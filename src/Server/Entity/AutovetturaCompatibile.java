@@ -1,21 +1,21 @@
 package Server.Entity;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
 
 @Entity
-@Table(name = "AutovetturaCompatibile")
 public class AutovetturaCompatibile {
 	@Column
 	ModelloAutovettura modello;
 	@Id
-	private string numeroTarga;
+	private String numeroTarga;
 
 	public ModelloAutovettura getModello() {
 		return this.modello;
 	}
 
 	public Sostituzione getLastRicambio() {
+		return null;
 		// TODO - implement AutovetturaCompatibile.getLastRicambio
 	}
 
