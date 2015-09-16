@@ -2,14 +2,18 @@ package Server.Control;
 
 public class Stazione implements Server.RMIInterface.Stazione {
 
-	private string nome;
-	private string indirizzo;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8069057008038377286L;
+	private String nome;
+	private String indirizzo;
 
-	public string getNome() {
+	public String getNome() {
 		return this.nome;
 	}
 
-	public string getIndirizzo() {
+	public String getIndirizzo() {
 		return this.indirizzo;
 	}
 
@@ -17,8 +21,9 @@ public class Stazione implements Server.RMIInterface.Stazione {
 	 * 
 	 * @param stazione
 	 */
-	public void setIndirizzo(Server.BusinessLogic.Stazione stazione) {
-		// TODO - implement Stazione.setIndirizzo
+	public void setStazione(Server.BusinessLogic.Stazione stazione) {
+		this.nome = stazione.getNome();
+		this.indirizzo = stazione.getIndirizzo();
 	}
 
 }
