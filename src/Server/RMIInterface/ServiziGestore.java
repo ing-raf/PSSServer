@@ -1,6 +1,7 @@
 package Server.RMIInterface;
 
 import java.rmi.*;
+import java.util.ArrayList;
 
 public interface ServiziGestore extends Remote {
 
@@ -20,7 +21,7 @@ public interface ServiziGestore extends Remote {
 	 * @param IDstazione
 	 * @param listabatterie
 	 */
-	boolean retrieveBatterieQuasiEsauste(int IDstazione, Batteria listabatterie);
+	boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Batteria> elencobatterie);
 
 	/**
 	 * 
@@ -28,7 +29,7 @@ public interface ServiziGestore extends Remote {
 	 * @param cognome
 	 * @param datanascita
 	 */
-	AutovetturaCliente[] retrieveAutovettureCliente(string nome, string cognome, Calendar datanascita);
+	AutovetturaCliente[] retrieveAutovettureCliente(int codicebadge);
 
 	/**
 	 * 

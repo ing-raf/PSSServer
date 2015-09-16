@@ -1,11 +1,14 @@
 package Server.Control;
 
+import java.util.ArrayList;
+
+import Server.BusinessLogic.GestoreBatterie;
 import Server.RMIInterface.*;
 
 public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 
 	public Autovettura[] retrieveListaModelli() {
-		// TODO - implement CoordinatoreGestoreAutenticato.retrieveListaModelli
+
 	}
 
 	/**
@@ -24,8 +27,16 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * @param IDstazione
 	 * @param listabatterie
 	 */
-	public boolean retrieveBatterieQuasiEsauste(int IDstazione, Server.Entity.Batteria[] listabatterie) {
-		// TODO - implement CoordinatoreGestoreAutenticato.retrieveBatterieQuasiEsauste
+	public boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Server.RMIInterface.Batteria> elencobatterie) {
+		GestoreBatterie gestoreBatterie = new GestoreBatterie();
+		ArrayList<Server.BusinessLogic.Batteria> listabatterie = gestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
+		
+		for (Server.BusinessLogic.Batteria batteria: listabatterie) {
+			Batteria nuova = new Batteria();
+			nuova.setBatteria(batteria);
+			elencobatterie.add(nuova);
+		}
+		
 	}
 
 	/**
@@ -44,7 +55,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 		// TODO - implement CoordinatoreGestoreAutenticato.remoteRetrieveBatterieCompatibili
 	}
 
-	public Server.Entity.Sostituzione retrieveUltimaSostituzione() {
+	public Server.RMIInterface.Sostituzione retrieveUltimaSostituzione() {
 		// TODO - implement CoordinatoreGestoreAutenticato.retrieveUltimaSostituzione
 	}
 
