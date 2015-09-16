@@ -1,17 +1,23 @@
 package Server.Control;
 
-public class NonAutenticato implements Stato {
+import Server.BusinessLogic.ValidazioneBadge;
+
+public class NonAutenticato extends Stato {
 
 	public boolean verificaEsitoValidazione() {
-		// TODO - implement NonAutenticato.verificaEsitoValidazione
+		return false;
 	}
 
 	/**
 	 * 
 	 * @param codice
 	 */
-	public void startValidazione(int codice) {
-		// TODO - implement NonAutenticato.startValidazione
+	public void startValidazione(CoordinatoreClienteRegistrato coordinatore, int codice) {
+		ValidazioneBadge cercaBadge = new ValidazioneBadge();
+		
+		if ( cercaBadge.findCodiceBadge(codice) == true)
+			coordinatore.setStato( new Autenticato (cercaBadge) );
+			
 	}
 
 }

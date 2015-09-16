@@ -52,6 +52,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	public boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Server.RMIInterface.Batteria> elencobatterie) {
 		GestoreBatterie gestoreBatterie = new GestoreBatterie();
 		ArrayList<Server.BusinessLogic.Batteria> listaBatterie = gestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
+		elencoBatterie = new ArrayList<Server.RMIInterface.Batteria>();
 		
 		for (Server.BusinessLogic.Batteria batteria: listaBatterie) {
 			Batteria nuova = new Batteria();

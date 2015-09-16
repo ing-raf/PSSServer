@@ -1,8 +1,10 @@
 package Server.Control;
 
+import java.util.ArrayList;
+
 public abstract class Stato {
 
-	AutovetturaCliente[] retrieveAutovetture() {
+	ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -32,7 +34,7 @@ public abstract class Stato {
 	 * 
 	 * @param codice
 	 */
-	void startValidazione(int codice) {		
+	void startValidazione(CoordinatoreClienteRegistrato coordinatore, int codice) {		
 		throw new UnsupportedOperationException();
 	}
 

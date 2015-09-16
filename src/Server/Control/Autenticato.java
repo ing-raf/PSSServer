@@ -1,9 +1,31 @@
 package Server.Control;
 
-public class Autenticato implements Stato {
+import java.util.ArrayList;
 
-	public Server.RMIInterface.AutovetturaCliente[] retrieveAutovetture() {
-		// TODO - implement Autenticato.retrieveAutovetture
+import Server.BusinessLogic.GestoreAutovetture;
+import Server.BusinessLogic.ValidazioneBadge;
+
+public class Autenticato extends Stato {
+	
+	private ValidazioneBadge badgeAutenticato;
+	private ArrayList<AutovetturaCliente> lastElenco;
+
+	public Autenticato(ValidazioneBadge badgeAutenticato) {
+		this.badgeAutenticato = badgeAutenticato;
+	}
+
+	public ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
+		GestoreAutovetture gestoreAutovetture = new GestoreAutovetture();
+		ArrayList<Server.BusinessLogic.AutovetturaCompatibile> listaAutovetture = gestoreAutovetture.retrieveListaAutovetture(this.badgeAutenticato);
+		this.lastElenco = new ArrayList<AutovetturaCliente>();
+		
+		for (Server.BusinessLogic.AutovetturaCompatibile veicolo : listaAutovetture) {
+			AutovetturaCliente nuova = new AutovetturaCliente();
+			nuova.setAutovetturaCliente(veicolo);
+			this.lastElenco.add(nuova);
+		}
+		
+		return new ArrayList<Server.RMIInterface.AutovetturaCliente>(this.lastElenco);
 	}
 
 	/**
@@ -12,7 +34,7 @@ public class Autenticato implements Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	public boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.BusinessLogic.Batteria[] elencoBatterie, Server.BusinessLogic.Stazione[] elencoStazioni) {
+	public boolean retrieveBatterieCompatibili(int indiceAutovettura, ArrayList<Server.RMIInterface.Batteria> elencoBatterie, ArrayList<Server.RMIInterface.Stazione> elencoStazioni) {
 		// TODO - implement Autenticato.retrieveBatterieCompatibili
 	}
 
@@ -25,15 +47,7 @@ public class Autenticato implements Stato {
 	}
 
 	public boolean verificaEsitoValidazione() {
-		// TODO - implement Autenticato.verificaEsitoValidazione
-	}
-
-	/**
-	 * 
-	 * @param codice
-	 */
-	public void startValidazione(int codice) {
-		// TODO - implement Autenticato.startValidazione
+		return true;
 	}
 
 	/**
@@ -41,8 +55,4 @@ public class Autenticato implements Stato {
 	 * @param indiceAutovettura
 	 * @param elencoBatterie
 	 */
-	public boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.RMIInterface.Batteria elencoBatterie) {
-		// TODO - implement Autenticato.retrieveBatterieCompatibili
-	}
-
 }

@@ -1,6 +1,7 @@
 package Server.RMIInterface;
 
 import java.rmi.*;
+import java.util.ArrayList;
 
 public interface ServiziCliente extends Remote {
 
@@ -12,7 +13,7 @@ public interface ServiziCliente extends Remote {
 	 */
 	boolean retrieveBatterieCompatibili(int indiceAutovettura, Batteria[] elencoBatterie, Stazione[] elencoStazioni);
 
-	AutovetturaCliente[] retrieveAutovetture();
+	ArrayList<AutovetturaCliente> retrieveAutovetture();
 
 	/**
 	 * 

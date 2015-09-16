@@ -1,5 +1,7 @@
 package Server.Control;
 
+import java.util.ArrayList;
+
 import Server.RMIInterface.*;
 import Server.RMIInterface.Batteria;
 import Server.RMIInterface.Stazione;
@@ -8,7 +10,7 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	
 	private Stato stato;
 
-	public AutovetturaCliente[] retrieveAutovetture() {
+	public ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
 		return this.stato.retrieveAutovetture();
 	}
 
@@ -39,8 +41,11 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	 * @param codice
 	 */
 	public void startValidazione(int codice) {
-		this.stato.startValidazione(codice);
+		this.stato.startValidazione(this, codice);
 	}
 
+	public void setStato (Stato stato) {
+		this.stato = stato;
+	}
 
 }
