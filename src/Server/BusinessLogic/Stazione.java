@@ -2,11 +2,11 @@ package Server.BusinessLogic;
 
 public class Stazione {
 
-	public string getNome() {
+	public String getNome() {
 		// TODO - implement Stazione.getNome
 	}
 
-	public string getIndirizzo() {
+	public String getIndirizzo() {
 		// TODO - implement Stazione.getIndirizzo
 	}
 
