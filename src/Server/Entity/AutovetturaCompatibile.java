@@ -1,8 +1,14 @@
 package Server.Entity;
 
-public class AutovetturaCompatibile {
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "AutovetturaCompatibile")
+public class AutovetturaCompatibile {
+	@Column
 	ModelloAutovettura modello;
+	@Id
 	private string numeroTarga;
 
 	public ModelloAutovettura getModello() {
