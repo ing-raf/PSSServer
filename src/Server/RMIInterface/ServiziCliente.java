@@ -8,10 +8,11 @@ public interface ServiziCliente extends Remote {
 	 * 
 	 * @param indiceAutovettura
 	 * @param elencoBatterie
+	 * @param elencoStazioni
 	 */
-	boolean retrieveBatterieCompatibili(int indiceAutovettura, Batteria elencoBatterie);
+	boolean retrieveBatterieCompatibili(int indiceAutovettura, Batteria[] elencoBatterie, Stazione[] elencoStazioni);
 
-	AutovetturaCliente retrieveAutovetture();
+	AutovetturaCliente[] retrieveAutovetture();
 
 	/**
 	 * 

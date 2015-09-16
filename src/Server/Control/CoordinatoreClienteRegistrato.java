@@ -1,11 +1,15 @@
 package Server.Control;
 
 import Server.RMIInterface.*;
+import Server.RMIInterface.Batteria;
+import Server.RMIInterface.Stazione;
 
 public class CoordinatoreClienteRegistrato implements ServiziCliente {
+	
+	private Stato stato;
 
 	public AutovetturaCliente[] retrieveAutovetture() {
-		// TODO - implement CoordinatoreClienteRegistrato.retrieveAutovetture
+		return this.stato.retrieveAutovetture();
 	}
 
 	/**
@@ -14,8 +18,8 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	public boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.BusinessLogic.Batteria[] elencoBatterie, Server.BusinessLogic.Stazione[] elencoStazioni) {
-		// TODO - implement CoordinatoreClienteRegistrato.retrieveBatterieCompatibili
+	public boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.RMIInterface.Batteria[] elencoBatterie, Server.RMIInterface.Stazione[] elencoStazioni) {
+		return this.stato.retrieveBatterieCompatibili(indiceAutovettura, elencoBatterie, elencoStazioni);
 	}
 
 	/**
@@ -23,11 +27,11 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	 * @param indiceBatteria
 	 */
 	public boolean startInstallazione(int indiceBatteria) {
-		// TODO - implement CoordinatoreClienteRegistrato.startInstallazione
+		return this.stato.startInstallazione(indiceBatteria);
 	}
 
 	public boolean verificaEsitoValidazione() {
-		// TODO - implement CoordinatoreClienteRegistrato.verificaEsitoValidazione
+		return this.stato.verificaEsitoValidazione();
 	}
 
 	/**
@@ -35,7 +39,8 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	 * @param codice
 	 */
 	public void startValidazione(int codice) {
-		// TODO - implement CoordinatoreClienteRegistrato.startValidazione
+		this.stato.startValidazione(codice);
 	}
+
 
 }

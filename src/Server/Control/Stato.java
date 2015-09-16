@@ -1,8 +1,10 @@
 package Server.Control;
 
-public interface Stato {
+public abstract class Stato {
 
-	Server.RMIInterface.AutovetturaCliente[] retrieveAutovetture();
+	AutovetturaCliente[] retrieveAutovetture() {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * 
@@ -10,27 +12,28 @@ public interface Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.BusinessLogic.Batteria[] elencoBatterie, Server.BusinessLogic.Stazione[] elencoStazioni);
+	boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.RMIInterface.Batteria[] elencoBatterie, Server.RMIInterface.Stazione[] elencoStazioni) {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * 
 	 * @param indiceBatteria
 	 */
-	boolean startInstallazione(int indiceBatteria);
+	boolean startInstallazione(int indiceBatteria) {
+		throw new UnsupportedOperationException();
+	}
 
-	boolean verificaEsitoValidazione();
+	boolean verificaEsitoValidazione() {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * 
 	 * @param codice
 	 */
-	void startValidazione(int codice);
-
-	/**
-	 * 
-	 * @param indiceAutovettura
-	 * @param elencoBatterie
-	 */
-	boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.RMIInterface.Batteria elencoBatterie);
+	void startValidazione(int codice) {		
+		throw new UnsupportedOperationException();
+	}
 
 }
