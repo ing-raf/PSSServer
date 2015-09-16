@@ -4,14 +4,14 @@ import Server.BusinessLogic.*;
 
 public class Autovettura implements Server.RMIInterface.Autovettura {
 
-	private string modello;
-	private string fornitore;
+	private String modello;
+	private String fornitore;
 
-	public string getModello() {
+	public String getModello() {
 		return this.modello;
 	}
 
-	public string getFornitore() {
+	public String getFornitore() {
 		return this.fornitore;
 	}
 
