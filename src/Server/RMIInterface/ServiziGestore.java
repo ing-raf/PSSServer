@@ -37,7 +37,7 @@ public interface ServiziGestore extends Remote {
 	 * 
 	 * @param modello
 	 */
-	Stazione[] remoteRetrieveBatterieCompatibili(int modello);
+	ArrayList<Stazione> remoteRetrieveBatterieCompatibili(int modello);
 
 	Sostituzione retrieveUltimaSostituzione(int autovettura);
 

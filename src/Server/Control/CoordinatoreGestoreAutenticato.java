@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreBatterie;
+import Server.BusinessLogic.GestoreDisponibilità;
 import Server.BusinessLogic.GestoreSostituzioni;
 import Server.BusinessLogic.ValidazioneBadge;
 import Server.RMIInterface.*;
@@ -91,8 +92,18 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * 
 	 * @param modello
 	 */
-	public Stazione[] remoteRetrieveBatterieCompatibili(int modello) {
-		// TODO - implement CoordinatoreGestoreAutenticato.remoteRetrieveBatterieCompatibili
+	public ArrayList<Stazione> remoteRetrieveBatterieCompatibili(int modello) {
+		GestoreDisponibilità gestoreSostituzioni = new GestoreDisponibilità();
+		ArrayList<Server.BusinessLogic.Stazione> listaStazioni = gestoreSostituzioni.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello) );
+		ArrayList<Stazione> elencoStazioni = new ArrayList<Stazione> (listaStazioni.size() );
+		
+		for (Server.BusinessLogic.Stazione stazione : listaStazioni) {
+			Stazione nuova = new Stazione();
+			nuova.setStazione(stazione);
+			elencoStazioni.add(nuova);
+		}
+		
+		return elencoStazioni;
 	}
 
 	public Sostituzione retrieveUltimaSostituzione(int autovettura) {	
