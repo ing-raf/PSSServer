@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreBatterie;
+import Server.BusinessLogic.GestoreSostituzioni;
+import Server.BusinessLogic.ValidazioneBadge;
 import Server.RMIInterface.*;
 
 public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	
 	private int IDStazione;
+	private ArrayList<Autovettura> lastElenco;
 	
 	public CoordinatoreGestoreAutenticato (int IDStazione) {
 		this.IDStazione = IDStazione;
@@ -17,13 +20,15 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	public ArrayList<Server.RMIInterface.Autovettura> retrieveListaModelli() {
 		GestoreAutovetture gestoreAutovetture = new GestoreAutovetture();
 		ArrayList<Server.BusinessLogic.ModelloAutovettura> listaAutovetture = gestoreAutovetture.retrieveListaModelli();
-		ArrayList<Autovettura> elencoAutovetture = new ArrayList<Autovettura> ( listaAutovetture.size() );
+		this.lastElenco = new ArrayList<Autovettura>();
 		
 		for (Server.BusinessLogic.ModelloAutovettura autovettura: listaAutovetture) {
 			Autovettura nuova = new Autovettura();
 			nuova.setModelloAutovettura(autovettura);
-			elencoAutovetture.add(nuova);
+			this.lastElenco.add(nuova);
 		}
+		
+		return new ArrayList<Server.RMIInterface.Autovettura>(this.lastElenco);
 	}
 
 	/**
@@ -59,8 +64,27 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * 
 	 * @param codicebadge
 	 */
-	public AutovetturaCliente[] retrieveAutovettureCliente(int codicebadge) {
-		// TODO - implement CoordinatoreGestoreAutenticato.retrieveAutovettureCliente
+	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture) {
+		ValidazioneBadge badge = new ValidazioneBadge();
+		
+		if ( badge.findCodiceBadge(codicebadge) == false ) return false;
+		else {
+			GestoreAutovetture gestoreAutovetture = new GestoreAutovetture();
+			ArrayList<Server.BusinessLogic.AutovetturaCompatibile> listaAutovetture = gestoreAutovetture.retrieveListaAutovetture(badge);
+			elencoAutovetture = new ArrayList<AutovetturaCliente>();
+			
+			for (Server.BusinessLogic.AutovetturaCompatibile veicolo : listaAutovetture) {
+				AutovetturaCliente nuova = new AutovetturaCliente();
+				nuova.setAutovetturaCliente(veicolo);
+				elencoAutovetture.add(nuova);
+			}
+			
+			this.lastElenco = new ArrayList<Autovettura>( elencoAutovetture.size() );
+			this.lastElenco.addAll(elencoAutovetture);
+			
+			return true;
+		}
+		
 	}
 
 	/**
@@ -71,8 +95,14 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 		// TODO - implement CoordinatoreGestoreAutenticato.remoteRetrieveBatterieCompatibili
 	}
 
-	public Server.RMIInterface.Sostituzione retrieveUltimaSostituzione() {
-		// TODO - implement CoordinatoreGestoreAutenticato.retrieveUltimaSostituzione
+	public Sostituzione retrieveUltimaSostituzione(int autovettura) {	
+		GestoreSostituzioni gestoreSostituzioni = new GestoreSostituzioni();
+		Server.BusinessLogic.Sostituzione sostituzione = gestoreSostituzioni.findLastSostituzione( this.lastElenco.get(autovettura) );
+
+		Sostituzione ultima = new Sostituzione();
+		ultima.setSostituzione(sostituzione);
+		
+		return ultima;
 	}
 
 }

@@ -3,6 +3,8 @@ package Server.RMIInterface;
 import java.rmi.*;
 import java.util.ArrayList;
 
+import Server.Control.AutovetturaCliente;
+
 public interface ServiziGestore extends Remote {
 
 	ArrayList<Autovettura> retrieveListaModelli();
@@ -29,7 +31,7 @@ public interface ServiziGestore extends Remote {
 	 * @param cognome
 	 * @param datanascita
 	 */
-	AutovetturaCliente[] retrieveAutovettureCliente(int codicebadge);
+	boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture);
 
 	/**
 	 * 
@@ -37,6 +39,6 @@ public interface ServiziGestore extends Remote {
 	 */
 	Stazione[] remoteRetrieveBatterieCompatibili(int modello);
 
-	Sostituzione retrieveUltimaSostituzione();
+	Sostituzione retrieveUltimaSostituzione(int autovettura);
 
 }
