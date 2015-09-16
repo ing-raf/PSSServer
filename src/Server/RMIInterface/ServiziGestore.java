@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public interface ServiziGestore extends Remote {
 
-	Autovettura[] retrieveListaModelli();
+	ArrayList<Autovettura> retrieveListaModelli();
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public interface ServiziGestore extends Remote {
 	 * @param maxciclidiricarica
 	 * @param modelloautovettura
 	 */
-	void addBatteria(int IDbatteria, float costosostituzione, int maxciclidiricarica, int modelloautovettura);
+	boolean addBatteria(int IDbatteria, float costosostituzione, int maxciclidiricarica, int modelloautovettura);
 
 	/**
 	 * 

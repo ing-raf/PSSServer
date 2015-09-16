@@ -2,13 +2,28 @@ package Server.Control;
 
 import java.util.ArrayList;
 
+import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreBatterie;
 import Server.RMIInterface.*;
 
 public class CoordinatoreGestoreAutenticato implements ServiziGestore {
+	
+	private int IDStazione;
+	
+	public CoordinatoreGestoreAutenticato (int IDStazione) {
+		this.IDStazione = IDStazione;
+	}
 
-	public Autovettura[] retrieveListaModelli() {
-
+	public ArrayList<Server.RMIInterface.Autovettura> retrieveListaModelli() {
+		GestoreAutovetture gestoreAutovetture = new GestoreAutovetture();
+		ArrayList<Server.BusinessLogic.ModelloAutovettura> listaAutovetture = gestoreAutovetture.retrieveListaModelli();
+		ArrayList<Autovettura> elencoAutovetture = new ArrayList<Autovettura> ( listaAutovetture.size() );
+		
+		for (Server.BusinessLogic.ModelloAutovettura autovettura: listaAutovetture) {
+			Autovettura nuova = new Autovettura();
+			nuova.setModelloAutovettura(autovettura);
+			elencoAutovetture.add(nuova);
+		}
 	}
 
 	/**
@@ -18,8 +33,9 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * @param maxciclidiricarica
 	 * @param modelloautovettura
 	 */
-	public void addBatteria(int IDbatteria, float costosostituzione, int maxciclidiricarica, int modelloautovettura) {
-		// TODO - implement CoordinatoreGestoreAutenticato.addBatteria
+	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) {
+		GestoreBatterie gestoreBatterie = new GestoreBatterie();
+		return gestoreBatterie.addBatteria(IDStazione, IDbatteria, costosostituzione, maxcicliricarica, modelloautovettura);
 	}
 
 	/**
@@ -29,9 +45,9 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 */
 	public boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Server.RMIInterface.Batteria> elencobatterie) {
 		GestoreBatterie gestoreBatterie = new GestoreBatterie();
-		ArrayList<Server.BusinessLogic.Batteria> listabatterie = gestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
+		ArrayList<Server.BusinessLogic.Batteria> listaBatterie = gestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
 		
-		for (Server.BusinessLogic.Batteria batteria: listabatterie) {
+		for (Server.BusinessLogic.Batteria batteria: listaBatterie) {
 			Batteria nuova = new Batteria();
 			nuova.setBatteria(batteria);
 			elencobatterie.add(nuova);
