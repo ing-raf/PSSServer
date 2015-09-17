@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public interface ServiziGestore extends Remote {
 
-	ArrayList<Autovettura> retrieveListaModelli() throws RemoteException;
+	ArrayList<? extends Autovettura> retrieveListaModelli() throws RemoteException;
 
 	/**
 	 * 
@@ -21,7 +21,7 @@ public interface ServiziGestore extends Remote {
 	 * @param IDstazione
 	 * @param listabatterie
 	 */
-	boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Batteria> elencobatterie) throws RemoteException;
+	ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws RemoteException;
 
 	/**
 	 * 
@@ -29,13 +29,13 @@ public interface ServiziGestore extends Remote {
 	 * @param cognome
 	 * @param datanascita
 	 */
-	boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture) throws RemoteException;
+	boolean retrieveAutovettureCliente(int codicebadge, ArrayList<? extends AutovetturaCliente> elencoAutovetture) throws RemoteException;
 
 	/**
 	 * 
 	 * @param modello
 	 */
-	ArrayList<Stazione> remoteRetrieveBatterieCompatibili(int modello) throws RemoteException;
+	ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws RemoteException;
 
 	Sostituzione retrieveUltimaSostituzione(int autovettura) throws RemoteException;
 
