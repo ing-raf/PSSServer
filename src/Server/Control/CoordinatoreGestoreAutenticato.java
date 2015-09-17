@@ -19,8 +19,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	}
 
 	public ArrayList<Server.RMIInterface.Autovettura> retrieveListaModelli() {
-		GestoreAutovetture gestoreAutovetture = new GestoreAutovetture();
-		ArrayList<Server.BusinessLogic.ModelloAutovettura> listaAutovetture = gestoreAutovetture.retrieveListaModelli();
+		ArrayList<Server.BusinessLogic.ModelloAutovettura> listaAutovetture = GestoreAutovetture.retrieveListaModelli();
 		this.lastElenco = new ArrayList<Autovettura>();
 		
 		for (Server.BusinessLogic.ModelloAutovettura autovettura: listaAutovetture) {
@@ -40,8 +39,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * @param modelloautovettura
 	 */
 	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) {
-		GestoreBatterie gestoreBatterie = new GestoreBatterie();
-		return gestoreBatterie.addBatteria(IDStazione, IDbatteria, costosostituzione, maxcicliricarica, modelloautovettura);
+		return GestoreBatterie.addBatteria(IDStazione, IDbatteria, costosostituzione, maxcicliricarica, modelloautovettura);
 	}
 
 	/**
@@ -50,8 +48,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * @param listabatterie
 	 */
 	public boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Server.RMIInterface.Batteria> elencobatterie) {
-		GestoreBatterie gestoreBatterie = new GestoreBatterie();
-		ArrayList<Server.BusinessLogic.Batteria> listaBatterie = gestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
+		ArrayList<Server.BusinessLogic.Batteria> listaBatterie = GestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
 		elencoBatterie = new ArrayList<Server.RMIInterface.Batteria>();
 		
 		for (Server.BusinessLogic.Batteria batteria: listaBatterie) {
@@ -71,8 +68,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 		
 		if ( badge.findCodiceBadge(codicebadge) == false ) return false;
 		else {
-			GestoreAutovetture gestoreAutovetture = new GestoreAutovetture();
-			ArrayList<Server.BusinessLogic.AutovetturaCompatibile> listaAutovetture = gestoreAutovetture.retrieveListaAutovetture(badge);
+			ArrayList<Server.BusinessLogic.AutovetturaCompatibile> listaAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
 			elencoAutovetture = new ArrayList<AutovetturaCliente>();
 			
 			for (Server.BusinessLogic.AutovetturaCompatibile veicolo : listaAutovetture) {
@@ -94,8 +90,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * @param modello
 	 */
 	public ArrayList<Stazione> remoteRetrieveBatterieCompatibili(int modello) {
-		GestoreDisponibilità gestoreSostituzioni = new GestoreDisponibilità();
-		ArrayList<Server.BusinessLogic.Stazione> listaStazioni = gestoreSostituzioni.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello) );
+		ArrayList<Server.BusinessLogic.Stazione> listaStazioni = GestoreSostituzioni.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello) );
 		ArrayList<Stazione> elencoStazioni = new ArrayList<Stazione> (listaStazioni.size() );
 		
 		for (Server.BusinessLogic.Stazione stazione : listaStazioni) {
@@ -108,8 +103,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	}
 
 	public Sostituzione retrieveUltimaSostituzione(int autovettura) {	
-		GestoreSostituzioni gestoreSostituzioni = new GestoreSostituzioni();
-		Server.BusinessLogic.Sostituzione sostituzione = gestoreSostituzioni.findLastSostituzione( this.lastElenco.get(autovettura) );
+		Server.BusinessLogic.Sostituzione sostituzione = GestoreSostituzioni.findLastSostituzione( this.lastElenco.get(autovettura) );
 
 		Sostituzione ultima = new Sostituzione();
 		ultima.setSostituzione(sostituzione);
