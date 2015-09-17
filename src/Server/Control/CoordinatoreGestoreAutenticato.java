@@ -20,15 +20,9 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 
 	public ArrayList<Server.RMIInterface.Autovettura> retrieveListaModelli() {
 		ArrayList<Server.BusinessLogic.Autovettura> listaAutovetture = GestoreAutovetture.retrieveListaModelli();
-		this.lastElenco = new ArrayList<Autovettura>();
+		this.lastElenco = new ArrayList<Autovettura>(listaAutovetture);
 		
-		for (Server.BusinessLogic.Autovettura autovettura: listaAutovetture) {
-			Autovettura nuova = new Autovettura();
-			nuova.setModelloAutovettura(autovettura);
-			this.lastElenco.add(nuova);
-		}
-		
-		return new ArrayList<Server.RMIInterface.Autovettura>(this.lastElenco);
+		return new ArrayList<Autovettura>(this.lastElenco);
 	}
 
 	/**
@@ -39,7 +33,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * @param modelloautovettura
 	 */
 	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) {
-		return GestoreBatterie.addBatteria(IDStazione, IDbatteria, costosostituzione, maxcicliricarica, modelloautovettura);
+		return GestoreBatterie.addBatteria(IDStazione, IDbatteria, costosostituzione, maxcicliricarica, lastElenco.get(modelloautovettura) );
 	}
 
 	/**
@@ -47,15 +41,9 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * @param IDstazione
 	 * @param listabatterie
 	 */
-	public boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Server.RMIInterface.Batteria> elencobatterie) {
+	public boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Batteria> elencobatterie) {
 		ArrayList<Server.BusinessLogic.Batteria> listaBatterie = GestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
-		elencoBatterie = new ArrayList<Server.RMIInterface.Batteria>();
-		
-		for (Server.BusinessLogic.Batteria batteria: listaBatterie) {
-			Batteria nuova = new Batteria();
-			nuova.setBatteria(batteria);
-			elencobatterie.add(nuova);
-		}
+		elencobatterie = new ArrayList<Batteria>(listaBatterie);
 		
 	}
 
@@ -69,16 +57,8 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 		if ( badge.findCodiceBadge(codicebadge) == false ) return false;
 		else {
 			ArrayList<Server.BusinessLogic.AutovetturaCliente> listaAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
-			elencoAutovetture = new ArrayList<AutovetturaCliente>();
-			
-			for (Server.BusinessLogic.AutovetturaCliente veicolo : listaAutovetture) {
-				AutovetturaCliente nuova = new AutovetturaCliente();
-				nuova.setAutovetturaCliente(veicolo);
-				elencoAutovetture.add(nuova);
-			}
-			
-			this.lastElenco = new ArrayList<Autovettura>( elencoAutovetture.size() );
-			this.lastElenco.addAll(elencoAutovetture);
+			this.lastElenco = new ArrayList<Autovettura>( listaAutovetture);
+			elencoAutovetture = new ArrayList<AutovetturaCliente>(listaAutovetture);
 			
 			return true;
 		}
@@ -90,25 +70,11 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	 * @param modello
 	 */
 	public ArrayList<Stazione> remoteRetrieveBatterieCompatibili(int modello) {
-		ArrayList<Server.BusinessLogic.Stazione> listaStazioni = GestoreSostituzioni.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello) );
-		ArrayList<Stazione> elencoStazioni = new ArrayList<Stazione> (listaStazioni.size() );
-		
-		for (Server.BusinessLogic.Stazione stazione : listaStazioni) {
-			Stazione nuova = new Stazione();
-			nuova.setStazione(stazione);
-			elencoStazioni.add(nuova);
-		}
-		
-		return elencoStazioni;
+		return GestoreDisponibilità.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello) );
 	}
 
 	public Sostituzione retrieveUltimaSostituzione(int autovettura) {	
-		Server.BusinessLogic.UltimaSostituzione sostituzione = GestoreSostituzioni.findLastSostituzione( this.lastElenco.get(autovettura) );
-
-		Sostituzione ultima = new Sostituzione();
-		ultima.setSostituzione(sostituzione);
-		
-		return ultima;
+		return GestoreSostituzioni.findLastSostituzione( (Server.BusinessLogic.AutovetturaCliente)this.lastElenco.get(autovettura) );
 	}
 
 }
