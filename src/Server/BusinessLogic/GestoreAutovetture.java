@@ -6,7 +6,7 @@ public class GestoreAutovetture {
 	 * 
 	 * @param validazionebadge
 	 */
-	public AutovetturaCompatibile[] retrieveListaAutovetture(ValidazioneBadge validazionebadge) {
+	public AutovetturaCliente[] retrieveListaAutovetture(ValidazioneBadge validazionebadge) {
 		// TODO - implement GestoreAutovetture.retrieveListaAutovetture
 	}
 

@@ -15,10 +15,10 @@ public class Autenticato extends Stato {
 	}
 
 	public ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
-		ArrayList<Server.BusinessLogic.AutovetturaCompatibile> listaAutovetture = gestoreAutovetture.retrieveListaAutovetture(this.badgeAutenticato);
+		ArrayList<Server.BusinessLogic.AutovetturaCliente> listaAutovetture = gestoreAutovetture.retrieveListaAutovetture(this.badgeAutenticato);
 		this.lastElenco = new ArrayList<AutovetturaCliente>();
 		
-		for (Server.BusinessLogic.AutovetturaCompatibile veicolo : listaAutovetture) {
+		for (Server.BusinessLogic.AutovetturaCliente veicolo : listaAutovetture) {
 			AutovetturaCliente nuova = new AutovetturaCliente();
 			nuova.setAutovetturaCliente(veicolo);
 			this.lastElenco.add(nuova);

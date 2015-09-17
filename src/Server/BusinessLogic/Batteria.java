@@ -1,9 +1,15 @@
 package Server.BusinessLogic;
 
-public class Batteria {
+public class Batteria implements Server.RMIInterface.Batteria {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6370376348997524139L;
+	private Server.Entity.Batteria batteria;
+	
 	public float getCosto() {
-		// TODO - implement Batteria.getCosto
+		return this.batteria.getCostoSostituzione();
 	}
 
 	/**
@@ -11,7 +17,7 @@ public class Batteria {
 	 * @param batteria
 	 */
 	public void setBatteria(Server.Entity.Batteria batteria) {
-		// TODO - implement Batteria.setBatteria
+		this.batteria = batteria;
 	}
 
 }

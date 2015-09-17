@@ -10,7 +10,7 @@ public class GestoreBatterie {
 	 * @param maxcicliricarica
 	 * @param modello
 	 */
-	public void addBatteria(int IDstazione, int IDbatteria, int costosostituzione, int maxcicliricarica, ModelloAutovettura[] modello) {
+	public void addBatteria(int IDstazione, int IDbatteria, int costosostituzione, int maxcicliricarica, Autovettura[] modello) {
 		// TODO - implement GestoreBatterie.addBatteria
 	}
 
@@ -18,7 +18,7 @@ public class GestoreBatterie {
 	 * 
 	 * @param IDstazione
 	 */
-	public ModelloAutovettura[] retrieveBatterieQuasiEsauste(int IDstazione) {
+	public Autovettura[] retrieveBatterieQuasiEsauste(int IDstazione) {
 		// TODO - implement GestoreBatterie.retrieveBatterieQuasiEsauste
 	}
 

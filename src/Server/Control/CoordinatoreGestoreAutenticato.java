@@ -19,10 +19,10 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	}
 
 	public ArrayList<Server.RMIInterface.Autovettura> retrieveListaModelli() {
-		ArrayList<Server.BusinessLogic.ModelloAutovettura> listaAutovetture = GestoreAutovetture.retrieveListaModelli();
+		ArrayList<Server.BusinessLogic.Autovettura> listaAutovetture = GestoreAutovetture.retrieveListaModelli();
 		this.lastElenco = new ArrayList<Autovettura>();
 		
-		for (Server.BusinessLogic.ModelloAutovettura autovettura: listaAutovetture) {
+		for (Server.BusinessLogic.Autovettura autovettura: listaAutovetture) {
 			Autovettura nuova = new Autovettura();
 			nuova.setModelloAutovettura(autovettura);
 			this.lastElenco.add(nuova);
@@ -68,10 +68,10 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 		
 		if ( badge.findCodiceBadge(codicebadge) == false ) return false;
 		else {
-			ArrayList<Server.BusinessLogic.AutovetturaCompatibile> listaAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
+			ArrayList<Server.BusinessLogic.AutovetturaCliente> listaAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
 			elencoAutovetture = new ArrayList<AutovetturaCliente>();
 			
-			for (Server.BusinessLogic.AutovetturaCompatibile veicolo : listaAutovetture) {
+			for (Server.BusinessLogic.AutovetturaCliente veicolo : listaAutovetture) {
 				AutovetturaCliente nuova = new AutovetturaCliente();
 				nuova.setAutovetturaCliente(veicolo);
 				elencoAutovetture.add(nuova);
@@ -103,7 +103,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 	}
 
 	public Sostituzione retrieveUltimaSostituzione(int autovettura) {	
-		Server.BusinessLogic.Sostituzione sostituzione = GestoreSostituzioni.findLastSostituzione( this.lastElenco.get(autovettura) );
+		Server.BusinessLogic.UltimaSostituzione sostituzione = GestoreSostituzioni.findLastSostituzione( this.lastElenco.get(autovettura) );
 
 		Sostituzione ultima = new Sostituzione();
 		ultima.setSostituzione(sostituzione);

@@ -6,7 +6,7 @@ public class GestoreDisponibilità {
 	 * 
 	 * @param modello
 	 */
-	public Batteria[] retrieveBatterieCompatibili(ModelloAutovettura modello) {
+	public Batteria[] retrieveBatterieCompatibili(Autovettura modello) {
 		// TODO - implement GestoreDisponibilità.retrieveBatterieCompatibili
 	}
 
