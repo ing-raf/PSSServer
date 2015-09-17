@@ -18,7 +18,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 		this.IDStazione = IDStazione;
 	}
 
-	public ArrayList<Server.RMIInterface.Autovettura> retrieveListaModelli() {
+	public ArrayList<Autovettura> retrieveListaModelli() {
 		ArrayList<Server.BusinessLogic.Autovettura> listaAutovetture = GestoreAutovetture.retrieveListaModelli();
 		this.lastElenco = new ArrayList<Autovettura>(listaAutovetture);
 		
