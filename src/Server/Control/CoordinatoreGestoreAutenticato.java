@@ -1,5 +1,7 @@
 package Server.Control;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import Server.BusinessLogic.GestoreAutovetture;
@@ -9,12 +11,17 @@ import Server.BusinessLogic.GestoreSostituzioni;
 import Server.BusinessLogic.ValidazioneBadge;
 import Server.RMIInterface.*;
 
-public class CoordinatoreGestoreAutenticato implements ServiziGestore {
+public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implements ServiziGestore {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -51837280579457780L;
 	private int IDStazione;
 	private ArrayList<Autovettura> lastElenco;
 	
-	public CoordinatoreGestoreAutenticato (int IDStazione) {
+	public CoordinatoreGestoreAutenticato (int IDStazione) throws RemoteException {
+		super();
 		this.IDStazione = IDStazione;
 	}
 
@@ -57,7 +64,7 @@ public class CoordinatoreGestoreAutenticato implements ServiziGestore {
 		if ( badge.findCodiceBadge(codicebadge) == false ) return false;
 		else {
 			ArrayList<Server.BusinessLogic.AutovetturaCliente> listaAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
-			this.lastElenco = new ArrayList<Autovettura>( listaAutovetture);
+			this.lastElenco = new ArrayList<Autovettura>(listaAutovetture);
 			elencoAutovetture = new ArrayList<AutovetturaCliente>(listaAutovetture);
 			
 			return true;

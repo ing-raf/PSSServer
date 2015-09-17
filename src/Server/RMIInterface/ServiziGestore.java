@@ -3,11 +3,9 @@ package Server.RMIInterface;
 import java.rmi.*;
 import java.util.ArrayList;
 
-import Server.Control.AutovetturaCliente;
-
 public interface ServiziGestore extends Remote {
 
-	ArrayList<Autovettura> retrieveListaModelli();
+	ArrayList<Autovettura> retrieveListaModelli() throws RemoteException;
 
 	/**
 	 * 
@@ -16,14 +14,14 @@ public interface ServiziGestore extends Remote {
 	 * @param maxciclidiricarica
 	 * @param modelloautovettura
 	 */
-	boolean addBatteria(int IDbatteria, float costosostituzione, int maxciclidiricarica, int modelloautovettura);
+	boolean addBatteria(int IDbatteria, float costosostituzione, int maxciclidiricarica, int modelloautovettura) throws RemoteException;
 
 	/**
 	 * 
 	 * @param IDstazione
 	 * @param listabatterie
 	 */
-	boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Batteria> elencobatterie);
+	boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Batteria> elencobatterie) throws RemoteException;
 
 	/**
 	 * 
@@ -31,14 +29,14 @@ public interface ServiziGestore extends Remote {
 	 * @param cognome
 	 * @param datanascita
 	 */
-	boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture);
+	boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture) throws RemoteException;
 
 	/**
 	 * 
 	 * @param modello
 	 */
-	ArrayList<Stazione> remoteRetrieveBatterieCompatibili(int modello);
+	ArrayList<Stazione> remoteRetrieveBatterieCompatibili(int modello) throws RemoteException;
 
-	Sostituzione retrieveUltimaSostituzione(int autovettura);
+	Sostituzione retrieveUltimaSostituzione(int autovettura) throws RemoteException;
 
 }

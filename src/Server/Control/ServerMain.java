@@ -23,19 +23,20 @@ public class ServerMain {
 		for (int i = 0; i < NUM_STAZIONI; i++) {
 			
 			try {
-				Registry registry = LocateRegistry.createRegistry(PORT_OFFSET+elencoIDstazioni.get(i));
+				Registry registry = LocateRegistry.createRegistry(PORT_OFFSET + elencoIDstazioni.get(i));
 				
 				CoordinatoreClienteRegistrato coordinatoreClienteRegistrato = 
-						new CoordinatoreClienteRegistrato(); 
-				
+						new CoordinatoreClienteRegistrato( elencoIDstazioni.get(i) ); 
+								
 				CoordinatoreGestoreAutenticato coordinatoreGestoreAutenticato = 
-						new CoordinatoreGestoreAutenticato(); 
+						new CoordinatoreGestoreAutenticato( elencoIDstazioni.get(i) ); 
 				
 				registry.rebind("ServiziCliente", coordinatoreClienteRegistrato);
 				registry.rebind("ServiziGestore", coordinatoreGestoreAutenticato);
 			} catch (RemoteException e) {
 				System.err.println("Il server ha riscontrato un problema nell'apertura "
 						+ "della connessione sul porto " + (PORT_OFFSET + i) );
+				e.printStackTrace();
 				System.exit(0);
 			}
 		}

@@ -1,14 +1,27 @@
 package Server.Control;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 import Server.RMIInterface.*;
 
-public class CoordinatoreClienteRegistrato implements ServiziCliente {
+public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implements ServiziCliente {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3976477806196171091L;
 	private Stato stato;
+	private final int IDstazione;
+	
+	public CoordinatoreClienteRegistrato(int IDstazione) throws RemoteException {
+			super();
+			this.stato = new NonAutenticato();
+			this.IDstazione = IDstazione;
+	}
 
-	public ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
+	public ArrayList<AutovetturaCliente> retrieveAutovetture() {
 		return this.stato.retrieveAutovetture();
 	}
 
@@ -18,7 +31,7 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	public boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.RMIInterface.Batteria[] elencoBatterie, Server.RMIInterface.Stazione[] elencoStazioni) {
+	public boolean retrieveBatterieCompatibili(int indiceAutovettura, ArrayList<Batteria> elencoBatterie, ArrayList<Stazione> elencoStazioni) {
 		return this.stato.retrieveBatterieCompatibili(this, indiceAutovettura, elencoBatterie, elencoStazioni);
 	}
 
@@ -42,7 +55,7 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 		this.stato.startValidazione(this, codice);
 	}
 
-	public void setStato (Stato stato) {
+	void setStato (Stato stato) {
 		this.stato = stato;
 	}
 

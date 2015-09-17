@@ -2,6 +2,9 @@ package Server.Control;
 
 import java.util.ArrayList;
 
+import Server.RMIInterface.Batteria;
+import Server.RMIInterface.Stazione;
+
 public abstract class Stato {
 
 	ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
@@ -14,7 +17,7 @@ public abstract class Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	boolean retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura, Server.RMIInterface.Batteria[] elencoBatterie, Server.RMIInterface.Stazione[] elencoStazioni) {
+	boolean retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura, ArrayList<Batteria> elencoBatterie, ArrayList<Stazione> elencoStazioni) {
 		throw new UnsupportedOperationException();
 	}
 
