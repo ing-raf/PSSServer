@@ -14,7 +14,7 @@ public interface Sostituzione extends Serializable {
 
 	int getMinuti();
 
-	string getIndirizzoStazione();
+	String getIndirizzoStazione();
 
 	int getIDbatteria();
 

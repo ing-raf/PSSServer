@@ -4,8 +4,8 @@ import java.io.*;
 
 public interface Stazione extends Serializable {
 
-	string getNome();
+	String getNome();
 
-	string getIndirizzo();
+	String getIndirizzo();
 
 }

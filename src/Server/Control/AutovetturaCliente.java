@@ -4,9 +4,13 @@ import Server.BusinessLogic.*;
 
 public class AutovetturaCliente extends Autovettura implements Server.RMIInterface.AutovetturaCliente {
 
-	private string numeroTarga;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6670811571001494844L;
+	private String numeroTarga;
 
-	public string getNumeroTarga() {
+	public String getNumeroTarga() {
 		return this.numeroTarga;
 	}
 
@@ -15,7 +19,8 @@ public class AutovetturaCliente extends Autovettura implements Server.RMIInterfa
 	 * @param autovetturaCliente
 	 */
 	public void setAutovetturaCliente(AutovetturaCompatibile autovetturaCliente) {
-		// TODO - implement AutovetturaCliente.setAutovetturaCliente
+		this.setModelloAutovettura(autovetturaCliente);
+		this.numeroTarga = autovetturaCliente.getNumeroTarga();
 	}
 
 }
