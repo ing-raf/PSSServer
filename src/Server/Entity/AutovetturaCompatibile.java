@@ -9,6 +9,10 @@ public class AutovetturaCompatibile {
 	ModelloAutovettura modello;
 	@Id
 	private String numeroTarga;
+	
+	public AutovetturaCompatibile (){
+		
+	}
 
 	public ModelloAutovettura getModello() {
 		return this.modello;

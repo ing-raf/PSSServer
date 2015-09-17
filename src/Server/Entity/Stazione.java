@@ -1,36 +1,42 @@
 package Server.Entity;
-
+import javax.persistence.*;
 import java.util.*;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
+
+@Entity
 public class Stazione {
 
-	ArrayList<Batteria> disponibilità;
-	private string nome;
-	private string indirizzo;
-	private int ID;
+	@Id
+	private int ID;	
+	@Column
+	private String nome;
+	@Column
+	private String indirizzo;
+	@OneToMany
+	@JoinColumn (name ="disp_batterie") Set<Batteria> disponibii;
+	@OneToMany
+	@JoinColumn (name = "staz_sostituzione") Set<Sostituzione> sost_stazione;
 
-	/**
-	 * 
-	 * @param IDstazione
-	 * @param nuova
-	 */
-	public void insertBatteria(int IDstazione, Batteria nuova) {
-		// TODO - implement Stazione.insertBatteria
+
+	public void insertBatteria(Stazione stazione, Batteria nuova) {
+		
+		nuova.setStazione (stazione);
+		nuova.salva();
 	}
 
-	/**
-	 * 
-	 * @param cicliRicaricaRimanenti
-	 */
-	public Batteria[] getListaBatterie(int cicliRicaricaRimanenti) {
+	
+	public ArrayList<Batteria> getListaBatterie(int cicliRicaricaRimanenti) {
+		return null;
 		// TODO - implement Stazione.getListaBatterie
 	}
 
-	public string getIndirizzo() {
+	public String getIndirizzo() {
 		return this.indirizzo;
 	}
 
-	public string getNome() {
+	public String getNome() {
 		return this.nome;
 	}
 
@@ -38,6 +44,15 @@ public class Stazione {
 	 * 
 	 * @param batteria
 	 */
+	
+	public int getID(){
+		return this.ID;
+	}
+	
+	public void setID(int id){
+		this.ID = id;
+	}
+	
 	public void removeBatteria(Batteria batteria) {
 		// TODO - implement Stazione.removeBatteria
 	}
