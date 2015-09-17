@@ -2,8 +2,10 @@ package Server.BusinessLogic;
 
 public class AutovetturaCompatibile extends ModelloAutovettura {
 
-	public int getNumeroTarga() {
-		// TODO - implement AutovetturaCompatibile.getNumeroTarga
+	private String numeroTarga;
+	
+	public String getNumeroTarga() {
+		return this.numeroTarga;
 	}
 
 	/**

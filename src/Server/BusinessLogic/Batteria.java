@@ -2,8 +2,10 @@ package Server.BusinessLogic;
 
 public class Batteria {
 
+	private float costo;
+	
 	public float getCosto() {
-		// TODO - implement Batteria.getCosto
+		return this.costo;
 	}
 
 	/**

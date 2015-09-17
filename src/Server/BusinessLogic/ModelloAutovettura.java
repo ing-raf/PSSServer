@@ -2,11 +2,13 @@ package Server.BusinessLogic;
 
 public class ModelloAutovettura {
 
-	public string getModello() {
+	public String getModello() {
+		return null;
 		// TODO - implement ModelloAutovettura.getModello
 	}
 
-	public string getFornitore() {
+	public String getFornitore() {
+		return null;
 		// TODO - implement ModelloAutovettura.getFornitore
 	}
 
