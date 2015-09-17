@@ -14,7 +14,7 @@ public abstract class Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.RMIInterface.Batteria[] elencoBatterie, Server.RMIInterface.Stazione[] elencoStazioni) {
+	boolean retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura, Server.RMIInterface.Batteria[] elencoBatterie, Server.RMIInterface.Stazione[] elencoStazioni) {
 		throw new UnsupportedOperationException();
 	}
 

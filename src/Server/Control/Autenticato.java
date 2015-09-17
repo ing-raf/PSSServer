@@ -15,7 +15,6 @@ public class Autenticato extends Stato {
 	}
 
 	public ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
-		GestoreAutovetture gestoreAutovetture = new GestoreAutovetture();
 		ArrayList<Server.BusinessLogic.AutovetturaCompatibile> listaAutovetture = gestoreAutovetture.retrieveListaAutovetture(this.badgeAutenticato);
 		this.lastElenco = new ArrayList<AutovetturaCliente>();
 		
@@ -34,7 +33,7 @@ public class Autenticato extends Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	public boolean retrieveBatterieCompatibili(int indiceAutovettura, ArrayList<Server.RMIInterface.Batteria> elencoBatterie, ArrayList<Server.RMIInterface.Stazione> elencoStazioni) {
+	public boolean retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura, ArrayList<Server.RMIInterface.Batteria> elencoBatterie, ArrayList<Server.RMIInterface.Stazione> elencoStazioni) {
 		// TODO - implement Autenticato.retrieveBatterieCompatibili
 	}
 

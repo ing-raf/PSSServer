@@ -3,8 +3,6 @@ package Server.Control;
 import java.util.ArrayList;
 
 import Server.RMIInterface.*;
-import Server.RMIInterface.Batteria;
-import Server.RMIInterface.Stazione;
 
 public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	
@@ -21,7 +19,7 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	 * @param elencoStazioni
 	 */
 	public boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.RMIInterface.Batteria[] elencoBatterie, Server.RMIInterface.Stazione[] elencoStazioni) {
-		return this.stato.retrieveBatterieCompatibili(indiceAutovettura, elencoBatterie, elencoStazioni);
+		return this.stato.retrieveBatterieCompatibili(this, indiceAutovettura, elencoBatterie, elencoStazioni);
 	}
 
 	/**
