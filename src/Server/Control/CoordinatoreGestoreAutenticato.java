@@ -3,6 +3,7 @@ package Server.Control;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreBatterie;
@@ -18,17 +19,15 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 */
 	private static final long serialVersionUID = -51837280579457780L;
 	private int IDStazione;
-	private ArrayList<Autovettura> lastElenco;
+	private ArrayList<? extends Autovettura> lastElenco;
 	
 	public CoordinatoreGestoreAutenticato (int IDStazione) throws RemoteException {
 		super();
 		this.IDStazione = IDStazione;
 	}
 
-	public ArrayList<Autovettura> retrieveListaModelli() {
-		ArrayList<Server.BusinessLogic.Autovettura> listaAutovetture = GestoreAutovetture.retrieveListaModelli();
-		this.lastElenco = new ArrayList<Autovettura>(listaAutovetture);
-		
+	public ArrayList<? extends Autovettura> retrieveListaModelli() {
+		this.lastElenco = GestoreAutovetture.retrieveListaModelli();		
 		return new ArrayList<Autovettura>(this.lastElenco);
 	}
 
@@ -48,25 +47,24 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * @param IDstazione
 	 * @param listabatterie
 	 */
-	public boolean retrieveBatterieQuasiEsauste(int IDstazione, ArrayList<Batteria> elencobatterie) {
-		ArrayList<Server.BusinessLogic.Batteria> listaBatterie = GestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
-		elencobatterie = new ArrayList<Batteria>(listaBatterie);
-		
+	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) {
+		return GestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
 	}
 
 	/**
 	 * 
 	 * @param codicebadge
 	 */
-	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture) {
+	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<? extends AutovetturaCliente> elencoAutovetture) {
+		
+		if ( elencoAutovetture.isEmpty() == false ) throw new IllegalArgumentException("Non empty input array");
+			
 		ValidazioneBadge badge = new ValidazioneBadge();
 		
 		if ( badge.findCodiceBadge(codicebadge) == false ) return false;
 		else {
-			ArrayList<Server.BusinessLogic.AutovetturaCliente> listaAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
-			this.lastElenco = new ArrayList<Autovettura>(listaAutovetture);
-			elencoAutovetture = new ArrayList<AutovetturaCliente>(listaAutovetture);
-			
+			elencoAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
+			this.lastElenco = new ArrayList<AutovetturaCliente>(elencoAutovetture);
 			return true;
 		}
 		
@@ -76,7 +74,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * 
 	 * @param modello
 	 */
-	public ArrayList<Stazione> remoteRetrieveBatterieCompatibili(int modello) {
+	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) {
 		return GestoreDisponibilità.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello) );
 	}
 
