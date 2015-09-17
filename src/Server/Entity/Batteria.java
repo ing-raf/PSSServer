@@ -51,7 +51,7 @@ public class Batteria {
 
 	public ModelloAutovettura getModelloAutovettura() {
 		return this.modello_compatibile;
-		// TODO - implement Batteria.getModelloAutovettura
+		
 	}
 	
 	
