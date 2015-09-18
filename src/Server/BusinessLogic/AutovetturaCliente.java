@@ -8,7 +8,7 @@ public class AutovetturaCliente extends Autovettura implements Server.RMIInterfa
 	 * 
 	 */
 	private static final long serialVersionUID = -6726985347038990778L;
-	AutovetturaCompatibile autovettura;
+	private AutovetturaCompatibile autovettura;
 	
 	public String getNumeroTarga() {
 		return autovettura.getNumeroTarga();
@@ -22,10 +22,14 @@ public class AutovetturaCliente extends Autovettura implements Server.RMIInterfa
 		this.autovettura = autovettura;
 	}
 	
-//	public Autovettura getModelloAutovettura(){
-//		Autovettura a = new Autovettura();
-//		a.setAutovettura(this.autovettura.getModello());
-//		return a;
-//	}
+	public AutovetturaCompatibile getAutovetturaCliente(){
+		return this.autovettura;
+	}
+	
+	public Autovettura getModelloAutovettura(){
+		Autovettura a = new Autovettura();
+		a.setAutovettura(this.autovettura.getModello());
+		return a;
+	}
 
 }

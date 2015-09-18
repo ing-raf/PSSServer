@@ -3,8 +3,6 @@ package Server.Control;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
-import java.util.Collection;
-
 import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreBatterie;
 import Server.BusinessLogic.GestoreDisponibilità;

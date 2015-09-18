@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import Server.Entity.*;
 
-public class GestoreDisponibilità{
+public class GestoreDisponibilitÃ {
 
 	/**
 	 * 
@@ -55,7 +55,7 @@ public class GestoreDisponibilità{
 	public static ArrayList<Stazione> remoteRetrieveBatterieCompatibili(Autovettura modello, int IDstazione) {
 		
 		ArrayList<Stazione> stazioniRemote = new ArrayList<Stazione>();
-		Società s = new Società();
+		Societï¿½ s = new Societï¿½();
 		ArrayList<Server.Entity.Stazione> listaS = s.getListaStazioni();
 		ModelloAutovettura m = modello.getAutovettura();
 		

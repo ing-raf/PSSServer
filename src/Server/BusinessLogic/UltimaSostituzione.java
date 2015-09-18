@@ -13,36 +13,29 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	private Sostituzione sostituzione;
 
 	public int getGiorno() {
-		return this.sostituzione.getData().get(Calendar.DATE);
+		return this.sostituzione.getDataOra().get(Calendar.DATE);
 	}
 
 	public int getMese() {
-		return this.sostituzione.getData().get(Calendar.MONTH);
+		return this.sostituzione.getDataOra().get(Calendar.MONTH);
 	}
 
 	public int getAnno() {
-		return this.sostituzione.getData().get(Calendar.YEAR);
+		return this.sostituzione.getDataOra().get(Calendar.YEAR);
 	}
 
 	public int getOra() {
-		return this.sostituzione.getOra().get(Calendar.HOUR_OF_DAY);
+		return this.sostituzione.getDataOra().get(Calendar.HOUR_OF_DAY);
 	}
 
 	public int getMinuti() {
-		return this.sostituzione.getOra().get(Calendar.MINUTE);
+		return this.sostituzione.getDataOra().get(Calendar.MINUTE);
 	}
 
-	public Calendar setSostituzione() {
-		// TODO - implement Sostituzione.setSostituzione
+	public void setSostituzione(Server.Entity.Sostituzione sos) {
+		this.sostituzione = sos;
 	}
 
-	public string getNomeStazione() {
-		// TODO - implement Sostituzione.getNomeStazione
-	}
-
-	public string getIndirizzoStazione() {
-		// TODO - implement Sostituzione.getIndirizzoStazione
-	}
 
 	public String getNomeStazione() {
 		return this.sostituzione.getBatteria().nomeStazione;
