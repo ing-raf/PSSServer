@@ -1,6 +1,7 @@
 package Server.BusinessLogic;
 
 import java.util.ArrayList;
+import Server.Entity.*;
 
 public class GestoreAutovetture {
 
