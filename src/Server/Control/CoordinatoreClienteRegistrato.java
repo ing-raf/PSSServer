@@ -55,6 +55,10 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 		this.stato.startValidazione(this, codice);
 	}
 
+	int getIDStazione() {
+		return this.IDstazione;
+	}
+	
 	void setStato (Stato stato) {
 		this.stato = stato;
 	}

@@ -39,7 +39,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * @param modelloautovettura
 	 */
 	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) {
-		return GestoreBatterie.addBatteria(IDStazione, IDbatteria, costosostituzione, maxcicliricarica, lastElenco.get(modelloautovettura) );
+		return GestoreDisponibilità.addBatteria(IDStazione, IDbatteria, costosostituzione, maxcicliricarica, lastElenco.get(modelloautovettura) );
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * @param modello
 	 */
 	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) {
-		return GestoreDisponibilità.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello) );
+		return GestoreDisponibilità.remoteRetrieveBatterieCompatibili( this.IDStazione, this.lastElenco.get(modello) );
 	}
 
 	public Sostituzione retrieveUltimaSostituzione(int autovettura) {	
