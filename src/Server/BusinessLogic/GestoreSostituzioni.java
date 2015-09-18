@@ -1,5 +1,8 @@
 package Server.BusinessLogic;
 
+import java.util.ArrayList;
+import Server.Entity.*;
+
 public class GestoreSostituzioni {
 
 	public Server.Entity.Sostituzione findLastSostituzione() {

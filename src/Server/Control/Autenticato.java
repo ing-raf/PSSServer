@@ -17,7 +17,8 @@ public class Autenticato extends Stato {
 	
 	private ValidazioneBadge badgeAutenticato;
 	private ArrayList<? extends AutovetturaCliente> lastElenco;
-	private ArrayList<? extends Batteria> availableBatteria;
+	private int indiceAutovettura;
+	private ArrayList<? extends Batteria> availableBatterie;
 
 	public Autenticato(ValidazioneBadge badgeAutenticato) {
 		this.badgeAutenticato = badgeAutenticato;
@@ -36,18 +37,15 @@ public class Autenticato extends Stato {
 	 * @param elencoStazioni
 	 */
 	public boolean retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura, ArrayList<? extends Batteria> elencoBatterie, ArrayList<? extends Stazione> elencoStazioni) {
-		AutovetturaCliente scelta = this.lastElenco.get(indiceAutovettura);
-		this.availableBatteria = GestoreDisponibilità.retrieveBatterieCompatibili( coordinatore.getIDStazione(), AutovetturaCliente.getAutovettura() );
+		this.availableBatterie = GestoreDisponibilità.retrieveBatterieCompatibili( (Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura).getModelloAutovettura(), coordinatore.getIDStazione() );
 		
-		if ( this.availableBatteria.isEmpty() ) {
-			elencoStazioni = GestoreDisponibilità.remoteRetrieveBatterieCompatibili( coordinatore.getIDStazione(), this.lastElenco.get(indiceAutovettura). );
+		if ( this.availableBatterie.isEmpty() ) {
+			elencoStazioni = GestoreDisponibilità.remoteRetrieveBatterieCompatibili( (Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura).getModelloAutovettura(), coordinatore.getIDStazione() );
 			coordinatore.setStato( new NonAutenticato() );
 			return false;
-			
 		} else {
-			elencoBatterie = new ArrayList<Batteria>(this.availableBatteria);
-			this.lastElenco.clear();
-			this.lastElenco.add(scelta);
+			this.indiceAutovettura = indiceAutovettura;
+			elencoBatterie = new ArrayList<Batteria>(this.availableBatterie);
 			return true;
 		}
 		
@@ -60,8 +58,8 @@ public class Autenticato extends Stato {
 	public boolean startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) {
 		if ( this.removeBatteria() == false) throw new ConnectIOException("Riscontrato un errore durante la rimozione della vecchia batteria");
 		if ( this.installBatteria(indiceBatteria) == false ) throw new ConnectIOException("Riscontrato un errore durante l'installazione della batteria");
-		Batteria rimossa = GestoreSostituzioni.updateSostituzione(this.lastElenco.get(0), coordinatore.getIDStazione(), this.availableBatteria.get(indiceBatteria) );
-		if (GestoreDisponibilità.removeBatteria( coordinatore.getIDStazione(), this.availableBatteria.get(indiceBatteria) ) == false ) throw new InvalidTransactionException("Il server non è riuscito a rimuovere");
+		Batteria rimossa = GestoreSostituzioni.updateSostituzione( this.lastElenco.get(this.indiceAutovettura), coordinatore.getIDStazione(), this.availableBatterie.get(indiceBatteria) );
+		if (GestoreDisponibilità.removeBatteria( (Server.BusinessLogic.Batteria) this.availableBatterie.get(indiceBatteria), coordinatore.getIDStazione() ) == false ) throw new InvalidTransactionException("Il server non è riuscito a rimuovere");
 		// start thread CoordinatoreRecupero
 		coordinatore.setStato( new NonAutenticato() );
 	}
@@ -72,12 +70,13 @@ public class Autenticato extends Stato {
 	
 	private boolean removeBatteria() {
 		// TODO Auto-generated method stub
+		return false;
 		
 	}
 	
 	private boolean installBatteria(int IDbatteria) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 }

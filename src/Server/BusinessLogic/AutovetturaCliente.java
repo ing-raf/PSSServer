@@ -21,5 +21,11 @@ public class AutovetturaCliente extends Autovettura implements Server.RMIInterfa
 	public void setAutovettura(AutovetturaCompatibile autovettura) {
 		this.autovettura = autovettura;
 	}
+	
+//	public Autovettura getModelloAutovettura(){
+//		Autovettura a = new Autovettura();
+//		a.setAutovettura(this.autovettura.getModello());
+//		return a;
+//	}
 
 }
