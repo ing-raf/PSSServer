@@ -27,7 +27,8 @@ public class Stazione {
 	}
 	public Stazione (int id){
 		
-		Stazione s = new Stazione ();
+		Stazione s =  this.findStazione(id);
+		this.ID=s.getID();
 		this.nome = s.getNome();
 		this.indirizzo = s.getIndirizzo();
 		this.disponibii=s.getBatterieDisp();
@@ -72,22 +73,6 @@ public class Stazione {
 		// TODO - implement Stazione.removeBatteria
 	}
 	
-	ArrayList<Batteria> findBatterie (){
-		ArrayList<Batteria> trovate = new ArrayList<Batteria>();
-		//apro la sessione e la transazione
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-		session.beginTransaction();
-				
-		Query query = session.createQuery("from Batteria as s where s.stazione_associata.ID = :cod");
-		query.setParameter("cod", this.ID);
-		trovate = (ArrayList<Batteria>)query.list();
-				
-		//chiudo la transazione e la sessione
-		session.getTransaction().commit();		
-		session.close();
-		return trovate;
-	}
 	
 	 Stazione findStazione (int cod){
 		//apro la sessione e la transazione
@@ -133,6 +118,23 @@ public class Stazione {
 		session.close();
 		
 		return this;
+	}
+	
+	ArrayList<Batteria> findBatterie (){
+		ArrayList<Batteria> trovate = new ArrayList<Batteria>();
+		//apro la sessione e la transazione
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+				
+		Query query = session.createQuery("from Batteria as s where s.stazione_disp.ID = :cod ");
+		query.setParameter("cod", this.getID());
+		trovate = (ArrayList<Batteria>)query.list();
+				
+		//chiudo la transazione e la sessione
+		session.getTransaction().commit();		
+		session.close();
+		return trovate;
 	}
 
 }

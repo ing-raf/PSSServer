@@ -19,7 +19,9 @@ public class ModelloAutovettura {
 	private String modello;
 
 	
-	
+	public ModelloAutovettura(){
+		
+	}
 	
 	public String getModello() {
 		return this.modello;

@@ -1,5 +1,9 @@
 package Server.Entity;
+import java.util.ArrayList;
+
 import javax.persistence.*;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -14,7 +18,9 @@ public class Batteria {
 	@Column
 	private int cicliRicaricaRimanenti;
 	@ManyToOne
-	@JoinColumn (name="modello_autovettura") private ModelloAutovettura modello_compatibile;
+	@JoinColumn (name = "modello_autovettura") private ModelloAutovettura modello_compatibile;
+	@ManyToOne 
+	@JoinColumn(name = "disp_batterie") private Stazione stazione_disp;
 	
 	
 	
@@ -120,5 +126,23 @@ public class Batteria {
 		session.close();
 		return b;
 	}
+	
+	ArrayList<Batteria> findBatterie (){
+		ArrayList<Batteria> trovate = new ArrayList<Batteria>();
+		//apro la sessione e la transazione
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+				
+		Query query = session.createQuery("from Batteria as s where s.stazione_disp.ID = :cod ");
+		query.setParameter("cod", 1);
+		trovate = (ArrayList<Batteria>)query.list();
+				
+		//chiudo la transazione e la sessione
+		session.getTransaction().commit();		
+		session.close();
+		return trovate;
+	}
+	
 
 }

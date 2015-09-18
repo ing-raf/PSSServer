@@ -21,11 +21,39 @@ public class Cliente {
 	private int Id;
 	
 	@OneToMany
-	@JoinColumn (name="autovetture") Set<AutovetturaCompatibile> autovetturePossedute;
+	@JoinColumn (name="Id_cliente") Set<AutovetturaCompatibile> autovetturePossedute;
 	
-	public Cliente () {
+	public Cliente (int id) {
+		Cliente c = new Cliente ();
+		c.findCliente(id);
+		this.nome = c.getNome();
+		this.cognome = c.getCognome();
+		this.dataNascita = c.getDataNascita();
+		this.autovetturePossedute = c.getAutoPoassedute();
 		
 	}
+	public int getID (){
+		return this.Id;
+	}
+	
+	 public Cliente() {
+		// TODO Auto-generated constructor stub
+	}
+
+	Cliente findCliente (int cod){
+			//apro la sessione e la transazione
+					SessionFactory sf = HibernateUtil.getSessionFactory();
+					Session session = sf.openSession();
+					session.beginTransaction();
+
+					Cliente trovato = (Cliente) session.get(Cliente.class, cod) ; 
+					
+					//chiudo la transazione e la sessione
+					session.getTransaction().commit();		
+					session.close();
+					
+					return trovato;
+		}
 
 	/*public Set<AutovetturaCompatibile> getListaAutovetture() {
 		return this.autovetturePosseduta;
@@ -34,7 +62,9 @@ public class Cliente {
 	/*public Badge getBadge () {
 		return this.badge_assegnato;
 	}*/
-
+	public void setAutovettura (Set<AutovetturaCompatibile> a){
+		this.autovetturePossedute = a;
+	}
 	public String getNome() {
 		return this.nome;
 	}

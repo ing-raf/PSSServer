@@ -17,15 +17,37 @@ public class AutovetturaCompatibile {
 	@ManyToOne
 	@JoinColumn (name = "modello")  ModelloAutovettura modello;
 	@OneToOne
-	@JoinColumn (name = "sostituzione") Sostituzione sostituzione;
+	@JoinColumn (name = "Id_sostituzione") Sostituzione sostituzione;
 	
 	public AutovetturaCompatibile (){
-		
+	
 	}
+		
+	AutovetturaCompatibile findAuto (String targa){
+		//apro la sessione e la transazione
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+
+		AutovetturaCompatibile trovato = (AutovetturaCompatibile) session.get(AutovetturaCompatibile.class, targa) ; 
+						
+		//chiudo la transazione e la sessione
+		session.getTransaction().commit();		
+		session.close();
+						
+		return trovato;
+			}
+		
+	
 	
 	public void setNumeroTarga(String nt){
 		this.numeroTarga=nt;
 	}
+	
+	public String getNumeroTarga (){
+		return this.numeroTarga;
+	}
+	
 
 	public ModelloAutovettura getModello() {
 		return this.modello;
