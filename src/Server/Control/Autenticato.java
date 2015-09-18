@@ -1,6 +1,8 @@
 package Server.Control;
 
+import java.rmi.ConnectIOException;
 import java.util.ArrayList;
+import javax.transaction.InvalidTransactionException;
 
 import Server.BusinessLogic.Autovettura;
 import Server.BusinessLogic.GestoreAutovetture;
@@ -56,10 +58,10 @@ public class Autenticato extends Stato {
 	 * @param indiceBatteria
 	 */
 	public boolean startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) {
-		this.removeBatteria();
-		this.installBatteria(indiceBatteria);
-		GestoreSostituzioni.updateSostituzione(this.lastElenco.get(0), coordinatore.getIDStazione(), this.availableBatteria.get(indiceBatteria) );
-		GestoreDisponibilità.removeBatteria( this.availableBatteria.get(indiceBatteria) );
+		if ( this.removeBatteria() == false) throw new ConnectIOException("Riscontrato un errore durante la rimozione della vecchia batteria");
+		if ( this.installBatteria(indiceBatteria) == false ) throw new ConnectIOException("Riscontrato un errore durante l'installazione della batteria");
+		Batteria rimossa = GestoreSostituzioni.updateSostituzione(this.lastElenco.get(0), coordinatore.getIDStazione(), this.availableBatteria.get(indiceBatteria) );
+		if (GestoreDisponibilità.removeBatteria( coordinatore.getIDStazione(), this.availableBatteria.get(indiceBatteria) ) == false ) throw new InvalidTransactionException("Il server non è riuscito a rimuovere");
 		// start thread CoordinatoreRecupero
 		coordinatore.setStato( new NonAutenticato() );
 	}
@@ -68,12 +70,12 @@ public class Autenticato extends Stato {
 		return true;
 	}
 	
-	private void removeBatteria() {
+	private boolean removeBatteria() {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	private void installBatteria(int IDbatteria) {
+	private boolean installBatteria(int IDbatteria) {
 		// TODO Auto-generated method stub
 		
 	}
