@@ -5,9 +5,8 @@ import Server.Entity.*;
 
 public class GestoreSostituzioni {
 
-	public Server.Entity.Sostituzione findLastSostituzione() {
+	public static Server.Entity.Sostituzione findLastSostituzione() {
 		return null;
-		// TODO - implement GestoreSostituzioni.findLastSostituzione
 	}
 
 	/**
@@ -16,9 +15,9 @@ public class GestoreSostituzioni {
 	 * @param idStazione
 	 * @param batteria
 	 */
-	public Batteria updateSostituzione(Server.Entity.AutovetturaCompatibile autovettura, int idStazione, Server.Entity.Batteria batteria) {
+	public static Batteria updateSostituzione(Server.Entity.AutovetturaCompatibile autovettura, int idStazione, Server.Entity.Batteria batteria) {
 		return null;
-		// TODO - implement GestoreSostituzioni.updateSostituzione
+	
 	}
 
 }
