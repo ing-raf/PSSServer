@@ -1,5 +1,7 @@
 package Server.BusinessLogic;
 
+import java.util.ArrayList;
+
 public class GestoreBatterie {
 
 	/**
@@ -10,7 +12,8 @@ public class GestoreBatterie {
 	 * @param maxcicliricarica
 	 * @param modello
 	 */
-	public void addBatteria(int IDstazione, int IDbatteria, int costosostituzione, int maxcicliricarica, Autovettura[] modello) {
+	public boolean addBatteria(int IDstazione, int IDbatteria, float costosostituzione, int maxcicliricarica, Autovettura modello) {
+		return false;
 		// TODO - implement GestoreBatterie.addBatteria
 	}
 
@@ -18,7 +21,8 @@ public class GestoreBatterie {
 	 * 
 	 * @param IDstazione
 	 */
-	public Autovettura[] retrieveBatterieQuasiEsauste(int IDstazione) {
+	public ArrayList<Batteria> retrieveBatterieQuasiEsauste(int IDstazione) {
+		return null;
 		// TODO - implement GestoreBatterie.retrieveBatterieQuasiEsauste
 	}
 
@@ -27,6 +31,7 @@ public class GestoreBatterie {
 	 * @param batteria
 	 */
 	public boolean verifyRicarica(Batteria batteria) {
+		return false;
 		// TODO - implement GestoreBatterie.verifyRicarica
 	}
 

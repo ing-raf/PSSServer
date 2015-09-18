@@ -1,12 +1,15 @@
 package Server.BusinessLogic;
 
-public class GestoreDisponibilità {
+import java.util.ArrayList;
+
+public class GestoreDisponibilità{
 
 	/**
 	 * 
 	 * @param modello
 	 */
-	public Batteria[] retrieveBatterieCompatibili(Autovettura modello) {
+	public ArrayList<Batteria> retrieveBatterieCompatibili(Autovettura modello) {
+		return null;
 		// TODO - implement GestoreDisponibilità.retrieveBatterieCompatibili
 	}
 
@@ -15,6 +18,7 @@ public class GestoreDisponibilità {
 	 * @param modello
 	 */
 	public Server.Entity.Stazione[] remoteRetrieveBatterieCompatibili(Server.Entity.ModelloAutovettura modello) {
+		return null;
 		// TODO - implement GestoreDisponibilità.remoteRetrieveBatterieCompatibili
 	}
 
@@ -31,6 +35,7 @@ public class GestoreDisponibilità {
 	 * @param batteria
 	 */
 	public boolean addBatteria(Batteria batteria) {
+		return false;
 		// TODO - implement GestoreDisponibilità.addBatteria
 	}
 

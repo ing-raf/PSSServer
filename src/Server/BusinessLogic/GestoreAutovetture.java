@@ -1,16 +1,20 @@
 package Server.BusinessLogic;
 
+import java.util.ArrayList;
+
 public class GestoreAutovetture {
 
 	/**
 	 * 
 	 * @param validazionebadge
 	 */
-	public AutovetturaCliente[] retrieveListaAutovetture(ValidazioneBadge validazionebadge) {
+	public ArrayList<AutovetturaCliente> retrieveListaAutovetture(ValidazioneBadge validazionebadge) {
+		return null;
 		// TODO - implement GestoreAutovetture.retrieveListaAutovetture
 	}
 
-	public Server.Entity.ModelloAutovettura[] retrieveListaModelli() {
+	public ArrayList<Autovettura> retrieveListaModelli() {
+		return null;
 		// TODO - implement GestoreAutovetture.retrieveListaModelli
 	}
 

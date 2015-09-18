@@ -6,6 +6,10 @@ import Server.Entity.Sostituzione;
 
 public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2017480700229004661L;
 	private Sostituzione sostituzione;
 
 	public int getGiorno() {
@@ -48,7 +52,7 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 		return this.sostituzione.getBatteria().indirizzoStazione;
 	}
 
-	public int getIDBatteria() {
+	public int getIDbatteria() {
 		return this.sostituzione.getBatteria().IDBatteria;
 	}
 
