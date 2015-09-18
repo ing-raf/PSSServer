@@ -17,10 +17,8 @@ public class ModelloAutovettura {
 	private String fornitore;
 	@Column 
 	private String modello;
-	//@OneToMany
-	//@JoinColumn (name="unamed") Set<AutovetturaCompatibile> modelloauto;
-	@OneToMany
-	@JoinColumn (name="modello_batteria") Set<Batteria> batterie_compatibili;
+
+	
 	
 	
 	public String getModello() {
@@ -38,6 +36,8 @@ public class ModelloAutovettura {
 	public void setModello (String model){
 		this.modello=model;
 	}
+	
+	
 	
 	ModelloAutovettura update() {
 		//apro la sessione e la transazione

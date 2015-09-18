@@ -6,34 +6,40 @@ public class Sostituzione {
 	@Id
 	private int ID;
 	@Column 
-	private Calendar data;
-	@Column
-	private Calendar ora;
+	private Calendar dataOra;
 	@ManyToOne 
 	@JoinColumn (name = "stazione_sostituzione") Stazione staz_sostittuz;
+	@OneToOne
+	@JoinColumn (name = "batteria_sostituita") Batteria batteria;
 	
-	public Calendar getData() {
-		return this.data;
+	public Calendar getDataOra() {
+		return this.dataOra;
 	}
 
-	public Calendar getOra() {
-		return this.ora;
+	
+	public int getID (){
+		return this.ID;
 	}
-
 	public Stazione getStazione() {
 		// TODO - implement Sostituzione.getStazione
-		return null;
+		return this.staz_sostittuz;
 	}
 
-	public void setData() {
-		// TODO - implement Sostituzione.setData
+	public void setDataOra(Calendar dataora) {
+		this.dataOra = dataora;
+		
+	}
+	
+	public void setID (int cod){
+		this.ID = cod;
 	}
 
-	public void setOra() {
-		// TODO - implement Sostituzione.setOra
+	public Batteria getBatteria () {
+		return this.batteria;
 	}
+	
 
-	public void setAutovettura() {
+	/*public void setAutovettura() {
 		// TODO - implement Sostituzione.setAutovettura
 	}
 
@@ -43,6 +49,6 @@ public class Sostituzione {
 
 	public void setBatteria() {
 		// TODO - implement Sostituzione.setBatteria
-	}
+	}*/
 
 }

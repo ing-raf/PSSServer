@@ -19,10 +19,9 @@ public class Cliente {
 	@Id
 	@Column
 	private int Id;
-	//@OneToOne
-	//@JoinColumn (name="codice_badge") Badge badge_assegnato;
-	//@OneToMany
-	//@JoinColumn (name="autovetture") Set<AutovetturaCompatibile> autovetturePosseduta;
+	
+	@OneToMany
+	@JoinColumn (name="autovetture") Set<AutovetturaCompatibile> autovetturePossedute;
 	
 	public Cliente () {
 		
@@ -62,6 +61,10 @@ public class Cliente {
 	
 	public void setData (Calendar d){
 		this.dataNascita=d;
+	}
+	
+	public Set<AutovetturaCompatibile> getAutoPoassedute() {
+		return this.autovetturePossedute;
 	}
 	
 	

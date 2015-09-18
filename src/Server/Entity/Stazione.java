@@ -34,7 +34,6 @@ public class Stazione {
 	}
 	public void insertBatteria(Batteria nuova) {
 		
-		nuova.setStazione (this);
 		nuova.update();
 	}
 	public Set<Batteria> getBatterieDisp (){
@@ -87,7 +86,7 @@ public class Stazione {
 		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
-		return null;
+		return trovate;
 	}
 	
 	 Stazione findStazione (int cod){

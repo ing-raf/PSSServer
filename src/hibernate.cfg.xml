@@ -33,5 +33,8 @@
         <mapping class="Server.Entity.Cliente" />
         <mapping class="Server.Entity.ModelloAutovettura" />
         <mapping class="Server.Entity.Stazione" />
+        <mapping class="Server.Entity.AutovetturaCompatibile" />
+        <mapping class="Server.Entity.Sostituzione" />
+        
     </session-factory>
 </hibernate-configuration>
