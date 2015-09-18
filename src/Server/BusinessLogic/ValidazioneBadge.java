@@ -7,8 +7,7 @@ public class ValidazioneBadge {
 	Badge badgeValidato;
 
 	public Cliente getCliente() {
-		return null;
-		
+		return badgeValidato.getCliente();	
 	}
 
 	/**
@@ -16,8 +15,11 @@ public class ValidazioneBadge {
 	 * @param codice
 	 */
 	public boolean findCodiceBadge(int codice) {
-		return false;
-		// TODO - implement ValidazioneBadge.findCodiceBadge
+		
+		Società s = new Società();
+		badgeValidato = new Badge();
+	    
+		return s.findBadge(badgeValidato, codice);
 	}
 
 }
