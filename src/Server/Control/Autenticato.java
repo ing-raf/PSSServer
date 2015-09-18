@@ -9,21 +9,14 @@ import Server.RMIInterface.AutovetturaCliente;
 public class Autenticato extends Stato {
 	
 	private ValidazioneBadge badgeAutenticato;
-	private ArrayList<AutovetturaCliente> lastElenco;
+	private ArrayList<? extends AutovetturaCliente> lastElenco;
 
 	public Autenticato(ValidazioneBadge badgeAutenticato) {
 		this.badgeAutenticato = badgeAutenticato;
 	}
 
-	public ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
-		ArrayList<Server.BusinessLogic.AutovetturaCliente> listaAutovetture = gestoreAutovetture.retrieveListaAutovetture(this.badgeAutenticato);
-		this.lastElenco = new ArrayList<AutovetturaCliente>();
-		
-		for (Server.BusinessLogic.AutovetturaCliente veicolo : listaAutovetture) {
-			AutovetturaCliente nuova = new AutovetturaCliente();
-			nuova.setAutovetturaCliente(veicolo);
-			this.lastElenco.add(nuova);
-		}
+	public ArrayList<AutovetturaCliente> retrieveAutovetture() {
+		this.lastElenco = GestoreAutovetture.retrieveListaAutovetture(this.badgeAutenticato);
 		
 		return new ArrayList<Server.RMIInterface.AutovetturaCliente>(this.lastElenco);
 	}
