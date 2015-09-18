@@ -1,6 +1,5 @@
 package Server.Entity;
 import javax.persistence.*;
-import java.util.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -14,19 +13,34 @@ public class Batteria {
 	private float costoSostituzione;
 	@Column
 	private int cicliRicaricaRimanenti;
-	@OneToOne
+	@ManyToOne
 	@JoinColumn (name="modello_autovettura") private ModelloAutovettura modello_compatibile;
 	@ManyToOne
 	@JoinColumn (name="Id_Stazione") private Stazione stazione_associata;
-	@OneToOne 
-	@JoinColumn (name="Id_Sostituzione") private Sostituzione sostituzione_batteria;
+	/*@OneToOne 
+	@JoinColumn (name="Id_Sostituzione") private Sostituzione sostituzione_batteria;*/
 	
-	public Batteria (){}
+	public Batteria (){
+	}
 	
-	public Batteria(int id, float costosostituzione, int maxcicliricarica) {		
+	public Batteria (int id){
+		Batteria b = this.findBatteria(id);
+		this.costoSostituzione = b.getCostoSostituzione();
+		this.cicliRicaricaRimanenti = b.getCicliRicarica();
+		this.modello_compatibile = b.getModelloAutovettura();
+		this.stazione_associata = b.getStazione();
+	}
+	
+	public Stazione getStazione () {
+		return this.stazione_associata;
+	}
+	
+	public Batteria(int id, float costosostituzione, int maxcicliricarica, ModelloAutovettura mod) {		
 		this.ID = id;
 		this.costoSostituzione = costosostituzione;
 		this.cicliRicaricaRimanenti = maxcicliricarica;
+		this.modello_compatibile=mod;
+		this.salva();
 	}
 	
 	void setStazione(Stazione staz){

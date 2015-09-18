@@ -1,7 +1,6 @@
 package Server.Entity;
 
 import java.util.*;
-import java.util.ArrayList;
 import javax.persistence.*;
 
 import org.hibernate.Session;
@@ -18,18 +17,31 @@ public class Cliente {
 	@Column
 	private Calendar dataNascita;
 	@Id
+	@Column
 	private int Id;
-	@OneToOne
-	@JoinColumn (name="codice_badge") Badge badge_assegnato;
-	@OneToMany
-	@JoinColumn (name="autovetture") Set<AutovetturaCompatibile> autovetturePosseduta;
-
-	public Set<AutovetturaCompatibile> getListaAutovetture() {
-		return this.autovetturePosseduta;
+	//@OneToOne
+	//@JoinColumn (name="codice_badge") Badge badge_assegnato;
+	//@OneToMany
+	//@JoinColumn (name="autovetture") Set<AutovetturaCompatibile> autovetturePosseduta;
+	
+	public Cliente () {
+		
 	}
+
+	/*public Set<AutovetturaCompatibile> getListaAutovetture() {
+		return this.autovetturePosseduta;
+	}*/
+	
+	/*public Badge getBadge () {
+		return this.badge_assegnato;
+	}*/
 
 	public String getNome() {
 		return this.nome;
+	}
+	
+	public void setId (int cod){
+		this.Id=cod;
 	}
 
 	public String getCognome() {
@@ -40,36 +52,19 @@ public class Cliente {
 		return this.dataNascita;
 	}
 	
-	public int getId() {
-		return this.Id;
+	public void setNome (String n){
+		this.nome = n;
 	}
 	
-	public void setNome (String name){
-		this.nome = name;
+	public void setcognome (String c){
+		this.cognome = c;
 	}
 	
-	public void setCognome (String cogn){
-		this.cognome = cogn;
+	public void setData (Calendar d){
+		this.dataNascita=d;
 	}
 	
-	public void setDataNascita (Calendar data){
-		this.dataNascita = data;
-	}
 	
-	public void setId (int id){
-		this.Id = id;
-	}
-
-	/*public void setListaAutovetture (ArrayList<AutovetturaCompatibile> lista){
-		
-		int k, dim;
-		
-		dim = lista.size();
-		
-		for (k = 0; k <= dim; k++){
-			this.autovetturePossedute.add(k,lista.get(k));
-		}
-	}*/
 	Cliente update() {
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
@@ -84,6 +79,8 @@ public class Cliente {
 		
 		return this;
 	}
+	
+	
 	
 	Cliente salva(){
 		//apro la sessione e la transazione

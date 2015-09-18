@@ -1,12 +1,17 @@
 package Server.Entity;
-
+import javax.persistence.*;
 import java.util.Calendar;
-
+@Entity
 public class Sostituzione {
-
+	@Id
+	private int ID;
+	@Column 
 	private Calendar data;
+	@Column
 	private Calendar ora;
-
+	@ManyToOne 
+	@JoinColumn (name = "stazione_sostituzione") Stazione staz_sostittuz;
+	
 	public Calendar getData() {
 		return this.data;
 	}
@@ -17,6 +22,7 @@ public class Sostituzione {
 
 	public Stazione getStazione() {
 		// TODO - implement Sostituzione.getStazione
+		return null;
 	}
 
 	public void setData() {

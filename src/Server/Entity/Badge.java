@@ -1,22 +1,12 @@
 package Server.Entity;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
+
+import javax.persistence.*;
+
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -52,6 +42,10 @@ public class Badge {
 	
 	public void setCredito(float cred){
 		this.creditoResiduo = cred;
+	}
+	
+	public void setCliente (Cliente p){
+		this.possessore=p;
 	}
 	
 	public Badge () {

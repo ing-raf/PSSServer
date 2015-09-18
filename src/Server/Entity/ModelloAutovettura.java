@@ -17,10 +17,11 @@ public class ModelloAutovettura {
 	private String fornitore;
 	@Column 
 	private String modello;
-	@OneToMany
-	@JoinColumn (name="unamed") Set<AutovetturaCompatibile> modelloauto;
+	//@OneToMany
+	//@JoinColumn (name="unamed") Set<AutovetturaCompatibile> modelloauto;
 	@OneToMany
 	@JoinColumn (name="modello_batteria") Set<Batteria> batterie_compatibili;
+	
 	
 	public String getModello() {
 		return this.modello;
