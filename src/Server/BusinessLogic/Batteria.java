@@ -23,5 +23,9 @@ public class Batteria implements Server.RMIInterface.Batteria {
 	public void setBatteria(Server.Entity.Batteria batteria) {
 		this.batteria = batteria;
 	}
+	
+	public Server.Entity.Batteria getBatteria(){
+		return this.batteria;
+	}
 
 }

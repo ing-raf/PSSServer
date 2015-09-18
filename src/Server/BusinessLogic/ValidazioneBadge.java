@@ -8,7 +8,7 @@ public class ValidazioneBadge {
 
 	public Cliente getCliente() {
 		return null;
-		// TODO - implement ValidazioneBadge.getCliente
+		
 	}
 
 	/**
