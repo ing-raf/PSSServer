@@ -1,45 +1,97 @@
 package Server.Entity;
-
+import javax.persistence.*;
 import java.util.*;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+@Entity
 public class Stazione {
 
-	ArrayList<Batteria> disponibilità;
-	private string nome;
-	private string indirizzo;
-	private int ID;
-
-	/**
-	 * 
-	 * @param IDstazione
-	 * @param nuova
-	 */
-	public void insertBatteria(int IDstazione, Batteria nuova) {
-		// TODO - implement Stazione.insertBatteria
+	@Id
+	private int ID;	
+	@Column
+	private String nome;
+	@Column
+	private String indirizzo;
+	@OneToMany (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn (name ="disp_batterie")
+	private List<Batteria> disponibili;
+	
+	public Stazione () {
 	}
 
-	/**
-	 * 
-	 * @param cicliRicaricaRimanenti
-	 */
-	public Batteria[] getListaBatterie(int cicliRicaricaRimanenti) {
-		// TODO - implement Stazione.getListaBatterie
+	public void insertBatteria(Batteria nuova) {
+		this.disponibili.add(nuova);
+		this.update();
 	}
-
-	public string getIndirizzo() {
+	public List<Batteria> getBatterieDisp (){
+		return this.disponibili;
+	}
+	
+	public String getIndirizzo() {
 		return this.indirizzo;
 	}
 
-	public string getNome() {
+	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * 
-	 * @param batteria
-	 */
-	public void removeBatteria(Batteria batteria) {
-		// TODO - implement Stazione.removeBatteria
+	
+	public int getID(){
+		return this.ID;
 	}
+	
+	public void setID(int id){
+		this.ID = id;
+	}
+	
+	public void removeBatteria(Batteria batteria) {
+		batteria.elimina(batteria);
+	}
+		
+	public void getStazione (int cod){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
 
+		Stazione trovato = (Stazione) session.get(Stazione.class, cod) ; 
+					
+		session.getTransaction().commit();		
+		session.close();
+		
+		this.ID = trovato.getID();
+		this.nome = trovato.getNome();
+		this.indirizzo = trovato.getIndirizzo();
+		this.disponibili = trovato.getBatterieDisp();
+					
+		
+		}
+	
+	Stazione update() {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+
+		session.update(this);
+		
+		session.getTransaction().commit();		
+		session.close();
+		
+		return this;
+	}
+	
+	Stazione salva(){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+
+		session.save(this);
+		
+		session.getTransaction().commit();		
+		session.close();
+		
+		return this;
+	}	
+	
 }

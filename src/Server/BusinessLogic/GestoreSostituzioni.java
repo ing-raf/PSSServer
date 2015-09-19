@@ -1,8 +1,5 @@
 package Server.BusinessLogic;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-
 import Server.Entity.*;
 
 public class GestoreSostituzioni {
@@ -24,15 +21,15 @@ public class GestoreSostituzioni {
 	 * @param batteria
 	 */
 	public static Batteria updateSostituzione(AutovetturaCliente autovettura, int idStazione, Server.BusinessLogic.Batteria batteria) {
-		
-		Server.BusinessLogic.Batteria vecchia = new Server.BusinessLogic.Batteria();
+
 		Server.Entity.AutovetturaCompatibile a = autovettura.getAutovetturaCliente();
 		Server.Entity.Sostituzione ultima = a.getLastRicambio();
 		
-		vecchia.setBatteria(ultima.getBatteria());
-		ultima.setStazione(idStazione);
-		ultima.setBatteria(batteria);
-		ultima.setDataOra(Calendar.getInstance());
+		Server.Entity.Stazione stazione = new Server.Entity.Stazione();
+		Società.findStazione(stazione, idStazione);
+		Server.BusinessLogic.Batteria vecchia = new Server.BusinessLogic.Batteria();
+		
+		vecchia.setBatteria( ultima.updateSostituzione(stazione, batteria.getBatteria() ) );
 		
 		return vecchia;
 	

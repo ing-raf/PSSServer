@@ -1,6 +1,9 @@
 package Server.BusinessLogic;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import Server.Entity.Società;
 
 
 public class GestoreBatterie {
@@ -14,13 +17,14 @@ public class GestoreBatterie {
 	 */
 	public static ArrayList<Batteria> retrieveBatterieQuasiEsauste(int IDstazione) {
 		
-		Server.Entity.Stazione s = new Server.Entity.Stazione(IDstazione);
+		Server.Entity.Stazione s = new Server.Entity.Stazione();
+		Società.findStazione(s, IDstazione);
 		ArrayList<Batteria> quasiEsauste = new ArrayList<Batteria>();
-		ArrayList<Server.Entity.Batteria> lista = s.getListaBatterie();
+		List<Server.Entity.Batteria> lista = s.getBatterieDisp();
 		
 		for(int i = 0; i < lista.size(); i++){
 			
-			if(lista.get(i).getCicliCarica() < sogliaQuasiEsausta){
+			if(lista.get(i).getCicliRicarica() < sogliaQuasiEsausta){
 				Server.BusinessLogic.Batteria nuova = new Server.BusinessLogic.Batteria();
 				nuova.setBatteria(lista.get(i));
 				quasiEsauste.add(nuova);

@@ -1,40 +1,86 @@
 package Server.Entity;
+import javax.persistence.*;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
+import java.util.Calendar;
+@Entity
 public class Sostituzione {
-
-	private Calendar data;
-	private Calendar ora;
-
-	public Calendar getData() {
-		return this.data;
+	@Id
+	private int ID;
+	@Column 
+	private Calendar dataOra;
+	@ManyToOne  (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn (name = "stazione_sostituzione") Stazione staz_sostittuz;
+	@OneToOne
+	@JoinColumn (name = "batteria_sostituita") Batteria batteria;
+	
+	public Sostituzione (){
+	}
+	
+	public Calendar getDataOra() {
+		return this.dataOra;
 	}
 
-	public Calendar getOra() {
-		return this.ora;
+	
+	public int getID (){
+		return this.ID;
 	}
-
 	public Stazione getStazione() {
-		// TODO - implement Sostituzione.getStazione
+		return this.staz_sostittuz;
 	}
 
-	public void setData() {
-		// TODO - implement Sostituzione.setData
+	public void setDataOra(Calendar dataora) {
+		this.dataOra = dataora;
+		
+	}
+	
+	public void setID (int cod){
+		this.ID = cod;
 	}
 
-	public void setOra() {
-		// TODO - implement Sostituzione.setOra
+	public Batteria getBatteria () {
+		return this.batteria;
 	}
+	
+	public Batteria updateSostituzione (Stazione s, Batteria b){
+		Batteria temp = this.batteria;
+		this.batteria = b;
+		this.staz_sostittuz = s;
+		this.dataOra = Calendar.getInstance();
+		this.update();
+		return temp;
+	}
+	
 
-	public void setAutovettura() {
-		// TODO - implement Sostituzione.setAutovettura
-	}
+	void update() {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
 
-	public void setStazione() {
-		// TODO - implement Sostituzione.setStazione
+		session.update(this);
+		
+		session.getTransaction().commit();		
+		session.close();
+		
+		
 	}
+	
+	
+	
+	void salva(){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
 
-	public void setBatteria() {
-		// TODO - implement Sostituzione.setBatteria
+		session.save(this);
+		
+		session.getTransaction().commit();		
+		session.close();
+		
+		
 	}
+	
 
 }

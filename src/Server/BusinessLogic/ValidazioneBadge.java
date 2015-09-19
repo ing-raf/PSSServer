@@ -16,10 +16,9 @@ public class ValidazioneBadge {
 	 */
 	public boolean findCodiceBadge(int codice) {
 		
-		Societ‡ s = new Societ‡();
 		badgeValidato = new Badge();
 	    
-		return s.findBadge(badgeValidato, codice);
+		return Societ√†.findBadge(badgeValidato, codice);
 	}
 
 }

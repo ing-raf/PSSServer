@@ -1,7 +1,8 @@
 package Server.BusinessLogic;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import Server.Entity.*;
 
 public class GestoreDisponibilità{
@@ -12,18 +13,11 @@ public class GestoreDisponibilità{
 	 */
 	public static boolean addBatteria(int IDstazione, int IDbatteria, float costosostituzione, int maxcicliricarica, Autovettura modello) {
 		
-		Server.Entity.Stazione s = new Server.Entity.Stazione(IDstazione);
+		Server.Entity.Stazione s = new Server.Entity.Stazione();
+		if (Società.findStazione(s, IDstazione) == false) return false;
 		Server.Entity.Batteria b = new Server.Entity.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
 		
-		try{
-			
-			s.insertBatteria(b);
-		
-		}catch(SQLException e){
-			
-			e.printStackTrace();
-			return false;
-		}
+		s.insertBatteria(b);
 		
 		return true;
 	
@@ -33,12 +27,13 @@ public class GestoreDisponibilità{
 		
 		ArrayList<Batteria> batterieCompatibili = new ArrayList<Batteria>();
 		Server.Entity.ModelloAutovettura m = modello.getAutovettura();
-		Server.Entity.Stazione s = new Server.Entity.Stazione(IDstazione);
-		ArrayList<Server.Entity.Batteria> lista = s.getListaBatterie();
+		Server.Entity.Stazione s = new Server.Entity.Stazione();
+		Società.findStazione(s, IDstazione);
+		List<Server.Entity.Batteria> lista = s.getBatterieDisp();
 		
 		for(int i=0; i<lista.size(); i++){
 			
-			if(lista.get(i).getModelloAutovettura().equals(m)){
+			if(lista.get(i).getModello().equals(m)){
 				Server.BusinessLogic.Batteria nuova = new Server.BusinessLogic.Batteria();
 				nuova.setBatteria(lista.get(i));
 				batterieCompatibili.add(nuova);
@@ -55,8 +50,7 @@ public class GestoreDisponibilità{
 	public static ArrayList<Stazione> remoteRetrieveBatterieCompatibili(Autovettura modello, int IDstazione) {
 		
 		ArrayList<Stazione> stazioniRemote = new ArrayList<Stazione>();
-		Societ� s = new Societ�();
-		ArrayList<Server.Entity.Stazione> listaS = s.getListaStazioni();
+		List<Server.Entity.Stazione> listaS = Società.getListaStazioni();
 		ModelloAutovettura m = modello.getAutovettura();
 		
 		int k;
@@ -69,10 +63,10 @@ public class GestoreDisponibilità{
 			
 			if(listaS.get(i).getID() != IDstazione){
 				
-				ArrayList<Server.Entity.Batteria> listaB = listaS.get(i).getListaBatterie();
+				List<Server.Entity.Batteria> listaB = listaS.get(i).getBatterieDisp();
 				
 				while(hit != true || k < listaB.size()){
-					if(listaB.get(k).getModelloAutovettura().equals(m)){
+					if(listaB.get(k).getModello().equals(m)){
 						Server.BusinessLogic.Stazione nuova = new Server.BusinessLogic.Stazione();
 						nuova.setStazione(listaS.get(i));
 						stazioniRemote.add(nuova);
@@ -92,18 +86,11 @@ public class GestoreDisponibilità{
 	 */
 	public static boolean removeBatteria(Server.BusinessLogic.Batteria batteria, int IDstazione) {
 		
-		Server.Entity.Stazione s = new Server.Entity.Stazione(IDstazione);
+		Server.Entity.Stazione s = new Server.Entity.Stazione();
+		if ( Società.findStazione(s, IDstazione) == false) return false;
 		Server.Entity.Batteria b = batteria.getBatteria();
 		
-		try{
-			
-			s.removeBatteria(b);
-		
-		}catch(SQLException e){
-			
-			e.printStackTrace();
-			return false;
-		}
+		s.removeBatteria(b);
 		
 		return true;
 		
@@ -116,9 +103,10 @@ public class GestoreDisponibilità{
 	public static boolean addBatteriaDisponibili(Batteria batteria, int IDstazione) {
 		
 		Server.Entity.Batteria b = batteria.getBatteria();
-		Server.Entity.Stazione s = new Server.Entity.Stazione(IDstazione);
-		int cicliNew = b.getCicliRicarica() - 1;
+		Server.Entity.Stazione s = new Server.Entity.Stazione();
 		
+		int cicliNew = b.getCicliRicarica() - 1;
+		if ( Società.findStazione(s, IDstazione) == false) return false;
 		if(cicliNew > 0){
 			b.setCicliRicarica(cicliNew);
 			s.insertBatteria(b);

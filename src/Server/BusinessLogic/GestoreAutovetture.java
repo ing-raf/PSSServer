@@ -1,6 +1,8 @@
 package Server.BusinessLogic;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import Server.Entity.*;
 
 public class GestoreAutovetture {
@@ -14,7 +16,7 @@ public class GestoreAutovetture {
 		Cliente cliente = validazionebadge.getCliente();
 		
 		ArrayList<AutovetturaCliente> listaAutovetture = new ArrayList<AutovetturaCliente>();
-		ArrayList<AutovetturaCompatibile> lista = cliente.getListaAutovetture();
+		List<AutovetturaCompatibile> lista = cliente.getAutoPossedute();
 		
 		for(int i = 0; i<lista.size(); i++){
 			Server.BusinessLogic.AutovetturaCliente auto = new Server.BusinessLogic.AutovetturaCliente();
@@ -28,9 +30,8 @@ public class GestoreAutovetture {
 
 	public static ArrayList<Autovettura> retrieveListaModelli() {
 		
-		Societ‡ s = new Societ‡();
 		ArrayList<Autovettura> listaModelli = new ArrayList<Autovettura>();
-		ArrayList<ModelloAutovettura> lista = s.getListaModelli();
+		List<ModelloAutovettura> lista = Societ√†.getListaModelli();
 		
 		for(int i = 0; i<lista.size(); i++){
 			Autovettura m = new Autovettura();

@@ -89,11 +89,21 @@ public class Autenticato extends Stato {
 	}
 	
 	private boolean removeBatteria() {
-		return this.sistemaSostituzione.removeBatteria();
+		try {
+			return this.sistemaSostituzione.removeBatteria();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	private boolean installBatteria(int IDbatteria) {
-		return this.sistemaSostituzione.installBatteria(IDbatteria);
+		try {
+			return this.sistemaSostituzione.installBatteria(IDbatteria);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }
