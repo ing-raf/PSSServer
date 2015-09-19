@@ -14,12 +14,24 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 	private static final long serialVersionUID = -3976477806196171091L;
 	private Stato stato;
 	private final int IDstazione;
+	private final String hostname;
+	private final int portSostituzione;
 	
 	public CoordinatoreClienteRegistrato(int IDstazione) throws RemoteException {
 			super();
 			this.stato = new NonAutenticato();
 			this.IDstazione = IDstazione;
+			this.hostname = "localhost";
+			this.portSostituzione = 1099;
 	}
+	
+	public CoordinatoreClienteRegistrato(int IDstazione, String hostname) throws RemoteException {
+		super();
+		this.stato = new NonAutenticato();
+		this.IDstazione = IDstazione;
+		this.hostname = hostname;
+		this.portSostituzione = 1099;
+}
 
 	public ArrayList<AutovetturaCliente> retrieveAutovetture() {
 		return this.stato.retrieveAutovetture();
@@ -57,6 +69,14 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 
 	int getIDStazione() {
 		return this.IDstazione;
+	}
+	
+	String getHostname () {
+		return this.hostname;
+	}
+	
+	int getPortSostituzione() {
+		return this.portSostituzione;
 	}
 	
 	void setStato (Stato stato) {

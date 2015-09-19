@@ -1,11 +1,13 @@
 package Server.Control;
 
 import java.rmi.ConnectIOException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import javax.transaction.InvalidTransactionException;
 
-import Server.BusinessLogic.Autovettura;
 import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreDisponibilità;
 import Server.BusinessLogic.GestoreSostituzioni;
@@ -13,6 +15,7 @@ import Server.BusinessLogic.ValidazioneBadge;
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Batteria;
 import Server.RMIInterface.Stazione;
+import SistemaSostituzione.RMIDeviceInterface.ServizidiSostituzione;
 
 public class Autenticato extends Stato {
 	
@@ -20,9 +23,12 @@ public class Autenticato extends Stato {
 	private ArrayList<? extends AutovetturaCliente> lastElenco;
 	private int indiceAutovettura;
 	private ArrayList<? extends Batteria> availableBatterie;
+	private ServizidiSostituzione sistemaSostituzione;
 
 	public Autenticato(ValidazioneBadge badgeAutenticato) {
+		sistemaSostituzione = null;
 		this.badgeAutenticato = badgeAutenticato;
+		sistemaSostituzione = null;
 	}
 
 	public ArrayList<AutovetturaCliente> retrieveAutovetture() {
@@ -58,8 +64,9 @@ public class Autenticato extends Stato {
 	 * @throws RemoteException 
 	 */
 	public boolean startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
-		if ( this.removeBatteria() == false) throw new ConnectIOException("Riscontrato un errore durante la rimozione della vecchia batteria");
-		if ( this.installBatteria(indiceBatteria) == false ) throw new ConnectIOException("Riscontrato un errore durante l'installazione della batteria");
+		this.startDeviceConnection(coordinatore.getHostname(), coordinatore.getPortSostituzione()) ;
+		if ( this.removeBatteria() == false) throw new ConnectIOException("Riscontrato un problema durante la rimozione della vecchia batteria");
+		if ( this.installBatteria(indiceBatteria) == false ) throw new ConnectIOException("Riscontrato un problema durante l'installazione della batteria");
 		Batteria rimossa = GestoreSostituzioni.updateSostituzione( (Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(this.indiceAutovettura), coordinatore.getIDStazione(), (Server.BusinessLogic.Batteria) this.availableBatterie.get(indiceBatteria) );
 		if (GestoreDisponibilità.removeBatteria( (Server.BusinessLogic.Batteria) this.availableBatterie.get(indiceBatteria), coordinatore.getIDStazione() ) == false ) throw new InvalidTransactionException("Il server non è riuscito a rimuovere");
 		// start thread CoordinatoreRecupero
@@ -71,15 +78,22 @@ public class Autenticato extends Stato {
 		return true;
 	}
 	
-	private boolean removeBatteria() {
-		// TODO Auto-generated method stub
-		return false;
+	private void startDeviceConnection(String hostname, int port) throws RemoteException {
+		Registry registry = LocateRegistry.getRegistry(hostname, port);
+		try {
+			this.sistemaSostituzione = (ServizidiSostituzione) registry.lookup("sostituzione");
+		} catch (NotBoundException e) {
+			throw new RemoteException("Riscontrato un problema nella connessione con il sistema di sostituzione",e);
+		}
 		
 	}
 	
+	private boolean removeBatteria() {
+		return this.sistemaSostituzione.removeBatteria();
+	}
+	
 	private boolean installBatteria(int IDbatteria) {
-		// TODO Auto-generated method stub
-		return false;
+		return this.sistemaSostituzione.installBatteria(IDbatteria);
 	}
 
 }
