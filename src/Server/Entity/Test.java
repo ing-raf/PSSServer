@@ -2,6 +2,7 @@ package Server.Entity;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 //import Server.Entity.*;
@@ -51,15 +52,24 @@ public class Test {
 		Set<AutovetturaCompatibile> f1 = c3.getAutoPoassedute();
 		if (f1 == null) System.out.println("Associazione non letta");
 		System.out.println(b2.getCliente().getNome() + " " + c2.getCognome() + " " + t[0].getNumeroTarga() +" " + t[1].getNumeroTarga());*/
-		Stazione s1 = new Stazione();
-		s1.setID(1);
+		Stazione s = new Stazione(1);
+	//	s.setID(1);
 		
+		Badge b = new Badge(2);
+		System.out.println( b.getCliente().getNome() );
 		
-		ArrayList<Batteria> result = new ArrayList<Batteria>(s1.findBatterie());
-		if ( result.isEmpty() ) System.out.println("Lttura fallita");
+//		ArrayList<Batteria> result = new ArrayList<Batteria>(s1.findBatterie());
+		List<Batteria> result = s.getBatterieDisp();
+		if ( result.isEmpty() ) System.out.println("Lettura fallita");
 		else System.out.println(result.size());
 		
-		Batteria s = new Batteria();
+		for (int i = 1; i < result.size(); i++) {
+			System.out.println( result.get(i).getCostoSostituzione() );
+		}
+		
+
+		
+//		Batteria s = new Batteria();
 		
 		/*ArrayList<Batteria> result = new ArrayList<Batteria>(s.findBatterie());
 		if ( result.isEmpty() ) System.out.println("Lttura fallita");

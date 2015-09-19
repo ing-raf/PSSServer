@@ -17,12 +17,10 @@ public class Batteria {
 	private float costoSostituzione;
 	@Column
 	private int cicliRicaricaRimanenti;
-	@ManyToOne
-	@JoinColumn (name = "modello_autovettura") private ModelloAutovettura modello_compatibile;
+//	@ManyToOne
+//	@JoinColumn (name = "modello_autovettura") private ModelloAutovettura modello_compatibile;
 	@ManyToOne 
 	@JoinColumn(name = "disp_batterie") private Stazione stazione_disp;
-	
-	
 	
 	public Batteria (){
 	}
@@ -31,7 +29,7 @@ public class Batteria {
 		Batteria b = this.findBatteria(id);
 		this.costoSostituzione = b.getCostoSostituzione();
 		this.cicliRicaricaRimanenti = b.getCicliRicarica();
-		this.modello_compatibile = b.getModelloAutovettura();
+//		this.modello_compatibile = b.getModelloAutovettura();
 	}
 	
 	
@@ -40,7 +38,7 @@ public class Batteria {
 		this.ID = id;
 		this.costoSostituzione = costosostituzione;
 		this.cicliRicaricaRimanenti = maxcicliricarica;
-		this.modello_compatibile=mod;
+//		this.modello_compatibile=mod;
 		this.salva();
 	}
 	
@@ -61,10 +59,10 @@ public class Batteria {
 		return this.cicliRicaricaRimanenti;
 	}
 
-	public ModelloAutovettura getModelloAutovettura() {
-		return this.modello_compatibile;
+//	public ModelloAutovettura getModelloAutovettura() {
+//		return this.modello_compatibile;
 		
-	}
+//	}
 	
 	
 	Batteria update() {

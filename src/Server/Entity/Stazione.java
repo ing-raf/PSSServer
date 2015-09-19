@@ -5,6 +5,8 @@ import java.util.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.engine.profile.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 
 
@@ -18,8 +20,10 @@ public class Stazione {
 	private String nome;
 	@Column
 	private String indirizzo;
-	@OneToMany
-	@JoinColumn (name ="disp_batterie") Set<Batteria> disponibii;
+	@OneToMany (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn (name ="disp_batterie")
+	@OrderColumn (name = "ID")
+	List<Batteria> disponibili;
 	
 
 	public Stazione () {
@@ -31,15 +35,16 @@ public class Stazione {
 		this.ID=s.getID();
 		this.nome = s.getNome();
 		this.indirizzo = s.getIndirizzo();
-		this.disponibii=s.getBatterieDisp();
+		this.disponibili = s.getBatterieDisp();
 	}
 	public void insertBatteria(Batteria nuova) {
 		
 		nuova.update();
 	}
-	public Set<Batteria> getBatterieDisp (){
-		return this.disponibii;
+	public List<Batteria> getBatterieDisp (){
+		return this.disponibili;
 	}
+	
 	
 	public ArrayList<Batteria> getListaBatterie() {
 		return this.findBatterie();
