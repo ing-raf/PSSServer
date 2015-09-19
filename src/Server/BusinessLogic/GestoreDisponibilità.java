@@ -71,7 +71,7 @@ public class GestoreDisponibilità{
 				
 				ArrayList<Server.Entity.Batteria> listaB = listaS.get(i).getListaBatterie();
 				
-				while(hit != true || k == listaB.size() - 1){
+				while(hit != true || k < listaB.size()){
 					if(listaB.get(k).getModelloAutovettura().equals(m)){
 						Server.BusinessLogic.Stazione nuova = new Server.BusinessLogic.Stazione();
 						nuova.setStazione(listaS.get(i));
