@@ -1,5 +1,5 @@
 package Server.Entity;
-import java.util.ArrayList;
+
 
 import javax.persistence.*;
 
@@ -23,22 +23,25 @@ public class AutovetturaCompatibile {
 	
 	}
 		
-	AutovetturaCompatibile findAuto (String targa){
+	public void getAuto (String targa){
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
 		AutovetturaCompatibile trovato = (AutovetturaCompatibile) session.get(AutovetturaCompatibile.class, targa) ; 
-						
+		
 		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
+		
+		this.numeroTarga = trovato.getNumeroTarga();
+		this.modello = trovato.getModello();
+		this.sostituzione = trovato.getLastRicambio();
 						
-		return trovato;
+		
 			}
 		
-	
 	
 	public void setNumeroTarga(String nt){
 		this.numeroTarga=nt;
@@ -58,7 +61,7 @@ public class AutovetturaCompatibile {
 		
 	}
 	
-	AutovetturaCompatibile salva(){
+	void salva(){
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -71,7 +74,7 @@ public class AutovetturaCompatibile {
 		session.getTransaction().commit();		
 		session.close();
 		
-		return this;
+		
 	}
 
 }

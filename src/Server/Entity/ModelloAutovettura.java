@@ -1,6 +1,6 @@
 package Server.Entity;
 
-import java.util.Set;
+
 
 import javax.persistence.*;
 
@@ -23,6 +23,9 @@ public class ModelloAutovettura {
 		
 	}
 	
+	public int getId () {
+		return this.ID;
+	}
 	public String getModello() {
 		return this.modello;
 	}
@@ -40,6 +43,24 @@ public class ModelloAutovettura {
 	}
 	
 	
+	public void getModelloAuto (int cod){
+		//apro la sessione e la transazione
+				SessionFactory sf = HibernateUtil.getSessionFactory();
+				Session session = sf.openSession();
+				session.beginTransaction();
+
+				ModelloAutovettura b = (ModelloAutovettura) session.get(ModelloAutovettura.class, cod) ; 
+				
+				//chiudo la transazione e la sessione
+				session.getTransaction().commit();		
+				session.close();
+				this.ID=b.getId();
+				this.modello = b.getModello();
+				this.fornitore = b.getFornitore();
+			
+				
+				
+	}
 	
 	ModelloAutovettura update() {
 		//apro la sessione e la transazione

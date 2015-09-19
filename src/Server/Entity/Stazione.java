@@ -5,8 +5,8 @@ import java.util.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.engine.profile.Fetch;
-import org.hibernate.annotations.FetchMode;
+//import org.hibernate.engine.profile.Fetch;
+//import org.hibernate.annotations.FetchMode;
 
 
 
@@ -22,39 +22,20 @@ public class Stazione {
 	private String indirizzo;
 	@OneToMany (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn (name ="disp_batterie")
-	@OrderColumn (name = "ID")
-	List<Batteria> disponibili;
+	private List<Batteria> disponibili;
 	
 
 	public Stazione () {
-		
 	}
-	public Stazione (int id){
-		
-		Stazione s =  this.findStazione(id);
-		this.ID=s.getID();
-		this.nome = s.getNome();
-		this.indirizzo = s.getIndirizzo();
-		this.disponibili = s.getBatterieDisp();
-	}
+
 	public void insertBatteria(Batteria nuova) {
-		
-		nuova.update();
+		this.disponibili.add(nuova);
+		this.update();
 	}
 	public List<Batteria> getBatterieDisp (){
 		return this.disponibili;
 	}
 	
-	
-	public ArrayList<Batteria> getListaBatterie() {
-		return this.findBatterie();
-	}
-
-	
-	public ArrayList<Batteria> findEsausta() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 
 	public String getIndirizzo() {
@@ -75,11 +56,12 @@ public class Stazione {
 	}
 	
 	public void removeBatteria(Batteria batteria) {
-		// TODO - implement Stazione.removeBatteria
+		batteria.elimina(batteria);
 	}
 	
 	
-	 Stazione findStazione (int cod){
+	
+	public void getStazione (int cod){
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -90,8 +72,13 @@ public class Stazione {
 		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
+		
+		this.ID = trovato.getID();
+		this.nome = trovato.getNome();
+		this.indirizzo = trovato.getIndirizzo();
+		this.disponibili = trovato.getBatterieDisp();
 					
-		return trovato;
+		
 		}
 	
 	Stazione update() {
@@ -125,21 +112,5 @@ public class Stazione {
 		return this;
 	}
 	
-	ArrayList<Batteria> findBatterie (){
-		ArrayList<Batteria> trovate = new ArrayList<Batteria>();
-		//apro la sessione e la transazione
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-		session.beginTransaction();
-				
-		Query query = session.createQuery("from Batteria as s where s.stazione_disp.ID = :cod ");
-		query.setParameter("cod", this.getID());
-		trovate = (ArrayList<Batteria>)query.list();
-				
-		//chiudo la transazione e la sessione
-		session.getTransaction().commit();		
-		session.close();
-		return trovate;
-	}
-
+	
 }

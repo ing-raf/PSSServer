@@ -8,11 +8,10 @@ import java.util.Calendar;
 @Entity
 public class Sostituzione {
 	@Id
-	@GeneratedValue
 	private int ID;
 	@Column 
 	private Calendar dataOra;
-	@ManyToOne 
+	@ManyToOne  (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn (name = "stazione_sostituzione") Stazione staz_sostittuz;
 	@OneToOne
 	@JoinColumn (name = "batteria_sostituita") Batteria batteria;
@@ -29,7 +28,6 @@ public class Sostituzione {
 		return this.ID;
 	}
 	public Stazione getStazione() {
-		// TODO - implement Sostituzione.getStazione
 		return this.staz_sostittuz;
 	}
 
@@ -46,7 +44,17 @@ public class Sostituzione {
 		return this.batteria;
 	}
 	
-	Sostituzione update() {
+	public Batteria updateSostituzione (Stazione s, Batteria b){
+		Batteria temp = this.batteria;
+		this.batteria = b;
+		this.staz_sostittuz = s;
+		this.dataOra = Calendar.getInstance();
+		this.update();
+		return temp;
+	}
+	
+
+	void update() {
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -58,12 +66,12 @@ public class Sostituzione {
 		session.getTransaction().commit();		
 		session.close();
 		
-		return this;
+		
 	}
 	
 	
 	
-	Sostituzione salva(){
+	void salva(){
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -76,20 +84,8 @@ public class Sostituzione {
 		session.getTransaction().commit();		
 		session.close();
 		
-		return this;
+		
 	}
 	
-
-	/*public void setAutovettura() {
-		// TODO - implement Sostituzione.setAutovettura
-	}
-
-	public void setStazione() {
-		// TODO - implement Sostituzione.setStazione
-	}
-
-	public void setBatteria() {
-		// TODO - implement Sostituzione.setBatteria
-	}*/
 
 }

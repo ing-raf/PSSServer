@@ -17,21 +17,12 @@ public class Cliente {
 	@Column
 	private Calendar dataNascita;
 	@Id
-	@Column
 	private int Id;
 	
-	@OneToMany
-	@JoinColumn (name="Id_cliente") Set<AutovetturaCompatibile> autovetturePossedute;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@JoinColumn (name="Id_cliente") private List<AutovetturaCompatibile> autovetturePossedute;
 	
-	public Cliente (int id) {
-		Cliente c = new Cliente ();
-		c.findCliente(id);
-		this.nome = c.getNome();
-		this.cognome = c.getCognome();
-		this.dataNascita = c.getDataNascita();
-		this.autovetturePossedute = c.getAutoPoassedute();
-		
-	}
+
 	public int getID (){
 		return this.Id;
 	}
@@ -40,7 +31,7 @@ public class Cliente {
 		// TODO Auto-generated constructor stub
 	}
 
-	Cliente findCliente (int cod){
+	public Cliente getCliente (int cod){
 			//apro la sessione e la transazione
 					SessionFactory sf = HibernateUtil.getSessionFactory();
 					Session session = sf.openSession();
@@ -62,9 +53,7 @@ public class Cliente {
 	/*public Badge getBadge () {
 		return this.badge_assegnato;
 	}*/
-	public void setAutovettura (Set<AutovetturaCompatibile> a){
-		this.autovetturePossedute = a;
-	}
+
 	public String getNome() {
 		return this.nome;
 	}
@@ -90,10 +79,10 @@ public class Cliente {
 	}
 	
 	public void setData (Calendar d){
-		this.dataNascita=d;
+		this.dataNascita = d;
 	}
 	
-	public Set<AutovetturaCompatibile> getAutoPoassedute() {
+	public List<AutovetturaCompatibile> getAutoPoassedute() {
 		return this.autovetturePossedute;
 	}
 	

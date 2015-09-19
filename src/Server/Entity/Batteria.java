@@ -1,9 +1,9 @@
 package Server.Entity;
-import java.util.ArrayList;
+
 
 import javax.persistence.*;
 
-import org.hibernate.Query;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -17,19 +17,12 @@ public class Batteria {
 	private float costoSostituzione;
 	@Column
 	private int cicliRicaricaRimanenti;
-//	@ManyToOne
-//	@JoinColumn (name = "modello_autovettura") private ModelloAutovettura modello_compatibile;
-	@ManyToOne 
-	@JoinColumn(name = "disp_batterie") private Stazione stazione_disp;
+	@ManyToOne
+	@JoinColumn (name = "modello_autovettura") private ModelloAutovettura modello_compatibile;
+	//@ManyToOne 
+	//@JoinColumn(name = "disp_batterie") private Stazione stazione_disp;
 	
 	public Batteria (){
-	}
-	
-	public Batteria (int id){
-		Batteria b = this.findBatteria(id);
-		this.costoSostituzione = b.getCostoSostituzione();
-		this.cicliRicaricaRimanenti = b.getCicliRicarica();
-//		this.modello_compatibile = b.getModelloAutovettura();
 	}
 	
 	
@@ -38,31 +31,31 @@ public class Batteria {
 		this.ID = id;
 		this.costoSostituzione = costosostituzione;
 		this.cicliRicaricaRimanenti = maxcicliricarica;
-//		this.modello_compatibile=mod;
+		this.modello_compatibile = mod;
 		this.salva();
 	}
 	
 	
-	public void setCicliRicarica (int num_cicli){
-		this.cicliRicaricaRimanenti=num_cicli;
-	}
-
+	/*public void setStazione (Stazione s){
+		this.stazione_disp = s;
+	}*/
 	public int getID() {
 		return this.ID;
 	}
+	
 
 	public float getCostoSostituzione() {
 		return this.costoSostituzione;
 	}
-
+	
+	public ModelloAutovettura getModello() {
+		return this.modello_compatibile;
+	}
 	public int getCicliRicarica() {
 		return this.cicliRicaricaRimanenti;
 	}
 
-//	public ModelloAutovettura getModelloAutovettura() {
-//		return this.modello_compatibile;
-		
-//	}
+
 	
 	
 	Batteria update() {
@@ -96,22 +89,27 @@ public class Batteria {
 		return this;
 	}
 
-	 Batteria findBatteria (int cod){
+	public void getBatteria (int cod){
 		//apro la sessione e la transazione
 				SessionFactory sf = HibernateUtil.getSessionFactory();
 				Session session = sf.openSession();
 				session.beginTransaction();
 
-				Batteria trovato = (Batteria) session.get(Batteria.class, cod) ; 
+				Batteria b = (Batteria) session.get(Batteria.class, cod) ; 
 				
 				//chiudo la transazione e la sessione
 				session.getTransaction().commit();		
 				session.close();
 				
-				return trovato;
+				this.ID = b.getID();
+				this.costoSostituzione = b.getCostoSostituzione();
+				this.cicliRicaricaRimanenti = b.getCicliRicarica();
+				this.modello_compatibile = b.getModello();
+				
+				
 	}
-	Batteria elimina (int id){
-		Batteria b = this.findBatteria(id);
+	void elimina (Batteria b){
+
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -122,25 +120,10 @@ public class Batteria {
 		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
-		return b;
+		
 	}
 	
-	ArrayList<Batteria> findBatterie (){
-		ArrayList<Batteria> trovate = new ArrayList<Batteria>();
-		//apro la sessione e la transazione
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-		session.beginTransaction();
-				
-		Query query = session.createQuery("from Batteria as s where s.stazione_disp.ID = :cod ");
-		query.setParameter("cod", 1);
-		trovate = (ArrayList<Batteria>)query.list();
-				
-		//chiudo la transazione e la sessione
-		session.getTransaction().commit();		
-		session.close();
-		return trovate;
-	}
+
 	
 
 }

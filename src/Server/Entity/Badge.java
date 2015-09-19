@@ -52,17 +52,9 @@ public class Badge {
 		
 	}
 	
-	public Badge (int cod){
-		
-		Badge b = this.findBadge(cod);
-		this.creditoResiduo = b.getCredito();
-		this.codice = b.getCodice();
-		this.possessore = b.getCliente();
-		
-	 
-	}
 	
-	 Badge findBadge (int cod){
+	
+	public  void getBadge (int cod){
 		//apro la sessione e la transazione
 				SessionFactory sf = HibernateUtil.getSessionFactory();
 				Session session = sf.openSession();
@@ -74,7 +66,9 @@ public class Badge {
 				session.getTransaction().commit();		
 				session.close();
 				
-				return trovato;
+				this.codice = trovato.getCodice();
+				this.creditoResiduo = trovato.getCredito();
+				this.possessore = trovato.getCliente();
 	}
 	
 	 Badge update() {
