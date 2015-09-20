@@ -1,8 +1,15 @@
 package Server.Control;
 
-public interface Stato {
+import java.util.ArrayList;
 
-	Server.RMIInterface.AutovetturaCliente[] retrieveAutovetture();
+import Server.RMIInterface.Batteria;
+import Server.RMIInterface.Stazione;
+
+public abstract class Stato {
+
+	ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * 
@@ -10,27 +17,28 @@ public interface Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.BusinessLogic.Batteria[] elencoBatterie, Server.BusinessLogic.Stazione[] elencoStazioni);
+	boolean retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura, ArrayList<? extends Batteria> elencoBatterie, ArrayList<? extends Stazione> elencoStazioni) {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * 
 	 * @param indiceBatteria
 	 */
-	boolean startInstallazione(int indiceBatteria);
+	boolean startInstallazione(int indiceBatteria) {
+		throw new UnsupportedOperationException();
+	}
 
-	boolean verificaEsitoValidazione();
+	boolean verificaEsitoValidazione() {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * 
 	 * @param codice
 	 */
-	void startValidazione(int codice);
-
-	/**
-	 * 
-	 * @param indiceAutovettura
-	 * @param elencoBatterie
-	 */
-	boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.RMIInterface.Batteria elencoBatterie);
+	void startValidazione(CoordinatoreClienteRegistrato coordinatore, int codice) {		
+		throw new UnsupportedOperationException();
+	}
 
 }

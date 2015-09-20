@@ -1,11 +1,40 @@
 package Server.Control;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+
 import Server.RMIInterface.*;
 
-public class CoordinatoreClienteRegistrato implements ServiziCliente {
+public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implements ServiziCliente {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3976477806196171091L;
+	private Stato stato;
+	private final int IDstazione;
+	private final String hostname;
+	private final int portSostituzione;
+	
+	public CoordinatoreClienteRegistrato(int IDstazione) throws RemoteException {
+			super();
+			this.stato = new NonAutenticato();
+			this.IDstazione = IDstazione;
+			this.hostname = "localhost";
+			this.portSostituzione = 1099;
+	}
+	
+	public CoordinatoreClienteRegistrato(int IDstazione, String hostname) throws RemoteException {
+		super();
+		this.stato = new NonAutenticato();
+		this.IDstazione = IDstazione;
+		this.hostname = hostname;
+		this.portSostituzione = 1099;
+}
 
-	public AutovetturaCliente[] retrieveAutovetture() {
-		// TODO - implement CoordinatoreClienteRegistrato.retrieveAutovetture
+	public ArrayList<AutovetturaCliente> retrieveAutovetture() {
+		return this.stato.retrieveAutovetture();
 	}
 
 	/**
@@ -14,8 +43,8 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	public boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.BusinessLogic.Batteria[] elencoBatterie, Server.BusinessLogic.Stazione[] elencoStazioni) {
-		// TODO - implement CoordinatoreClienteRegistrato.retrieveBatterieCompatibili
+	public boolean retrieveBatterieCompatibili(int indiceAutovettura, ArrayList<Batteria> elencoBatterie, ArrayList<Stazione> elencoStazioni) {
+		return this.stato.retrieveBatterieCompatibili(this, indiceAutovettura, elencoBatterie, elencoStazioni);
 	}
 
 	/**
@@ -23,11 +52,11 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	 * @param indiceBatteria
 	 */
 	public boolean startInstallazione(int indiceBatteria) {
-		// TODO - implement CoordinatoreClienteRegistrato.startInstallazione
+		return this.stato.startInstallazione(indiceBatteria);
 	}
 
 	public boolean verificaEsitoValidazione() {
-		// TODO - implement CoordinatoreClienteRegistrato.verificaEsitoValidazione
+		return this.stato.verificaEsitoValidazione();
 	}
 
 	/**
@@ -35,7 +64,23 @@ public class CoordinatoreClienteRegistrato implements ServiziCliente {
 	 * @param codice
 	 */
 	public void startValidazione(int codice) {
-		// TODO - implement CoordinatoreClienteRegistrato.startValidazione
+		this.stato.startValidazione(this, codice);
+	}
+
+	int getIDStazione() {
+		return this.IDstazione;
+	}
+	
+	String getHostname () {
+		return this.hostname;
+	}
+	
+	int getPortSostituzione() {
+		return this.portSostituzione;
+	}
+	
+	void setStato (Stato stato) {
+		this.stato = stato;
 	}
 
 }

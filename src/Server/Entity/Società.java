@@ -1,9 +1,26 @@
 package Server.Entity;
 
+import java.util.List;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+
 public class Società {
 
-	public ModelloAutovettura[] getListaModelli() {
-		// TODO - implement Società.getListaModelli
+	public  static List<ModelloAutovettura> getListaModelli() {
+		List<ModelloAutovettura> trovate;
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+				
+		Query query = session.createQuery("from ModelloAutovettura");
+		
+		trovate = (List<ModelloAutovettura>)query.list();
+				
+		session.getTransaction().commit();		
+		session.close();
+		return trovate;
 	}
 
 	/**
@@ -11,12 +28,35 @@ public class Società {
 	 * @param badge
 	 * @param codice
 	 */
-	public boolean findBadge(Badge badge, int codice) {
-		// TODO - implement Società.findBadge
+	public static boolean findBadge(Badge badge, int codice) {
+		
+		if (badge.getBadge(codice) == null)
+			return false;
+		else
+			return true;
 	}
 
-	public Stazione[] getListaStazioni() {
-		// TODO - implement Società.getListaStazioni
+	public static List<Stazione> getListaStazioni() {
+		List<Stazione> trovate;
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+				
+		Query query = session.createQuery("from Stazione");
+		
+		trovate = (List<Stazione>)query.list();
+				
+		session.getTransaction().commit();		
+		session.close();
+		return trovate;
+	}
+	
+	public static boolean findStazione (Stazione stazione, int id){
+		
+		if (stazione.getStazione(id) == null)
+			return false;
+		else
+			return true;
 	}
 
 }

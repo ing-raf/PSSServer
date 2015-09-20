@@ -1,9 +1,17 @@
 package Server.BusinessLogic;
 
+import Server.Entity.*;
+
 public class GestoreSostituzioni {
 
-	public Server.Entity.Sostituzione findLastSostituzione() {
-		// TODO - implement GestoreSostituzioni.findLastSostituzione
+	public static Server.BusinessLogic.UltimaSostituzione findLastSostituzione(AutovetturaCliente auto) {
+		
+		Server.BusinessLogic.UltimaSostituzione ultima = new Server.BusinessLogic.UltimaSostituzione();
+		Server.Entity.AutovetturaCompatibile a = auto.getAutovetturaCliente();
+		
+		ultima.setSostituzione(a.getLastRicambio());
+		
+		return ultima;
 	}
 
 	/**
@@ -12,8 +20,19 @@ public class GestoreSostituzioni {
 	 * @param idStazione
 	 * @param batteria
 	 */
-	public Batteria updateSostituzione(Server.Entity.AutovetturaCompatibile autovettura, int idStazione, Server.Entity.Batteria batteria) {
-		// TODO - implement GestoreSostituzioni.updateSostituzione
+	public static Batteria updateSostituzione(AutovetturaCliente autovettura, int idStazione, Server.BusinessLogic.Batteria batteria) {
+
+		Server.Entity.AutovetturaCompatibile a = autovettura.getAutovetturaCliente();
+		Server.Entity.Sostituzione ultima = a.getLastRicambio();
+		
+		Server.Entity.Stazione stazione = new Server.Entity.Stazione();
+		Società.findStazione(stazione, idStazione);
+		Server.BusinessLogic.Batteria vecchia = new Server.BusinessLogic.Batteria();
+		
+		vecchia.setBatteria( ultima.updateSostituzione(stazione, batteria.getBatteria() ) );
+		
+		return vecchia;
+	
 	}
 
 }

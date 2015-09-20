@@ -1,6 +1,7 @@
 package Server.RMIInterface;
 
 import java.rmi.*;
+import java.util.ArrayList;
 
 public interface ServiziCliente extends Remote {
 
@@ -8,23 +9,24 @@ public interface ServiziCliente extends Remote {
 	 * 
 	 * @param indiceAutovettura
 	 * @param elencoBatterie
+	 * @param elencoStazioni
 	 */
-	boolean retrieveBatterieCompatibili(int indiceAutovettura, Batteria elencoBatterie);
+	boolean retrieveBatterieCompatibili(int indiceAutovettura, ArrayList<Batteria> elencoBatterie, ArrayList<Stazione> elencoStazioni) throws RemoteException;
 
-	AutovetturaCliente retrieveAutovetture();
+	ArrayList<AutovetturaCliente> retrieveAutovetture() throws RemoteException;
 
 	/**
 	 * 
 	 * @param indicebatteria
 	 */
-	boolean startInstallazione(int indicebatteria);
+	boolean startInstallazione(int indicebatteria) throws RemoteException;
 
-	boolean verificaEsitoValidazione();
+	boolean verificaEsitoValidazione() throws RemoteException;
 
 	/**
 	 * 
 	 * @param codice
 	 */
-	void startValidazione(int codice);
+	void startValidazione(int codice) throws RemoteException;
 
 }
