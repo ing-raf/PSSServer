@@ -31,8 +31,8 @@ public class Società {
 	 * @param codice
 	 */
 	public static boolean findBadge(Badge badge, int codice) {
-		badge.getBadge(codice);
-		if (badge == null)
+		
+		if (badge.getBadge(codice) == null)
 			return false;
 		else
 			return true;
