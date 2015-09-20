@@ -14,6 +14,10 @@ import org.hibernate.SessionFactory;
 @Entity
 public class AutovetturaCompatibile implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5386990241003066785L;
 	@Id
 	private String numeroTarga;
 	@ManyToOne (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
