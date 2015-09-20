@@ -34,6 +34,7 @@ public class Autenticato extends Stato {
 		sistemaSostituzione = null;
 	}
 
+	@Override
 	public ArrayList<AutovetturaCliente> retrieveAutovetture() {
 		this.lastElenco = GestoreAutovetture.retrieveListaAutovetture(this.badgeAutenticato);
 		
@@ -46,7 +47,7 @@ public class Autenticato extends Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	public boolean retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura, ArrayList<? extends Batteria> elencoBatterie, ArrayList<? extends Stazione> elencoStazioni) {
+/*	public boolean retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura, ArrayList<? extends Batteria> elencoBatterie, ArrayList<? extends Stazione> elencoStazioni) {
 		this.availableBatterie = GestoreDisponibilità.retrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), coordinatore.getIDStazione() );
 		
 		if ( this.availableBatterie.isEmpty() ) {
@@ -59,13 +60,28 @@ public class Autenticato extends Stato {
 			return true;
 		}
 		
+	} */
+	
+	@Override
+	public ArrayList<? extends Batteria> retrieveBatterieCompatibili(int IDStazione, int indiceAutovettura) {		
+		this.availableBatterie = GestoreDisponibilità.retrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), IDStazione ); 
+		return new ArrayList<Batteria>(this.availableBatterie);			
 	}
+	
+	@Override
+	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
+		coordinatore.setStato( new NonAutenticato() );
+		return GestoreDisponibilità.remoteRetrieveBatterieCompatibili( (Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura), coordinatore.getIDStazione());
+	}
+	
 
 	/**
 	 * 
 	 * @param indiceBatteria
 	 * @throws RemoteException 
 	 */
+	
+	@Override
 	public boolean startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
 		this.startDeviceConnection(coordinatore.getHostname(), coordinatore.getPortSostituzione()) ;
 		if ( this.removeBatteria() == false) throw new ConnectIOException("Riscontrato un problema durante la rimozione della vecchia batteria");
@@ -85,6 +101,7 @@ public class Autenticato extends Stato {
 		return true;
 	}
 
+	@Override
 	public boolean verificaEsitoValidazione() {
 		return true;
 	}
