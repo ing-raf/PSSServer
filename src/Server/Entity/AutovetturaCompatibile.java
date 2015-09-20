@@ -1,6 +1,8 @@
 package Server.Entity;
 
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,7 +12,7 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class AutovetturaCompatibile {
+public class AutovetturaCompatibile implements Serializable {
 
 	@Id
 	private String numeroTarga;

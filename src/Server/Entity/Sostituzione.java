@@ -4,9 +4,14 @@ import javax.persistence.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import java.io.Serializable;
 import java.util.Calendar;
 @Entity
-public class Sostituzione {
+public class Sostituzione implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3810346218832520036L;
 	@Id
 	private int ID;
 	@Column 

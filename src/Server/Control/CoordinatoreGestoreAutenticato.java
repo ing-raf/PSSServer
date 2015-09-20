@@ -3,6 +3,7 @@ package Server.Control;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+
 import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreBatterie;
 import Server.BusinessLogic.GestoreDisponibilità;
@@ -53,7 +54,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * 
 	 * @param codicebadge
 	 */
-	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<? extends AutovetturaCliente> elencoAutovetture) {
+	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture) {
 		
 		if ( elencoAutovetture.isEmpty() == false ) throw new IllegalArgumentException("Non empty input array");
 			
@@ -61,8 +62,16 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 		
 		if ( badge.findCodiceBadge(codicebadge) == false ) return false;
 		else {
-			elencoAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
-			this.lastElenco = new ArrayList<AutovetturaCliente>(elencoAutovetture);
+//			elencoAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
+//			this.lastElenco = new ArrayList<AutovetturaCliente>(elencoAutovetture);
+//			return true;
+			this.lastElenco = GestoreAutovetture.retrieveListaAutovetture(badge);
+
+			for (int i = 0; i < this.lastElenco.size(); i++)
+				elencoAutovetture.add( (AutovetturaCliente)this.lastElenco.get(i) );
+			
+			System.err.println(elencoAutovetture.size());
+			
 			return true;
 		}
 		

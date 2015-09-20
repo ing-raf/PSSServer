@@ -29,7 +29,7 @@ public interface ServiziGestore extends Remote {
 	 * @param cognome
 	 * @param datanascita
 	 */
-	boolean retrieveAutovettureCliente(int codicebadge, ArrayList<? extends AutovetturaCliente> elencoAutovetture) throws RemoteException;
+	boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture) throws RemoteException;
 
 	/**
 	 * 

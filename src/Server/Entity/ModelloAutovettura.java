@@ -2,6 +2,8 @@ package Server.Entity;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 import org.hibernate.Session;
@@ -10,7 +12,11 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class ModelloAutovettura {
+public class ModelloAutovettura implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3330338838905026475L;
 	@Id
 	private int ID;
 	@Column
