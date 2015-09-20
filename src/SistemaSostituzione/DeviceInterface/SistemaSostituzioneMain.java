@@ -22,6 +22,7 @@ public class SistemaSostituzioneMain {
 			System.out.println ("Il device ha riscontrato un problema nell'apertura "
 					+ "della connessione sul porto" + PORT);
 			e.printStackTrace();
+			System.exit(0);
 		} 	
 		
 		System.out.println("Device tutt appost tutt appost");

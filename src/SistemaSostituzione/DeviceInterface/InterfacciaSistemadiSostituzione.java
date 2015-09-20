@@ -1,10 +1,26 @@
 package SistemaSostituzione.DeviceInterface;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import SistemaSostituzione.RMIDeviceInterface.*;
 
-public class InterfacciaSistemadiSostituzione implements ServizidiSostituzione {
+public class InterfacciaSistemadiSostituzione extends UnicastRemoteObject implements ServizidiSostituzione {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1875640802971240440L;
+
+
+
+	protected InterfacciaSistemadiSostituzione() throws RemoteException {
+		super();
+	}
+
 	private static final int SECONDS = 1000;
+	
+	
 
 	public boolean removeBatteria() throws Exception {
 		System.out.println("Inizio la rimozione della batteria");
