@@ -45,9 +45,9 @@ public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticat
 	}
 
 	@Override
-	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture)
+	public ArrayList<? extends AutovetturaCliente> retrieveAutovettureCliente(int codicebadge)
 			throws RemoteException {
-		return this.stub.retrieveAutovettureCliente(codicebadge, elencoAutovetture);
+		return this.stub.retrieveAutovettureCliente(codicebadge);
 	}
 
 	@Override

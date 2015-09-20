@@ -54,29 +54,18 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * 
 	 * @param codicebadge
 	 */
-	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture) {
+	public ArrayList<? extends AutovetturaCliente> retrieveAutovettureCliente(int codicebadge) {
 		
-		if ( elencoAutovetture.isEmpty() == false ) throw new IllegalArgumentException("Non empty input array");
-			
 		ValidazioneBadge badge = new ValidazioneBadge();
 		
-		if ( badge.findCodiceBadge(codicebadge) == false ) return false;
+		if ( badge.findCodiceBadge(codicebadge) == false ) {
+			return new ArrayList<AutovetturaCliente>(0);
+		}
 		else {
-//			elencoAutovetture = GestoreAutovetture.retrieveListaAutovetture(badge);
-//			this.lastElenco = new ArrayList<AutovetturaCliente>(elencoAutovetture);
-//			return true;
+			
 			this.lastElenco = GestoreAutovetture.retrieveListaAutovetture(badge);
-
-			for (int i = 0; i < this.lastElenco.size(); i++)
-				elencoAutovetture.add( (AutovetturaCliente)this.lastElenco.get(i) );
 			
-			System.err.println(elencoAutovetture.size());
-			
-			for (int i = 0; i < elencoAutovetture.size(); i++) {
-				System.err.println(elencoAutovetture.get(i).getFornitore() + "\t" + elencoAutovetture.get(i).getModello() + elencoAutovetture.get(i).getNumeroTarga());
-			}
-			
-			return true;
+			return new ArrayList<AutovetturaCliente>( (ArrayList<AutovetturaCliente>)this.lastElenco );
 		}
 		
 	}

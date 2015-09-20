@@ -42,7 +42,7 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	}
 
 	public String getIndirizzoStazione() {
-		return this.sostituzione.getStazione().getNome();
+		return this.sostituzione.getStazione().getIndirizzo();
 	}
 
 	public int getIDbatteria() {
