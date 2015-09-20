@@ -16,7 +16,7 @@ public class AutovetturaCompatibile implements Serializable {
 
 	@Id
 	private String numeroTarga;
-	@ManyToOne
+	@ManyToOne (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn (name = "modello")  ModelloAutovettura modello;
 	@OneToOne
 	@JoinColumn (name = "Id_sostituzione") Sostituzione sostituzione;

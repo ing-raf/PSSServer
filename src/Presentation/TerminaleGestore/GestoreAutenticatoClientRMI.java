@@ -21,7 +21,7 @@ public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticat
 	ServiziGestore stub;
 	
 	
-	GestoreAutenticatoClientRMI (int IDstazione, String hostname) throws Exception {
+	public GestoreAutenticatoClientRMI (int IDstazione, String hostname) throws Exception {
 		this.IDstazione = IDstazione;
 		this.hostname = hostname;
 		registry = LocateRegistry.getRegistry(this.hostname, PORT_OFFSET + this.IDstazione);
@@ -45,7 +45,7 @@ public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticat
 	}
 
 	@Override
-	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<? extends AutovetturaCliente> elencoAutovetture)
+	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture)
 			throws RemoteException {
 		return this.stub.retrieveAutovettureCliente(codicebadge, elencoAutovetture);
 	}

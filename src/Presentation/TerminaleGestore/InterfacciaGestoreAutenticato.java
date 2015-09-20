@@ -17,7 +17,7 @@ public interface InterfacciaGestoreAutenticato {
 	
 	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws Exception;
 
-	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<? extends AutovetturaCliente> elencoAutovetture) throws Exception;
+	public boolean retrieveAutovettureCliente(int codicebadge, ArrayList<AutovetturaCliente> elencoAutovetture) throws Exception;
 
 	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception;
 

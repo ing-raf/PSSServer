@@ -72,6 +72,10 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 			
 			System.err.println(elencoAutovetture.size());
 			
+			for (int i = 0; i < elencoAutovetture.size(); i++) {
+				System.err.println(elencoAutovetture.get(i).getFornitore() + "\t" + elencoAutovetture.get(i).getModello() + elencoAutovetture.get(i).getNumeroTarga());
+			}
+			
 			return true;
 		}
 		

@@ -55,33 +55,30 @@ public class Badge {
 
 
 	public  Badge getBadge (int cod){
-		//apro la sessione e la transazione
-				SessionFactory sf = HibernateUtil.getSessionFactory();
-				Session session = sf.openSession();
-				session.beginTransaction();
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
 
-				Badge trovato = (Badge) session.get(Badge.class, cod);
+		Badge trovato = (Badge) session.get(Badge.class, cod);
 				
-				//chiudo la transazione e la sessione
-				session.getTransaction().commit();		
-				session.close();
-				if (trovato != null){
-					this.codice = trovato.getCodice();
-					this.creditoResiduo = trovato.getCredito();
-					this.possessore = trovato.getCliente();
-					}
-				return trovato;
+		session.getTransaction().commit();		
+		session.close();
+			
+			if (trovato != null){
+				this.codice = trovato.getCodice();
+				this.creditoResiduo = trovato.getCredito();
+				this.possessore = trovato.getCliente();
+				}
+		return trovato;
 	}
 	
 	 Badge update() {
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
 		session.update(this);
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		
@@ -89,14 +86,12 @@ public class Badge {
 	}
 	
 	Badge salva(){
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
 		session.save(this);
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		

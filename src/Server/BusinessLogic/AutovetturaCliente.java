@@ -13,6 +13,14 @@ public class AutovetturaCliente extends Autovettura implements Server.RMIInterfa
 	public String getNumeroTarga() {
 		return autovettura.getNumeroTarga();
 	}
+	
+	public String getModello() {
+		return this.autovettura.getModello().getModello();
+	}
+
+	public String getFornitore() {
+		return this.autovettura.getModello().getFornitore();
+	}
 
 	/**
 	 * 
