@@ -13,7 +13,7 @@ public interface ServiziCliente extends Remote {
 	 */
 	boolean retrieveBatterieCompatibili(int indiceAutovettura, ArrayList<Batteria> elencoBatterie, ArrayList<Stazione> elencoStazioni) throws RemoteException;
 
-	ArrayList<AutovetturaCliente> retrieveAutovetture() throws RemoteException;
+	ArrayList<? extends AutovetturaCliente> retrieveAutovetture() throws RemoteException;
 
 	/**
 	 * 
