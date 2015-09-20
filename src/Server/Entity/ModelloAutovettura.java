@@ -49,7 +49,7 @@ public class ModelloAutovettura implements Serializable {
 	}
 	
 	
-	public void getModelloAuto (int cod){
+	public ModelloAutovettura getModelloAuto (int cod){
 				SessionFactory sf = HibernateUtil.getSessionFactory();
 				Session session = sf.openSession();
 				session.beginTransaction();
@@ -58,11 +58,14 @@ public class ModelloAutovettura implements Serializable {
 				
 				session.getTransaction().commit();		
 				session.close();
-				this.ID=b.getId();
-				this.modello = b.getModello();
-				this.fornitore = b.getFornitore();
-			
 				
+				if (b != null){
+					this.ID=b.getId();
+					this.modello = b.getModello();
+					this.fornitore = b.getFornitore();
+				}
+				
+				return b;		
 				
 	}
 	

@@ -29,8 +29,8 @@ public class Società {
 	 * @param codice
 	 */
 	public static boolean findBadge(Badge badge, int codice) {
-		badge.getBadge(codice);
-		if (badge == null)
+		
+		if (badge.getBadge(codice) == null)
 			return false;
 		else
 			return true;
@@ -52,8 +52,8 @@ public class Società {
 	}
 	
 	public static boolean findStazione (Stazione stazione, int id){
-		stazione.getStazione(id);
-		if (stazione == null)
+		
+		if (stazione.getStazione(id) == null)
 			return false;
 		else
 			return true;

@@ -56,7 +56,7 @@ public class Stazione implements Serializable {
 		batteria.elimina(batteria);
 	}
 		
-	public void getStazione (int cod){
+	public Stazione getStazione (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -66,12 +66,14 @@ public class Stazione implements Serializable {
 		session.getTransaction().commit();		
 		session.close();
 		
-		this.ID = trovato.getID();
-		this.nome = trovato.getNome();
-		this.indirizzo = trovato.getIndirizzo();
-		this.disponibili = trovato.getBatterieDisp();
+		if (trovato != null){
+			this.ID = trovato.getID();
+			this.nome = trovato.getNome();
+			this.indirizzo = trovato.getIndirizzo();
+			this.disponibili = trovato.getBatterieDisp();
+			}
+		return trovato;
 					
-		
 		}
 	
 	Stazione update() {

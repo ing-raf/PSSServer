@@ -87,7 +87,7 @@ public class Batteria implements Serializable {
 		return this;
 	}
 
-	public void getBatteria (int cod){
+	public Batteria getBatteria (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -96,12 +96,13 @@ public class Batteria implements Serializable {
 				
 		session.getTransaction().commit();		
 		session.close();
-				
-		this.ID = b.getID();
-		this.costoSostituzione = b.getCostoSostituzione();
-		this.cicliRicaricaRimanenti = b.getCicliRicarica();
-		this.modello_compatibile = b.getModello();
-				
+		if (b != null)	{
+			this.ID = b.getID();
+			this.costoSostituzione = b.getCostoSostituzione();
+			this.cicliRicaricaRimanenti = b.getCicliRicarica();
+			this.modello_compatibile = b.getModello();
+		}
+		return b;
 				
 	}
 	
