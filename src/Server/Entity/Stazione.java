@@ -102,4 +102,12 @@ public class Stazione implements Serializable {
 		return this;
 	}	
 	
+	public boolean equals (Object obj) {
+		Stazione staz = (Stazione) obj;
+		if ((this.nome.equals(staz.getNome())) && (this.indirizzo.equals(staz.getIndirizzo())) && (this.ID == staz.getID()))
+			return true;
+		else
+			return false;
+	}
+	
 }

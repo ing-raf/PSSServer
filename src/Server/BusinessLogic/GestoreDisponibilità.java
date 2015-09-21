@@ -66,13 +66,13 @@ public class GestoreDisponibilità{
 				List<Server.Entity.Batteria> listaB = listaS.get(i).getBatterieDisp();
 				
 				while(hit != true || k < listaB.size()){
-					
 					if(listaB.get(k).getModello().equals(m)){
 						Server.BusinessLogic.Stazione nuova = new Server.BusinessLogic.Stazione();
 						nuova.setStazione(listaS.get(i));
 						stazioniRemote.add(nuova);
 						hit = true;
-					}else k++;
+					}
+					k++;
 					
 				}
 			}
@@ -119,5 +119,7 @@ public class GestoreDisponibilità{
 			s.removeBatteria(b);
 			return false;
 	}
+	
+	
 
 }

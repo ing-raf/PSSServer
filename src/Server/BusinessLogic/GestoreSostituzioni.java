@@ -26,12 +26,15 @@ public class GestoreSostituzioni {
 		Server.Entity.Sostituzione ultima = a.getLastRicambio();
 		
 		Server.Entity.Stazione stazione = new Server.Entity.Stazione();
-		Società.findStazione(stazione, idStazione);
+		boolean ris = Società.findStazione(stazione, idStazione);
+		if (ris == true ){
+		stazione.getStazione(idStazione);
 		Server.BusinessLogic.Batteria vecchia = new Server.BusinessLogic.Batteria();
 		
 		vecchia.setBatteria( ultima.updateSostituzione(stazione, batteria.getBatteria() ) );
 		
 		return vecchia;
+		} return null;
 	
 	}
 

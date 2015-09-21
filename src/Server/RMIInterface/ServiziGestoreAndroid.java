@@ -1,9 +1,8 @@
 package Server.RMIInterface;
 
-import java.rmi.*;
 import java.util.ArrayList;
 
-public interface ServiziGestore extends Remote {
+public interface ServiziGestoreAndroid {
 
 	ArrayList<? extends Autovettura> retrieveListaModelli() throws Exception;
 
