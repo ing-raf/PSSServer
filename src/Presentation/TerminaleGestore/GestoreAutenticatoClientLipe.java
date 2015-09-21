@@ -16,17 +16,17 @@ import lipermi.net.Client;
 public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutenticato {
 	
 	private static int PORT_OFFSET = 1024;
-	private final String hostname;
+	private final String serverHostname;
 	private final int IDstazione;
 	Client client;
 	ServiziGestoreAndroid stub;
 	
 	
-	public GestoreAutenticatoClientLipe (int IDstazione, String hostname) throws Exception {
+	public GestoreAutenticatoClientLipe (int IDstazione, String serverHostname) throws Exception {
 		CallHandler callHandler = new CallHandler();
 		this.IDstazione = IDstazione;
-		this.hostname = hostname;
-		this.client = new Client(this.hostname, PORT_OFFSET + 2 * this.IDstazione + 1, callHandler);
+		this.serverHostname = serverHostname;
+		this.client = new Client(this.serverHostname, PORT_OFFSET + 2 * this.IDstazione + 1, callHandler);
 		this.stub = (ServiziGestoreAndroid) client.getGlobal (ServiziGestoreAndroid.class);
 	}
 

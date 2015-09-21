@@ -1,14 +1,10 @@
 package Server.Control;
 
-import java.io.IOException;
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
-import Server.RMIInterface.ServiziGestore;
 import Server.RMIInterface.ServiziGestoreAndroid;
-import lipermi.exception.LipeRMIException;
 import lipermi.handler.CallHandler;
 import lipermi.net.Server;
 

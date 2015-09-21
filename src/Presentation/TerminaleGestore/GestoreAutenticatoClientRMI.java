@@ -1,6 +1,5 @@
 package Presentation.TerminaleGestore;
 
-import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
@@ -15,16 +14,16 @@ import Server.RMIInterface.Stazione;
 public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticato {
 	
 	private static int PORT_OFFSET = 1024;
-	private final String hostname;
+	private final String serverHostname;
 	private final int IDstazione;
 	Registry registry;
 	ServiziGestore stub;
 	
 	
-	public GestoreAutenticatoClientRMI (int IDstazione, String hostname) throws Exception {
+	public GestoreAutenticatoClientRMI (int IDstazione, String serverHostname) throws Exception {
 		this.IDstazione = IDstazione;
-		this.hostname = hostname;
-		registry = LocateRegistry.getRegistry(this.hostname, PORT_OFFSET + this.IDstazione);
+		this.serverHostname = serverHostname;
+		registry = LocateRegistry.getRegistry(this.serverHostname, PORT_OFFSET + this.IDstazione);
 		this.stub = (ServiziGestore)registry.lookup("ServiziGestore");
 	}
 
