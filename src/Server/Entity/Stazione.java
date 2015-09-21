@@ -31,6 +31,13 @@ public class Stazione implements Serializable {
 		this.disponibili.add(nuova);
 		this.update();
 	}
+	
+	public void removeBatteria(Batteria vecchia) {
+		int i = this.findIndex(vecchia);
+		this.disponibili.remove(i);
+		this.update();
+	}
+	
 	public List<Batteria> getBatterieDisp (){
 		return this.disponibili;
 	}
@@ -52,7 +59,7 @@ public class Stazione implements Serializable {
 		this.ID = id;
 	}
 	
-	public void removeBatteria(Batteria batteria) {
+	public void deleteBatteria(Batteria batteria) {
 		batteria.elimina(batteria);
 	}
 		
@@ -109,5 +116,20 @@ public class Stazione implements Serializable {
 		else
 			return false;
 	}
+	
+	private int findIndex (Batteria vecchia){
+		int index=0,k=0;
+		boolean hit = false;
+		while (k<this.disponibili.size() || hit != true){
+			if (this.disponibili.get(k).getID() == vecchia.getID()){
+				index = k;
+				hit = true;
+				}
+			k++;
+			
+		}
+		return index;
+	}
+	
 	
 }
