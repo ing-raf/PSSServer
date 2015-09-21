@@ -50,6 +50,7 @@ public class Sostituzione implements Serializable {
 	}
 	
 	public Batteria updateSostituzione (Stazione s, Batteria b){
+		System.out.println("Sono in updateSostituzione");
 		Batteria temp = this.batteria;
 		this.batteria = b;
 		this.staz_sostittuz = s;

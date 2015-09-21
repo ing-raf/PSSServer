@@ -31,6 +31,12 @@ public class Stazione implements Serializable {
 		this.disponibili.add(nuova);
 		this.update();
 	}
+	
+	public void removeBatteria(Batteria vecchia) {
+		this.disponibili.remove(vecchia);
+		this.update();
+	}
+	
 	public List<Batteria> getBatterieDisp (){
 		return this.disponibili;
 	}
@@ -52,7 +58,7 @@ public class Stazione implements Serializable {
 		this.ID = id;
 	}
 	
-	public void removeBatteria(Batteria batteria) {
+	public void deleteBatteria(Batteria batteria) {
 		batteria.elimina(batteria);
 	}
 		
