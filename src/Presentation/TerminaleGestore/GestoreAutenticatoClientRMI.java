@@ -29,34 +29,34 @@ public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticat
 	}
 
 	@Override
-	public ArrayList<? extends Autovettura> retrieveListaModelli() throws RemoteException {
+	public ArrayList<? extends Autovettura> retrieveListaModelli() throws Exception {
 		return this.stub.retrieveListaModelli();
 	}
 
 	@Override
 	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxciclidiricarica, int modelloautovettura)
-			throws RemoteException {
+			throws Exception {
 		return this.stub.addBatteria(IDbatteria, costosostituzione, maxciclidiricarica, modelloautovettura);
 	}
 
 	@Override
-	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws RemoteException {
+	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws Exception {
 		return this.stub.retrieveBatterieQuasiEsauste(IDstazione);
 	}
 
 	@Override
 	public ArrayList<? extends AutovetturaCliente> retrieveAutovettureCliente(int codicebadge)
-			throws RemoteException {
+			throws Exception {
 		return this.stub.retrieveAutovettureCliente(codicebadge);
 	}
 
 	@Override
-	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws RemoteException {
+	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception {
 		return this.stub.remoteRetrieveBatterieCompatibili(modello);
 	}
 
 	@Override
-	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws RemoteException {
+	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {
 		return this.stub.retrieveUltimaSostituzione(autovettura);
 	}
 
