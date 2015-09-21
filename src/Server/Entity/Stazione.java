@@ -117,7 +117,7 @@ public class Stazione implements Serializable {
 			return false;
 	}
 	
-	public int findIndex (Batteria vecchia){
+	private int findIndex (Batteria vecchia){
 		int index=0,k=0;
 		boolean hit = false;
 		while (k<this.disponibili.size() || hit != true){
