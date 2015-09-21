@@ -94,7 +94,7 @@ public class GestoreDisponibilità{
 		if ( Società.findStazione(s, IDstazione) == false) return false;
 		Server.Entity.Batteria b = batteria.getBatteria();
 		
-		s.removeBatteria(b);
+		s.deleteBatteria(b);
 		
 		return true;
 		
@@ -109,15 +109,14 @@ public class GestoreDisponibilità{
 		Server.Entity.Batteria b = batteria.getBatteria();
 		Server.Entity.Stazione s = new Server.Entity.Stazione();
 		
-		int cicliNew = b.getCicliRicarica() - 1;
 		if ( Società.findStazione(s, IDstazione) == false) return false;
+		int cicliNew = b.getCicliRicarica() - 1;
 		if(cicliNew > 0){
 			b.setCicliRicarica(cicliNew);
 			s.insertBatteria(b);
 			return true;
 		}else
-			s.removeBatteria(b);
-			return false;
+			throw new IllegalStateException("Il server ha ricaricato una batteria esausta");
 	}
 	
 	

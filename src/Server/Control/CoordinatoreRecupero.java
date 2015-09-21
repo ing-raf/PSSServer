@@ -32,10 +32,11 @@ public class CoordinatoreRecupero implements Runnable {
 				if (this.stub.rechargeBatteria( this.batteria.getID() ) == false )
 					throw new ConnectIOException("Riscontrato un problema durante la ricarica della batteria");
 				
-				GestoreDisponibilità.addBatteriaDisponibili(batteria, idStazione);
+				GestoreDisponibilità.addBatteriaDisponibili(this.batteria, this.idStazione);
 					
 			} else {
 				
+				GestoreDisponibilità.removeBatteria(this.batteria, this.idStazione);
 				if (this.stub.discardBatteria( this.batteria.getID() ) == false)
 					throw new ConnectIOException("Riscontrato un problema durante lo scarto della batteria");
 				
