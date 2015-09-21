@@ -1,19 +1,19 @@
 package Server.Entity;
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.*;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-//import org.hibernate.engine.profile.Fetch;
-//import org.hibernate.annotations.FetchMode;
-
-
-
 
 @Entity
-public class Stazione {
+public class Stazione implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1020587181488276598L;
 	@Id
 	private int ID;	
 	@Column
@@ -24,7 +24,6 @@ public class Stazione {
 	@JoinColumn (name ="disp_batterie")
 	private List<Batteria> disponibili;
 	
-
 	public Stazione () {
 	}
 
@@ -36,8 +35,6 @@ public class Stazione {
 		return this.disponibili;
 	}
 	
-
-
 	public String getIndirizzo() {
 		return this.indirizzo;
 	}
@@ -58,38 +55,34 @@ public class Stazione {
 	public void removeBatteria(Batteria batteria) {
 		batteria.elimina(batteria);
 	}
-	
-	
-	
-	public void getStazione (int cod){
-		//apro la sessione e la transazione
+		
+	public Stazione getStazione (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
 		Stazione trovato = (Stazione) session.get(Stazione.class, cod) ; 
 					
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		
-		this.ID = trovato.getID();
-		this.nome = trovato.getNome();
-		this.indirizzo = trovato.getIndirizzo();
-		this.disponibili = trovato.getBatterieDisp();
+		if (trovato != null){
+			this.ID = trovato.getID();
+			this.nome = trovato.getNome();
+			this.indirizzo = trovato.getIndirizzo();
+			this.disponibili = trovato.getBatterieDisp();
+			}
+		return trovato;
 					
-		
 		}
 	
 	Stazione update() {
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
 		session.update(this);
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		
@@ -97,20 +90,24 @@ public class Stazione {
 	}
 	
 	Stazione salva(){
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		//salvo il cliente
 		session.save(this);
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		
 		return this;
-	}
+	}	
 	
+	public boolean equals (Object obj) {
+		Stazione staz = (Stazione) obj;
+		if ((this.nome.equals(staz.getNome())) && (this.indirizzo.equals(staz.getIndirizzo())) && (this.ID == staz.getID()))
+			return true;
+		else
+			return false;
+	}
 	
 }

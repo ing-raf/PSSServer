@@ -1,6 +1,8 @@
 package Server.Entity;
 
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,11 +12,15 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class AutovetturaCompatibile {
+public class AutovetturaCompatibile implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5386990241003066785L;
 	@Id
 	private String numeroTarga;
-	@ManyToOne
+	@ManyToOne (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn (name = "modello")  ModelloAutovettura modello;
 	@OneToOne
 	@JoinColumn (name = "Id_sostituzione") Sostituzione sostituzione;
@@ -67,7 +73,7 @@ public class AutovetturaCompatibile {
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		//salvo il cliente
+		//salvo l'autovettura compatibile
 		session.save(this);
 		
 		//chiudo la transazione e la sessione

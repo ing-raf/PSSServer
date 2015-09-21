@@ -1,8 +1,16 @@
 package Server.Control;
 
-public interface Stato {
+import java.rmi.RemoteException;
+import java.util.ArrayList;
 
-	Server.RMIInterface.AutovetturaCliente[] retrieveAutovetture();
+import Server.RMIInterface.Batteria;
+import Server.RMIInterface.Stazione;
+
+public abstract class Stato {
+
+	ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * 
@@ -10,27 +18,34 @@ public interface Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.BusinessLogic.Batteria[] elencoBatterie, Server.BusinessLogic.Stazione[] elencoStazioni);
+	ArrayList<? extends Batteria> retrieveBatterieCompatibili(int IDStazione, int indiceAutovettura) {
+		throw new UnsupportedOperationException();
+	}
+	
+	ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
+		throw new UnsupportedOperationException();
+	}
+
 
 	/**
 	 * 
 	 * @param indiceBatteria
+	 * @throws RemoteException 
 	 */
-	boolean startInstallazione(int indiceBatteria);
+	boolean startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
+		throw new UnsupportedOperationException();
+	}
 
-	boolean verificaEsitoValidazione();
+	boolean verificaEsitoValidazione() {
+		throw new UnsupportedOperationException();
+	}
 
 	/**
 	 * 
 	 * @param codice
 	 */
-	void startValidazione(int codice);
-
-	/**
-	 * 
-	 * @param indiceAutovettura
-	 * @param elencoBatterie
-	 */
-	boolean retrieveBatterieCompatibili(int indiceAutovettura, Server.RMIInterface.Batteria elencoBatterie);
+	void startValidazione(CoordinatoreClienteRegistrato coordinatore, int codice) {		
+		throw new UnsupportedOperationException();
+	}
 
 }

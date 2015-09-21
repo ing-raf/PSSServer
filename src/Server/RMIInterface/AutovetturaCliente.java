@@ -1,9 +1,7 @@
 package Server.RMIInterface;
 
-import java.io.*;
+public interface AutovetturaCliente extends Autovettura {
 
-public interface AutovetturaCliente extends Autovettura, Serializable {
-
-	string getNumeroTarga();
+	String getNumeroTarga();
 
 }

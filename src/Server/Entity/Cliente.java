@@ -32,27 +32,18 @@ public class Cliente {
 	}
 
 	public Cliente getCliente (int cod){
-			//apro la sessione e la transazione
-					SessionFactory sf = HibernateUtil.getSessionFactory();
-					Session session = sf.openSession();
-					session.beginTransaction();
 
-					Cliente trovato = (Cliente) session.get(Cliente.class, cod) ; 
-					
-					//chiudo la transazione e la sessione
-					session.getTransaction().commit();		
-					session.close();
-					
-					return trovato;
-		}
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
 
-	/*public Set<AutovetturaCompatibile> getListaAutovetture() {
-		return this.autovetturePosseduta;
-	}*/
-	
-	/*public Badge getBadge () {
-		return this.badge_assegnato;
-	}*/
+		Cliente trovato = (Cliente) session.get(Cliente.class, cod) ; 
+					
+		session.getTransaction().commit();		
+		session.close();
+					
+		return trovato;
+	}
 
 	public String getNome() {
 		return this.nome;
@@ -82,7 +73,7 @@ public class Cliente {
 		this.dataNascita = d;
 	}
 	
-	public List<AutovetturaCompatibile> getAutoPoassedute() {
+	public List<AutovetturaCompatibile> getAutoPossedute() {
 		return this.autovetturePossedute;
 	}
 	

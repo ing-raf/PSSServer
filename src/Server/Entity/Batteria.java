@@ -1,6 +1,8 @@
 package Server.Entity;
 
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -10,7 +12,11 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class Batteria {
+public class Batteria implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -980961376913777720L;
 	@Id
 	private int ID;
 	@Column
@@ -19,8 +25,6 @@ public class Batteria {
 	private int cicliRicaricaRimanenti;
 	@ManyToOne
 	@JoinColumn (name = "modello_autovettura") private ModelloAutovettura modello_compatibile;
-	//@ManyToOne 
-	//@JoinColumn(name = "disp_batterie") private Stazione stazione_disp;
 	
 	public Batteria (){
 	}
@@ -35,10 +39,6 @@ public class Batteria {
 		this.salva();
 	}
 	
-	
-	/*public void setStazione (Stazione s){
-		this.stazione_disp = s;
-	}*/
 	public int getID() {
 		return this.ID;
 	}
@@ -51,22 +51,23 @@ public class Batteria {
 	public ModelloAutovettura getModello() {
 		return this.modello_compatibile;
 	}
+	
 	public int getCicliRicarica() {
 		return this.cicliRicaricaRimanenti;
 	}
 
-
+	public void setCicliRicarica(int cicli) {
+		this.cicliRicaricaRimanenti = cicli;
+	}
 	
 	
 	Batteria update() {
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
 		session.update(this);
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		
@@ -74,50 +75,45 @@ public class Batteria {
 	}
 	
 	Batteria salva(){
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		//salvo il cliente
 		session.save(this);
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		
 		return this;
 	}
 
-	public void getBatteria (int cod){
-		//apro la sessione e la transazione
-				SessionFactory sf = HibernateUtil.getSessionFactory();
-				Session session = sf.openSession();
-				session.beginTransaction();
+	public Batteria getBatteria (int cod){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
 
-				Batteria b = (Batteria) session.get(Batteria.class, cod) ; 
+		Batteria b = (Batteria) session.get(Batteria.class, cod) ; 
 				
-				//chiudo la transazione e la sessione
-				session.getTransaction().commit();		
-				session.close();
-				
-				this.ID = b.getID();
-				this.costoSostituzione = b.getCostoSostituzione();
-				this.cicliRicaricaRimanenti = b.getCicliRicarica();
-				this.modello_compatibile = b.getModello();
-				
+		session.getTransaction().commit();		
+		session.close();
+		if (b != null)	{
+			this.ID = b.getID();
+			this.costoSostituzione = b.getCostoSostituzione();
+			this.cicliRicaricaRimanenti = b.getCicliRicarica();
+			this.modello_compatibile = b.getModello();
+		}
+		return b;
 				
 	}
+	
 	void elimina (Batteria b){
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		//salvo il cliente
 		session.delete(b);
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		

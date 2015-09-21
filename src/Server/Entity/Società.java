@@ -10,7 +10,6 @@ public class Società {
 
 	public  static List<ModelloAutovettura> getListaModelli() {
 		List<ModelloAutovettura> trovate;
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -19,7 +18,6 @@ public class Società {
 		
 		trovate = (List<ModelloAutovettura>)query.list();
 				
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		return trovate;
@@ -40,7 +38,6 @@ public class Società {
 
 	public static List<Stazione> getListaStazioni() {
 		List<Stazione> trovate;
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -49,15 +46,14 @@ public class Società {
 		
 		trovate = (List<Stazione>)query.list();
 				
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		return trovate;
 	}
 	
 	public static boolean findStazione (Stazione stazione, int id){
-		stazione.getStazione(id);
-		if (stazione == null)
+		
+		if (stazione.getStazione(id) == null)
 			return false;
 		else
 			return true;

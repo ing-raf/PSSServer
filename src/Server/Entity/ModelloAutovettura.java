@@ -2,6 +2,8 @@ package Server.Entity;
 
 
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 import org.hibernate.Session;
@@ -10,7 +12,11 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class ModelloAutovettura {
+public class ModelloAutovettura implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3330338838905026475L;
 	@Id
 	private int ID;
 	@Column
@@ -43,34 +49,33 @@ public class ModelloAutovettura {
 	}
 	
 	
-	public void getModelloAuto (int cod){
-		//apro la sessione e la transazione
+	public ModelloAutovettura getModelloAuto (int cod){
 				SessionFactory sf = HibernateUtil.getSessionFactory();
 				Session session = sf.openSession();
 				session.beginTransaction();
 
 				ModelloAutovettura b = (ModelloAutovettura) session.get(ModelloAutovettura.class, cod) ; 
 				
-				//chiudo la transazione e la sessione
 				session.getTransaction().commit();		
 				session.close();
-				this.ID=b.getId();
-				this.modello = b.getModello();
-				this.fornitore = b.getFornitore();
-			
 				
+				if (b != null){
+					this.ID=b.getId();
+					this.modello = b.getModello();
+					this.fornitore = b.getFornitore();
+				}
+				
+				return b;		
 				
 	}
 	
 	ModelloAutovettura update() {
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
 		session.update(this);
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		
@@ -78,18 +83,23 @@ public class ModelloAutovettura {
 	}
 	
 	ModelloAutovettura salva(){
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		//salvo il cliente
 		session.save(this);
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
 		
 		return this;
+	}
+	
+	public boolean equals (Object obj) {
+		ModelloAutovettura mod = (ModelloAutovettura) obj;
+		if ((this.fornitore.equals(mod.getFornitore())) && (this.modello.equals(mod.getModello())) && (this.ID == mod.getId()))
+			return true;
+		else
+			return false;
 	}
 }
