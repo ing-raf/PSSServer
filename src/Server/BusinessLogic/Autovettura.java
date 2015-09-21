@@ -31,4 +31,6 @@ public class Autovettura implements Server.RMIInterface.Autovettura {
 		return this.autovettura;
 		
 	}
+	
+
 }

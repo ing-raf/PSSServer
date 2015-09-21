@@ -94,4 +94,12 @@ public class ModelloAutovettura implements Serializable {
 		
 		return this;
 	}
+	
+	public boolean equals (Object obj) {
+		ModelloAutovettura mod = (ModelloAutovettura) obj;
+		if ((this.fornitore.equals(mod.getFornitore())) && (this.modello.equals(mod.getModello())) && (this.ID == mod.getId()))
+			return true;
+		else
+			return false;
+	}
 }
