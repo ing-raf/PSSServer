@@ -1,6 +1,5 @@
 package Server.Control;
 
-import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
@@ -11,7 +10,7 @@ import Server.BusinessLogic.GestoreSostituzioni;
 import Server.BusinessLogic.ValidazioneBadge;
 import Server.RMIInterface.*;
 
-public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implements ServiziGestore {
+public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implements ServiziGestore, ServiziGestoreAndroid {
 	
 	/**
 	 * 
@@ -20,12 +19,12 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	private int IDStazione;
 	private ArrayList<? extends Autovettura> lastElenco;
 	
-	public CoordinatoreGestoreAutenticato (int IDStazione) throws RemoteException {
+	public CoordinatoreGestoreAutenticato (int IDStazione) throws Exception {
 		super();
 		this.IDStazione = IDStazione;
 	}
 
-	public ArrayList<? extends Autovettura> retrieveListaModelli() throws RemoteException {
+	public ArrayList<? extends Autovettura> retrieveListaModelli() throws Exception {
 		this.lastElenco = GestoreAutovetture.retrieveListaModelli();		
 		return new ArrayList<Autovettura>(this.lastElenco);
 	}
@@ -37,7 +36,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * @param maxciclidiricarica
 	 * @param modelloautovettura
 	 */
-	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) throws RemoteException {
+	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) throws Exception {
 		return GestoreDisponibilità.addBatteria(IDStazione, IDbatteria, costosostituzione, maxcicliricarica, (Server.BusinessLogic.Autovettura) lastElenco.get(modelloautovettura) );
 	}
 
@@ -46,7 +45,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * @param IDstazione
 	 * @param listabatterie
 	 */
-	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws RemoteException {
+	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws Exception {
 		return GestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
 	}
 
@@ -54,7 +53,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * 
 	 * @param codicebadge
 	 */
-	public ArrayList<? extends AutovetturaCliente> retrieveAutovettureCliente(int codicebadge) throws RemoteException {
+	public ArrayList<? extends AutovetturaCliente> retrieveAutovettureCliente(int codicebadge) throws Exception {
 		
 		ValidazioneBadge badge = new ValidazioneBadge();
 		
@@ -74,11 +73,11 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * 
 	 * @param modello
 	 */
-	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws RemoteException {
+	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception {
 		return GestoreDisponibilità.remoteRetrieveBatterieCompatibili( (Server.BusinessLogic.Autovettura) this.lastElenco.get(modello),  this.IDStazione);
 	}
 
-	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws RemoteException {	
+	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {	
 		return GestoreSostituzioni.findLastSostituzione( (Server.BusinessLogic.AutovetturaCliente)this.lastElenco.get(autovettura) );
 	}
 

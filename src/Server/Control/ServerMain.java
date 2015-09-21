@@ -7,7 +7,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 import Server.RMIInterface.ServiziGestore;
-
+import Server.RMIInterface.ServiziGestoreAndroid;
 import lipermi.exception.LipeRMIException;
 import lipermi.handler.CallHandler;
 import lipermi.net.Server;
@@ -28,15 +28,17 @@ public class ServerMain {
 			System.exit(0);
 		}
 		
-		for (int i = 0; i < NUM_STAZIONI; i = i + 2) {
+		for (int i = 0; i < NUM_STAZIONI; i++) {
 			
 			try {
-				Registry registry = LocateRegistry.createRegistry(PORT_OFFSET + elencoIDstazioni.get(i));
+				Registry registry = LocateRegistry.createRegistry(PORT_OFFSET + 2*elencoIDstazioni.get(i));
 				
 				CoordinatoreClienteRegistrato coordinatoreClienteRegistrato = 
 						new CoordinatoreClienteRegistrato( elencoIDstazioni.get(i) ); 
 				CoordinatoreGestoreAutenticato coordinatoreGestoreAutenticato = 
-						new CoordinatoreGestoreAutenticato( elencoIDstazioni.get(i) ); 
+						new CoordinatoreGestoreAutenticato( elencoIDstazioni.get(i) );
+				
+				System.out.println ("Cliente registrato sul porto " + ( PORT_OFFSET + 2*elencoIDstazioni.get(i) ) );
 				
 				registry.rebind("ServiziCliente", coordinatoreClienteRegistrato);
 					
@@ -49,29 +51,21 @@ public class ServerMain {
 					CallHandler callHandler = new CallHandler();
 					Server server = new Server();
 					
-					callHandler.registerGlobal(ServiziGestore.class, coordinatoreGestoreAutenticato);
-					server.bind(PORT_OFFSET + elencoIDstazioni.get(i) + 1, callHandler);
+					callHandler.registerGlobal(ServiziGestoreAndroid.class, coordinatoreGestoreAutenticato);
+					server.bind(PORT_OFFSET + 2*elencoIDstazioni.get(i) + 1, callHandler);
+					
+					System.out.println ("Gestore registrato sul porto " + (PORT_OFFSET + 2*elencoIDstazioni.get(i) + 1) );
 					
 				} else {
 					throw new UnsupportedOperationException("Specificare uno dei middleware supportati");
 				}
 				
-			} catch (RemoteException e) {
-				System.err.println("Il server JavaRMI ha riscontrato un problema nell'apertura "
-						+ "della connessione sul porto " + (PORT_OFFSET + i) );
-				e.printStackTrace();
-				System.exit(0);
-			} catch (LipeRMIException e) {
-				System.err.println("Il server LipeRMI ha riscontrato un problema nell'apertura "
-						+ "della connessione sul porto " + (PORT_OFFSET + i) );
-				e.printStackTrace();
-				System.exit(0);
-			} catch (IOException e) {
+			} catch (Exception e) {
 				System.err.println("Il server ha riscontrato un problema nell'apertura "
 						+ "della connessione sul porto " + (PORT_OFFSET + i) );
 				e.printStackTrace();
 				System.exit(0);
-			}
+			} 
 		}
 		
 		System.out.println("Tutt appost tutt appost");
