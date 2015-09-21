@@ -43,16 +43,21 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	public boolean retrieveBatterieCompatibili(int indiceAutovettura, ArrayList<Batteria> elencoBatterie, ArrayList<Stazione> elencoStazioni) {
-		return this.stato.retrieveBatterieCompatibili(this, indiceAutovettura, elencoBatterie, elencoStazioni);
+	public ArrayList<? extends Batteria> retrieveBatterieCompatibili(int indiceAutovettura) {
+		return this.stato.retrieveBatterieCompatibili(this.getIDStazione(), indiceAutovettura);
+	}
+	
+	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int indiceAutovettura) {
+		return this.stato.remoteRetrieveBatterieCompatibili(this, indiceAutovettura);
 	}
 
 	/**
 	 * 
 	 * @param indiceBatteria
+	 * @throws RemoteException 
 	 */
-	public boolean startInstallazione(int indiceBatteria) {
-		return this.stato.startInstallazione(indiceBatteria);
+	public boolean startInstallazione(int indiceBatteria) throws RemoteException {
+		return this.stato.startInstallazione(this, indiceBatteria);
 	}
 
 	public boolean verificaEsitoValidazione() {
