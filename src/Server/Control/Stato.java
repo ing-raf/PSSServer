@@ -1,5 +1,6 @@
 package Server.Control;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 import Server.RMIInterface.Batteria;
@@ -17,15 +18,21 @@ public abstract class Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	boolean retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura, ArrayList<? extends Batteria> elencoBatterie, ArrayList<? extends Stazione> elencoStazioni) {
+	ArrayList<? extends Batteria> retrieveBatterieCompatibili(int IDStazione, int indiceAutovettura) {
 		throw new UnsupportedOperationException();
 	}
+	
+	ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
+		throw new UnsupportedOperationException();
+	}
+
 
 	/**
 	 * 
 	 * @param indiceBatteria
+	 * @throws RemoteException 
 	 */
-	boolean startInstallazione(int indiceBatteria) {
+	boolean startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
 		throw new UnsupportedOperationException();
 	}
 
