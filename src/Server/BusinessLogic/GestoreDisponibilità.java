@@ -49,9 +49,13 @@ public class GestoreDisponibilità{
 	 */
 	public static ArrayList<Stazione> remoteRetrieveBatterieCompatibili(Autovettura modello, int IDstazione) {
 		
+			
 		ArrayList<Stazione> stazioniRemote = new ArrayList<Stazione>();
 		List<Server.Entity.Stazione> listaS = Società.getListaStazioni();
 		ModelloAutovettura m = modello.getAutovettura();
+		
+		System.out.println(modello.toString() );
+		System.out.println(m.getModello() );
 		
 		int k;
 		boolean hit;

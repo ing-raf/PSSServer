@@ -15,7 +15,7 @@ import Server.RMIInterface.Stazione;
 public class ControlUC01SostituzioneBatteria {
 	
 	private static final int IDSTAZIONE = 1;
-	private static final int CODICEBADGE = 2;
+	private static final int CODICEBADGE = 4;
 
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
@@ -133,22 +133,24 @@ public class ControlUC01SostituzioneBatteria {
 			}
 			
 			System.out.println("Specificare il numero:");
-		}
 		
-		int indiceBatteria = Integer.parseInt( in.readLine() );
 		
-		if (indiceBatteria < 0 || indiceBatteria >= batterie.size() ) {
-			System.out.println("STRUNZ!!! Devi scegliere una delle autovetture presenti!");
-			System.exit(0);
-		}
+			int indiceBatteria = Integer.parseInt( in.readLine() );
 		
-		try {
-			if (server.startInstallazione(indiceBatteria) == false)
-				throw new RemoteException("Installazione non avvenuta");
-		} catch (RemoteException e) {
-			System.err.println("Eccezione durante l'esecuzione del messaggio I.4.2");
-			e.printStackTrace();
-			System.exit(0);
+			if (indiceBatteria < 0 || indiceBatteria >= batterie.size() ) {
+				System.out.println("STRUNZ!!! Devi scegliere una delle autovetture presenti!");
+				System.exit(0);
+			}
+		
+			try {
+				if (server.startInstallazione(indiceBatteria) == false)
+					throw new RemoteException("Installazione non avvenuta");
+			} catch (RemoteException e) {
+				System.err.println("Eccezione durante l'esecuzione del messaggio I.4.2");
+				e.printStackTrace();
+				System.exit(0);
+			}
+			
 		}
 		
 		System.out.println ("BANANAAAAAAAAAAAA");

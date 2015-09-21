@@ -56,7 +56,7 @@ public class Autenticato extends Stato {
 	@Override
 	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
 		coordinatore.setStato( new NonAutenticato() );
-		return GestoreDisponibilità.remoteRetrieveBatterieCompatibili( (Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura), coordinatore.getIDStazione());
+		return GestoreDisponibilità.remoteRetrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), coordinatore.getIDStazione());
 	}
 	
 
