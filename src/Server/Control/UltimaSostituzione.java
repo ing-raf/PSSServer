@@ -2,9 +2,7 @@ package Server.Control;
 
 import java.util.Calendar;
 
-import Server.BusinessLogic.UltimaSostituzione;
-
-public class Sostituzione implements Server.RMIInterface.Sostituzione {
+public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 
 	private Calendar dataOra;
 	private String nomeStazione;
@@ -47,7 +45,7 @@ public class Sostituzione implements Server.RMIInterface.Sostituzione {
 	 * 
 	 * @param sostituzione
 	 */
-	public void setSostituzione(UltimaSostituzione sostituzione) {
+	public void setSostituzione(Server.BusinessLogic.UltimaSostituzione sostituzione) {
 		this.dataOra = sostituzione.getDataOra();
 		this.nomeStazione = sostituzione.getNomeStazione();
 		this.indirizzoStazione = sostituzione.getIndirizzoStazione();
