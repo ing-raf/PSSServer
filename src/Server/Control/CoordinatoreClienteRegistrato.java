@@ -33,7 +33,7 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 		this.portSostituzione = 1099;
 }
 
-	public ArrayList<AutovetturaCliente> retrieveAutovetture() {
+	public ArrayList<? extends AutovetturaCliente> retrieveAutovetture() {
 		return this.stato.retrieveAutovetture();
 	}
 
