@@ -22,8 +22,8 @@ public class Autovettura implements Server.RMIInterface.Autovettura {
 	 * @param modello
 	 */
 	public void setModelloAutovettura(Server.BusinessLogic.Autovettura modello) {
-		this.modello = modello.getFornitore();
-		this.fornitore = modello.getModello();
+		this.modello = modello.getModello();
+		this.fornitore = modello.getFornitore();
 	}
 
 }
