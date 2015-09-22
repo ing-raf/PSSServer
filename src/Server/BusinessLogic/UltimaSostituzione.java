@@ -45,8 +45,12 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 		return this.sostituzione.getStazione().getIndirizzo();
 	}
 
-	public int getIDbatteria() {
+	public int getIDBatteria() {
 		return this.sostituzione.getBatteria().getID();
+	}
+
+	public Calendar getDataOra() {
+		return this.sostituzione.getDataOra();
 	}
 
 }

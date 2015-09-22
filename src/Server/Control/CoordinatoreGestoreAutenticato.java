@@ -46,7 +46,17 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * @param listabatterie
 	 */
 	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws Exception {
-		return GestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
+			ArrayList<Server.BusinessLogic.Batteria> listaBatterie = GestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
+			ArrayList<Batteria> elencoBatterie = new ArrayList<Server.Control.Batteria>(listaBatterie.size());
+			
+			for (Server.BusinessLogic.Batteria batteria: listaBatterie) {
+				Batteria nuova = new Batteria();
+				nuova.setBatteria(batteria);
+				elencoBatterie.add(nuova);
+			}
+			
+			return elencoBatterie;
+
 	}
 
 	/**
