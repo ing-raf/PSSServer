@@ -64,7 +64,7 @@ public class ServerMain {
 			} 
 		}
 		
-		System.out.println("Tutt appost tutt appost");
+		System.out.println("Server pronto");
 
 	}
 	
