@@ -6,7 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-public class Societ√† {
+public class Societ‡{
 
 	public  static List<ModelloAutovettura> getListaModelli() {
 		List<ModelloAutovettura> trovate;

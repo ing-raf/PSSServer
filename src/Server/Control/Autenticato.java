@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import Server.BusinessLogic.GestoreAutovetture;
-import Server.BusinessLogic.GestoreDisponibilit√†;
+import Server.BusinessLogic.GestoreDisponibilit‡;
 import Server.BusinessLogic.GestoreSostituzioni;
 import Server.BusinessLogic.ValidazioneBadge;
 import SistemaSostituzione.RMIDeviceInterface.ServizidiSostituzione;
@@ -52,6 +52,7 @@ public class Autenticato extends Stato {
 	 */
 	@Override
 	public ArrayList<? extends Batteria> retrieveBatterieCompatibili(int IDStazione, int indiceAutovettura) {		
+<<<<<<< Updated upstream
 		this.availableBatterie = GestoreDisponibilit√†.retrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), IDStazione ); 
 		ArrayList<Batteria> elencoBatterie = new ArrayList<Server.Control.Batteria>( this.availableBatterie.size() );
 		
@@ -62,6 +63,10 @@ public class Autenticato extends Stato {
 		}
 		
 		return elencoBatterie;		
+=======
+		this.availableBatterie = GestoreDisponibilit‡.retrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), IDStazione ); 
+		return new ArrayList<Batteria>(this.availableBatterie);			
+>>>>>>> Stashed changes
 	}
 	
 	@Override
@@ -77,7 +82,11 @@ public class Autenticato extends Stato {
 		}
 		
 		coordinatore.setStato( new NonAutenticato() );
+<<<<<<< Updated upstream
 		return elencoStazioni;
+=======
+		return GestoreDisponibilit‡.remoteRetrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), coordinatore.getIDStazione());
+>>>>>>> Stashed changes
 	}
 	
 
