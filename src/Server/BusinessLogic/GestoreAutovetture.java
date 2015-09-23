@@ -31,7 +31,7 @@ public class GestoreAutovetture {
 	public static ArrayList<Autovettura> retrieveListaModelli() {
 		
 		ArrayList<Autovettura> listaModelli = new ArrayList<Autovettura>();
-		List<ModelloAutovettura> lista = Societ‡.getListaModelli();
+		List<ModelloAutovettura> lista = Societ√†.getListaModelli();
 		
 		for(int i = 0; i<lista.size(); i++){
 			Autovettura m = new Autovettura();

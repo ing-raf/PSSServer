@@ -26,7 +26,7 @@ public class GestoreSostituzioni {
 		Server.Entity.Sostituzione ultima = new Server.Entity.Sostituzione ();
 		ultima = a.getLastRicambio();
 		Server.Entity.Stazione stazione = new Server.Entity.Stazione();
-		boolean ris = Societ‡.findStazione(stazione, idStazione);
+		boolean ris = Societ√†.findStazione(stazione, idStazione);
 		if (ris == true ){
 			stazione.getStazione(idStazione);
 			Server.BusinessLogic.Batteria vecchia = new Server.BusinessLogic.Batteria();
