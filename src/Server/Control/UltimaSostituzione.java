@@ -4,6 +4,10 @@ import java.util.Calendar;
 
 public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6051325080494565570L;
 	private Calendar dataOra;
 	private String nomeStazione;
 	private String indirizzoStazione;
