@@ -29,7 +29,7 @@ public class ModelloAutovettura implements Serializable {
 		
 	}
 	
-	public int getId () {
+	public int getID () {
 		return this.ID;
 	}
 	public String getModello() {
@@ -40,15 +40,19 @@ public class ModelloAutovettura implements Serializable {
 		return this.fornitore;
 	}
 	
-	public void setFornitore (String forn){
+	void setFornitore (String forn){
 		this.fornitore = forn;
 	}
 
-	public void setModello (String model){
+	void setModello (String model){
 		this.modello=model;
 	}
 	
 	
+	void setID(int ID) {
+		this.ID = ID;
+	}
+
 	public ModelloAutovettura getModelloAuto (int cod){
 				SessionFactory sf = HibernateUtil.getSessionFactory();
 				Session session = sf.openSession();
@@ -60,7 +64,7 @@ public class ModelloAutovettura implements Serializable {
 				session.close();
 				
 				if (b != null){
-					this.ID=b.getId();
+					this.setID(b.getID());
 					this.modello = b.getModello();
 					this.fornitore = b.getFornitore();
 				}
@@ -97,7 +101,7 @@ public class ModelloAutovettura implements Serializable {
 	
 	public boolean equals (Object obj) {
 		ModelloAutovettura mod = (ModelloAutovettura) obj;
-		if ((this.fornitore.equals(mod.getFornitore())) && (this.modello.equals(mod.getModello())) && (this.ID == mod.getId()))
+		if ((this.fornitore.equals(mod.getFornitore())) && (this.modello.equals(mod.getModello())) && (this.getID() == mod.getID()))
 			return true;
 		else
 			return false;

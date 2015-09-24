@@ -36,7 +36,7 @@ public class Badge {
 	}
 	
 	
-	public void setCodice(int cod){
+	void setCodice(int cod){
 		this.codice = cod;
 	}
 	
@@ -44,7 +44,7 @@ public class Badge {
 		this.creditoResiduo = cred;
 	}
 	
-	public void setCliente (Cliente p){
+	void setCliente (Cliente p){
 		this.possessore=p;
 	}
 	
@@ -54,7 +54,7 @@ public class Badge {
 	
 
 
-	public  Badge getBadge (int cod){
+	public Badge getBadge (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();

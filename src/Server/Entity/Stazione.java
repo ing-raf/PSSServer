@@ -25,6 +25,7 @@ public class Stazione implements Serializable {
 	private List<Batteria> disponibili;
 	
 	public Stazione () {
+		this.disponibili = new ArrayList<Batteria>();
 	}
 
 	public void insertBatteria(Batteria nuova) {
@@ -55,8 +56,16 @@ public class Stazione implements Serializable {
 		return this.ID;
 	}
 	
-	public void setID(int id){
+	void setID(int id){
 		this.ID = id;
+	}
+	
+	void setNome(String nome){
+		this.nome = nome;
+	}
+	
+	void setIndirizzo(String indirizzo){
+		this.indirizzo = indirizzo;
 	}
 	
 	public void deleteBatteria(Batteria batteria) {

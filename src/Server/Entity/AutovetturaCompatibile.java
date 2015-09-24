@@ -21,9 +21,11 @@ public class AutovetturaCompatibile implements Serializable {
 	@Id
 	private String numeroTarga;
 	@ManyToOne (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn (name = "modello")  ModelloAutovettura modello;
+	@JoinColumn (name = "modello")  
+	private ModelloAutovettura modello;
 	@OneToOne
-	@JoinColumn (name = "idSostituzione") Sostituzione sostituzione;
+	@JoinColumn (name = "idSostituzione") 
+	private Sostituzione sostituzione;
 	
 	public AutovetturaCompatibile (){
 	
@@ -62,11 +64,19 @@ public class AutovetturaCompatibile implements Serializable {
 		return this.modello;
 	}
 
+	public void setModello(ModelloAutovettura modello) {
+		this.modello = modello;
+	}
+
 	public Sostituzione getLastRicambio() {
 		return this.sostituzione;
 		
 	}
 	
+	public void setLastRicambio(Sostituzione sostituzione) {
+		this.sostituzione = sostituzione;
+	}
+
 	void salva(){
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();

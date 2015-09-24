@@ -56,11 +56,27 @@ public class Batteria implements Serializable {
 		return this.cicliRicaricaRimanenti;
 	}
 
+	void setID(int id) {
+		this.ID = id;
+	}
+	
+	void setCostoSostituzione(float costoSostituzione) {
+		this.costoSostituzione = costoSostituzione;
+	}
+
+
+
 	public void setCicliRicarica(int cicli) {
 		this.cicliRicaricaRimanenti = cicli;
 	}
 	
 	
+	void setModello(ModelloAutovettura modello_compatibile) {
+		this.modello_compatibile = modello_compatibile;
+	}
+
+
+
 	Batteria update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
