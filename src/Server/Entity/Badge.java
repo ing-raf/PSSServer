@@ -19,7 +19,7 @@ public class Badge {
 	@Column
 	private float creditoResiduo;
 	@OneToOne
-	@JoinColumn(name="Id_cliente") Cliente possessore;
+	@JoinColumn(name="idCliente") Cliente possessore;
 
 	
 

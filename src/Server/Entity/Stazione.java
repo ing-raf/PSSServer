@@ -21,7 +21,7 @@ public class Stazione implements Serializable {
 	@Column
 	private String indirizzo;
 	@OneToMany (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn (name ="disp_batterie")
+	@JoinColumn (name ="idStazione")
 	private List<Batteria> disponibili;
 	
 	public Stazione () {

@@ -24,7 +24,7 @@ public class Batteria implements Serializable {
 	@Column
 	private int cicliRicaricaRimanenti;
 	@ManyToOne
-	@JoinColumn (name = "modello_autovettura") private ModelloAutovettura modello_compatibile;
+	@JoinColumn (name = "idModello") private ModelloAutovettura modello_compatibile;
 	
 	public Batteria (){
 	}

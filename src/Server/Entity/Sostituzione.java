@@ -17,9 +17,9 @@ public class Sostituzione implements Serializable {
 	@Column 
 	private Calendar dataOra;
 	@ManyToOne  (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn (name = "stazione_sostituzione") Stazione staz_sostittuz;
+	@JoinColumn (name = "idStazioneSostituzione") Stazione staz_sostittuz;
 	@OneToOne
-	@JoinColumn (name = "batteria_sostituita") Batteria batteria;
+	@JoinColumn (name = "idBatteriaInserita") Batteria batteria;
 	
 	public Sostituzione (){
 	}

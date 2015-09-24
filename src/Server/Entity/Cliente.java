@@ -20,7 +20,7 @@ public class Cliente {
 	private int Id;
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn (name="Id_cliente") private List<AutovetturaCompatibile> autovetturePossedute;
+	@JoinColumn (name="idProprietario") private List<AutovetturaCompatibile> autovetturePossedute;
 	
 
 	public int getID (){
