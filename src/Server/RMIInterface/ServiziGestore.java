@@ -37,6 +37,6 @@ public interface ServiziGestore extends Remote {
 	 */
 	ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception;
 
-	ArrayList<? extends Sostituzione> retrieveUltimaSostituzione(int autovettura) throws Exception;
+	Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception;
 
 }

@@ -1,4 +1,5 @@
 package Server.Entity;
+
 import javax.persistence.*;
 
 import org.hibernate.Session;

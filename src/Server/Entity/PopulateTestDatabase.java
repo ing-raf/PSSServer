@@ -258,7 +258,7 @@ public class PopulateTestDatabase {
 		scal[2].clear();
 		scal[2].set(2015, Calendar.SEPTEMBER, 02, 10, 15);
 		sost[2].setDataOra(scal[2]);
-		sost[2].setBatteria(batt[9]);
+		sost[2].setBatteria(batt[10]);
 		sost[2].setStazione(st[0]);
 		
 		sost[3] = new Sostituzione();
@@ -267,7 +267,7 @@ public class PopulateTestDatabase {
 		scal[3].clear();
 		scal[3].set(2015, Calendar.SEPTEMBER, 01, 13, 30);
 		sost[3].setDataOra(scal[3]);
-		sost[3].setBatteria(batt[10]);
+		sost[3].setBatteria(batt[11]);
 		sost[3].setStazione(st[2]);
 		
 		sost[4] = new Sostituzione();
@@ -276,7 +276,7 @@ public class PopulateTestDatabase {
 		scal[4].clear();
 		scal[4].set(2015, Calendar.AUGUST, 20, 9, 20);
 		sost[4].setDataOra(scal[4]);
-		sost[4].setBatteria(batt[11]);
+		sost[4].setBatteria(batt[12]);
 		sost[4].setStazione(st[1]);
 		
 		sost[5] = new Sostituzione();
@@ -285,7 +285,7 @@ public class PopulateTestDatabase {
 		scal[5].clear();
 		scal[5].set(2015, Calendar.JULY, 15, 18, 45);
 		sost[5].setDataOra(scal[5]);
-		sost[5].setBatteria(batt[12]);
+		sost[5].setBatteria(batt[13]);
 		sost[5].setStazione(st[1]);
 		
 		sost[6] = new Sostituzione();
@@ -294,7 +294,7 @@ public class PopulateTestDatabase {
 		scal[6].clear();
 		scal[6].set(2015, Calendar.SEPTEMBER, 12, 15, 29);
 		sost[6].setDataOra(scal[6]);
-		sost[6].setBatteria(batt[13]);
+		sost[6].setBatteria(batt[14]);
 		sost[6].setStazione(st[0]);
 		
 		for (Sostituzione s : sost) s.salva();

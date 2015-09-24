@@ -58,7 +58,7 @@ public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutentica
 	}
 
 	@Override
-	public ArrayList<? extends Sostituzione> retrieveUltimaSostituzione(int autovettura) throws Exception {
+	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {
 		return this.stub.retrieveUltimaSostituzione(autovettura);
 	}
 

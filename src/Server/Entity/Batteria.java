@@ -1,8 +1,5 @@
 package Server.Entity;
 
-
-import java.io.Serializable;
-
 import javax.persistence.*;
 
 

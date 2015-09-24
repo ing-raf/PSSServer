@@ -12,6 +12,13 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	private String nomeStazione;
 	private String indirizzoStazione;
 	private int IDBatteria;
+	
+	public UltimaSostituzione(){
+		this.dataOra = Calendar.getInstance();
+		this.nomeStazione = "prova prova";
+		this.indirizzoStazione = "si si";
+		this.IDBatteria = 0;
+	}
 
 	public int getGiorno() {
 		return this.dataOra.get(Calendar.DATE);
@@ -45,11 +52,11 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 		return this.IDBatteria;
 	}
 
-	public void setSostituzione(Server.BusinessLogic.UltimaSostituzione sostituzione) {
+/*	public void setSostituzione(Server.BusinessLogic.UltimaSostituzione sostituzione) {
 		this.dataOra = sostituzione.getDataOra();
 		this.nomeStazione = sostituzione.getNomeStazione();
 		this.indirizzoStazione = sostituzione.getIndirizzoStazione();
 		this.IDBatteria = sostituzione.getIDBatteria();
-	}
+	}*/
 
 }
