@@ -4,12 +4,8 @@ import java.util.Calendar;
 
 import Server.Entity.Sostituzione;
 
-public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
+public class UltimaSostituzione {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2017480700229004661L;
 	private Sostituzione sostituzione;
 
 	public int getGiorno() {

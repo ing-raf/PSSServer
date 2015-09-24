@@ -1,8 +1,6 @@
 package Server.Entity;
 
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 
 
@@ -12,12 +10,8 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class AutovetturaCompatibile implements Serializable {
+public class AutovetturaCompatibile {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5386990241003066785L;
 	@Id
 	private String numeroTarga;
 	@ManyToOne (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
