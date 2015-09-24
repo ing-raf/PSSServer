@@ -44,10 +44,6 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	public int getIDBatteria() {
 		return this.IDBatteria;
 	}
-	
-	public void getDataOra() {
-		// tuffaischifo
-	}
 
 	public void setSostituzione(Server.BusinessLogic.UltimaSostituzione sostituzione) {
 		this.dataOra = sostituzione.getDataOra();

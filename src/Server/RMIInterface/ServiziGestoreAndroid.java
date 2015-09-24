@@ -36,6 +36,6 @@ public interface ServiziGestoreAndroid {
 	 */
 	ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception;
 
-	Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception;
+	ArrayList<? extends Sostituzione> retrieveUltimaSostituzione(int autovettura) throws Exception;
 
 }

@@ -21,6 +21,6 @@ public interface InterfacciaGestoreAutenticato {
 
 	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception;
 
-	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception;
+	public ArrayList<? extends Sostituzione> retrieveUltimaSostituzione(int autovettura) throws Exception;
 
 }

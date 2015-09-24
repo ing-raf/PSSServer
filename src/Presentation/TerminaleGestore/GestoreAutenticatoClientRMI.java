@@ -55,7 +55,7 @@ public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticat
 	}
 
 	@Override
-	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {
+	public ArrayList<? extends Sostituzione> retrieveUltimaSostituzione(int autovettura) throws Exception {
 		return this.stub.retrieveUltimaSostituzione(autovettura);
 	}
 
