@@ -345,7 +345,13 @@ public class PopulateTestDatabase {
 		cl[0].insertAutoPossedute(ac[4]);
 		cl[0].insertAutoPossedute(ac[5]);
 		cl[0].insertAutoPossedute(ac[6]);
-			
 	}
-
+			
+	public boolean testStazione (int idStazione, int idBatteria, int cicliRicarica, float costo, int idModello) {
+		Stazione s = new Stazione();
+		s = s.getStazione(idStazione);
+		return false;
+	}
 }
+
+
