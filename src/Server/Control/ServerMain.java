@@ -75,7 +75,7 @@ public class ServerMain {
 	public static void cablatedID (ArrayList<Integer> listaID) {
 		
 		for (int i = 0; i < 3; i++)
-			listaID.add(i, i);
+			listaID.add(i, i + 1);
 		
 	}
 
