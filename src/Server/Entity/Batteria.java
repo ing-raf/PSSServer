@@ -1,6 +1,7 @@
 package Server.Entity;
 
 import javax.persistence.*;
+import javax.transaction.Transaction;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -87,15 +88,22 @@ public class Batteria {
 		return this;
 	}
 	
-	Batteria salva(){
+	Batteria salva() throws Exception{
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-		
-		session.save(this);
-		
-		session.getTransaction().commit();		
-		session.close();
+	
+		try {
+			session.beginTransaction();
+			session.save(this);
+			session.getTransaction().commit();		
+			
+		}catch (Exception ex) {
+	             session.getTransaction().rollback();
+	             throw ex;
+			
+		}finally { 
+	           session.close();
+	      }
 		
 		return this;
 	}
