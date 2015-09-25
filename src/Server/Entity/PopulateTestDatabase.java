@@ -1,6 +1,7 @@
 package Server.Entity;
 
 import java.util.Calendar;
+import java.util.List;
 
 public class PopulateTestDatabase {
 	
@@ -347,10 +348,21 @@ public class PopulateTestDatabase {
 		cl[0].insertAutoPossedute(ac[6]);
 	}
 			
-	public boolean testStazione (int idStazione, int idBatteria, int cicliRicarica, float costo, int idModello) {
+	public static Batteria testStazione (int idStazione, int idBatteria, int cicliRicarica, float costo, int idModello) {
 		Stazione s = new Stazione();
 		s = s.getStazione(idStazione);
-		return false;
+		List<Batteria> list = s.getBatterieDisp();
+		int k = 0;
+		while (k < list.size() ){
+			if ((list.get(k).getID() == idBatteria) && 
+				(list.get(k).getCicliRicarica() == cicliRicarica) && 
+				(Float.compare(list.get(k).getCostoSostituzione(), costo) == 0) && 
+				(list.get(k).getModello().getID() == idModello)){
+					return list.get(k);
+				} 
+			}
+		return null;
+		
 	}
 }
 
