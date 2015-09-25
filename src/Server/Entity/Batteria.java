@@ -1,8 +1,5 @@
 package Server.Entity;
 
-
-import java.io.Serializable;
-
 import javax.persistence.*;
 
 import org.hibernate.Hibernate;
@@ -15,11 +12,8 @@ import org.hibernate.metamodel.source.MappingException;
 
 
 @Entity
-public class Batteria implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -980961376913777720L;
+public class Batteria {
+
 	@Id
 	private int ID;
 	@Column
@@ -27,7 +21,7 @@ public class Batteria implements Serializable {
 	@Column
 	private int cicliRicaricaRimanenti;
 	@ManyToOne
-	@JoinColumn (name = "modello_autovettura") private ModelloAutovettura modello_compatibile;
+	@JoinColumn (name = "idModello") private ModelloAutovettura modello_compatibile;
 	
 	public Batteria (){
 	}
@@ -59,11 +53,27 @@ public class Batteria implements Serializable {
 		return this.cicliRicaricaRimanenti;
 	}
 
+	void setID(int id) {
+		this.ID = id;
+	}
+	
+	void setCostoSostituzione(float costoSostituzione) {
+		this.costoSostituzione = costoSostituzione;
+	}
+
+
+
 	public void setCicliRicarica(int cicli) {
 		this.cicliRicaricaRimanenti = cicli;
 	}
 	
 	
+	void setModello(ModelloAutovettura modello_compatibile) {
+		this.modello_compatibile = modello_compatibile;
+	}
+
+
+
 	Batteria update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();

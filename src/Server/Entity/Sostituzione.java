@@ -1,25 +1,25 @@
 package Server.Entity;
+
 import javax.persistence.*;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import java.io.Serializable;
 import java.util.Calendar;
+
 @Entity
-public class Sostituzione implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3810346218832520036L;
+public class Sostituzione {
+
 	@Id
 	private int ID;
 	@Column 
 	private Calendar dataOra;
 	@ManyToOne  (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn (name = "stazione_sostituzione") Stazione staz_sostittuz;
+	@JoinColumn (name = "idStazioneSostituzione")
+	private Stazione staz_sostituz;
 	@OneToOne
-	@JoinColumn (name = "batteria_sostituita") Batteria batteria;
+	@JoinColumn (name = "idBatteriaInserita")
+	private Batteria batteria;
 	
 	public Sostituzione (){
 	}
@@ -33,10 +33,10 @@ public class Sostituzione implements Serializable {
 		return this.ID;
 	}
 	public Stazione getStazione() {
-		return this.staz_sostittuz;
+		return this.staz_sostituz;
 	}
 
-	public void setDataOra(Calendar dataora) {
+	void setDataOra(Calendar dataora) {
 		this.dataOra = dataora;
 		
 	}
@@ -45,18 +45,21 @@ public class Sostituzione implements Serializable {
 		this.ID = cod;
 	}
 
+	void setBatteria(Batteria batteria) {
+		this.batteria = batteria;
+	}
+
 	public Batteria getBatteria () {
 		return this.batteria;
 	}
 	
 	public Batteria updateSostituzione (Stazione s, Batteria b){
-		System.out.println("Sono in updateSostituzione");
-		Batteria temp = this.batteria;
+		Batteria vecchia = this.getBatteria();
 		this.batteria = b;
-		this.staz_sostittuz = s;
+		this.staz_sostituz = s;
 		this.dataOra = Calendar.getInstance();
 		this.update();
-		return temp;
+		return vecchia;
 	}
 	
 
@@ -86,6 +89,10 @@ public class Sostituzione implements Serializable {
 		session.close();
 		
 		
+	}
+
+	void setStazione(Stazione staz_sostituz) {
+		this.staz_sostituz = staz_sostituz;
 	}
 	
 

@@ -4,9 +4,11 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
-import Server.RMIInterface.ServiziGestoreAndroid;
 import lipermi.handler.CallHandler;
 import lipermi.net.Server;
+
+import Server.RMIInterface.ServiziGestoreAndroid;
+import Server.Entity.PopulateTestDatabase;
 
 public class ServerMain {
 	
@@ -23,6 +25,8 @@ public class ServerMain {
 			System.err.println("Farsi dare il progetto da Imma e Paolo");
 			System.exit(0);
 		}
+		
+		PopulateTestDatabase.populate();
 		
 		for (int i = 0; i < NUM_STAZIONI; i++) {
 			
@@ -64,14 +68,14 @@ public class ServerMain {
 			} 
 		}
 		
-		System.out.println("Tutt appost tutt appost");
+		System.out.println("Server pronto");
 
 	}
 	
 	public static void cablatedID (ArrayList<Integer> listaID) {
 		
 		for (int i = 0; i < 3; i++)
-			listaID.add(i, i);
+			listaID.add(i, i + 1);
 		
 	}
 

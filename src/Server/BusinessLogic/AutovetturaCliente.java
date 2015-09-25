@@ -2,12 +2,8 @@ package Server.BusinessLogic;
 
 import Server.Entity.AutovetturaCompatibile;
 
-public class AutovetturaCliente extends Autovettura implements Server.RMIInterface.AutovetturaCliente {
+public class AutovetturaCliente extends Autovettura {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -6726985347038990778L;
 	private AutovetturaCompatibile autovettura;
 	
 	public String getNumeroTarga() {

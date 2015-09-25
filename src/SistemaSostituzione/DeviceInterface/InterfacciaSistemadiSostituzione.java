@@ -59,9 +59,9 @@ public class InterfacciaSistemadiSostituzione extends UnicastRemoteObject implem
 	 * @throws Exception 
 	 */
 	public boolean discardBatteria(int idBatteria) throws Exception {
-		System.out.println("Inizio la ricarica della batteria nº " + idBatteria);
+		System.out.println("Inizio lo scarto della batteria nº " + idBatteria);
 		Thread.sleep(TIME_TO_WAIT*SECONDS);
-		System.out.println("Terminata la ricarica della batteria nº " + idBatteria);
+		System.out.println("Terminato lo scarto della batteria nº " + idBatteria);
 		return true;
 	}
 

@@ -8,8 +8,7 @@ import org.hibernate.SessionFactory;
 
 @Entity
 public class Cliente {
-	//@Column
-	//private ArrayList<AutovetturaCompatibile> autovetturePossedute;
+
 	@Column
 	private String nome;
 	@Column
@@ -20,7 +19,8 @@ public class Cliente {
 	private int Id;
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn (name="Id_cliente") private List<AutovetturaCompatibile> autovetturePossedute;
+	@JoinColumn (name="idProprietario") 
+	private List<AutovetturaCompatibile> autovetturePossedute;
 	
 
 	public int getID (){
@@ -28,7 +28,7 @@ public class Cliente {
 	}
 	
 	 public Cliente() {
-		// TODO Auto-generated constructor stub
+		this.autovetturePossedute = new ArrayList<AutovetturaCompatibile>();
 	}
 
 	public Cliente getCliente (int cod){
@@ -61,20 +61,25 @@ public class Cliente {
 		return this.dataNascita;
 	}
 	
-	public void setNome (String n){
+	void setNome (String n){
 		this.nome = n;
 	}
 	
-	public void setcognome (String c){
+	void setCognome (String c){
 		this.cognome = c;
 	}
 	
-	public void setData (Calendar d){
+	void setData (Calendar d){
 		this.dataNascita = d;
 	}
 	
 	public List<AutovetturaCompatibile> getAutoPossedute() {
 		return this.autovetturePossedute;
+	}
+	
+	void insertAutoPossedute(AutovetturaCompatibile nuova) {
+		this.autovetturePossedute.add(nuova);
+		this.update();
 	}
 	
 	

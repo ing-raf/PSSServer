@@ -53,6 +53,7 @@ public class GestoreDisponibilità{
 	 */
 	public static ArrayList<Stazione> remoteRetrieveBatterieCompatibili(Autovettura modello, int IDstazione) {
 		
+			
 		ArrayList<Stazione> stazioniRemote = new ArrayList<Stazione>();
 		List<Server.Entity.Stazione> listaS = Società.getListaStazioni();
 		ModelloAutovettura m = modello.getAutovettura();
@@ -69,7 +70,8 @@ public class GestoreDisponibilità{
 				
 				List<Server.Entity.Batteria> listaB = listaS.get(i).getBatterieDisp();
 				
-				while(hit != true || k < listaB.size()){
+				
+				while(hit != true && k < listaB.size()){
 					if(listaB.get(k).getModello().equals(m)){
 						Server.BusinessLogic.Stazione nuova = new Server.BusinessLogic.Stazione();
 						nuova.setStazione(listaS.get(i));
