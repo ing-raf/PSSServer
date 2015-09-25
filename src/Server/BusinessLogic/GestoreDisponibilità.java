@@ -15,10 +15,13 @@ public class GestoreDisponibilità{
 		
 		Server.Entity.Stazione s = new Server.Entity.Stazione();
 		if (Società.findStazione(s, IDstazione) == false) return false;
-		Server.Entity.Batteria b = new Server.Entity.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
-		
-		s.insertBatteria(b);
-		
+		try {
+			Server.Entity.Batteria b = new Server.Entity.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
+			s.insertBatteria(b);
+		} catch (Exception ex) {
+			System.err.println("Batteria non inserita");
+			return false;
+	}
 		return true;
 	
 	}
@@ -54,9 +57,6 @@ public class GestoreDisponibilità{
 		List<Server.Entity.Stazione> listaS = Società.getListaStazioni();
 		ModelloAutovettura m = modello.getAutovettura();
 		
-		System.out.println(modello.toString() );
-		System.out.println(m.getModello() );
-		
 		int k;
 		boolean hit;
 		
@@ -69,7 +69,8 @@ public class GestoreDisponibilità{
 				
 				List<Server.Entity.Batteria> listaB = listaS.get(i).getBatterieDisp();
 				
-				while(hit != true || k < listaB.size()){
+				
+				while(hit != true && k < listaB.size()){
 					if(listaB.get(k).getModello().equals(m)){
 						Server.BusinessLogic.Stazione nuova = new Server.BusinessLogic.Stazione();
 						nuova.setStazione(listaS.get(i));

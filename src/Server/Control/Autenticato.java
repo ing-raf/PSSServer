@@ -9,23 +9,18 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javax.transaction.InvalidTransactionException;
-
 import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreDisponibilità;
 import Server.BusinessLogic.GestoreSostituzioni;
 import Server.BusinessLogic.ValidazioneBadge;
-import Server.RMIInterface.AutovetturaCliente;
-import Server.RMIInterface.Batteria;
-import Server.RMIInterface.Stazione;
 import SistemaSostituzione.RMIDeviceInterface.ServizidiSostituzione;
 
 public class Autenticato extends Stato {
 	
 	private ValidazioneBadge badgeAutenticato;
-	private ArrayList<? extends AutovetturaCliente> lastElenco;
+	private ArrayList<? extends Server.BusinessLogic.AutovetturaCliente> lastElenco;
 	private int indiceAutovettura;
-	private ArrayList<? extends Batteria> availableBatterie;
+	private ArrayList<? extends Server.BusinessLogic.Batteria> availableBatterie;
 	private ServizidiSostituzione sistemaSostituzione;
 
 	public Autenticato(ValidazioneBadge badgeAutenticato) {
@@ -35,10 +30,18 @@ public class Autenticato extends Stato {
 	}
 
 	@Override
-	public ArrayList<AutovetturaCliente> retrieveAutovetture() {
+	public ArrayList<? extends AutovetturaCliente> retrieveAutovetture() {
 		this.lastElenco = GestoreAutovetture.retrieveListaAutovetture(this.badgeAutenticato);
 		
-		return new ArrayList<Server.RMIInterface.AutovetturaCliente>(this.lastElenco);
+		ArrayList<AutovetturaCliente> elencoAutovetture = new ArrayList<AutovetturaCliente>( this.lastElenco.size() );			
+		
+		for (Server.BusinessLogic.Autovettura autovettura: this.lastElenco) {
+			AutovetturaCliente nuova = new AutovetturaCliente();
+			nuova.setAutovetturaCliente( (Server.BusinessLogic.AutovetturaCliente) autovettura);
+			elencoAutovetture.add(nuova);
+		}
+				
+		return elencoAutovetture;
 	}
 
 	/**
@@ -50,13 +53,34 @@ public class Autenticato extends Stato {
 	@Override
 	public ArrayList<? extends Batteria> retrieveBatterieCompatibili(int IDStazione, int indiceAutovettura) {		
 		this.availableBatterie = GestoreDisponibilità.retrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), IDStazione ); 
-		return new ArrayList<Batteria>(this.availableBatterie);			
+		ArrayList<Batteria> elencoBatterie = new ArrayList<Server.Control.Batteria>( this.availableBatterie.size() );
+		
+		for (Server.BusinessLogic.Batteria batteria: this.availableBatterie) {
+			Batteria nuova = new Batteria();
+			nuova.setBatteria(batteria);
+			elencoBatterie.add(nuova);
+		}
+		
+		return elencoBatterie;	
+		
 	}
 	
 	@Override
 	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
+		ArrayList<Server.BusinessLogic.Stazione> listaStazioni = GestoreDisponibilità.remoteRetrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), coordinatore.getIDStazione());
+	
+		ArrayList<Stazione> elencoStazioni = new ArrayList<Stazione>( this.availableBatterie.size() );
+		
+		for (Server.BusinessLogic.Stazione stazione: listaStazioni) {
+			Stazione nuova = new Stazione();
+			nuova.setStazione(stazione);
+			elencoStazioni.add(nuova);
+		}
+		
 		coordinatore.setStato( new NonAutenticato() );
-		return GestoreDisponibilità.remoteRetrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), coordinatore.getIDStazione());
+
+		return elencoStazioni;
+
 	}
 	
 
@@ -73,12 +97,9 @@ public class Autenticato extends Stato {
 		if ( this.installBatteria(indiceBatteria) == false ) throw new ConnectIOException("Riscontrato un problema durante l'installazione della batteria");
 		Server.BusinessLogic.Batteria rimossa = GestoreSostituzioni.updateSostituzione( (Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(this.indiceAutovettura), coordinatore.getIDStazione(), (Server.BusinessLogic.Batteria) this.availableBatterie.get(indiceBatteria) );
 		
-		CoordinatoreRecupero threadRecupero = new CoordinatoreRecupero(rimossa, coordinatore.getIDStazione(), this.sistemaSostituzione);
-		
-		ExecutorService threadExecutor = Executors.newFixedThreadPool(1);
-		
-		threadExecutor.execute(threadRecupero);
-		
+		CoordinatoreRecupero threadRecupero = new CoordinatoreRecupero(rimossa, coordinatore.getIDStazione(), this.sistemaSostituzione);		
+		ExecutorService threadExecutor = Executors.newFixedThreadPool(1);	
+		threadExecutor.execute(threadRecupero);		
 		threadExecutor.shutdown();
 		
 		coordinatore.setStato( new NonAutenticato() );

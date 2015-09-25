@@ -4,12 +4,8 @@ import java.util.Calendar;
 
 import Server.Entity.Sostituzione;
 
-public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
+public class UltimaSostituzione {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2017480700229004661L;
 	private Sostituzione sostituzione;
 
 	public int getGiorno() {
@@ -45,8 +41,12 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 		return this.sostituzione.getStazione().getIndirizzo();
 	}
 
-	public int getIDbatteria() {
+	public int getIDBatteria() {
 		return this.sostituzione.getBatteria().getID();
+	}
+
+	public Calendar getDataOra() {
+		return this.sostituzione.getDataOra();
 	}
 
 }

@@ -1,8 +1,6 @@
 package Server.Entity;
 
 
-import java.io.Serializable;
-
 import javax.persistence.*;
 
 
@@ -12,18 +10,16 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class AutovetturaCompatibile implements Serializable {
+public class AutovetturaCompatibile {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5386990241003066785L;
 	@Id
 	private String numeroTarga;
 	@ManyToOne (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn (name = "modello")  ModelloAutovettura modello;
+	@JoinColumn (name = "modello")  
+	private ModelloAutovettura modello;
 	@OneToOne
-	@JoinColumn (name = "Id_sostituzione") Sostituzione sostituzione;
+	@JoinColumn (name = "idSostituzione") 
+	private Sostituzione sostituzione;
 	
 	public AutovetturaCompatibile (){
 	
@@ -62,11 +58,19 @@ public class AutovetturaCompatibile implements Serializable {
 		return this.modello;
 	}
 
+	public void setModello(ModelloAutovettura modello) {
+		this.modello = modello;
+	}
+
 	public Sostituzione getLastRicambio() {
 		return this.sostituzione;
 		
 	}
 	
+	public void setLastRicambio(Sostituzione sostituzione) {
+		this.sostituzione = sostituzione;
+	}
+
 	void salva(){
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();

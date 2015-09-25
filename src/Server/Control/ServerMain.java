@@ -4,9 +4,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
-import Server.RMIInterface.ServiziGestoreAndroid;
 import lipermi.handler.CallHandler;
 import lipermi.net.Server;
+
+import Server.RMIInterface.ServiziGestoreAndroid;
+import Server.BusinessLogic.GestoreStazioni;
+import Server.Entity.PopulateTestDatabase;
 
 public class ServerMain {
 	
@@ -15,9 +18,16 @@ public class ServerMain {
 	private static String middleware = "LipeRMI";
 
 	public static void main(String[] args) {
-		ArrayList<Integer> elencoIDstazioni = new ArrayList<Integer>(NUM_STAZIONI);
 		
-		cablatedID(elencoIDstazioni);
+		try {
+			PopulateTestDatabase.populate();
+		} catch (Exception e) {
+			System.out.println("Il database risulta inaccessibile");
+			e.printStackTrace();
+			System.exit(0);
+		}
+		
+		ArrayList<Integer> elencoIDstazioni = GestoreStazioni.retriveListaId();
 		
 		if ( elencoIDstazioni.size() != NUM_STAZIONI ) {
 			System.err.println("Farsi dare il progetto da Imma e Paolo");
@@ -64,14 +74,14 @@ public class ServerMain {
 			} 
 		}
 		
-		System.out.println("Tutt appost tutt appost");
+		System.out.println("Server pronto");
 
 	}
 	
 	public static void cablatedID (ArrayList<Integer> listaID) {
 		
 		for (int i = 0; i < 3; i++)
-			listaID.add(i, i);
+			listaID.add(i, i + 1);
 		
 	}
 

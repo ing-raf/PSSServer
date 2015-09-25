@@ -25,7 +25,7 @@ public class SistemaSostituzioneMain {
 			System.exit(0);
 		} 	
 		
-		System.out.println("Device tutt appost tutt appost");
+		System.out.println("Device pronto");
 
 	}
 
