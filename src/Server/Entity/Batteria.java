@@ -5,9 +5,12 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.metamodel.source.MappingException;
 
 
 
@@ -36,7 +39,7 @@ public class Batteria implements Serializable {
 		this.costoSostituzione = costosostituzione;
 		this.cicliRicaricaRimanenti = maxcicliricarica;
 		this.modello_compatibile = mod;
-		this.salva();
+		this.salva(); 
 	}
 	
 	public int getID() {
@@ -78,7 +81,7 @@ public class Batteria implements Serializable {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
-
+		
 		session.save(this);
 		
 		session.getTransaction().commit();		
