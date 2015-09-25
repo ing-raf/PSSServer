@@ -3,8 +3,6 @@ package Server.BusinessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.exception.ConstraintViolationException;
-
 import Server.Entity.*;
 
 public class GestoreDisponibilità{
@@ -20,7 +18,7 @@ public class GestoreDisponibilità{
 		try {
 		Server.Entity.Batteria b = new Server.Entity.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
 		s.insertBatteria(b);
-		} catch (ConstraintViolationException ex) {
+		} catch (Exception ex) {
 			return false;
 	}
 		return true;
