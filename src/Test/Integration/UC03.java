@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.After;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;

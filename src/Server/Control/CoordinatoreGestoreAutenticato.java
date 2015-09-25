@@ -46,14 +46,13 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * @param modelloautovettura
 	 */
 	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) throws Exception {
-		return GestoreDisponibilità.addBatteria(IDStazione, IDbatteria, costosostituzione, maxcicliricarica, this.lastElenco.get(modelloautovettura) );
+		return GestoreDisponibilità.addBatteria(this.IDStazione, IDbatteria, costosostituzione, maxcicliricarica, this.lastElenco.get(modelloautovettura) );
 
 	}
 
 	/**
 	 * 
 	 * @param IDstazione
-	 * @param listabatterie
 	 */
 	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws Exception {
 			ArrayList<Server.BusinessLogic.Batteria> listaBatterie = GestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);

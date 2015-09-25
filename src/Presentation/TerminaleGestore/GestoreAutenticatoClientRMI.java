@@ -16,14 +16,14 @@ public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticat
 	private static int PORT_OFFSET = 1024;
 	private final String serverHostname;
 	private final int IDstazione;
-	Registry registry;
-	ServiziGestore stub;
+	private Registry registry;
+	private ServiziGestore stub;
 	
 	
 	public GestoreAutenticatoClientRMI (int IDstazione, String serverHostname) throws Exception {
 		this.IDstazione = IDstazione;
 		this.serverHostname = serverHostname;
-		registry = LocateRegistry.getRegistry(this.serverHostname, PORT_OFFSET + this.IDstazione);
+		this.registry = LocateRegistry.getRegistry(this.serverHostname, PORT_OFFSET + 2 * this.IDstazione + 1);
 		this.stub = (ServiziGestore)registry.lookup("ServiziGestore");
 	}
 
