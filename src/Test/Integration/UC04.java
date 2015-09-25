@@ -5,12 +5,10 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;
 import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
-import Server.Entity.PopulateTestDatabase;
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Sostituzione;
 
@@ -167,7 +165,6 @@ public class UC04 {
 
 	}
 
-	@SuppressWarnings("unused")
 	@Test
 	public void TC08() {
 		

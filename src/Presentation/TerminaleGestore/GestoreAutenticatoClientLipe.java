@@ -18,8 +18,8 @@ public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutentica
 	private static int PORT_OFFSET = 1024;
 	private final String serverHostname;
 	private final int IDstazione;
-	Client client;
-	ServiziGestoreAndroid stub;
+	private Client client;
+	private ServiziGestoreAndroid stub;
 	
 	
 	public GestoreAutenticatoClientLipe (int IDstazione, String serverHostname) throws Exception {

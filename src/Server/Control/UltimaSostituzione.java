@@ -8,23 +8,15 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	 * 
 	 */
 	private static final long serialVersionUID = 8677490410508960918L;
-	int giorno;
-	int mese;
-	int anno;
-	int ora;
-	int minuti;
-//	private Calendar dataOra;
+	private int giorno;
+	private int mese;
+	private int anno;
+	private int ora;
+	private int minuti;
 	private String nomeStazione;
 	private String indirizzoStazione;
 	private int IDBatteria;
-/*	
-	public UltimaSostituzione(){
-		this.dataOra = Calendar.getInstance();
-		this.nomeStazione = "prova prova";
-		this.indirizzoStazione = "si si";
-		this.IDBatteria = 0;
-	}
-*/
+
 	public int getGiorno() {
 		return this.giorno;
 	}

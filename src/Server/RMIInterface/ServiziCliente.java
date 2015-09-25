@@ -11,10 +11,8 @@ public interface ServiziCliente extends Remote {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	ArrayList<? extends Batteria> retrieveBatterieCompatibili(int indiceAutovettura) throws RemoteException;
+	ArrayList<?> retrieveBatterieCompatibili(int indiceAutovettura) throws RemoteException;
 	
-	ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int indiceAutovettura) throws RemoteException;
-
 	ArrayList<? extends AutovetturaCliente> retrieveAutovetture() throws RemoteException;
 
 	/**
