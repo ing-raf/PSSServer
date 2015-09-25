@@ -193,9 +193,9 @@ public class UC04 {
 		try {
 			autovetture = client.retrieveAutovettureCliente(codiceBadge);
 			
-			fail(idTest + " riuscito");
+			assertEquals(idTest + " riuscito", null, autovetture);
 		} catch (Exception e) {
-			assertTrue(true);
+			fail(idTest + " riuscito");
 		}
 	
 	}

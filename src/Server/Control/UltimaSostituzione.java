@@ -1,6 +1,6 @@
 package Server.Control;
 
-import java.util.Calendar;
+//import java.util.Calendar;
 
 public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 
@@ -8,7 +8,7 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	 * 
 	 */
 	private static final long serialVersionUID = 8677490410508960918L;
-	private Calendar dataOra;
+//	private Calendar dataOra;
 	private String nomeStazione;
 	private String indirizzoStazione;
 	private int IDBatteria;
@@ -20,7 +20,7 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 		this.IDBatteria = 0;
 	}
 */
-	public int getGiorno() {
+/*	public int getGiorno() {
 		return this.dataOra.get(Calendar.DATE);
 	}
 
@@ -39,7 +39,7 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	public int getMinuti() {
 		return this.dataOra.get(Calendar.MINUTE);
 	}
-
+*/
 	public String getNomeStazione() {
 		return this.nomeStazione;
 	}
@@ -53,7 +53,7 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	}
 
 	public void setSostituzione(Server.BusinessLogic.UltimaSostituzione sostituzione) {
-		this.dataOra = sostituzione.getDataOra();
+//		this.dataOra = sostituzione.getDataOra();
 		this.nomeStazione = sostituzione.getNomeStazione();
 		this.indirizzoStazione = sostituzione.getIndirizzoStazione();
 		this.IDBatteria = sostituzione.getIDBatteria();

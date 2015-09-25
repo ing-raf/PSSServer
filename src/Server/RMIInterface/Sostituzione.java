@@ -4,15 +4,15 @@ import java.io.*;
 
 public interface Sostituzione extends Serializable {
 
-	int getGiorno();
+//	int getGiorno();
 
-	int getMese();
+//	int getMese();
 
-	int getAnno();
+//	int getAnno();
 
-	int getOra();
+//	int getOra();
 
-	int getMinuti();
+//	int getMinuti();
 	
 	String getNomeStazione();
 

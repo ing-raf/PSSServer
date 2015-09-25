@@ -78,7 +78,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 		ValidazioneBadge badge = new ValidazioneBadge();
 		
 		if ( badge.findCodiceBadge(codicebadge) == false ) {
-			return new ArrayList<AutovetturaCliente>(0);
+			return null;
 		}
 		else {
 			
