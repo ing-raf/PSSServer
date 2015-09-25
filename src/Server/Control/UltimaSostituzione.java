@@ -7,7 +7,8 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6051325080494565570L;
+	private static final long serialVersionUID = 8677490410508960918L;
+//	private static final long serialVersionUID = -6051325080494565570L;
 	private Calendar dataOra;
 	private String nomeStazione;
 	private String indirizzoStazione;
