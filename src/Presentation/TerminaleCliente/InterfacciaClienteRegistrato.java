@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import java.awt.Toolkit;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -19,7 +21,11 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 
 public class InterfacciaClienteRegistrato {
 
@@ -28,7 +34,7 @@ public class InterfacciaClienteRegistrato {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void clientScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -57,29 +63,92 @@ public class InterfacciaClienteRegistrato {
 		frmMenuCliente.setIconImage(Toolkit.getDefaultToolkit().getImage(InterfacciaClienteRegistrato.class.getResource("/Presentation/TerminaleCliente/icon/ic_launcher.png")));
 		frmMenuCliente.setBounds(100, 100, 450, 300);
 		frmMenuCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frmMenuCliente.getContentPane().setLayout(gridBagLayout);
+		SpringLayout springLayout = new SpringLayout();
+		frmMenuCliente.getContentPane().setLayout(springLayout);
 		
-		JButton btnSostituzioneBatteria = new JButton("Sostituzione batteria");
-		GridBagConstraints gbc_btnSostituzioneBatteria = new GridBagConstraints();
-		gbc_btnSostituzioneBatteria.insets = new Insets(0, 0, 5, 0);
-		gbc_btnSostituzioneBatteria.gridx = 2;
-		gbc_btnSostituzioneBatteria.gridy = 1;
-		frmMenuCliente.getContentPane().add(btnSostituzioneBatteria, gbc_btnSostituzioneBatteria);
+		JLabel lblSelezionereUnoperazione = new JLabel("Selezionare un'operazione:");
+		springLayout.putConstraint(SpringLayout.NORTH, lblSelezionereUnoperazione, 22, SpringLayout.NORTH, frmMenuCliente.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, lblSelezionereUnoperazione, -105, SpringLayout.EAST, frmMenuCliente.getContentPane());
+		lblSelezionereUnoperazione.setForeground(Color.GREEN);
+		lblSelezionereUnoperazione.setFont(new Font("Maiandra GD", Font.PLAIN, 18));
+		frmMenuCliente.getContentPane().add(lblSelezionereUnoperazione);
 		
-		JButton btnPrimaInstallazione = new JButton("Prima installazione");
-		btnPrimaInstallazione.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		JButton btnNewButton = new JButton("Sostituzione");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+			
 			}
 		});
-		GridBagConstraints gbc_btnPrimaInstallazione = new GridBagConstraints();
-		gbc_btnPrimaInstallazione.gridx = 2;
-		gbc_btnPrimaInstallazione.gridy = 3;
-		frmMenuCliente.getContentPane().add(btnPrimaInstallazione, gbc_btnPrimaInstallazione);
+		frmMenuCliente.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton("Prima installazione");
+		springLayout.putConstraint(SpringLayout.WEST, btnNewButton, 0, SpringLayout.WEST, btnNewButton_1);
+		springLayout.putConstraint(SpringLayout.EAST, btnNewButton, 0, SpringLayout.EAST, btnNewButton_1);
+		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton_1, -10, SpringLayout.SOUTH, frmMenuCliente.getContentPane());
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JOptionPane.showMessageDialog(btnNewButton_1, "Operazione non disponibile!", "Attenzione!", JOptionPane.WARNING_MESSAGE);
+			
+			}
+		});
+		frmMenuCliente.getContentPane().add(btnNewButton_1);
+		
+		JButton btnNewButton_2 = new JButton("Credito residuo");
+		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton_2, 0, SpringLayout.NORTH, btnNewButton);
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				JOptionPane.showMessageDialog(btnNewButton_1, "Operazione non disponibile!", "Attenzione!", JOptionPane.WARNING_MESSAGE);
+			
+			}
+		});
+		frmMenuCliente.getContentPane().add(btnNewButton_2);
+		
+		JButton btnNewButton_3 = new JButton("Esci");
+		springLayout.putConstraint(SpringLayout.EAST, btnNewButton_2, 0, SpringLayout.EAST, btnNewButton_3);
+		springLayout.putConstraint(SpringLayout.WEST, btnNewButton_3, 282, SpringLayout.WEST, frmMenuCliente.getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, btnNewButton_1, -115, SpringLayout.WEST, btnNewButton_3);
+		springLayout.putConstraint(SpringLayout.EAST, btnNewButton_3, -47, SpringLayout.EAST, frmMenuCliente.getContentPane());
+		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton_3, 0, SpringLayout.NORTH, btnNewButton_1);
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				frmMenuCliente.setVisible(false);
+				InterfacciaClienteNonRegistrato gui = new InterfacciaClienteNonRegistrato();
+				gui.idleScreen();
+				frmMenuCliente.dispose();
+			
+			}
+		});
+		frmMenuCliente.getContentPane().add(btnNewButton_3);
+		
+		JLabel lblNewLabel = new JLabel("");
+		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton, 6, SpringLayout.SOUTH, lblNewLabel);
+		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel, 18, SpringLayout.SOUTH, lblSelezionereUnoperazione);
+		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel, 82, SpringLayout.WEST, frmMenuCliente.getContentPane());
+		lblNewLabel.setIcon(new ImageIcon(InterfacciaClienteRegistrato.class.getResource("/Presentation/TerminaleCliente/icon/battery.png")));
+		frmMenuCliente.getContentPane().add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel_1, -6, SpringLayout.NORTH, btnNewButton_2);
+		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel_1, -77, SpringLayout.EAST, frmMenuCliente.getContentPane());
+		lblNewLabel_1.setIcon(new ImageIcon(InterfacciaClienteRegistrato.class.getResource("/Presentation/TerminaleCliente/icon/badge.png")));
+		frmMenuCliente.getContentPane().add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(InterfacciaClienteRegistrato.class.getResource("/Presentation/TerminaleCliente/icon/first.png")));
+		springLayout.putConstraint(SpringLayout.SOUTH, lblNewLabel_2, -18, SpringLayout.NORTH, btnNewButton_1);
+		springLayout.putConstraint(SpringLayout.EAST, lblNewLabel_2, 0, SpringLayout.EAST, lblNewLabel);
+		frmMenuCliente.getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		springLayout.putConstraint(SpringLayout.NORTH, lblNewLabel_3, 0, SpringLayout.NORTH, lblNewLabel_2);
+		springLayout.putConstraint(SpringLayout.WEST, lblNewLabel_3, 0, SpringLayout.WEST, lblNewLabel_1);
+		lblNewLabel_3.setIcon(new ImageIcon(InterfacciaClienteRegistrato.class.getResource("/Presentation/TerminaleCliente/icon/exit.png")));
+		frmMenuCliente.getContentPane().add(lblNewLabel_3);
 	}
 	
 	public void notifyValidazione() {

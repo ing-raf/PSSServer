@@ -92,7 +92,11 @@ public class InterfacciaBadgeCliente {
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				JOptionPane.showMessageDialog(null,codice_badge.getText(),"Codice Badge", JOptionPane.INFORMATION_MESSAGE);
+				if(Integer.parseInt(codice_badge.getText())==1234){
+					InterfacciaClienteRegistrato gui = new InterfacciaClienteRegistrato();
+					gui.clientScreen();
+					frmStazioneRicambioBatterie.setVisible(false);
+				}
 			}
 		});
 		

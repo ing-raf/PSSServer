@@ -21,7 +21,7 @@ public class InterfacciaClienteNonRegistrato {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void idleScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
