@@ -18,6 +18,6 @@ public interface Sostituzione extends Serializable {
 
 	String getIndirizzoStazione();
 
-	int getIDbatteria();
+	int getIDBatteria();
 
 }

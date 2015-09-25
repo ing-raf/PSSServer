@@ -3,12 +3,9 @@ package Server.Control;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
-import Server.RMIInterface.Batteria;
-import Server.RMIInterface.Stazione;
-
 public abstract class Stato {
 
-	ArrayList<Server.RMIInterface.AutovetturaCliente> retrieveAutovetture() {
+	ArrayList<? extends AutovetturaCliente> retrieveAutovetture() {
 		throw new UnsupportedOperationException();
 	}
 

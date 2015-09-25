@@ -1,19 +1,14 @@
 package Server.Entity;
 import javax.persistence.*;
 
-import java.io.Serializable;
 import java.util.*;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 @Entity
-public class Stazione implements Serializable {
+public class Stazione {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1020587181488276598L;
 	@Id
 	private int ID;	
 	@Column
@@ -21,10 +16,11 @@ public class Stazione implements Serializable {
 	@Column
 	private String indirizzo;
 	@OneToMany (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
-	@JoinColumn (name ="disp_batterie")
+	@JoinColumn (name ="idStazione")
 	private List<Batteria> disponibili;
 	
 	public Stazione () {
+		this.disponibili = new ArrayList<Batteria>();
 	}
 
 	public void insertBatteria(Batteria nuova) {
@@ -55,8 +51,16 @@ public class Stazione implements Serializable {
 		return this.ID;
 	}
 	
-	public void setID(int id){
+	void setID(int id){
 		this.ID = id;
+	}
+	
+	void setNome(String nome){
+		this.nome = nome;
+	}
+	
+	void setIndirizzo(String indirizzo){
+		this.indirizzo = indirizzo;
 	}
 	
 	public void deleteBatteria(Batteria batteria) {
@@ -64,14 +68,24 @@ public class Stazione implements Serializable {
 	}
 		
 	public Stazione getStazione (int cod){
+		
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
+		
+		Stazione trovato = null;
+		
+		try {
+			session.beginTransaction();
 
-		Stazione trovato = (Stazione) session.get(Stazione.class, cod) ; 
+			trovato = (Stazione) session.get(Stazione.class, cod) ; 
 					
-		session.getTransaction().commit();		
-		session.close();
+			session.getTransaction().commit();	
+		} catch(Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
 		
 		if (trovato != null){
 			this.ID = trovato.getID();
@@ -79,6 +93,7 @@ public class Stazione implements Serializable {
 			this.indirizzo = trovato.getIndirizzo();
 			this.disponibili = trovato.getBatterieDisp();
 			}
+		
 		return trovato;
 					
 		}
@@ -86,12 +101,19 @@ public class Stazione implements Serializable {
 	Stazione update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-
-		session.update(this);
 		
-		session.getTransaction().commit();		
-		session.close();
+		try {
+			session.beginTransaction();
+
+			session.update(this);
+		
+			session.getTransaction().commit();	
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
 		
 		return this;
 	}
@@ -99,12 +121,19 @@ public class Stazione implements Serializable {
 	Stazione salva(){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-
-		session.save(this);
 		
-		session.getTransaction().commit();		
-		session.close();
+		try {
+			session.beginTransaction();
+
+			session.save(this);
+		
+			session.getTransaction().commit();	
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
 		
 		return this;
 	}	

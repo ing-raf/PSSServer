@@ -1,22 +1,20 @@
 package Server.Entity;
 
-
-import java.io.Serializable;
-
 import javax.persistence.*;
+import javax.transaction.Transaction;
 
-
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.hibernate.exception.ConstraintViolationException;
+import org.hibernate.metamodel.source.MappingException;
 
 
 
 @Entity
-public class Batteria implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -980961376913777720L;
+public class Batteria {
+
 	@Id
 	private int ID;
 	@Column
@@ -24,19 +22,19 @@ public class Batteria implements Serializable {
 	@Column
 	private int cicliRicaricaRimanenti;
 	@ManyToOne
-	@JoinColumn (name = "modello_autovettura") private ModelloAutovettura modello_compatibile;
+	@JoinColumn (name = "idModello") private ModelloAutovettura modello_compatibile;
 	
 	public Batteria (){
 	}
 	
 	
 	
-	public Batteria(int id, float costosostituzione, int maxcicliricarica, ModelloAutovettura mod) {		
+	public Batteria(int id, float costosostituzione, int maxcicliricarica, ModelloAutovettura mod) throws Exception {		
 		this.ID = id;
 		this.costoSostituzione = costosostituzione;
 		this.cicliRicaricaRimanenti = maxcicliricarica;
 		this.modello_compatibile = mod;
-		this.salva();
+		this.salva(); 
 	}
 	
 	public int getID() {
@@ -56,33 +54,63 @@ public class Batteria implements Serializable {
 		return this.cicliRicaricaRimanenti;
 	}
 
+	void setID(int id) {
+		this.ID = id;
+	}
+	
+	void setCostoSostituzione(float costoSostituzione) {
+		this.costoSostituzione = costoSostituzione;
+	}
+
+
+
 	public void setCicliRicarica(int cicli) {
 		this.cicliRicaricaRimanenti = cicli;
 	}
 	
 	
+	void setModello(ModelloAutovettura modello_compatibile) {
+		this.modello_compatibile = modello_compatibile;
+	}
+
+
+
 	Batteria update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-
-		session.update(this);
 		
-		session.getTransaction().commit();		
-		session.close();
+		try {
+			session.beginTransaction();
+
+			session.update(this);
+		
+			session.getTransaction().commit();	
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
+
 		
 		return this;
 	}
 	
-	Batteria salva(){
+	Batteria salva() throws Exception{
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-
-		session.save(this);
-		
-		session.getTransaction().commit();		
-		session.close();
+	
+		try {
+			session.beginTransaction();
+			session.save(this);
+			session.getTransaction().commit();		
+			session.close();
+		}catch (Exception ex) {
+	        session.getTransaction().rollback();
+	        session.close();
+	 		System.err.println("exc nell'entity");
+	 		throw ex;			
+		}
 		
 		return this;
 	}
@@ -90,6 +118,7 @@ public class Batteria implements Serializable {
 	public Batteria getBatteria (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
+		
 		session.beginTransaction();
 
 		Batteria b = (Batteria) session.get(Batteria.class, cod) ; 
@@ -102,6 +131,7 @@ public class Batteria implements Serializable {
 			this.cicliRicaricaRimanenti = b.getCicliRicarica();
 			this.modello_compatibile = b.getModello();
 		}
+		
 		return b;
 				
 	}
@@ -110,12 +140,20 @@ public class Batteria implements Serializable {
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-
-		session.delete(b);
 		
-		session.getTransaction().commit();		
-		session.close();
+		try {
+			session.beginTransaction();
+
+			session.delete(b);
+			
+			session.getTransaction().commit();	
+		} catch (Exception ceccis) {
+			session.getTransaction().rollback();
+			throw ceccis;
+		} finally {	
+			session.close();
+			
+		}
 		
 	}
 	
