@@ -5,7 +5,7 @@ import java.util.List;
 
 public class PopulateTestDatabase {
 	
-	public static void populate() {		
+	public static void populate() throws Exception {		
 		Stazione[] st = new Stazione[3];
 		
 		st[0] = new Stazione();
@@ -349,8 +349,10 @@ public class PopulateTestDatabase {
 	}
 			
 	public static Batteria testStazione (int idStazione, int idBatteria, int cicliRicarica, float costo, int idModello) {
+		
 		Stazione s = new Stazione();
 		s = s.getStazione(idStazione);
+		
 		List<Batteria> list = s.getBatterieDisp();
 		int k = 0;
 		while (k < list.size() ){
@@ -360,7 +362,8 @@ public class PopulateTestDatabase {
 				(list.get(k).getModello().getID() == idModello)){
 					return list.get(k);
 				} 
-			}
+				k++;
+			}		
 		return null;
 		
 	}

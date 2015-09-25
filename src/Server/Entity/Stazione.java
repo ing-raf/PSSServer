@@ -68,14 +68,24 @@ public class Stazione {
 	}
 		
 	public Stazione getStazione (int cod){
+		
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
+		
+		Stazione trovato = null;
+		
+		try {
+			session.beginTransaction();
 
-		Stazione trovato = (Stazione) session.get(Stazione.class, cod) ; 
+			trovato = (Stazione) session.get(Stazione.class, cod) ; 
 					
-		session.getTransaction().commit();		
-		session.close();
+			session.getTransaction().commit();	
+		} catch(Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
 		
 		if (trovato != null){
 			this.ID = trovato.getID();
@@ -83,6 +93,7 @@ public class Stazione {
 			this.indirizzo = trovato.getIndirizzo();
 			this.disponibili = trovato.getBatterieDisp();
 			}
+		
 		return trovato;
 					
 		}
@@ -90,12 +101,19 @@ public class Stazione {
 	Stazione update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-
-		session.update(this);
 		
-		session.getTransaction().commit();		
-		session.close();
+		try {
+			session.beginTransaction();
+
+			session.update(this);
+		
+			session.getTransaction().commit();	
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
 		
 		return this;
 	}
@@ -103,12 +121,19 @@ public class Stazione {
 	Stazione salva(){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-
-		session.save(this);
 		
-		session.getTransaction().commit();		
-		session.close();
+		try {
+			session.beginTransaction();
+
+			session.save(this);
+		
+			session.getTransaction().commit();	
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
 		
 		return this;
 	}	

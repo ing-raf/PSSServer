@@ -29,7 +29,7 @@ public class Batteria {
 	
 	
 	
-	public Batteria(int id, float costosostituzione, int maxcicliricarica, ModelloAutovettura mod) {		
+	public Batteria(int id, float costosostituzione, int maxcicliricarica, ModelloAutovettura mod) throws Exception {		
 		this.ID = id;
 		this.costoSostituzione = costosostituzione;
 		this.cicliRicaricaRimanenti = maxcicliricarica;
@@ -78,12 +78,20 @@ public class Batteria {
 	Batteria update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-
-		session.update(this);
 		
-		session.getTransaction().commit();		
-		session.close();
+		try {
+			session.beginTransaction();
+
+			session.update(this);
+		
+			session.getTransaction().commit();	
+		} catch (Exception e) {
+			session.getTransaction().rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
+
 		
 		return this;
 	}
@@ -96,14 +104,13 @@ public class Batteria {
 			session.beginTransaction();
 			session.save(this);
 			session.getTransaction().commit();		
-			
+			session.close();
 		}catch (Exception ex) {
-	             session.getTransaction().rollback();
-	             throw ex;
-			
-		}finally { 
-	           session.close();
-	      }
+	        session.getTransaction().rollback();
+	        session.close();
+	 		System.err.println("exc nell'entity");
+	 		throw ex;			
+		}
 		
 		return this;
 	}
@@ -111,6 +118,7 @@ public class Batteria {
 	public Batteria getBatteria (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
+		
 		session.beginTransaction();
 
 		Batteria b = (Batteria) session.get(Batteria.class, cod) ; 
@@ -123,6 +131,7 @@ public class Batteria {
 			this.cicliRicaricaRimanenti = b.getCicliRicarica();
 			this.modello_compatibile = b.getModello();
 		}
+		
 		return b;
 				
 	}
@@ -131,12 +140,20 @@ public class Batteria {
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
-		session.beginTransaction();
-
-		session.delete(b);
 		
-		session.getTransaction().commit();		
-		session.close();
+		try {
+			session.beginTransaction();
+
+			session.delete(b);
+			
+			session.getTransaction().commit();	
+		} catch (Exception ceccis) {
+			session.getTransaction().rollback();
+			throw ceccis;
+		} finally {	
+			session.close();
+			
+		}
 		
 	}
 	

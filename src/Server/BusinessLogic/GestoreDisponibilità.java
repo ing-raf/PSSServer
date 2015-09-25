@@ -16,9 +16,10 @@ public class GestoreDisponibilità{
 		Server.Entity.Stazione s = new Server.Entity.Stazione();
 		if (Società.findStazione(s, IDstazione) == false) return false;
 		try {
-		Server.Entity.Batteria b = new Server.Entity.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
-		s.insertBatteria(b);
+			Server.Entity.Batteria b = new Server.Entity.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
+			s.insertBatteria(b);
 		} catch (Exception ex) {
+			System.err.println("Batteria non inserita");
 			return false;
 	}
 		return true;

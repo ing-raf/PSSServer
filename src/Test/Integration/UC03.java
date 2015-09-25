@@ -18,11 +18,6 @@ public class UC03 {
 	
 	private Server.Entity.Batteria inserita;
 	private int idStazione;
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		PopulateTestDatabase.populate();
-	}
 	
 	@After
 	public void tearDown() throws Exception {
@@ -222,13 +217,17 @@ public class UC03 {
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
-			assertNotEquals(idTest + " riuscito", true, client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) ); 
+			assertNotEquals(idTest + " riuscito", true,  client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) );
 
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
 		
+		System.err.println("prima del testStazione");
+		
 		inserita = PopulateTestDatabase.testStazione(idStazione, idBatteria, cicli, costo, idModello);
+		
+		System.err.println("dopo il testStazione");
 		
 		assertEquals (idTest + " riuscito", null, inserita);
 			

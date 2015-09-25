@@ -8,6 +8,7 @@ import lipermi.handler.CallHandler;
 import lipermi.net.Server;
 
 import Server.RMIInterface.ServiziGestoreAndroid;
+import Server.BusinessLogic.GestoreStazioni;
 import Server.Entity.PopulateTestDatabase;
 
 public class ServerMain {
@@ -17,16 +18,21 @@ public class ServerMain {
 	private static String middleware = "LipeRMI";
 
 	public static void main(String[] args) {
-		ArrayList<Integer> elencoIDstazioni = new ArrayList<Integer>(NUM_STAZIONI);
 		
-		cablatedID(elencoIDstazioni);
+		try {
+			PopulateTestDatabase.populate();
+		} catch (Exception e) {
+			System.out.println("Il database risulta inaccessibile");
+			e.printStackTrace();
+			System.exit(0);
+		}
+		
+		ArrayList<Integer> elencoIDstazioni = GestoreStazioni.retriveListaId();
 		
 		if ( elencoIDstazioni.size() != NUM_STAZIONI ) {
 			System.err.println("Farsi dare il progetto da Imma e Paolo");
 			System.exit(0);
 		}
-		
-		PopulateTestDatabase.populate();
 		
 		for (int i = 0; i < NUM_STAZIONI; i++) {
 			

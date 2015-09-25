@@ -14,11 +14,6 @@ import Server.RMIInterface.Batteria;
 
 public class UC02 {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		PopulateTestDatabase.populate();
-	}
-
 	@Test
 	public void TC01() {
 		

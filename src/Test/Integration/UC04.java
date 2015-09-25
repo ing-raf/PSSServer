@@ -16,11 +16,6 @@ import Server.RMIInterface.Sostituzione;
 
 public class UC04 {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		PopulateTestDatabase.populate();
-	}
-
 	@Test
 	public void TC01() {
 		

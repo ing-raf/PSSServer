@@ -15,11 +15,6 @@ import Server.RMIInterface.Stazione;
 
 public class UC05 {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		PopulateTestDatabase.populate();
-	}
-
 	@SuppressWarnings({ "unchecked" })
 	@Test
 	public void TC01() {
