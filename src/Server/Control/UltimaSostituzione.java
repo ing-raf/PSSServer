@@ -8,7 +8,12 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	 * 
 	 */
 	private static final long serialVersionUID = 8677490410508960918L;
-	private Calendar dataOra;
+	int giorno;
+	int mese;
+	int anno;
+	int ora;
+	int minuti;
+//	private Calendar dataOra;
 	private String nomeStazione;
 	private String indirizzoStazione;
 	private int IDBatteria;
@@ -21,23 +26,23 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	}
 */
 	public int getGiorno() {
-		return this.dataOra.get(Calendar.DATE);
+		return this.giorno;
 	}
 
 	public int getMese() {
-		return this.dataOra.get(Calendar.MONTH);
+		return this.mese;
 	}
 
 	public int getAnno() {
-		return this.dataOra.get(Calendar.YEAR);
+		return this.anno;
 	}
 
 	public int getOra() {
-		return this.dataOra.get(Calendar.HOUR_OF_DAY);
+		return this.ora;
 	}
 
 	public int getMinuti() {
-		return this.dataOra.get(Calendar.MINUTE);
+		return this.minuti;
 	}
 
 	public String getNomeStazione() {
@@ -53,7 +58,11 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	}
 
 	public void setSostituzione(Server.BusinessLogic.UltimaSostituzione sostituzione) {
-		this.dataOra = sostituzione.getDataOra();
+		this.giorno = sostituzione.getDataOra().get(Calendar.DATE);
+		this.mese = sostituzione.getDataOra().get(Calendar.MONTH);
+		this.anno = sostituzione.getDataOra().get(Calendar.YEAR);
+		this.ora = sostituzione.getDataOra().get(Calendar.HOUR_OF_DAY);
+		this.minuti = sostituzione.getDataOra().get(Calendar.MINUTE);
 		this.nomeStazione = sostituzione.getNomeStazione();
 		this.indirizzoStazione = sostituzione.getIndirizzoStazione();
 		this.IDBatteria = sostituzione.getIDBatteria();
