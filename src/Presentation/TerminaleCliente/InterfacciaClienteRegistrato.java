@@ -9,36 +9,27 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Color;
-import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
-import java.awt.Choice;
-import java.awt.List;
-import javax.swing.JTextField;
-import javax.swing.JSpinner;
-import java.awt.Label;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.ActionEvent;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
 public class InterfacciaClienteRegistrato {
 
+	private static String Host;
 	private JFrame frmMenuCliente;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void clientScreen() {
+	public static void clientScreen(String host) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					InterfacciaClienteRegistrato window = new InterfacciaClienteRegistrato();
+					InterfacciaClienteRegistrato.setHost(host);
 					window.frmMenuCliente.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,6 +68,8 @@ public class InterfacciaClienteRegistrato {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				frmMenuCliente.dispose();
+				FinestraSostituzione.sostScreen(InterfacciaClienteRegistrato.getHost());
 				
 			
 			}
@@ -117,8 +110,7 @@ public class InterfacciaClienteRegistrato {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				frmMenuCliente.setVisible(false);
-				InterfacciaClienteNonRegistrato gui = new InterfacciaClienteNonRegistrato();
-				gui.idleScreen();
+				InterfacciaClienteNonRegistrato.idleScreen();
 				frmMenuCliente.dispose();
 			
 			}
@@ -151,8 +143,23 @@ public class InterfacciaClienteRegistrato {
 		frmMenuCliente.getContentPane().add(lblNewLabel_3);
 	}
 	
-	public void notifyValidazione() {
-		// TODO - implement InterfacciaClienteRegistrato.notifyValidazione
+	public void notifyValidazione(String host) throws Exception {
+		ClienteRegistratoClientRMI cr = new ClienteRegistratoClientRMI(1,host);
+		if(cr.verificaEsitoValidazione() == true){
+			InterfacciaClienteRegistrato.clientScreen(host);
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "Codice badge errato!", "Attenzione!", JOptionPane.ERROR_MESSAGE);
+			InterfacciaClienteNonRegistrato.idleScreen();
+		}
+	}
+	
+	public static void setHost(String ip){
+		Host = ip;
+	}
+	
+	public static String getHost(){
+		return Host;
 	}
 
 }

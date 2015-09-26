@@ -3,48 +3,39 @@ package Presentation.TerminaleCliente;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import java.awt.GridLayout;
 import javax.swing.SpringLayout;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
 import java.awt.Toolkit;
-import java.awt.Canvas;
-import javax.swing.JInternalFrame;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JSeparator;
-import javax.swing.JTextPane;
-import java.awt.Window.Type;
+import java.rmi.RemoteException;
+
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
+
 
 public class InterfacciaBadgeCliente {
 
 	private JFrame frmStazioneRicambioBatterie;
 	private JTextField codice_badge;
+	private static String Host;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void badgeScreen() {
+	public static void badgeScreen(String host) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					InterfacciaBadgeCliente window = new InterfacciaBadgeCliente();
+					InterfacciaBadgeCliente.setHost(host);
 					window.frmStazioneRicambioBatterie.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,15 +46,17 @@ public class InterfacciaBadgeCliente {
 
 	/**
 	 * Create the application.
+	 * @throws Exception 
 	 */
-	public InterfacciaBadgeCliente() {
+	public InterfacciaBadgeCliente() throws Exception {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws Exception 
 	 */
-	private void initialize() {
+	private void initialize() throws Exception {
 		frmStazioneRicambioBatterie = new JFrame();
 		frmStazioneRicambioBatterie.setForeground(new Color(204, 255, 204));
 		frmStazioneRicambioBatterie.getContentPane().setFont(new Font("Maiandra GD", Font.BOLD, 18));
@@ -88,15 +81,27 @@ public class InterfacciaBadgeCliente {
 		codice_badge.setHorizontalAlignment(SwingConstants.CENTER);
 		codice_badge.setColumns(10);
 		
+		BadgeClientRMI badge = new BadgeClientRMI(1,InterfacciaBadgeCliente.getHost());
+		
 		JButton btnOk = new JButton("OK");
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				if(Integer.parseInt(codice_badge.getText())==1234){
-					InterfacciaClienteRegistrato gui = new InterfacciaClienteRegistrato();
-					gui.clientScreen();
-					frmStazioneRicambioBatterie.setVisible(false);
+				try {
+					badge.startValidazione(Integer.parseInt(codice_badge.getText()));
+				} catch (NumberFormatException | RemoteException e) {
+					
+					e.printStackTrace();
 				}
+				InterfacciaClienteRegistrato cr = new InterfacciaClienteRegistrato();
+				try {
+					cr.notifyValidazione(InterfacciaBadgeCliente.getHost());
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+				frmStazioneRicambioBatterie.setVisible(false);
+				
 			}
 		});
 		
@@ -133,5 +138,13 @@ public class InterfacciaBadgeCliente {
 	
 	public void ejectBadge() {
 		
+	}
+	
+	public static void setHost(String ip){
+		Host = ip;
+	}
+	
+	public static String getHost(){
+		return Host;
 	}
 }
