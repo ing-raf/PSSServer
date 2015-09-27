@@ -15,11 +15,7 @@ public abstract class Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	ArrayList<? extends Batteria> retrieveBatterieCompatibili(int IDStazione, int indiceAutovettura) {
-		throw new UnsupportedOperationException();
-	}
-	
-	ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
+	ArrayList<?> retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
 		throw new UnsupportedOperationException();
 	}
 

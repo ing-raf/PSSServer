@@ -5,7 +5,7 @@ import java.util.List;
 
 import Server.Entity.*;
 
-public class GestoreDisponibilit√†{
+public class GestoreDisponibilit‡{
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class GestoreDisponibilit√†{
 	public static boolean addBatteria(int IDstazione, int IDbatteria, float costosostituzione, int maxcicliricarica, Autovettura modello) {
 		
 		Server.Entity.Stazione s = new Server.Entity.Stazione();
-		if (Societ√†.findStazione(s, IDstazione) == false) return false;
+		if (Societ‡.findStazione(s, IDstazione) == false) return false;
 		try {
 			Server.Entity.Batteria b = new Server.Entity.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
 			s.insertBatteria(b);
@@ -31,7 +31,7 @@ public class GestoreDisponibilit√†{
 		ArrayList<Batteria> batterieCompatibili = new ArrayList<Batteria>();
 		Server.Entity.ModelloAutovettura m = modello.getAutovettura();
 		Server.Entity.Stazione s = new Server.Entity.Stazione();
-		Societ√†.findStazione(s, IDstazione);
+		Societ‡.findStazione(s, IDstazione);
 		List<Server.Entity.Batteria> lista = s.getBatterieDisp();
 		
 		for(int i=0; i<lista.size(); i++){
@@ -54,7 +54,7 @@ public class GestoreDisponibilit√†{
 		
 			
 		ArrayList<Stazione> stazioniRemote = new ArrayList<Stazione>();
-		List<Server.Entity.Stazione> listaS = Societ√†.getListaStazioni();
+		List<Server.Entity.Stazione> listaS = Societ‡.getListaStazioni();
 		ModelloAutovettura m = modello.getAutovettura();
 		
 		int k;
@@ -96,7 +96,7 @@ public class GestoreDisponibilit√†{
 	public static boolean removeBatteria(Server.BusinessLogic.Batteria batteria, int IDstazione) {
 		
 		Server.Entity.Stazione s = new Server.Entity.Stazione();
-		if ( Societ√†.findStazione(s, IDstazione) == false) return false;
+		if ( Societ‡.findStazione(s, IDstazione) == false) return false;
 		Server.Entity.Batteria b = batteria.getBatteria();
 		
 		s.deleteBatteria(b);
@@ -114,7 +114,7 @@ public class GestoreDisponibilit√†{
 		Server.Entity.Batteria b = batteria.getBatteria();
 		Server.Entity.Stazione s = new Server.Entity.Stazione();
 		
-		if ( Societ√†.findStazione(s, IDstazione) == false) return false;
+		if ( Societ‡.findStazione(s, IDstazione) == false) return false;
 		int cicliNew = b.getCicliRicarica() - 1;
 		if(cicliNew > 0){
 			b.setCicliRicarica(cicliNew);

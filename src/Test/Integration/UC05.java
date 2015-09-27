@@ -4,12 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;
 import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
-import Server.Entity.PopulateTestDatabase;
 import Server.RMIInterface.Autovettura;
 import Server.RMIInterface.Stazione;
 
