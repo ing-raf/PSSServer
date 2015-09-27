@@ -13,6 +13,7 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
@@ -40,6 +41,8 @@ public class FinestraSostituzione {
 	private DefaultListModel<String> listaD;
 	private DefaultListModel<String> listaD1;
 	private DefaultListModel<String> listaD2;
+	private JProgressBar pbar;
+	private JFrame progress;
 
 
 	
@@ -219,11 +222,15 @@ public class FinestraSostituzione {
 									listaD1.addElement(((Batteria) output.get(i)).getID()+", "+((Batteria) output.get(i)).getCosto());
 								}
 								list_1.addMouseListener(new MouseAdapter() {
+									
+
 									@Override
 									public void mouseClicked(MouseEvent e1) {
 										try {
 											if(cr.startInstallazione(list_1.getSelectedIndex()) == true){
-												JOptionPane.showMessageDialog(null,"Installazione avviata!","Sostituzione Batteria", JOptionPane.INFORMATION_MESSAGE);
+												JOptionPane.showMessageDialog(null,"Installazione completata!","Sostituzione Batteria", JOptionPane.INFORMATION_MESSAGE);
+												frmMenuDiSostituzione.dispose();
+												InterfacciaClienteNonRegistrato.idleScreen();
 											}
 										} catch (RemoteException e) {
 										e.printStackTrace();
@@ -232,11 +239,11 @@ public class FinestraSostituzione {
 								});
 						} else if ( output.get(0) instanceof Stazione) {
 							for(int i=0; i<output.size(); i++){
-								listaD1.addElement(((Stazione) output.get(i)).getNome()+", "+((Stazione) output.get(i)).getIndirizzo());
+								listaD2.addElement(((Stazione) output.get(i)).getNome()+", "+((Stazione) output.get(i)).getIndirizzo());
 							}
 							JOptionPane.showMessageDialog(null,scroll,"Batterie terminate!", JOptionPane.INFORMATION_MESSAGE);
 							frmMenuDiSostituzione.dispose();
-							System.exit(0);
+							InterfacciaClienteNonRegistrato.idleScreen();
 						}
 					}
 

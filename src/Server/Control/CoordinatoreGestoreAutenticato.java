@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreBatterie;
-import Server.BusinessLogic.GestoreDisponibilit√†;
+import Server.BusinessLogic.GestoreDisponibilit‡;
 import Server.BusinessLogic.GestoreSostituzioni;
 import Server.BusinessLogic.ValidazioneBadge;
 import Server.RMIInterface.*;
@@ -46,7 +46,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * @param modelloautovettura
 	 */
 	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) throws Exception {
-		return GestoreDisponibilit√†.addBatteria(this.IDStazione, IDbatteria, costosostituzione, maxcicliricarica, this.lastElenco.get(modelloautovettura) );
+		return GestoreDisponibilit‡.addBatteria(this.IDStazione, IDbatteria, costosostituzione, maxcicliricarica, this.lastElenco.get(modelloautovettura) );
 
 	}
 
@@ -101,7 +101,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	 * @param modello
 	 */
 	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception {
-		ArrayList<Server.BusinessLogic.Stazione> listaStazioni = GestoreDisponibilit√†.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello),  this.IDStazione);
+		ArrayList<Server.BusinessLogic.Stazione> listaStazioni = GestoreDisponibilit‡.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello),  this.IDStazione);
 		
 		ArrayList<Stazione> elencoStazioni = new ArrayList<Stazione> (listaStazioni.size() );
 		

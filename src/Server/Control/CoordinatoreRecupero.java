@@ -3,7 +3,7 @@ package Server.Control;
 import java.rmi.ConnectIOException;
 
 import Server.BusinessLogic.GestoreBatterie;
-import Server.BusinessLogic.GestoreDisponibilit√†;
+import Server.BusinessLogic.GestoreDisponibilit‡;
 import SistemaSostituzione.RMIDeviceInterface.ServizidiSostituzione;
 
 public class CoordinatoreRecupero implements Runnable {
@@ -32,11 +32,11 @@ public class CoordinatoreRecupero implements Runnable {
 				if (this.stub.rechargeBatteria( this.batteria.getID() ) == false )
 					throw new ConnectIOException("Riscontrato un problema durante la ricarica della batteria");
 				
-				GestoreDisponibilit√†.addBatteriaDisponibili(this.batteria, this.idStazione);
+				GestoreDisponibilit‡.addBatteriaDisponibili(this.batteria, this.idStazione);
 					
 			} else {
 				
-				GestoreDisponibilit√†.removeBatteria(this.batteria, this.idStazione);
+				GestoreDisponibilit‡.removeBatteria(this.batteria, this.idStazione);
 				if (this.stub.discardBatteria( this.batteria.getID() ) == false)
 					throw new ConnectIOException("Riscontrato un problema durante lo scarto della batteria");
 				

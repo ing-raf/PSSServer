@@ -10,7 +10,7 @@ import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
 import Server.RMIInterface.Autovettura;
 import Server.RMIInterface.Stazione;
 
-public class UC05Disponibilit√†RemotaBatterie {
+public class UC05Disponibilit‡RemotaBatterie {
 
 	private static final int IDSTAZIONE = 1;
 

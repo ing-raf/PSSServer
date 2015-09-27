@@ -112,6 +112,7 @@ public class InterfacciaClienteRegistrato {
 				frmMenuCliente.setVisible(false);
 				InterfacciaClienteNonRegistrato.idleScreen();
 				frmMenuCliente.dispose();
+				System.exit(0);
 			
 			}
 		});
