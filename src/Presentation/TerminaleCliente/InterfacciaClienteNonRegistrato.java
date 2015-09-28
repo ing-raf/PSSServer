@@ -19,7 +19,7 @@ import java.awt.event.MouseEvent;
 public class InterfacciaClienteNonRegistrato {
 
 	private JFrame frmStazioneDiSostituzione;
-	private static String Host;
+	private static String Host = "192.168.43.61";
 	
 
 	/**

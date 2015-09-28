@@ -25,6 +25,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Batteria;
+import Server.RMIInterface.Install_Outcome;
 import Server.RMIInterface.Stazione;
 
 import java.awt.event.ActionListener;
@@ -37,7 +38,7 @@ import java.rmi.RemoteException;
 public class FinestraSostituzione {
 
 	private static String Host;
-	private JFrame frmMenuDiSostituzione;
+	private static JFrame frmMenuDiSostituzione;
 	private DefaultListModel<String> listaD;
 	private DefaultListModel<String> listaD1;
 	private DefaultListModel<String> listaD2;
@@ -169,16 +170,25 @@ public class FinestraSostituzione {
 		ArrayList<? extends AutovetturaCliente> autovetture = null;
 		autovetture = cr.retrieveAutovetture();
 		
+		
+		
 		if ( autovetture.isEmpty() ) {
 			
 			JOptionPane.showMessageDialog(null,"Nessuna autovettura presente!","Attenzione!", JOptionPane.WARNING_MESSAGE);
+
 			InterfacciaClienteNonRegistrato.idleScreen();
+
 			frmMenuDiSostituzione.dispose();
+			InterfacciaClienteNonRegistrato.idleScreen();
 			
 			
 		} else{
+
 			FinestraSostituzione window = new FinestraSostituzione();
 			window.frmMenuDiSostituzione.setVisible(true);
+
+			frmMenuDiSostituzione.setVisible(true);
+
 			for(int i=0; i<autovetture.size(); i++){
 				listaD.addElement(autovetture.get(i).getFornitore()+", "+autovetture.get(i).getModello()+", "+autovetture.get(i).getNumeroTarga());
 			}
@@ -208,7 +218,9 @@ public class FinestraSostituzione {
         
 		
 		list.addMouseListener(new MouseAdapter() {
+
 			boolean ok = false;
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -224,7 +236,7 @@ public class FinestraSostituzione {
 					frmMenuDiSostituzione.setVisible(false);
 					InterfacciaClienteNonRegistrato.idleScreen();
 					frmMenuDiSostituzione.dispose();
-					//System.exit(0);
+					
 					
 				} 
 				
@@ -237,16 +249,28 @@ public class FinestraSostituzione {
 									listaD1.addElement(((Batteria) output.get(i)).getID()+", "+((Batteria) output.get(i)).getCosto());
 								}
 								ok  = true;
+
 								btnOk.addMouseListener(new MouseAdapter() {
 									
 
 									@Override
 									public void mouseClicked(MouseEvent e1) {
 										try {
-											if(cr.startInstallazione(list_1.getSelectedIndex()) == true){
+											if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.OK){
 												JOptionPane.showMessageDialog(null,"Installazione completata!","Sostituzione Batteria", JOptionPane.INFORMATION_MESSAGE);
-												frmMenuDiSostituzione.dispose();
+												frmMenuDiSostituzione.setVisible(false);
 												InterfacciaClienteNonRegistrato.idleScreen();
+												frmMenuDiSostituzione.dispose();
+											} else if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.NO_MONEY){
+												JOptionPane.showMessageDialog(null,"Credito residuo insufficiente!","Attenzione!", JOptionPane.ERROR_MESSAGE);
+												frmMenuDiSostituzione.setVisible(false);
+												InterfacciaClienteNonRegistrato.idleScreen();
+												frmMenuDiSostituzione.dispose();
+											} else if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.SUBST_PROBLEM){
+												JOptionPane.showMessageDialog(null,"Errore nella sostituzione!","Attenzione!", JOptionPane.ERROR_MESSAGE);
+												frmMenuDiSostituzione.setVisible(false);
+												InterfacciaClienteNonRegistrato.idleScreen();
+												frmMenuDiSostituzione.dispose();
 											}
 										} catch (RemoteException e) {
 										e.printStackTrace();
