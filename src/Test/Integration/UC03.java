@@ -53,8 +53,8 @@ public class UC03 {
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
-			if ( client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) == false) 
-				fail(idTest + " riuscito");
+			assertNotEquals(idTest + " riuscito", true, client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) );
+			
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
