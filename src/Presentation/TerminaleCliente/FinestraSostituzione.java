@@ -38,7 +38,7 @@ import java.rmi.RemoteException;
 public class FinestraSostituzione {
 
 	private static String Host;
-	private static JFrame frmMenuDiSostituzione;
+	//private static JFrame frmMenuDiSostituzione;
 	private DefaultListModel<String> listaD;
 	private DefaultListModel<String> listaD1;
 	private DefaultListModel<String> listaD2;
@@ -58,8 +58,8 @@ public class FinestraSostituzione {
 			public void run() {
 				try {
 					FinestraSostituzione window = new FinestraSostituzione();
-					FinestraSostituzione.setHost(host);
-					window.frmMenuDiSostituzione.setVisible(false);
+					window.setHost(host);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,7 +80,7 @@ public class FinestraSostituzione {
 	 * @throws Exception 
 	 */
 	private void initialize() throws Exception {
-		frmMenuDiSostituzione = new JFrame();
+		JFrame frmMenuDiSostituzione = new JFrame();
 		
 		frmMenuDiSostituzione.setIconImage(Toolkit.getDefaultToolkit().getImage(FinestraSostituzione.class.getResource("/Presentation/TerminaleCliente/icon/ic_launcher.png")));
 		frmMenuDiSostituzione.setTitle("Menu di sostituzione");
@@ -168,27 +168,24 @@ public class FinestraSostituzione {
 		listaD.removeAllElements();
 		
 		ArrayList<? extends AutovetturaCliente> autovetture = null;
-		autovetture = cr.retrieveAutovetture();
 		
+		try{
+		autovetture = cr.retrieveAutovetture();
+		}catch(RemoteException e){
+			e.printStackTrace();
+		}
 		
 		
 		if ( autovetture.isEmpty() ) {
 			
 			JOptionPane.showMessageDialog(null,"Nessuna autovettura presente!","Attenzione!", JOptionPane.WARNING_MESSAGE);
-
+			frmMenuDiSostituzione.setVisible(false);
 			InterfacciaClienteNonRegistrato.idleScreen();
-
 			frmMenuDiSostituzione.dispose();
-			InterfacciaClienteNonRegistrato.idleScreen();
-			
+	
 			
 		} else{
-
-			FinestraSostituzione window = new FinestraSostituzione();
-			window.frmMenuDiSostituzione.setVisible(true);
-
 			frmMenuDiSostituzione.setVisible(true);
-
 			for(int i=0; i<autovetture.size(); i++){
 				listaD.addElement(autovetture.get(i).getFornitore()+", "+autovetture.get(i).getModello()+", "+autovetture.get(i).getNumeroTarga());
 			}
