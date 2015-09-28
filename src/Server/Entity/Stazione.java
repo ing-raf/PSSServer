@@ -79,8 +79,6 @@ public class Stazione {
 		trovato = (Stazione) session.get(Stazione.class, cod) ; 
 					
 		session.getTransaction().commit();	
-		
-		session.getTransaction().rollback();
 		session.close();
 		
 		
@@ -104,7 +102,6 @@ public class Stazione {
 		session.update(this);
 		
 		session.getTransaction().commit();	
-		session.getTransaction().rollback();
 		session.close();
 	
 		return this;
