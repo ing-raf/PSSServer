@@ -1,7 +1,5 @@
 package Server.Control;
 
-import java.rmi.RemoteException;
-
 import Server.BusinessLogic.ValidazioneBadge;
 import Server.RMIInterface.Install_Outcome;
 
@@ -25,6 +23,9 @@ public class NonAutenticato extends Stato {
 	
 	public Install_Outcome startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) {
 		return Install_Outcome.NO_VALIDATE;
+	}
+	
+	public void logOut() {		
 	}
 
 }

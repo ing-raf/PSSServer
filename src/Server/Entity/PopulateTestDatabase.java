@@ -358,7 +358,7 @@ public class PopulateTestDatabase {
 		
 		if (auto != null){
 			Sostituzione s = new Sostituzione ();
-			s = auto.getLastRicambio();
+			s = auto.getLastRicambio();		
 			return s.getBatteria();		
 		}
 		return null;
