@@ -58,7 +58,7 @@ public class FinestraSostituzione {
 				try {
 					FinestraSostituzione window = new FinestraSostituzione();
 					FinestraSostituzione.setHost(host);
-					window.frmMenuDiSostituzione.setVisible(true);
+					window.frmMenuDiSostituzione.setVisible(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -86,11 +86,10 @@ public class FinestraSostituzione {
 		frmMenuDiSostituzione.setBounds(100, 100, 487, 304);
 		frmMenuDiSostituzione.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		
+		
 		JButton btnOk = new JButton("Conferma sostituzione");
-		btnOk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		
 		
 		JLabel lblSelezionareUnautovettura = new JLabel("Selezionare un'autovettura");
 		lblSelezionareUnautovettura.setFont(new Font("Maiandra GD", Font.PLAIN, 14));
@@ -173,13 +172,13 @@ public class FinestraSostituzione {
 		if ( autovetture.isEmpty() ) {
 			
 			JOptionPane.showMessageDialog(null,"Nessuna autovettura presente!","Attenzione!", JOptionPane.WARNING_MESSAGE);
-			frmMenuDiSostituzione.setVisible(false);
 			InterfacciaClienteNonRegistrato.idleScreen();
 			frmMenuDiSostituzione.dispose();
 			
 			
 		} else{
-		
+			FinestraSostituzione window = new FinestraSostituzione();
+			window.frmMenuDiSostituzione.setVisible(true);
 			for(int i=0; i<autovetture.size(); i++){
 				listaD.addElement(autovetture.get(i).getFornitore()+", "+autovetture.get(i).getModello()+", "+autovetture.get(i).getNumeroTarga());
 			}
@@ -206,8 +205,10 @@ public class FinestraSostituzione {
         scroll.setViewportView(lista);
         
         
+        
 		
 		list.addMouseListener(new MouseAdapter() {
+			boolean ok = false;
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -229,11 +230,14 @@ public class FinestraSostituzione {
 				
 				else {
 					
-						if ( output.get(0) instanceof Batteria) {
+						
+					
+						if ( (output.get(0) instanceof Batteria) && (ok == false)) {
 								for(int i=0; i<output.size(); i++){
 									listaD1.addElement(((Batteria) output.get(i)).getID()+", "+((Batteria) output.get(i)).getCosto());
 								}
-								list_1.addMouseListener(new MouseAdapter() {
+								ok  = true;
+								btnOk.addMouseListener(new MouseAdapter() {
 									
 
 									@Override
