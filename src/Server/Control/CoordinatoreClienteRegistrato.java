@@ -67,6 +67,11 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 	public void startValidazione(int codice) {
 		this.stato.startValidazione(this, codice);
 	}
+	
+	@Override
+	public void logOut() throws RemoteException {
+		this.stato.logOut(this);
+	}
 
 	int getIDStazione() {
 		return this.IDstazione;

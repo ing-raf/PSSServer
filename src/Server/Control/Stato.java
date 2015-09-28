@@ -7,7 +7,7 @@ import Server.RMIInterface.Install_Outcome;
 
 public abstract class Stato {
 
-	ArrayList<? extends AutovetturaCliente> retrieveAutovetture(CoordinatoreClienteRegistrato coordinatore) {
+	public ArrayList<? extends AutovetturaCliente> retrieveAutovetture(CoordinatoreClienteRegistrato coordinatore) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -17,7 +17,7 @@ public abstract class Stato {
 	 * @param elencoBatterie
 	 * @param elencoStazioni
 	 */
-	ArrayList<?> retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
+	public ArrayList<?> retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -27,11 +27,11 @@ public abstract class Stato {
 	 * @param indiceBatteria
 	 * @throws RemoteException 
 	 */
-	Install_Outcome startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
-		return Install_Outcome.NO_VALIDATE;
+	public Install_Outcome startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
+		throw new UnsupportedOperationException();
 	}
 
-	boolean verificaEsitoValidazione() {
+	public boolean verificaEsitoValidazione() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -39,7 +39,11 @@ public abstract class Stato {
 	 * 
 	 * @param codice
 	 */
-	void startValidazione(CoordinatoreClienteRegistrato coordinatore, int codice) {		
+	public void startValidazione(CoordinatoreClienteRegistrato coordinatore, int codice) {		
+		throw new UnsupportedOperationException();
+	}
+	
+	public void logOut(CoordinatoreClienteRegistrato coordinatore) {
 		throw new UnsupportedOperationException();
 	}
 

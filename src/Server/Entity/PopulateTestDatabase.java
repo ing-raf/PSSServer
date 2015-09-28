@@ -353,7 +353,9 @@ public class PopulateTestDatabase {
 	
 	public static Batteria testSostituzione (String targa){
 		AutovetturaCompatibile auto = new AutovetturaCompatibile ();
+		
 		auto.getAuto(targa);
+		
 		if (auto != null){
 			Sostituzione s = new Sostituzione ();
 			s = auto.getLastRicambio();

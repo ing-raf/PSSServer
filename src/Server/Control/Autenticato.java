@@ -143,6 +143,11 @@ public class Autenticato extends Stato {
 		return true;
 	}
 	
+	@Override
+	public void logOut(CoordinatoreClienteRegistrato coordinatore) {
+		coordinatore.setStato( new NonAutenticato() );
+	}
+	
 	private void startDeviceConnection(String hostname, int port) throws RemoteException {
 		Registry registry = LocateRegistry.getRegistry(hostname, port);
 		try {
