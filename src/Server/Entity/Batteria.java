@@ -1,14 +1,8 @@
 package Server.Entity;
 
 import javax.persistence.*;
-import javax.transaction.Transaction;
-
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
-import org.hibernate.exception.ConstraintViolationException;
-import org.hibernate.metamodel.source.MappingException;
 
 
 
@@ -79,20 +73,13 @@ public class Batteria {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
-		try {
-			session.beginTransaction();
+		session.beginTransaction();
 
-			session.update(this);
+		session.update(this);
 		
-			session.getTransaction().commit();	
-		} catch (Exception e) {
-			session.getTransaction().rollback();
-			throw e;
-		} finally {
-			session.close();
-		}
-
-		
+		session.getTransaction().commit();	
+		session.close();
+	
 		return this;
 	}
 	
@@ -141,19 +128,12 @@ public class Batteria {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
-		try {
-			session.beginTransaction();
+		session.beginTransaction();
 
-			session.delete(b);
+		session.delete(b);
 			
-			session.getTransaction().commit();	
-		} catch (Exception ceccis) {
-			session.getTransaction().rollback();
-			throw ceccis;
-		} finally {	
-			session.close();
-			
-		}
+		session.getTransaction().commit();	
+		session.close();
 		
 	}
 	
