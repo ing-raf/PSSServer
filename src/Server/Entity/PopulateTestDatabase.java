@@ -350,6 +350,17 @@ public class PopulateTestDatabase {
 		return null;
 		
 	}
+	
+	public static Batteria testSostituzione (String targa){
+		AutovetturaCompatibile auto = new AutovetturaCompatibile ();
+		auto.getAuto(targa);
+		if (auto != null){
+			Sostituzione s = new Sostituzione ();
+			s = auto.getLastRicambio();
+			return s.getBatteria();		
+		}
+		return null;
+	}
 }
 
 
