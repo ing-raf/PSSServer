@@ -1,6 +1,5 @@
 package Server.Control;
 
-import java.rmi.ConnectIOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -13,6 +12,7 @@ import Server.BusinessLogic.GestoreAutovetture;
 import Server.BusinessLogic.GestoreDisponibilita;
 import Server.BusinessLogic.GestoreSostituzioni;
 import Server.BusinessLogic.ValidazioneBadge;
+import Server.RMIInterface.Install_Outcome;
 import SistemaSostituzione.RMIDeviceInterface.ServizidiSostituzione;
 
 public class Autenticato extends Stato {
@@ -98,19 +98,44 @@ public class Autenticato extends Stato {
 	 */
 	
 	@Override
-	public boolean startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
-		this.startDeviceConnection(coordinatore.getHostname(), coordinatore.getPortSostituzione()) ;
-		if ( this.removeBatteria() == false) throw new ConnectIOException("Riscontrato un problema durante la rimozione della vecchia batteria");
-		if ( this.installBatteria(indiceBatteria) == false ) throw new ConnectIOException("Riscontrato un problema durante l'installazione della batteria");
-		Server.BusinessLogic.Batteria rimossa = GestoreSostituzioni.updateSostituzione( (Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(this.indiceAutovettura), coordinatore.getIDStazione(), (Server.BusinessLogic.Batteria) this.availableBatterie.get(indiceBatteria) );
+	public Install_Outcome startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
+		float costo = this.availableBatterie.get(indiceBatteria).getCosto();
+		Install_Outcome outcome;
 		
-		CoordinatoreRecupero threadRecupero = new CoordinatoreRecupero(rimossa, coordinatore.getIDStazione(), this.sistemaSostituzione);		
-		ExecutorService threadExecutor = Executors.newFixedThreadPool(1);	
-		threadExecutor.execute(threadRecupero);		
-		threadExecutor.shutdown();
+		if ( this.badgeAutenticato.verifyCredito(costo) ) {
+		
+			this.startDeviceConnection(coordinatore.getHostname(), coordinatore.getPortSostituzione()) ;
+			if ( this.removeBatteria() == true) {
+
+				if ( this.installBatteria(indiceBatteria) == true ) {
+					Server.BusinessLogic.Batteria rimossa = GestoreSostituzioni.updateSostituzione( (Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(this.indiceAutovettura), coordinatore.getIDStazione(), (Server.BusinessLogic.Batteria) this.availableBatterie.get(indiceBatteria) );
+				
+					CoordinatoreRecupero threadRecupero = new CoordinatoreRecupero(rimossa, coordinatore.getIDStazione(), this.sistemaSostituzione);		
+					ExecutorService threadExecutor = Executors.newFixedThreadPool(1);	
+					threadExecutor.execute(threadRecupero);		
+					threadExecutor.shutdown();
+			
+					outcome = Install_Outcome.OK;
+					
+				} else {
+					outcome = Install_Outcome.SUBST_PROBLEM;
+				}
+				
+			} else {
+				outcome = Install_Outcome.SUBST_PROBLEM;
+			}
+			
+		} else {		
+			outcome = Install_Outcome.NO_MONEY;
+		}
 		
 		coordinatore.setStato( new NonAutenticato() );
-		return true;
+		
+		return outcome;
+		
+			
+	
+
 	}
 
 	@Override

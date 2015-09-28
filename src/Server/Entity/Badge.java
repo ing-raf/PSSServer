@@ -52,6 +52,12 @@ public class Badge {
 		
 	}
 	
+	public Badge (int codice, float creditoResiduo, Cliente possessore) {
+		this.codice = codice;
+		this.creditoResiduo = creditoResiduo;
+		this.possessore = possessore;
+		this.salva();
+	}
 
 
 	public Badge getBadge (int cod){

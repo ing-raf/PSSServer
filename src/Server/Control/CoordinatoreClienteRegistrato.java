@@ -52,7 +52,7 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 	 * @param indiceBatteria
 	 * @throws RemoteException 
 	 */
-	public boolean startInstallazione(int indiceBatteria) throws RemoteException {
+	public Install_Outcome startInstallazione(int indiceBatteria) throws RemoteException {
 		return this.stato.startInstallazione(this, indiceBatteria);
 	}
 

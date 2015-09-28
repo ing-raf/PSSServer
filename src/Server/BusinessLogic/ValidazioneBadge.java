@@ -19,5 +19,14 @@ public class ValidazioneBadge {
 	   this.badgeValidato = new Badge ();
 	  return Societa.findBadge(this.badgeValidato, codice);
 	}
+	
+	public boolean verifyCredito (float costo) {
+		if (this.badgeValidato.getCredito() < costo) return false;
+		else return true;
+	}
+	
+	public void debitBattery (float costo) {
+		this.badgeValidato.setCredito(this.badgeValidato.getCredito() - costo);
+	}
 
 }
