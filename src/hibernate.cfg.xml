@@ -11,7 +11,6 @@
         <!-- Credenziali -->
         <property name="hibernate.connection.username">root</property>
         <property name="connection.password">Pipp0</property>
-        
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
         

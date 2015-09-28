@@ -3,9 +3,11 @@ package Server.Control;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import Server.RMIInterface.Install_Outcome;
+
 public abstract class Stato {
 
-	ArrayList<? extends AutovetturaCliente> retrieveAutovetture() {
+	ArrayList<? extends AutovetturaCliente> retrieveAutovetture(CoordinatoreClienteRegistrato coordinatore) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -25,8 +27,8 @@ public abstract class Stato {
 	 * @param indiceBatteria
 	 * @throws RemoteException 
 	 */
-	boolean startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
-		throw new UnsupportedOperationException();
+	Install_Outcome startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
+		return Install_Outcome.NO_VALIDATE;
 	}
 
 	boolean verificaEsitoValidazione() {
