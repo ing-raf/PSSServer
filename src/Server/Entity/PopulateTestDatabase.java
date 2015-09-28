@@ -70,7 +70,7 @@ public class PopulateTestDatabase {
 		batt[0].setID(1);
 		batt[0].setCostoSostituzione(610.21f);
 		batt[0].setCicliRicarica(121);
-		batt[0].setModello(ma[2]);
+		batt[0].setModello(ma[1]);
 	
 		batt[1] = new Batteria();
 		batt[1].setID(2);
@@ -210,28 +210,11 @@ public class PopulateTestDatabase {
 		
 		Badge[] bg = new Badge[4];
 		
-		bg[0] = new Badge();
-		bg[0].setCodice(-3);
-		bg[0].setCredito(50.00f);
-		bg[0].setCliente(cl[2]);
-		
-		bg[1] = new Badge();
-		bg[1].setCodice(0);
-		bg[1].setCredito(18.21f);
-		bg[1].setCliente(cl[3]);
-		
-		bg[2] = new Badge();
-		bg[2].setCodice(1);
-		bg[2].setCredito(10.00f);
-		bg[2].setCliente(cl[1]);
-		
-		bg[3] = new Badge();
-		bg[3].setCodice(5);
-		bg[3].setCredito(1000.00f);
-		bg[3].setCliente(cl[0]);
-		
-		for (Badge b : bg) b.salva();
-		
+		bg[0] = new Badge(-3, 50.00f, cl[2]);	
+		bg[1] = new Badge(0, 18.21f, cl[3]);		
+		bg[2] = new Badge(1, 10.00f, cl[1]);		
+		bg[3] = new Badge(5, 1000.00f, cl[0]);
+
 		Sostituzione[] sost = new Sostituzione[7];
 		Calendar[] scal = new Calendar[7];
 		

@@ -6,6 +6,7 @@ import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 import Server.RMIInterface.AutovetturaCliente;
+import Server.RMIInterface.Install_Outcome;
 import Server.RMIInterface.ServiziCliente;
 
 public class ClienteRegistratoClientRMI {
@@ -27,7 +28,7 @@ public class ClienteRegistratoClientRMI {
 		return this.stub.retrieveAutovetture();
 	}
 
-	public boolean startInstallazione(int indicebatteria) throws RemoteException {
+	public Install_Outcome startInstallazione(int indicebatteria) throws RemoteException {
 		return this.stub.startInstallazione(indicebatteria);
 	}
 

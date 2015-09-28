@@ -51,10 +51,10 @@ public class UC03 {
 			
 			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
 			
-			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
+			assertFalse(idTest + " riuscito", modelli.isEmpty() );
 			
-			if ( client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) == false) 
-				fail(idTest + " riuscito");
+			assertTrue(idTest + " riuscito", client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) );
+			
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}

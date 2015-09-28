@@ -19,7 +19,7 @@ public interface ServiziCliente extends Remote {
 	 * 
 	 * @param indicebatteria
 	 */
-	boolean startInstallazione(int indicebatteria) throws RemoteException;
+	Install_Outcome startInstallazione(int indicebatteria) throws RemoteException;
 
 	boolean verificaEsitoValidazione() throws RemoteException;
 
