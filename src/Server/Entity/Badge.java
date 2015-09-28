@@ -42,6 +42,7 @@ public class Badge {
 	
 	public void setCredito(float cred){
 		this.creditoResiduo = cred;
+		this.update();
 	}
 	
 	void setCliente (Cliente p){

@@ -9,6 +9,7 @@ import Presentation.TerminaleCliente.BadgeClientRMI;
 import Presentation.TerminaleCliente.ClienteRegistratoClientRMI;
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Batteria;
+import Server.RMIInterface.Install_Outcome;
 import Server.RMIInterface.Stazione;
 
 public class UC01SostituzioneBatteria {
@@ -124,7 +125,7 @@ public class UC01SostituzioneBatteria {
 				}
 			
 				try {
-					if (client.startInstallazione(indiceBatteria) == false)
+					if (client.startInstallazione(indiceBatteria) != Install_Outcome.OK)
 						throw new RemoteException("Installazione non avvenuta");
 				} catch (RemoteException e) {
 					System.err.println("Eccezione durante l'esecuzione del messaggio I.4.2");
