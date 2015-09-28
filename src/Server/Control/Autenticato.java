@@ -126,7 +126,7 @@ public class Autenticato extends Stato {
 				outcome = Install_Outcome.SUBST_PROBLEM;
 			}
 			
-		} else {		
+		} else {	
 			outcome = Install_Outcome.NO_MONEY;
 		}
 		

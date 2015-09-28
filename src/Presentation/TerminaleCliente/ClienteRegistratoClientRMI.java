@@ -29,7 +29,9 @@ public class ClienteRegistratoClientRMI {
 	}
 
 	public Install_Outcome startInstallazione(int indicebatteria) throws RemoteException {
-		return this.stub.startInstallazione(indicebatteria);
+		Install_Outcome outcome = this.stub.startInstallazione(indicebatteria);
+		return outcome;
+		
 	}
 
 	public boolean verificaEsitoValidazione() throws RemoteException {

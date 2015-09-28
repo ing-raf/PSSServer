@@ -84,7 +84,6 @@ public class Badge {
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		System.err.println("sto aggiornando");
 		session.update(this);
 		
 		session.getTransaction().commit();		

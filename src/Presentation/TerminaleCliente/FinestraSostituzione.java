@@ -207,7 +207,7 @@ public class FinestraSostituzione {
         listaD2.removeAllElements();
         
         JPanel pannello = new JPanel();
-        JLabel staz = new JLabel("Stazioni con disponibilità:");
+        JLabel staz = new JLabel("Stazioni con disponibilitï¿½:");
         JScrollPane scroll = new JScrollPane(lista);
         JViewport jv1 = new JViewport();
         jv1.setView(staz);
@@ -260,8 +260,10 @@ public class FinestraSostituzione {
 
 									@Override
 									public void mouseClicked(MouseEvent e1) {
+
 										try {
-											if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.OK){
+											Install_Outcome outcome = cr.startInstallazione(list_1.getSelectedIndex());
+											if(outcome == Install_Outcome.OK){
 												JOptionPane.showMessageDialog(null,"Installazione completata!","Sostituzione Batteria", JOptionPane.INFORMATION_MESSAGE);
 												frmMenuDiSostituzione.setVisible(false);
 												
@@ -273,7 +275,7 @@ public class FinestraSostituzione {
 												JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 												InterfacciaClienteNonRegistrato.idleScreen();
 												frmMenuDiSostituzione.dispose();
-											} else if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.NO_MONEY){
+											} else if(outcome == Install_Outcome.NO_MONEY){
 												JOptionPane.showMessageDialog(null,"Credito residuo insufficiente!","Attenzione!", JOptionPane.ERROR_MESSAGE);
 												frmMenuDiSostituzione.setVisible(false);
 												try {
@@ -284,7 +286,7 @@ public class FinestraSostituzione {
 												JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 												InterfacciaClienteNonRegistrato.idleScreen();
 												frmMenuDiSostituzione.dispose();
-											} else if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.SUBST_PROBLEM){
+											} else if(outcome == Install_Outcome.SUBST_PROBLEM){
 												JOptionPane.showMessageDialog(null,"Errore nella sostituzione!","Attenzione!", JOptionPane.ERROR_MESSAGE);
 												frmMenuDiSostituzione.setVisible(false);
 												try {
