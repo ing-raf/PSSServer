@@ -28,5 +28,7 @@ public interface ServiziCliente extends Remote {
 	 * @param codice
 	 */
 	void startValidazione(int codice) throws RemoteException;
+	
+	void logOut() throws RemoteException;
 
 }

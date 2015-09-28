@@ -9,8 +9,10 @@ import org.junit.Test;
 
 import Presentation.TerminaleCliente.BadgeClientRMI;
 import Presentation.TerminaleCliente.ClienteRegistratoClientRMI;
+import Server.Entity.PopulateTestDatabase;
 import Server.RMIInterface.AutovetturaCliente;
-import Server.RMIInterface.Batteria;
+import Server.Entity.Badge;
+import Server.Entity.Batteria;
 import Server.RMIInterface.Install_Outcome;
 import Server.RMIInterface.Stazione;
 
@@ -24,6 +26,8 @@ public class UC01 {
 		final int codiceBadge = 5;
 		final int indiceAutovettura = 0;
 		final int indiceBatteria = 0;
+		final String targa = "DZ 120 FP";
+		final int codiceBatteria = 33;
 		
 		BadgeClientRMI clientBadge = null;
 		ClienteRegistratoClientRMI client = null;
@@ -85,9 +89,16 @@ public class UC01 {
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
 		}
-
 		
-//		fail("To be verified");
+		assertEquals (idTest + " riuscito", 1, PopulateTestDatabase.testSostituzione(targa).getID() );
+
+		Batteria vecchia = new Batteria();
+		
+		assertEquals (idTest + " riuscito", 77, vecchia.getBatteria(codiceBatteria) );
+		
+		Badge b = new Badge();
+		
+		assertEquals (idTest + " riuscito", 389.79 , b.getBadge(codiceBadge).getCredito(), 0.001f );
 		
 	}
 
@@ -100,6 +111,7 @@ public class UC01 {
 		final int codiceBadge = 0;
 		final int indiceAutovettura = 0;
 		final int indiceBatteria = 0;
+		final String targa = "CB 739 HJ";
 		
 		BadgeClientRMI clientBadge = null;
 		ClienteRegistratoClientRMI client = null;
@@ -161,9 +173,8 @@ public class UC01 {
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
 		}
-
 		
-//		fail("To be verified");
+		assertEquals (idTest + " riuscito", 1, PopulateTestDatabase.testSostituzione(targa).getID() );
 		
 	}
 	

@@ -25,7 +25,7 @@ public class AutovetturaCompatibile {
 	
 	}
 		
-	public void getAuto (String targa){
+	public AutovetturaCompatibile getAuto (String targa){
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -36,11 +36,13 @@ public class AutovetturaCompatibile {
 		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
+		if (trovato != null){
+			this.numeroTarga = trovato.getNumeroTarga();
+			this.modello = trovato.getModello();
+			this.sostituzione = trovato.getLastRicambio();
+		}
 		
-		this.numeroTarga = trovato.getNumeroTarga();
-		this.modello = trovato.getModello();
-		this.sostituzione = trovato.getLastRicambio();
-						
+		return trovato;
 		
 			}
 		

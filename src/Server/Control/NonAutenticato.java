@@ -1,6 +1,7 @@
 package Server.Control;
 
 import Server.BusinessLogic.ValidazioneBadge;
+import Server.RMIInterface.Install_Outcome;
 
 public class NonAutenticato extends Stato {
 
@@ -18,6 +19,13 @@ public class NonAutenticato extends Stato {
 		if ( cercaBadge.findCodiceBadge(codice) == true)
 			coordinatore.setStato( new Autenticato (cercaBadge) );
 			
+	}
+	
+	public Install_Outcome startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) {
+		return Install_Outcome.NO_VALIDATE;
+	}
+	
+	public void logOut() {		
 	}
 
 }
