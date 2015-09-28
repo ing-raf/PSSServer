@@ -25,7 +25,8 @@ public class NonAutenticato extends Stato {
 		return Install_Outcome.NO_VALIDATE;
 	}
 	
-	public void logOut() {		
+	@Override
+	public void logOut(CoordinatoreClienteRegistrato coordinatore) {		
 	}
 
 }

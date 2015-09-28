@@ -19,7 +19,7 @@ import Server.RMIInterface.Stazione;
 public class UC01 {
 
 	@Test
-	public void TC01() {
+	public void TC01() throws InterruptedException {
 		
 		final String idTest = "TC01";
 		final int idStazione = 3;
@@ -93,6 +93,8 @@ public class UC01 {
 		assertEquals (idTest + " riuscito", 1, PopulateTestDatabase.testSostituzione(targa).getID() );
 
 		Batteria vecchia = new Batteria();
+		
+		Thread.sleep(5*1000);
 		
 		assertEquals (idTest + " riuscito", 77, vecchia.getBatteria(codiceBatteria).getCicliRicarica() );
 		
