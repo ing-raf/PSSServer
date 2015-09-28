@@ -174,7 +174,7 @@ public class UC01 {
 			fail(idTest + " riuscito");
 		}
 		
-		assertEquals (idTest + " riuscito", 1, PopulateTestDatabase.testSostituzione(targa).getID() );
+		assertEquals (idTest + " riuscito", 32, PopulateTestDatabase.testSostituzione(targa).getID() );
 		
 	}
 	

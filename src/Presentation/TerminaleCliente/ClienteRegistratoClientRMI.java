@@ -35,5 +35,9 @@ public class ClienteRegistratoClientRMI {
 	public boolean verificaEsitoValidazione() throws RemoteException {
 		return this.stub.verificaEsitoValidazione();
 	}
+	
+	public void logOut() throws RemoteException {
+		this.stub.logOut();
+	}
 
 }
