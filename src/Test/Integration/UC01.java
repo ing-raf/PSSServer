@@ -76,7 +76,7 @@ public class UC01 {
 			
 			assertFalse(idTest + " riuscito", output.isEmpty() );
 			
-			assertTrue(idTest + " riuscito", output.get(0) instanceof Batteria);
+			assertTrue(idTest + " riuscito", output.get(0) instanceof Server.RMIInterface.Batteria );
 			
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
@@ -94,7 +94,7 @@ public class UC01 {
 
 		Batteria vecchia = new Batteria();
 		
-		assertEquals (idTest + " riuscito", 77, vecchia.getBatteria(codiceBatteria) );
+		assertEquals (idTest + " riuscito", 77, vecchia.getBatteria(codiceBatteria).getCicliRicarica() );
 		
 		Badge b = new Badge();
 		
@@ -160,7 +160,7 @@ public class UC01 {
 			
 			assertFalse(idTest + " riuscito", output.isEmpty() );
 			
-			assertTrue(idTest + " riuscito", output.get(0) instanceof Batteria);
+			assertTrue(idTest + " riuscito", output.get(0) instanceof Server.RMIInterface.Batteria);
 			
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
