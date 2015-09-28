@@ -256,6 +256,13 @@ public class FinestraSostituzione {
 											if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.OK){
 												JOptionPane.showMessageDialog(null,"Installazione completata!","Sostituzione Batteria", JOptionPane.INFORMATION_MESSAGE);
 												frmMenuDiSostituzione.setVisible(false);
+												
+												try {
+													InterfacciaBadgeCliente.ejectBadge();
+												} catch (Exception e) {
+													e.printStackTrace();
+												}
+												JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 												InterfacciaClienteNonRegistrato.idleScreen();
 												frmMenuDiSostituzione.dispose();
 											} else if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.NO_MONEY){
