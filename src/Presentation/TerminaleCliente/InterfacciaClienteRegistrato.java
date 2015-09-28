@@ -14,6 +14,8 @@ import javax.swing.JButton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
+
 import javax.swing.ImageIcon;
 
 public class InterfacciaClienteRegistrato {
@@ -110,10 +112,14 @@ public class InterfacciaClienteRegistrato {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				frmMenuCliente.setVisible(false);
-				InterfacciaClienteNonRegistrato.idleScreen();
+				try {
+					InterfacciaBadgeCliente.ejectBadge();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				frmMenuCliente.dispose();
-				System.exit(0);
-			
+				JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
+				InterfacciaClienteNonRegistrato.idleScreen();
 			}
 		});
 		frmMenuCliente.getContentPane().add(btnNewButton_3);

@@ -25,6 +25,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Batteria;
+import Server.RMIInterface.Install_Outcome;
 import Server.RMIInterface.Stazione;
 
 import java.awt.event.ActionListener;
@@ -37,7 +38,7 @@ import java.rmi.RemoteException;
 public class FinestraSostituzione {
 
 	private static String Host;
-	private JFrame frmMenuDiSostituzione;
+	//private static JFrame frmMenuDiSostituzione;
 	private DefaultListModel<String> listaD;
 	private DefaultListModel<String> listaD1;
 	private DefaultListModel<String> listaD2;
@@ -57,8 +58,8 @@ public class FinestraSostituzione {
 			public void run() {
 				try {
 					FinestraSostituzione window = new FinestraSostituzione();
-					FinestraSostituzione.setHost(host);
-					window.frmMenuDiSostituzione.setVisible(true);
+					window.setHost(host);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -79,18 +80,17 @@ public class FinestraSostituzione {
 	 * @throws Exception 
 	 */
 	private void initialize() throws Exception {
-		frmMenuDiSostituzione = new JFrame();
+		JFrame frmMenuDiSostituzione = new JFrame();
 		
 		frmMenuDiSostituzione.setIconImage(Toolkit.getDefaultToolkit().getImage(FinestraSostituzione.class.getResource("/Presentation/TerminaleCliente/icon/ic_launcher.png")));
 		frmMenuDiSostituzione.setTitle("Menu di sostituzione");
 		frmMenuDiSostituzione.setBounds(100, 100, 487, 304);
 		frmMenuDiSostituzione.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		
+		
 		JButton btnOk = new JButton("Conferma sostituzione");
-		btnOk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		
 		
 		JLabel lblSelezionareUnautovettura = new JLabel("Selezionare un'autovettura");
 		lblSelezionareUnautovettura.setFont(new Font("Maiandra GD", Font.PLAIN, 14));
@@ -168,18 +168,28 @@ public class FinestraSostituzione {
 		listaD.removeAllElements();
 		
 		ArrayList<? extends AutovetturaCliente> autovetture = null;
+		
+		try{
 		autovetture = cr.retrieveAutovetture();
+		}catch(RemoteException e){
+			e.printStackTrace();
+		}
+		
 		
 		if ( autovetture.isEmpty() ) {
 			
 			JOptionPane.showMessageDialog(null,"Nessuna autovettura presente!","Attenzione!", JOptionPane.WARNING_MESSAGE);
 			frmMenuDiSostituzione.setVisible(false);
+			try {
+				InterfacciaBadgeCliente.ejectBadge();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 			InterfacciaClienteNonRegistrato.idleScreen();
 			frmMenuDiSostituzione.dispose();
-			
-			
 		} else{
-		
+			frmMenuDiSostituzione.setVisible(true);
 			for(int i=0; i<autovetture.size(); i++){
 				listaD.addElement(autovetture.get(i).getFornitore()+", "+autovetture.get(i).getModello()+", "+autovetture.get(i).getNumeroTarga());
 			}
@@ -206,8 +216,12 @@ public class FinestraSostituzione {
         scroll.setViewportView(lista);
         
         
+        
 		
 		list.addMouseListener(new MouseAdapter() {
+
+			boolean ok = false;
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
@@ -221,28 +235,66 @@ public class FinestraSostituzione {
 					
 					JOptionPane.showMessageDialog(null,"Batteria non presente in alcuna stazione!","Attenzione!", JOptionPane.WARNING_MESSAGE);
 					frmMenuDiSostituzione.setVisible(false);
+					try {
+						InterfacciaBadgeCliente.ejectBadge();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 					InterfacciaClienteNonRegistrato.idleScreen();
 					frmMenuDiSostituzione.dispose();
-					//System.exit(0);
-					
 				} 
 				
 				else {
 					
-						if ( output.get(0) instanceof Batteria) {
+						
+					
+						if ( (output.get(0) instanceof Batteria) && (ok == false)) {
 								for(int i=0; i<output.size(); i++){
 									listaD1.addElement(((Batteria) output.get(i)).getID()+", "+((Batteria) output.get(i)).getCosto());
 								}
-								list_1.addMouseListener(new MouseAdapter() {
+								ok  = true;
+
+								btnOk.addMouseListener(new MouseAdapter() {
 									
 
 									@Override
 									public void mouseClicked(MouseEvent e1) {
 										try {
-											if(cr.startInstallazione(list_1.getSelectedIndex()) == true){
+											if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.OK){
 												JOptionPane.showMessageDialog(null,"Installazione completata!","Sostituzione Batteria", JOptionPane.INFORMATION_MESSAGE);
-												frmMenuDiSostituzione.dispose();
+												frmMenuDiSostituzione.setVisible(false);
+												
+												try {
+													InterfacciaBadgeCliente.ejectBadge();
+												} catch (Exception e) {
+													e.printStackTrace();
+												}
+												JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 												InterfacciaClienteNonRegistrato.idleScreen();
+												frmMenuDiSostituzione.dispose();
+											} else if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.NO_MONEY){
+												JOptionPane.showMessageDialog(null,"Credito residuo insufficiente!","Attenzione!", JOptionPane.ERROR_MESSAGE);
+												frmMenuDiSostituzione.setVisible(false);
+												try {
+													InterfacciaBadgeCliente.ejectBadge();
+												} catch (Exception e) {
+													e.printStackTrace();
+												}
+												JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
+												InterfacciaClienteNonRegistrato.idleScreen();
+												frmMenuDiSostituzione.dispose();
+											} else if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.SUBST_PROBLEM){
+												JOptionPane.showMessageDialog(null,"Errore nella sostituzione!","Attenzione!", JOptionPane.ERROR_MESSAGE);
+												frmMenuDiSostituzione.setVisible(false);
+												try {
+													InterfacciaBadgeCliente.ejectBadge();
+												} catch (Exception e) {
+													e.printStackTrace();
+												}
+												JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
+												InterfacciaClienteNonRegistrato.idleScreen();
+												frmMenuDiSostituzione.dispose();
 											}
 										} catch (RemoteException e) {
 										e.printStackTrace();
@@ -255,6 +307,12 @@ public class FinestraSostituzione {
 							}
 							JOptionPane.showMessageDialog(null,scroll,"Batterie terminate!", JOptionPane.INFORMATION_MESSAGE);
 							frmMenuDiSostituzione.setVisible(false);
+							try {
+								InterfacciaBadgeCliente.ejectBadge();
+							} catch (Exception e1) {
+								e1.printStackTrace();
+							}
+							JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 							InterfacciaClienteNonRegistrato.idleScreen();
 							frmMenuDiSostituzione.dispose();
 						}

@@ -137,8 +137,10 @@ public class InterfacciaBadgeCliente {
 		frmStazioneRicambioBatterie.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{frmStazioneRicambioBatterie.getContentPane(), lblBenvenuto, lblInserireIlCodice, codice_badge, btnOk, label}));
 	}
 	
-	public void ejectBadge() {
+	public static void ejectBadge() throws Exception {
 		
+		ClienteRegistratoClientRMI cr = new ClienteRegistratoClientRMI(1,InterfacciaBadgeCliente.getHost());
+		cr.logOut();
 	}
 	
 	public static void setHost(String ip){
