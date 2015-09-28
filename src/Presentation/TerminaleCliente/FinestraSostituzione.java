@@ -180,10 +180,14 @@ public class FinestraSostituzione {
 			
 			JOptionPane.showMessageDialog(null,"Nessuna autovettura presente!","Attenzione!", JOptionPane.WARNING_MESSAGE);
 			frmMenuDiSostituzione.setVisible(false);
+			try {
+				InterfacciaBadgeCliente.ejectBadge();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 			InterfacciaClienteNonRegistrato.idleScreen();
 			frmMenuDiSostituzione.dispose();
-	
-			
 		} else{
 			frmMenuDiSostituzione.setVisible(true);
 			for(int i=0; i<autovetture.size(); i++){
@@ -231,10 +235,14 @@ public class FinestraSostituzione {
 					
 					JOptionPane.showMessageDialog(null,"Batteria non presente in alcuna stazione!","Attenzione!", JOptionPane.WARNING_MESSAGE);
 					frmMenuDiSostituzione.setVisible(false);
+					try {
+						InterfacciaBadgeCliente.ejectBadge();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 					InterfacciaClienteNonRegistrato.idleScreen();
 					frmMenuDiSostituzione.dispose();
-					
-					
 				} 
 				
 				else {
@@ -268,11 +276,23 @@ public class FinestraSostituzione {
 											} else if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.NO_MONEY){
 												JOptionPane.showMessageDialog(null,"Credito residuo insufficiente!","Attenzione!", JOptionPane.ERROR_MESSAGE);
 												frmMenuDiSostituzione.setVisible(false);
+												try {
+													InterfacciaBadgeCliente.ejectBadge();
+												} catch (Exception e) {
+													e.printStackTrace();
+												}
+												JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 												InterfacciaClienteNonRegistrato.idleScreen();
 												frmMenuDiSostituzione.dispose();
 											} else if(cr.startInstallazione(list_1.getSelectedIndex()) == Install_Outcome.SUBST_PROBLEM){
 												JOptionPane.showMessageDialog(null,"Errore nella sostituzione!","Attenzione!", JOptionPane.ERROR_MESSAGE);
 												frmMenuDiSostituzione.setVisible(false);
+												try {
+													InterfacciaBadgeCliente.ejectBadge();
+												} catch (Exception e) {
+													e.printStackTrace();
+												}
+												JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 												InterfacciaClienteNonRegistrato.idleScreen();
 												frmMenuDiSostituzione.dispose();
 											}
@@ -287,6 +307,12 @@ public class FinestraSostituzione {
 							}
 							JOptionPane.showMessageDialog(null,scroll,"Batterie terminate!", JOptionPane.INFORMATION_MESSAGE);
 							frmMenuDiSostituzione.setVisible(false);
+							try {
+								InterfacciaBadgeCliente.ejectBadge();
+							} catch (Exception e1) {
+								e1.printStackTrace();
+							}
+							JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 							InterfacciaClienteNonRegistrato.idleScreen();
 							frmMenuDiSostituzione.dispose();
 						}

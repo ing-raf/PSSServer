@@ -14,6 +14,8 @@ import javax.swing.JButton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.rmi.RemoteException;
+
 import javax.swing.ImageIcon;
 
 public class InterfacciaClienteRegistrato {
@@ -118,9 +120,6 @@ public class InterfacciaClienteRegistrato {
 				frmMenuCliente.dispose();
 				JOptionPane.showMessageDialog(null, "Espulsione badge!", "Esci", JOptionPane.INFORMATION_MESSAGE);
 				InterfacciaClienteNonRegistrato.idleScreen();
-				
-				
-			
 			}
 		});
 		frmMenuCliente.getContentPane().add(btnNewButton_3);
