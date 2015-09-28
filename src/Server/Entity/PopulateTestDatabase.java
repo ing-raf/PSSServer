@@ -70,7 +70,7 @@ public class PopulateTestDatabase {
 		batt[0].setID(1);
 		batt[0].setCostoSostituzione(610.21f);
 		batt[0].setCicliRicarica(121);
-		batt[0].setModello(ma[2]);
+		batt[0].setModello(ma[1]);
 	
 		batt[1] = new Batteria();
 		batt[1].setID(2);

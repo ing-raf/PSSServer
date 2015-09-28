@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public abstract class Stato {
 
-	ArrayList<? extends AutovetturaCliente> retrieveAutovetture() {
+	ArrayList<? extends AutovetturaCliente> retrieveAutovetture(CoordinatoreClienteRegistrato coordinatore) {
 		throw new UnsupportedOperationException();
 	}
 

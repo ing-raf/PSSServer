@@ -13,7 +13,7 @@ import Server.RMIInterface.Stazione;
 
 public class UC01SostituzioneBatteria {
 	
-	private static final int IDSTAZIONE = 1;
+	private static final int IDSTAZIONE = 3;
 	private static final int CODICEBADGE = 5;
 
 	public static void main(String[] args) throws Exception {
@@ -64,7 +64,7 @@ public class UC01SostituzioneBatteria {
 		}
 		
 		if ( autovetture.isEmpty() ) {
-			System.out.println("Nessun modello trovato");
+			System.out.println("Nessuna autovettura compatibile trovata");
 			System.exit(0);
 		}
 		

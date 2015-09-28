@@ -34,7 +34,7 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 }
 
 	public ArrayList<? extends AutovetturaCliente> retrieveAutovetture() {
-		return this.stato.retrieveAutovetture();
+		return this.stato.retrieveAutovetture(this);
 	}
 
 	/**

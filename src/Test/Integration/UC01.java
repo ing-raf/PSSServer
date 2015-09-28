@@ -20,7 +20,7 @@ public class UC01 {
 		final String idTest = "TC01";
 		final int idStazione = 3;
 		final int codiceBadge = 5;
-		final int indiceAutovettura = 3;
+		final int indiceAutovettura = 0;
 		final int indiceBatteria = 0;
 		
 		BadgeClientRMI clientBadge = null;
@@ -84,6 +84,84 @@ public class UC01 {
 			fail(idTest + " riuscito");
 		}
 
+		
+//		fail("To be verified");
+		
 	}
 
+	
+	@Test
+	public void TC02() {
+		
+		final String idTest = "TC02";
+		final int idStazione = 3;
+		final int codiceBadge = 0;
+		final int indiceAutovettura = 0;
+		final int indiceBatteria = 0;
+		
+		BadgeClientRMI clientBadge = null;
+		ClienteRegistratoClientRMI client = null;
+		
+		try {
+			 clientBadge = new BadgeClientRMI(idStazione, "localhost");
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+			 
+		try {
+			 client = new ClienteRegistratoClientRMI(idStazione, "localhost");
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			clientBadge.startValidazione(codiceBadge);
+		} catch (RemoteException e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			
+			assertTrue(idTest + " riuscito", client.verificaEsitoValidazione() );
+			
+		} catch (RemoteException e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			
+			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveAutovetture();
+			
+			assertFalse(idTest + " riuscito", autovetture.isEmpty() );
+			
+		} catch (RemoteException e) {
+			fail(idTest + " riuscito");
+		}
+		
+		ArrayList<?> output = null;
+		
+		try {
+			
+			output = client.retrieveBatterieCompatibili(indiceAutovettura);
+			
+			assertFalse(idTest + " riuscito", output.isEmpty() );
+			
+			assertTrue(idTest + " riuscito", output.get(0) instanceof Batteria);
+			
+		} catch (RemoteException e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			
+			assertFalse (idTest + " riuscito", client.startInstallazione(indiceBatteria) );
+			
+		} catch (RemoteException e) {
+			fail(idTest + " riuscito");
+		}
+
+		
+//		fail("To be verified");
+		
+	}
 }

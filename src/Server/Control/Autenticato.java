@@ -10,7 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import Server.BusinessLogic.GestoreAutovetture;
-import Server.BusinessLogic.GestoreDisponibilità;
+import Server.BusinessLogic.GestoreDisponibilita;
 import Server.BusinessLogic.GestoreSostituzioni;
 import Server.BusinessLogic.ValidazioneBadge;
 import SistemaSostituzione.RMIDeviceInterface.ServizidiSostituzione;
@@ -30,15 +30,21 @@ public class Autenticato extends Stato {
 	}
 
 	@Override
-	public ArrayList<? extends AutovetturaCliente> retrieveAutovetture() {
+	public ArrayList<? extends AutovetturaCliente> retrieveAutovetture(CoordinatoreClienteRegistrato coordinatore) {
 		this.lastElenco = GestoreAutovetture.retrieveListaAutovetture(this.badgeAutenticato);
 		
 		ArrayList<AutovetturaCliente> elencoAutovetture = new ArrayList<AutovetturaCliente>( this.lastElenco.size() );			
 		
-		for (Server.BusinessLogic.Autovettura autovettura: this.lastElenco) {
-			AutovetturaCliente nuova = new AutovetturaCliente();
-			nuova.setAutovetturaCliente( (Server.BusinessLogic.AutovetturaCliente) autovettura);
-			elencoAutovetture.add(nuova);
+		if ( this.lastElenco.isEmpty() ) {
+			coordinatore.setStato( new NonAutenticato() );
+		} else {
+			
+			for (Server.BusinessLogic.Autovettura autovettura: this.lastElenco) {
+				AutovetturaCliente nuova = new AutovetturaCliente();
+				nuova.setAutovetturaCliente( (Server.BusinessLogic.AutovetturaCliente) autovettura);
+				elencoAutovetture.add(nuova);
+			}
+			
 		}
 				
 		return elencoAutovetture;
@@ -52,11 +58,11 @@ public class Autenticato extends Stato {
 	 */
 	@Override
 	public ArrayList<?> retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {		
-		this.availableBatterie = GestoreDisponibilità.retrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), coordinatore.getIDStazione() ); 
+		this.availableBatterie = GestoreDisponibilita.retrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), coordinatore.getIDStazione() ); 
 		
 		if ( this.availableBatterie.isEmpty() ) {
 			
-			ArrayList<Server.BusinessLogic.Stazione> listaStazioni = GestoreDisponibilità.remoteRetrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), coordinatore.getIDStazione());
+			ArrayList<Server.BusinessLogic.Stazione> listaStazioni = GestoreDisponibilita.remoteRetrieveBatterieCompatibili( ((Server.BusinessLogic.AutovetturaCliente) this.lastElenco.get(indiceAutovettura)).getModelloAutovettura(), coordinatore.getIDStazione());
 			
 			ArrayList<Stazione> elencoStazioni = new ArrayList<Stazione>( listaStazioni.size() );
 			
