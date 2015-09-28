@@ -3,7 +3,7 @@ package Server.BusinessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
-import Server.Entity.Società;
+import Server.Entity.Societa;
 
 
 public class GestoreBatterie {
@@ -18,7 +18,7 @@ public class GestoreBatterie {
 	public static ArrayList<Batteria> retrieveBatterieQuasiEsauste(int IDstazione) {
 		
 		Server.Entity.Stazione s = new Server.Entity.Stazione();
-		Società.findStazione(s, IDstazione);
+		Societa.findStazione(s, IDstazione);
 		ArrayList<Batteria> quasiEsauste = new ArrayList<Batteria>();
 		List<Server.Entity.Batteria> lista = s.getBatterieDisp();
 		

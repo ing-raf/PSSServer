@@ -170,10 +170,20 @@ public class FinestraSostituzione {
 		ArrayList<? extends AutovetturaCliente> autovetture = null;
 		autovetture = cr.retrieveAutovetture();
 		
-		for(int i=0; i<autovetture.size(); i++){
-			listaD.addElement(autovetture.get(i).getFornitore()+", "+autovetture.get(i).getModello()+", "+autovetture.get(i).getNumeroTarga());
-		}
+		if ( autovetture.isEmpty() ) {
+			
+			JOptionPane.showMessageDialog(null,"Nessuna autovettura presente!","Attenzione!", JOptionPane.WARNING_MESSAGE);
+			frmMenuDiSostituzione.setVisible(false);
+			InterfacciaClienteNonRegistrato.idleScreen();
+			frmMenuDiSostituzione.dispose();
+			
+			
+		} else{
 		
+			for(int i=0; i<autovetture.size(); i++){
+				listaD.addElement(autovetture.get(i).getFornitore()+", "+autovetture.get(i).getModello()+", "+autovetture.get(i).getNumeroTarga());
+			}
+		}
 		//Recupero Batterie o Stazioni
 		listaD1 = new DefaultListModel<String>();
 		JList<String> list_1 = new JList<String>(listaD1);
@@ -210,8 +220,10 @@ public class FinestraSostituzione {
 				if ( output.isEmpty() ) {
 					
 					JOptionPane.showMessageDialog(null,"Batteria non presente in alcuna stazione!","Attenzione!", JOptionPane.WARNING_MESSAGE);
+					frmMenuDiSostituzione.setVisible(false);
+					InterfacciaClienteNonRegistrato.idleScreen();
 					frmMenuDiSostituzione.dispose();
-					System.exit(0);
+					//System.exit(0);
 					
 				} 
 				
@@ -242,8 +254,9 @@ public class FinestraSostituzione {
 								listaD2.addElement(((Stazione) output.get(i)).getNome()+", "+((Stazione) output.get(i)).getIndirizzo());
 							}
 							JOptionPane.showMessageDialog(null,scroll,"Batterie terminate!", JOptionPane.INFORMATION_MESSAGE);
-							frmMenuDiSostituzione.dispose();
+							frmMenuDiSostituzione.setVisible(false);
 							InterfacciaClienteNonRegistrato.idleScreen();
+							frmMenuDiSostituzione.dispose();
 						}
 					}
 

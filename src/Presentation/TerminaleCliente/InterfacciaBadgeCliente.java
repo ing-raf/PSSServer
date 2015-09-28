@@ -87,6 +87,7 @@ public class InterfacciaBadgeCliente {
 		btnOk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				
 				try {
 					badge.startValidazione(Integer.parseInt(codice_badge.getText()));
 				} catch (NumberFormatException | RemoteException e) {
