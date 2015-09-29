@@ -103,7 +103,7 @@ public class Autenticato extends Stato {
 		Install_Outcome outcome;
 		
 		if ( this.badgeAutenticato.verifyCredito(costo) ) {
-			this.badgeAutenticato.debitBattery(costo);
+			this.badgeAutenticato.debitBatteria(costo);
 		
 			this.startDeviceConnection(coordinatore.getHostname(), coordinatore.getPortSostituzione()) ;
 			if ( this.removeBatteria() == true) {

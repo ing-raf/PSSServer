@@ -19,7 +19,6 @@ public class GestoreDisponibilita{
 			Server.Entity.Batteria b = new Server.Entity.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
 			s.insertBatteria(b);
 		} catch (Exception ex) {
-			System.err.println("Batteria non inserita");
 			return false;
 	}
 		return true;
@@ -82,8 +81,7 @@ public class GestoreDisponibilita{
 				}
 			}
 		}
-		
-		System.err.println(stazioniRemote.size());
+
 		
 		return stazioniRemote;
 		

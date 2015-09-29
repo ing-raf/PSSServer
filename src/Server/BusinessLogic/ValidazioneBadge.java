@@ -25,7 +25,7 @@ public class ValidazioneBadge {
 		else return true;
 	}
 	
-	public void debitBattery (float costo) {
+	public void debitBatteria (float costo) {
 		this.badgeValidato.setCredito(this.badgeValidato.getCredito() - costo);
 	}
 
