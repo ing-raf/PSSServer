@@ -13,7 +13,7 @@ import Server.RMIInterface.Stazione;
 
 public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticato {
 	
-	private static int PORT_OFFSET = 1024;
+	private static int PORT_OFFSET = 3307;
 	private final String serverHostname;
 	private final int IDstazione;
 	private Registry registry;

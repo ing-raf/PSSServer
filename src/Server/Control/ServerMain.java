@@ -13,7 +13,7 @@ import Server.Entity.PopulateTestDatabase;
 
 public class ServerMain {
 	
-	private static int PORT_OFFSET = 1024;
+	private static int PORT_OFFSET = 3307;
 	private static int NUM_STAZIONI = 3;
 	private static String middleware = "LipeRMI";
 
