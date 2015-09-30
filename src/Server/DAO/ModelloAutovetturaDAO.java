@@ -39,16 +39,16 @@ public class ModelloAutovetturaDAO {
 		return this.fornitore;
 	}
 	
-	void setBrand (String forn){
+	public void setBrand (String forn){
 		this.fornitore = forn;
 	}
 
-	void setModel (String model){
+	public void setModel (String model){
 		this.modello=model;
 	}
 	
 	
-	void setID(int ID) {
+	public void setID(int ID) {
 		this.ID = ID;
 	}
 
