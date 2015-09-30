@@ -1,13 +1,18 @@
 package Server.DAO;
 
+import java.util.ArrayList;
+
 import javax.persistence.*;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.HibernateException;
 
 
 
 @Entity
+@Table (name = "ModelloAutovettura")
 public class ModelloAutovetturaDAO {
 
 	@Id
@@ -46,50 +51,81 @@ public class ModelloAutovetturaDAO {
 		this.ID = ID;
 	}
 
-	public ModelloAutovetturaDAO getModelloAuto (int cod){
+	public static ModelloAutovetturaDAO findModelloAuto (String mod, String forni){
 				SessionFactory sf = HibernateUtil.getSessionFactory();
 				Session session = sf.openSession();
 				session.beginTransaction();
 
-				ModelloAutovetturaDAO b = (ModelloAutovetturaDAO) session.get(ModelloAutovetturaDAO.class, cod) ; 
+				Query query = session.createQuery("from ModelloAutivetturaDAO as m where m.modello = :model && m.fornitore = :prod");
+				query.setParameter("model",mod);
+				query.setParameter("prod",forni);
+				
+				ArrayList<ModelloAutovetturaDAO> result = (ArrayList<ModelloAutovetturaDAO>)query.list();
 				
 				session.getTransaction().commit();		
 				session.close();
 				
-				if (b != null){
-					this.setID(b.getID());
-					this.modello = b.getModello();
-					this.fornitore = b.getFornitore();
-				}
 				
-				return b;		
+				return result.get(0);		
 				
 	}
 	
-	ModelloAutovetturaDAO update() {
+	public boolean update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
-
-		session.update(this);
+		try {
+			session.update(this);
 		
-		session.getTransaction().commit();		
-		session.close();
+			session.getTransaction().commit();
+		}catch (HibernateException ex){
+			session.getTransaction().rollback();
+			return false;
+			
+		} finally {
+			session.close();
+		}
 		
-		return this;
+		return true;
 	}
 	
-	ModelloAutovetturaDAO salva(){
+	public boolean save(){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
-
+		try{
 		session.save(this);
 		
-		session.getTransaction().commit();		
-		session.close();
+			session.getTransaction().commit();
+		}catch (HibernateException ex){
+			session.getTransaction().rollback();
+			return false;
 		
-		return this;
+		} finally {
+			session.close();
+		}
+	
+		return true;
+	}
+	
+	public boolean delete(){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		
+		try{
+			
+			session.delete(this);
+			session.getTransaction().commit();
+		} catch(HibernateException e){
+			session.getTransaction().rollback();
+			return false;
+		
+		} finally{
+				session.close();
+		}
+		
+		return true;
 	}
 	
 	public boolean equals (Object obj) {
