@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class UltimaSostituzioneDAO {
 
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	private int ID;
 	@Column 
 	private Calendar dataOra;
@@ -25,9 +25,9 @@ public class UltimaSostituzioneDAO {
 	@OneToOne
 	@JoinColumn (name = "idBatteriaInserita")
 	private BatteriaDAO batteria;
-	@OneToOne
-	@JoinColumn (name = "idAutovetturaCompatibile") 
-	private UltimaSostituzioneDAO autovettura;
+	@OneToOne (mappedBy="sostituzione")
+	@JoinColumn (name = "idAutovettura") 
+	private AutovetturaCompatibileDAO autovettura;
 	
 	public UltimaSostituzioneDAO (){
 	}

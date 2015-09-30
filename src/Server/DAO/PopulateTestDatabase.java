@@ -210,23 +210,25 @@ public class PopulateTestDatabase {
 		
 		BadgeDAO[] bg = new BadgeDAO[4];
 		
-	
+		bg[0] = new BadgeDAO();
 		bg[0].setCode(-3);
 		bg[0].setCredit(50.00f);
 		bg[0].setClient(cl[2]);
-			
+		
+		bg[1] = new BadgeDAO();	
 		bg[1].setCode(0);
 		bg[1].setCredit(18.21f);
 		bg[1].setClient(cl[3]);
 		
-		
+		bg[2] = new BadgeDAO();
 		bg[2].setCode(1);
 		bg[2].setCredit(10.00f);
 		bg[2].setClient(cl[1]);
 		
-		bg[0].setCode(5);
-		bg[0].setCredit(1000.00f);
-		bg[0].setClient(cl[0]);
+		bg[3] = new BadgeDAO();
+		bg[3].setCode(5);
+		bg[3].setCredit(1000.00f);
+		bg[3].setClient(cl[0]);
 
 		UltimaSostituzioneDAO[] sost = new UltimaSostituzioneDAO[7];
 		Calendar[] scal = new Calendar[7];
@@ -342,6 +344,7 @@ public class PopulateTestDatabase {
 		cl[0].setOwnedCars(ac[4]);
 		cl[0].setOwnedCars(ac[5]);
 		cl[0].setOwnedCars(ac[6]);
+		for (ClienteDAO c : cl) c.update();
 	}
 			
 	public static BatteriaDAO testStazione (int idStazione, int idBatteria, int cicliRicarica, float costo, int idModello) {

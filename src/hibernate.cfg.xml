@@ -30,13 +30,13 @@
         <property name="hibernate.hbm2ddl.auto">create</property>
 
         <!-- Entity -->
-        <mapping class="Server.Entity.Badge" />
-        <mapping class="Server.Entity.Batteria" />
-        <mapping class="Server.Entity.Cliente" />
-        <mapping class="Server.Entity.ModelloAutovettura" />
-        <mapping class="Server.Entity.Stazione" />
-        <mapping class="Server.Entity.AutovetturaCompatibile" />
-        <mapping class="Server.Entity.Sostituzione" />
+        <mapping class="Server.DAO.BadgeDAO" />
+        <mapping class="Server.DAO.BatteriaDAO" />
+        <mapping class="Server.DAO.ClienteDAO" />
+        <mapping class="Server.DAO.ModelloAutovetturaDAO" />
+        <mapping class="Server.DAO.StazioneDAO" />
+        <mapping class="Server.DAO.AutovetturaCompatibileDAO" />
+        <mapping class="Server.DAO.UltimaSostituzioneDAO" />
         
     </session-factory>
 </hibernate-configuration>
