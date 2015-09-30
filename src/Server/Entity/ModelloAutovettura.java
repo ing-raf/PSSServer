@@ -1,8 +1,5 @@
 package Server.Entity;
 
-import Server.DAO.BatteriaDAO;
-import Server.DAO.ModelloAutovetturaDAO;
-
 public class ModelloAutovettura {
 
 	private int ID;
