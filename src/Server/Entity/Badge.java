@@ -13,10 +13,8 @@ public class Badge {
 		BadgeDAO dao = BadgeDAO.findBadge(cod);
 		this.codice = dao.getCode();
 		this.creditoResiduo = dao.getCredit();
-		this.possessore = new Cliente();
-			this.possessore.setName(dao.getClient().getName());
-			this.possessore.setSurname(dao.getClient().getSurname());
-			this.possessore.setBirthDate(dao.getClient().getBirthDate());
+		this.possessore = new Cliente(dao.getClient().getName(),dao.getClient().getSurname(),dao.getClient().getBirthDate());
+
 	}
 
 	public int getCode(){
