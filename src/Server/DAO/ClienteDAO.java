@@ -6,6 +6,7 @@ import javax.persistence.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Query;
 
 @Entity
 public class ClienteDAO {
@@ -68,18 +69,23 @@ public class ClienteDAO {
 	}
 	
 
-	public static ClienteDAO findClient (int cod){
+	public static ClienteDAO findClient (String n, String c, Calendar d){
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		ClienteDAO trovato = (ClienteDAO) session.get(ClienteDAO.class, cod) ; 
-					
+		Query query = session.createQuery("from ClienteDAO as c where c.nome = : name && c.cognome = : cogn && c.dataNascita = : data");
+		query.setParameter("name", n);
+		query.setParameter("cogn", c);
+		query.setParameter("data", d);
+		
+		ArrayList<ClienteDAO> result = (ArrayList<ClienteDAO>)query.list();
+		
 		session.getTransaction().commit();		
 		session.close();
 					
-		return trovato;
+		return result.get(0);
 	}
 	
 	public boolean update() {
