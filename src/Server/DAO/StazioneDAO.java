@@ -46,6 +46,10 @@ public class StazioneDAO {
 		this.ID = id;
 	}
 	
+	public void setAvailableBatteries (BatteriaDAO b){
+		this.disponibili.add(b);
+	}
+	
 	public void setName(String nome){
 		this.nome = nome;
 	}
