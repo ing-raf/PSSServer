@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -20,47 +21,37 @@ public class BadgeDAO {
 	@OneToOne
 	@JoinColumn(name="idCliente") ClienteDAO possessore;
 
-	
+	public BadgeDAO(){
+		
+	}
 
-	public ClienteDAO getCliente() {
+	public ClienteDAO getClient() {
 		return this.possessore;
 	}
 	
-	public int getCodice (){
+	public int getCode (){
 		return this.codice;
 	}
 	
-	public float getCredito (){
+	public float getCredit (){
 		return this.creditoResiduo;
 	}
 	
 	
-	void setCodice(int cod){
+	public void setCode(int cod){
 		this.codice = cod;
 	}
 	
-	public void setCredito(float cred){
+	public void setCredit(float cred){
 		this.creditoResiduo = cred;
 		this.update();
 	}
 	
-	void setCliente (ClienteDAO p){
+	public void setClient (ClienteDAO p){
 		this.possessore=p;
 	}
-	
-	public BadgeDAO () {
-		
-	}
-	
-	public BadgeDAO (int codice, float creditoResiduo, ClienteDAO possessore) {
-		this.codice = codice;
-		this.creditoResiduo = creditoResiduo;
-		this.possessore = possessore;
-		this.salva();
-	}
 
-
-	public BadgeDAO getBadge (int cod){
+	public static BadgeDAO findBadge (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -69,38 +60,70 @@ public class BadgeDAO {
 				
 		session.getTransaction().commit();		
 		session.close();
-			
-			if (trovato != null){
-				this.codice = trovato.getCodice();
-				this.creditoResiduo = trovato.getCredito();
-				this.possessore = trovato.getCliente();
-				}
 		return trovato;
 	}
 	
-	 BadgeDAO update() {
+	public boolean update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		session.update(this);
+		try{
+			
+			session.update(this);
+			session.getTransaction().commit();	
+		} catch(HibernateException e){
+			session.getTransaction().rollback();
+			return false;
 		
-		session.getTransaction().commit();		
-		session.close();
+		} finally{
+				session.close();
+		}
 		
-		return this;
+		return true;
+		
 	}
 	
-	BadgeDAO salva(){
+	
+	
+	public boolean save(){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		session.save(this);
+		try{
+			
+			session.save(this);
+			session.getTransaction().commit();	
+		} catch(HibernateException e){
+			session.getTransaction().rollback();
+			return false;
 		
-		session.getTransaction().commit();		
-		session.close();
+		} finally{
+				session.close();
+		}
 		
-		return this;
-	}	
+		return true;
+		
+	}
+	
+	public boolean delete(){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		
+		try{
+			
+			session.delete(this);
+			session.getTransaction().commit();
+		} catch(HibernateException e){
+			session.getTransaction().rollback();
+			return false;
+		
+		} finally{
+				session.close();
+		}
+		
+		return true;
+	}
 }
