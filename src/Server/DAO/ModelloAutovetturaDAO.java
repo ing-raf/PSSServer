@@ -16,7 +16,7 @@ import org.hibernate.HibernateException;
 public class ModelloAutovetturaDAO {
 
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	private int ID;
 	@Column
 	private String fornitore;
