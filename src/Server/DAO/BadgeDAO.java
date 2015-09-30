@@ -62,6 +62,7 @@ public class BadgeDAO {
 				
 		session.getTransaction().commit();		
 		session.close();
+			
 		return trovato;
 	}
 	
