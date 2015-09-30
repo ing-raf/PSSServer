@@ -2,6 +2,8 @@ package Server.Entity;
 
 import java.util.Calendar;
 
+import Server.DAO.BatteriaDAO;
+import Server.DAO.ModelloAutovetturaDAO;
 import Server.DAO.StazioneDAO;
 import Server.DAO.UltimaSostituzioneDAO;
 
@@ -11,6 +13,10 @@ public class UltimaSostituzione {
 	private Stazione staz_sostituz;
 	private Batteria batteria;
 	private UltimaSostituzione autovettura;
+	
+	public UltimaSostituzione() {
+		
+	}
 	
 	public UltimaSostituzione(String targa) {
 		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
@@ -65,7 +71,20 @@ public class UltimaSostituzione {
 		stazione.setAddress(this.staz_sostituz.getAddress());
 		stazione.setName(this.staz_sostituz.getName());
 		stazione.setID(this.staz_sostituz.getID());
-		stazione.setAvailableBatteries(this.staz_sostituz.getBatteries());
+		
+		for(int i=0; i<stazione.getAvailableBatteries().size(); i++){
+			BatteriaDAO batt = new BatteriaDAO();
+			batt.setID( stazione.getAvailableBatteries().get(i).getID() );
+			batt.setCostSubstitution( stazione.getAvailableBatteries().get(i).getCostSubstitution() );
+			batt.setCyclesRecharge( stazione.getAvailableBatteries().get(i).getCyclesRecharge() );
+				ModelloAutovetturaDAO mod = new ModelloAutovetturaDAO();
+				mod.setBrand( stazione.getAvailableBatteries().get(i).getModel().getBrand() );
+				mod.setModel( stazione.getAvailableBatteries().get(i).getModel().getModel() );
+			batt.setModel(mod);
+			
+			stazione.setAvailableBatteries(batt);
+		}
+		
 		dao.setStation(stazione);
 		
 		Batteria batteria = new Batteria();
