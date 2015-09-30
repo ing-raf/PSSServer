@@ -129,19 +129,22 @@ public class UltimaSostituzioneDAO {
 	}
 
 	public static UltimaSostituzioneDAO findSubstitution(String targa){
+		//AutovetturaCompatibileDAO auto_v = AutovetturaCompatibileDAO.findCar(targa);
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 		
-		Query query = session.createQuery("from SostituzioneDAO as Sost where Sost.autovettura = :auto");
+		Query query = session.createQuery("select Sost from UltimaSostituzioneDAO as Sost inner join Sost.autovettura as a where a.numeroTarga = :auto");
 		query.setParameter("auto",targa);
-		
-		ArrayList<UltimaSostituzioneDAO> result = (ArrayList<UltimaSostituzioneDAO>)query.list();
+		ArrayList<UltimaSostituzioneDAO> result = (ArrayList<UltimaSostituzioneDAO>) query.list();
 		
 		session.getTransaction().commit();
 		session.close();
 		
-		return result.get(0);
+		if (result.isEmpty() == true)
+			return null;
+		else
+			return result.get(0) ;
 	}
 
 }
