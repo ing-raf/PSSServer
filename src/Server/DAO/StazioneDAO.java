@@ -60,11 +60,9 @@ public class StazioneDAO {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
-		StazioneDAO trovato = null;
-		
 		session.beginTransaction();
 
-		trovato = (StazioneDAO) session.get(StazioneDAO.class, cod) ; 
+		StazioneDAO trovato = (StazioneDAO) session.get(StazioneDAO.class, cod) ; 
 					
 		session.getTransaction().commit();	
 		session.close();
