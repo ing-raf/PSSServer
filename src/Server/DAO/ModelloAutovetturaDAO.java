@@ -57,7 +57,7 @@ public class ModelloAutovetturaDAO {
 				Session session = sf.openSession();
 				session.beginTransaction();
 
-				Query query = session.createQuery("from ModelloAutivetturaDAO as m where m.modello = :model && m.fornitore = :prod");
+				Query query = session.createQuery("from ModelloAutovetturaDAO as m where m.modello = :model and m.fornitore = :prod");
 				query.setParameter("model",mod);
 				query.setParameter("prod",forni);
 				
@@ -66,9 +66,10 @@ public class ModelloAutovetturaDAO {
 				session.getTransaction().commit();		
 				session.close();
 				
-				
-				return result.get(0);		
-				
+				if (result.isEmpty() == true)
+					return null;
+				else
+				return result.get(0);					
 	}
 	
 	public boolean update() {

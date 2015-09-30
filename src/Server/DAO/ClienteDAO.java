@@ -75,7 +75,7 @@ public class ClienteDAO {
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		Query query = session.createQuery("from ClienteDAO as c where c.nome = : name && c.cognome = : cogn && c.dataNascita = : data");
+		Query query = session.createQuery("from ClienteDAO as cl where cl.nome = :name and cl.cognome = :cogn and cl.dataNascita = :data");
 		query.setParameter("name", n);
 		query.setParameter("cogn", c);
 		query.setParameter("data", d);
@@ -84,8 +84,11 @@ public class ClienteDAO {
 		
 		session.getTransaction().commit();		
 		session.close();
-					
-		return result.get(0);
+		
+		if (result.isEmpty() == true)
+			return null;
+		else
+			return result.get(0);
 	}
 	
 	public boolean update() {
