@@ -30,19 +30,19 @@ public class ModelloAutovetturaDAO {
 	public int getID () {
 		return this.ID;
 	}
-	public String getModello() {
+	public String getModel() {
 		return this.modello;
 	}
 
-	public String getFornitore() {
+	public String getBrand() {
 		return this.fornitore;
 	}
 	
-	void setFornitore (String forn){
+	void setBrand (String forn){
 		this.fornitore = forn;
 	}
 
-	void setModello (String model){
+	void setModel (String model){
 		this.modello=model;
 	}
 	
@@ -130,7 +130,7 @@ public class ModelloAutovetturaDAO {
 	
 	public boolean equals (Object obj) {
 		ModelloAutovetturaDAO mod = (ModelloAutovetturaDAO) obj;
-		if ((this.fornitore.equals(mod.getFornitore())) && (this.modello.equals(mod.getModello())) && (this.getID() == mod.getID()))
+		if ((this.fornitore.equals(mod.getBrand())) && (this.modello.equals(mod.getModel())) && (this.getID() == mod.getID()))
 			return true;
 		else
 			return false;
