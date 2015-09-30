@@ -42,11 +42,11 @@ public class BatteriaDAO {
 		return this.cicliRicaricaRimanenti;
 	}
 
-	void setID(int id) {
+	public void setID(int id) {
 		this.ID = id;
 	}
 	
-	void setCostSubstitution(float costoSostituzione) {
+	public void setCostSubstitution(float costoSostituzione) {
 		this.costoSostituzione = costoSostituzione;
 	}
 
@@ -57,7 +57,7 @@ public class BatteriaDAO {
 	}
 	
 	
-	void setModel(ModelloAutovetturaDAO modello_compatibile) {
+	public void setModel(ModelloAutovetturaDAO modello_compatibile) {
 		this.modello_compatibile = modello_compatibile;
 	}
 
