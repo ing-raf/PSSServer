@@ -3,13 +3,14 @@ package Server.DAO;
 
 import javax.persistence.*;
 
-
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 
 
 @Entity
+@Table(name = "AutovetturaCompatibile")
 public class AutovetturaCompatibileDAO {
 
 	@Id
@@ -25,68 +26,103 @@ public class AutovetturaCompatibileDAO {
 	
 	}
 		
-	public AutovetturaCompatibileDAO getAuto (String targa){
-		//apro la sessione e la transazione
+	
+	public void setNumberPlate (String nt){
+		this.numeroTarga=nt;
+	}
+	
+	public String getNumberPlate (){
+		return this.numeroTarga;
+	}
+	
+
+	public ModelloAutovetturaDAO getModel() {
+		return this.modello;
+	}
+
+	public void setModel(ModelloAutovetturaDAO modello) {
+		this.modello = modello;
+	}
+
+	public UltimaSostituzioneDAO getLastSubstitution() {
+		return this.sostituzione;
+		
+	}
+	
+	public void setLastRicambio(UltimaSostituzioneDAO sostituzione) {
+		this.sostituzione = sostituzione;
+	}
+	
+	public static AutovetturaCompatibileDAO getAuto (String targa){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
 		AutovetturaCompatibileDAO trovato = (AutovetturaCompatibileDAO) session.get(AutovetturaCompatibileDAO.class, targa) ; 
 		
-		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
 		session.close();
-		if (trovato != null){
-			this.numeroTarga = trovato.getNumeroTarga();
-			this.modello = trovato.getModello();
-			this.sostituzione = trovato.getLastRicambio();
-		}
-		
+
 		return trovato;
 		
-			}
-		
-	
-	public void setNumeroTarga(String nt){
-		this.numeroTarga=nt;
-	}
-	
-	public String getNumeroTarga (){
-		return this.numeroTarga;
-	}
-	
+		}
 
-	public ModelloAutovetturaDAO getModello() {
-		return this.modello;
-	}
+	public boolean save(){
 
-	public void setModello(ModelloAutovetturaDAO modello) {
-		this.modello = modello;
-	}
-
-	public Sostituzione getLastRicambio() {
-		return this.sostituzione;
-		
-	}
-	
-	public void setLastRicambio(Sostituzione sostituzione) {
-		this.sostituzione = sostituzione;
-	}
-
-	void salva(){
-		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		//salvo l'autovettura compatibile
-		session.save(this);
+		try {
+			session.save(this);
+			session.getTransaction().commit();	
+		} catch (HibernateException he) {
+			session.getTransaction().rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+	
+		return true;
 		
-		//chiudo la transazione e la sessione
-		session.getTransaction().commit();		
-		session.close();
+	}
+	
+	public boolean update() {
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
 		
+		session.beginTransaction();
+
+		try {
+			session.update(this);
+			session.getTransaction().commit();	
+		} catch (HibernateException he) {
+			session.getTransaction().rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+	
+		return true;
+	}
+	
+	public boolean delete(){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
 		
+		session.beginTransaction();
+
+		try {
+			session.delete(this);
+			session.getTransaction().commit();	
+		} catch (HibernateException he) {
+			session.getTransaction().rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+	
+		return true;
 	}
 
 }
