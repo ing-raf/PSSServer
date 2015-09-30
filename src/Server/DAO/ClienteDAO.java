@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Query;
 
 @Entity
+@Table(name = "Cliente")
 public class ClienteDAO {
 
 	@Column
