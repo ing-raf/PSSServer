@@ -1,6 +1,6 @@
 package Server.BusinessLogic;
 
-import Server.Entity.AutovetturaCompatibile;
+import Server.DAO.AutovetturaCompatibile;
 
 public class AutovetturaCliente extends Autovettura {
 

@@ -9,7 +9,7 @@ import lipermi.net.Server;
 
 import Server.RMIInterface.ServiziGestoreAndroid;
 import Server.BusinessLogic.GestoreStazioni;
-import Server.Entity.PopulateTestDatabase;
+import Server.DAO.PopulateTestDatabase;
 
 public class ServerMain {
 	

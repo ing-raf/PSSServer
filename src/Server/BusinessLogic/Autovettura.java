@@ -1,6 +1,6 @@
 package Server.BusinessLogic;
 
-import Server.Entity.ModelloAutovettura;
+import Server.DAO.ModelloAutovettura;
 
 public class Autovettura {
 

@@ -1,4 +1,4 @@
-package Server.Entity;
+package Server.DAO;
 
 import java.util.*;
 import javax.persistence.*;

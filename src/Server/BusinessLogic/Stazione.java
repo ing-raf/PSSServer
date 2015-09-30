@@ -2,7 +2,7 @@ package Server.BusinessLogic;
 
 public class Stazione {
 	
-	private Server.Entity.Stazione stazione;
+	private Server.DAO.Stazione stazione;
 
 	public String getNome() {
 		return this.stazione.getNome();
@@ -16,7 +16,7 @@ public class Stazione {
 	 * 
 	 * @param stazione
 	 */
-	public void setStazione(Server.Entity.Stazione stazione) {
+	public void setStazione(Server.DAO.Stazione stazione) {
 		this.stazione = stazione;
 	}
 

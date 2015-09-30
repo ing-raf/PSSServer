@@ -3,7 +3,8 @@ package Server.BusinessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
-import Server.Entity.*;
+import Server.DAO.*;
+import Server.Entity.Societa;
 
 public class GestoreAutovetture {
 

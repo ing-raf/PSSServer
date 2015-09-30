@@ -1,4 +1,4 @@
-package Server.Entity;
+package Server.DAO;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

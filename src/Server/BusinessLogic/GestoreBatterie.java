@@ -17,10 +17,10 @@ public class GestoreBatterie {
 	 */
 	public static ArrayList<Batteria> retrieveBatterieQuasiEsauste(int IDstazione) {
 		
-		Server.Entity.Stazione s = new Server.Entity.Stazione();
+		Server.DAO.Stazione s = new Server.DAO.Stazione();
 		Societa.findStazione(s, IDstazione);
 		ArrayList<Batteria> quasiEsauste = new ArrayList<Batteria>();
-		List<Server.Entity.Batteria> lista = s.getBatterieDisp();
+		List<Server.DAO.Batteria> lista = s.getBatterieDisp();
 		
 		for(int i = 0; i < lista.size(); i++){
 			
@@ -39,7 +39,7 @@ public class GestoreBatterie {
 	 */
 	public static boolean verifyRicarica(Batteria batteria) {
 		
-		Server.Entity.Batteria b = batteria.getBatteria();
+		Server.DAO.Batteria b = batteria.getBatteria();
 		
 		if(b.getCicliRicarica() > 0){
 			return true;

@@ -1,4 +1,4 @@
-package Server.Entity;
+package Server.DAO;
 
 import javax.persistence.*;
 import org.hibernate.Session;

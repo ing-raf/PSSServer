@@ -9,10 +9,10 @@ import org.junit.Test;
 
 import Presentation.TerminaleCliente.BadgeClientRMI;
 import Presentation.TerminaleCliente.ClienteRegistratoClientRMI;
-import Server.Entity.PopulateTestDatabase;
+import Server.DAO.Badge;
+import Server.DAO.Batteria;
+import Server.DAO.PopulateTestDatabase;
 import Server.RMIInterface.AutovetturaCliente;
-import Server.Entity.Badge;
-import Server.Entity.Batteria;
 import Server.RMIInterface.Install_Outcome;
 import Server.RMIInterface.Stazione;
 

@@ -2,7 +2,7 @@ package Server.BusinessLogic;
 
 import java.util.Calendar;
 
-import Server.Entity.Sostituzione;
+import Server.DAO.Sostituzione;
 
 public class UltimaSostituzione {
 	
@@ -28,7 +28,7 @@ public class UltimaSostituzione {
 		return this.sostituzione.getDataOra().get(Calendar.MINUTE);
 	}
 
-	public void setSostituzione(Server.Entity.Sostituzione sos) {
+	public void setSostituzione(Server.DAO.Sostituzione sos) {
 		this.sostituzione = sos;
 	}
 

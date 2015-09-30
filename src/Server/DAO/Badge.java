@@ -1,4 +1,4 @@
-package Server.Entity;
+package Server.DAO;
 
 
 import javax.persistence.*;
@@ -10,8 +10,7 @@ import javax.persistence.JoinColumn;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-
-import Server.Entity.HibernateUtil;
+import Server.DAO.HibernateUtil;
 @Entity
 public class Badge {
 	@Id

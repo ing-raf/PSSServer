@@ -3,7 +3,8 @@ package Server.BusinessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
-import Server.Entity.*;
+import Server.DAO.*;
+import Server.Entity.Societa;
 
 public class GestoreDisponibilita{
 
@@ -13,10 +14,10 @@ public class GestoreDisponibilita{
 	 */
 	public static boolean addBatteria(int IDstazione, int IDbatteria, float costosostituzione, int maxcicliricarica, Autovettura modello) {
 		
-		Server.Entity.Stazione s = new Server.Entity.Stazione();
+		Server.DAO.Stazione s = new Server.DAO.Stazione();
 		if (Societa.findStazione(s, IDstazione) == false) return false;
 		try {
-			Server.Entity.Batteria b = new Server.Entity.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
+			Server.DAO.Batteria b = new Server.DAO.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
 			s.insertBatteria(b);
 		} catch (Exception ex) {
 			return false;
@@ -28,10 +29,10 @@ public class GestoreDisponibilita{
 	public static ArrayList<Batteria> retrieveBatterieCompatibili(Autovettura modello, int IDstazione) {
 		
 		ArrayList<Batteria> batterieCompatibili = new ArrayList<Batteria>();
-		Server.Entity.ModelloAutovettura m = modello.getAutovettura();
-		Server.Entity.Stazione s = new Server.Entity.Stazione();
+		Server.DAO.ModelloAutovettura m = modello.getAutovettura();
+		Server.DAO.Stazione s = new Server.DAO.Stazione();
 		Societa.findStazione(s, IDstazione);
-		List<Server.Entity.Batteria> lista = s.getBatterieDisp();
+		List<Server.DAO.Batteria> lista = s.getBatterieDisp();
 		
 		for(int i=0; i<lista.size(); i++){
 			
@@ -53,7 +54,7 @@ public class GestoreDisponibilita{
 		
 			
 		ArrayList<Stazione> stazioniRemote = new ArrayList<Stazione>();
-		List<Server.Entity.Stazione> listaS = Societa.getListaStazioni();
+		List<Server.DAO.Stazione> listaS = Societa.getListaStazioni();
 		ModelloAutovettura m = modello.getAutovettura();
 		
 		int k;
@@ -66,7 +67,7 @@ public class GestoreDisponibilita{
 			
 			if(listaS.get(i).getID() != IDstazione){
 				
-				List<Server.Entity.Batteria> listaB = listaS.get(i).getBatterieDisp();
+				List<Server.DAO.Batteria> listaB = listaS.get(i).getBatterieDisp();
 				
 				
 				while(hit != true && k < listaB.size()){
@@ -93,9 +94,9 @@ public class GestoreDisponibilita{
 	 */
 	public static boolean removeBatteria(Server.BusinessLogic.Batteria batteria, int IDstazione) {
 		
-		Server.Entity.Stazione s = new Server.Entity.Stazione();
+		Server.DAO.Stazione s = new Server.DAO.Stazione();
 		if ( Societa.findStazione(s, IDstazione) == false) return false;
-		Server.Entity.Batteria b = batteria.getBatteria();
+		Server.DAO.Batteria b = batteria.getBatteria();
 		
 		s.deleteBatteria(b);
 		
@@ -109,8 +110,8 @@ public class GestoreDisponibilita{
 	 */
 	public static boolean addBatteriaDisponibili(Batteria batteria, int IDstazione) {
 		
-		Server.Entity.Batteria b = batteria.getBatteria();
-		Server.Entity.Stazione s = new Server.Entity.Stazione();
+		Server.DAO.Batteria b = batteria.getBatteria();
+		Server.DAO.Stazione s = new Server.DAO.Stazione();
 		
 		if ( Societa.findStazione(s, IDstazione) == false) return false;
 		int cicliNew = b.getCicliRicarica() - 1;

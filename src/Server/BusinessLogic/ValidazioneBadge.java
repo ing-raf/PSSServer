@@ -1,6 +1,7 @@
 package Server.BusinessLogic;
 
-import Server.Entity.*;
+import Server.DAO.*;
+import Server.Entity.Societa;
 
 public class ValidazioneBadge {
 

@@ -1,13 +1,14 @@
 package Server.BusinessLogic;
 
-import Server.Entity.*;
+import Server.DAO.*;
+import Server.Entity.Societa;
 
 public class GestoreSostituzioni {
 
 	public static Server.BusinessLogic.UltimaSostituzione findLastSostituzione(AutovetturaCliente auto) {
 		
 		Server.BusinessLogic.UltimaSostituzione ultima = new Server.BusinessLogic.UltimaSostituzione();
-		Server.Entity.AutovetturaCompatibile a = auto.getAutovetturaCliente();
+		Server.DAO.AutovetturaCompatibile a = auto.getAutovetturaCliente();
 		
 		ultima.setSostituzione(a.getLastRicambio());
 		
@@ -22,15 +23,15 @@ public class GestoreSostituzioni {
 	 */
 	public static Batteria updateSostituzione(AutovetturaCliente autovettura, int idStazione, Server.BusinessLogic.Batteria batteria) {
 
-		Server.Entity.AutovetturaCompatibile a = autovettura.getAutovetturaCliente();
-		Server.Entity.Sostituzione ultima = new Server.Entity.Sostituzione ();
+		Server.DAO.AutovetturaCompatibile a = autovettura.getAutovetturaCliente();
+		Server.DAO.Sostituzione ultima = new Server.DAO.Sostituzione ();
 		ultima = a.getLastRicambio();
-		Server.Entity.Stazione stazione = new Server.Entity.Stazione();
+		Server.DAO.Stazione stazione = new Server.DAO.Stazione();
 		boolean ris = Societa.findStazione(stazione, idStazione);
 		if (ris == true ){
 			stazione.getStazione(idStazione);
 			Server.BusinessLogic.Batteria vecchia = new Server.BusinessLogic.Batteria();
-			Server.Entity.Batteria b = new Server.Entity.Batteria ();
+			Server.DAO.Batteria b = new Server.DAO.Batteria ();
 			b = ultima.updateSostituzione(stazione, batteria.getBatteria());
 			vecchia.setBatteria(b);
 			stazione.removeBatteria(batteria.getBatteria());

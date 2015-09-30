@@ -2,7 +2,7 @@ package Server.BusinessLogic;
 
 public class Batteria {
 
-	private Server.Entity.Batteria batteria;
+	private Server.DAO.Batteria batteria;
 	
 	public int getID() {
 		return this.batteria.getID();
@@ -16,11 +16,11 @@ public class Batteria {
 	 * 
 	 * @param batteria
 	 */
-	public void setBatteria(Server.Entity.Batteria batteria) {
+	public void setBatteria(Server.DAO.Batteria batteria) {
 		this.batteria = batteria;
 	}
 	
-	public Server.Entity.Batteria getBatteria(){
+	public Server.DAO.Batteria getBatteria(){
 		return this.batteria;
 	}
 

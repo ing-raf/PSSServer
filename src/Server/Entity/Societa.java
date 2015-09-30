@@ -6,6 +6,11 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import Server.DAO.Badge;
+import Server.DAO.HibernateUtil;
+import Server.DAO.ModelloAutovettura;
+import Server.DAO.Stazione;
+
 public class Societa{
 
 	public  static List<ModelloAutovettura> getListaModelli() {

@@ -9,13 +9,13 @@ import org.junit.Test;
 
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;
 import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
-import Server.Entity.PopulateTestDatabase;
-import Server.Entity.Stazione;
+import Server.DAO.PopulateTestDatabase;
+import Server.DAO.Stazione;
 import Server.RMIInterface.Autovettura;
 
 public class UC03 {
 	
-	private Server.Entity.Batteria inserita;
+	private Server.DAO.Batteria inserita;
 	private int idStazione;
 	
 	@After
