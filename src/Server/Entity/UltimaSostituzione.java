@@ -12,7 +12,7 @@ public class UltimaSostituzione {
 	private Calendar dataOra;
 	private Stazione staz_sostituz;
 	private Batteria batteria;
-	private UltimaSostituzione autovettura;
+	private AutovetturaCompatibile autovettura;
 	
 	public UltimaSostituzione() {
 		
@@ -56,11 +56,11 @@ public class UltimaSostituzione {
 		this.batteria = batteria;
 	}
 
-	public UltimaSostituzione getCar() {
+	public AutovetturaCompatibile getCar() {
 		return autovettura;
 	}
 
-	public void setCar(UltimaSostituzione autovettura) {
+	public void setCar(AutovetturaCompatibile autovettura) {
 		this.autovettura = autovettura;
 	}
 	
