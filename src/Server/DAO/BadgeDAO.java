@@ -48,7 +48,7 @@ public class BadgeDAO {
 	}
 	
 	public void setClient (ClienteDAO p){
-		this.possessore=p;
+		this.possessore = p;
 	}
 
 	public static BadgeDAO findBadge (int cod){
