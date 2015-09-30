@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class UltimaSostituzioneDAO {
 
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	private int ID;
 	@Column 
 	private Calendar dataOra;
@@ -25,9 +25,9 @@ public class UltimaSostituzioneDAO {
 	@OneToOne
 	@JoinColumn (name = "idBatteriaInserita")
 	private BatteriaDAO batteria;
-	@OneToOne
-	@JoinColumn (name = "idAutovetturaCompatibile") 
-	private UltimaSostituzioneDAO autovettura;
+	@OneToOne (mappedBy="sostituzione")
+	@JoinColumn (name = "idAutovettura") 
+	private AutovetturaCompatibileDAO autovettura;
 	
 	public UltimaSostituzioneDAO (){
 	}
@@ -128,13 +128,12 @@ public class UltimaSostituzioneDAO {
 		return true;
 	}
 
-	public static UltimaSostituzioneDAO findSubstitution(String targa, int id){
+	public static UltimaSostituzioneDAO findSubstitution(String targa){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 		
-		Query query = session.createQuery("from SostituzioneDAO as Sost where Sost.batteria = :batt && Sost.autovettura = :auto");
-		query.setParameter("batt",id);
+		Query query = session.createQuery("from SostituzioneDAO as Sost where Sost.autovettura = :auto");
 		query.setParameter("auto",targa);
 		
 		ArrayList<UltimaSostituzioneDAO> result = (ArrayList<UltimaSostituzioneDAO>)query.list();

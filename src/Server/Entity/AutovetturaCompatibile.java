@@ -17,7 +17,12 @@ public class AutovetturaCompatibile {
 			this.modello.setBrand( dao.getModel().getBrand() );
 		this.sostituzione = new UltimaSostituzione();
 			this.sostituzione.setDateHour ( dao.getLastSubstitution().getDateHour() );
-			this.sostituzione.
+				Batteria batteria = new Batteria();
+				batteria.setID( dao.getLastSubstitution().getBattery().getID() );
+				batteria.setCostSubstitution( dao.getLastSubstitution().getBattery().getCostSubstitution() );
+				batteria.setCyclesRecharge( dao.getLastSubstitution().getBattery().getCyclesRecharge() );
+				batteria.setModel(this.modello);
+			this.sostituzione.setBattery(batteria);
 		
 	}
 	
