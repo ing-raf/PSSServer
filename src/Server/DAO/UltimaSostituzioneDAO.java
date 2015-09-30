@@ -15,6 +15,7 @@ import java.util.Calendar;
 public class UltimaSostituzioneDAO {
 
 	@Id
+	@GeneratedValue
 	private int ID;
 	@Column 
 	private Calendar dataOra;

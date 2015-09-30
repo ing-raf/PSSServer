@@ -29,38 +29,38 @@ public class PopulateTestDatabase {
 		
 		ma[0] = new ModelloAutovetturaDAO();
 		ma[0].setID(1);
-		ma[0].setFornitore("Maserati");
-		ma[0].setModello("Quattroporte");
+		ma[0].setBrand("Maserati");
+		ma[0].setModel("Quattroporte");
 	
 		ma[1] = new ModelloAutovetturaDAO();
 		ma[1].setID(2);
-		ma[1].setFornitore("Lamborghini");
-		ma[1].setModello("Gallardo");
+		ma[1].setBrand("Lamborghini");
+		ma[1].setModel("Gallardo");
 		
 		ma[2] = new ModelloAutovetturaDAO();
 		ma[2].setID(3);
-		ma[2].setFornitore("Mercedes");
-		ma[2].setModello("SLK");
+		ma[2].setBrand("Mercedes");
+		ma[2].setModel("SLK");
 		
 		ma[3] = new ModelloAutovetturaDAO();
 		ma[3].setID(12);
-		ma[3].setFornitore("Alfa Romeo");
-		ma[3].setModello("Giulietta");
+		ma[3].setBrand("Alfa Romeo");
+		ma[3].setModel("Giulietta");
 		
 		ma[4] = new ModelloAutovetturaDAO();
 		ma[4].setID(13);
-		ma[4].setFornitore("Alfa Romeo");
-		ma[4].setModello("Mito");
+		ma[4].setBrand("Alfa Romeo");
+		ma[4].setModel("Mito");
 		
 		ma[5] = new ModelloAutovetturaDAO();
 		ma[5].setID(21);
-		ma[5].setFornitore("Peugeot");
-		ma[5].setModello("207");
+		ma[5].setBrand("Peugeot");
+		ma[5].setModel("207");
 		
 		ma[6] = new ModelloAutovetturaDAO();
 		ma[6].setID(43);
-		ma[6].setFornitore("Fiat");
-		ma[6].setModello("Panda");
+		ma[6].setBrand("Fiat");
+		ma[6].setModel("Panda");
 		
 		for (ModelloAutovetturaDAO m : ma) m.save();
 		
