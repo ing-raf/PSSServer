@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class Batteria {
+public class BatteriaDAO {
 
 	@Id
 	private int ID;
@@ -16,14 +16,14 @@ public class Batteria {
 	@Column
 	private int cicliRicaricaRimanenti;
 	@ManyToOne
-	@JoinColumn (name = "idModello") private ModelloAutovettura modello_compatibile;
+	@JoinColumn (name = "idModello") private ModelloAutovetturaDAO modello_compatibile;
 	
-	public Batteria (){
+	public BatteriaDAO (){
 	}
 	
 	
 	
-	public Batteria(int id, float costosostituzione, int maxcicliricarica, ModelloAutovettura mod) throws Exception {		
+	public BatteriaDAO(int id, float costosostituzione, int maxcicliricarica, ModelloAutovetturaDAO mod) throws Exception {		
 		this.ID = id;
 		this.costoSostituzione = costosostituzione;
 		this.cicliRicaricaRimanenti = maxcicliricarica;
@@ -40,7 +40,7 @@ public class Batteria {
 		return this.costoSostituzione;
 	}
 	
-	public ModelloAutovettura getModello() {
+	public ModelloAutovetturaDAO getModello() {
 		return this.modello_compatibile;
 	}
 	
@@ -63,13 +63,13 @@ public class Batteria {
 	}
 	
 	
-	void setModello(ModelloAutovettura modello_compatibile) {
+	void setModello(ModelloAutovetturaDAO modello_compatibile) {
 		this.modello_compatibile = modello_compatibile;
 	}
 
 
 
-	Batteria update() {
+	BatteriaDAO update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
@@ -83,7 +83,7 @@ public class Batteria {
 		return this;
 	}
 	
-	Batteria salva() throws Exception{
+	BatteriaDAO salva() throws Exception{
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 	
@@ -102,13 +102,13 @@ public class Batteria {
 		return this;
 	}
 
-	public Batteria getBatteria (int cod){
+	public BatteriaDAO getBatteria (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
 		session.beginTransaction();
 
-		Batteria b = (Batteria) session.get(Batteria.class, cod) ; 
+		BatteriaDAO b = (BatteriaDAO) session.get(BatteriaDAO.class, cod) ; 
 				
 		session.getTransaction().commit();		
 		session.close();
@@ -123,7 +123,7 @@ public class Batteria {
 				
 	}
 	
-	void elimina (Batteria b){
+	void elimina (BatteriaDAO b){
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();

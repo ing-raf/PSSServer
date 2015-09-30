@@ -15,7 +15,7 @@ import Server.RMIInterface.Autovettura;
 
 public class UC03 {
 	
-	private Server.DAO.Batteria inserita;
+	private Server.DAO.BatteriaDAO inserita;
 	private int idStazione;
 	
 	@After

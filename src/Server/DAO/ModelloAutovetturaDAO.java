@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class ModelloAutovettura {
+public class ModelloAutovetturaDAO {
 
 	@Id
 	private int ID;
@@ -18,7 +18,7 @@ public class ModelloAutovettura {
 	private String modello;
 
 	
-	public ModelloAutovettura(){
+	public ModelloAutovetturaDAO(){
 		
 	}
 	
@@ -46,12 +46,12 @@ public class ModelloAutovettura {
 		this.ID = ID;
 	}
 
-	public ModelloAutovettura getModelloAuto (int cod){
+	public ModelloAutovetturaDAO getModelloAuto (int cod){
 				SessionFactory sf = HibernateUtil.getSessionFactory();
 				Session session = sf.openSession();
 				session.beginTransaction();
 
-				ModelloAutovettura b = (ModelloAutovettura) session.get(ModelloAutovettura.class, cod) ; 
+				ModelloAutovetturaDAO b = (ModelloAutovetturaDAO) session.get(ModelloAutovetturaDAO.class, cod) ; 
 				
 				session.getTransaction().commit();		
 				session.close();
@@ -66,7 +66,7 @@ public class ModelloAutovettura {
 				
 	}
 	
-	ModelloAutovettura update() {
+	ModelloAutovetturaDAO update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -79,7 +79,7 @@ public class ModelloAutovettura {
 		return this;
 	}
 	
-	ModelloAutovettura salva(){
+	ModelloAutovetturaDAO salva(){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -93,7 +93,7 @@ public class ModelloAutovettura {
 	}
 	
 	public boolean equals (Object obj) {
-		ModelloAutovettura mod = (ModelloAutovettura) obj;
+		ModelloAutovetturaDAO mod = (ModelloAutovetturaDAO) obj;
 		if ((this.fornitore.equals(mod.getFornitore())) && (this.modello.equals(mod.getModello())) && (this.getID() == mod.getID()))
 			return true;
 		else

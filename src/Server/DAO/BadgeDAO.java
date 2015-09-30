@@ -12,17 +12,17 @@ import org.hibernate.SessionFactory;
 
 import Server.DAO.HibernateUtil;
 @Entity
-public class Badge {
+public class BadgeDAO {
 	@Id
 	private int codice;
 	@Column
 	private float creditoResiduo;
 	@OneToOne
-	@JoinColumn(name="idCliente") Cliente possessore;
+	@JoinColumn(name="idCliente") ClienteDAO possessore;
 
 	
 
-	public Cliente getCliente() {
+	public ClienteDAO getCliente() {
 		return this.possessore;
 	}
 	
@@ -44,15 +44,15 @@ public class Badge {
 		this.update();
 	}
 	
-	void setCliente (Cliente p){
+	void setCliente (ClienteDAO p){
 		this.possessore=p;
 	}
 	
-	public Badge () {
+	public BadgeDAO () {
 		
 	}
 	
-	public Badge (int codice, float creditoResiduo, Cliente possessore) {
+	public BadgeDAO (int codice, float creditoResiduo, ClienteDAO possessore) {
 		this.codice = codice;
 		this.creditoResiduo = creditoResiduo;
 		this.possessore = possessore;
@@ -60,12 +60,12 @@ public class Badge {
 	}
 
 
-	public Badge getBadge (int cod){
+	public BadgeDAO getBadge (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		Badge trovato = (Badge) session.get(Badge.class, cod);
+		BadgeDAO trovato = (BadgeDAO) session.get(BadgeDAO.class, cod);
 				
 		session.getTransaction().commit();		
 		session.close();
@@ -78,7 +78,7 @@ public class Badge {
 		return trovato;
 	}
 	
-	 Badge update() {
+	 BadgeDAO update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -91,7 +91,7 @@ public class Badge {
 		return this;
 	}
 	
-	Badge salva(){
+	BadgeDAO salva(){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();

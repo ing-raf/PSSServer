@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import Presentation.TerminaleCliente.BadgeClientRMI;
 import Presentation.TerminaleCliente.ClienteRegistratoClientRMI;
-import Server.DAO.Badge;
-import Server.DAO.Batteria;
+import Server.DAO.BadgeDAO;
+import Server.DAO.BatteriaDAO;
 import Server.DAO.PopulateTestDatabase;
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Install_Outcome;
@@ -92,13 +92,13 @@ public class UC01 {
 		
 		assertEquals (idTest + " riuscito", 1, PopulateTestDatabase.testSostituzione(targa).getID() );
 
-		Batteria vecchia = new Batteria();
+		BatteriaDAO vecchia = new BatteriaDAO();
 		
 		Thread.sleep(5*1000);
 		
 		assertEquals (idTest + " riuscito", 77, vecchia.getBatteria(codiceBatteria).getCicliRicarica() );
 		
-		Badge b = new Badge();
+		BadgeDAO b = new BadgeDAO();
 		
 		assertEquals (idTest + " riuscito", 389.79 , b.getBadge(codiceBadge).getCredito(), 0.001f );
 		

@@ -5,9 +5,9 @@ import Server.Entity.Societa;
 
 public class ValidazioneBadge {
 
-	Badge badgeValidato;
+	BadgeDAO badgeValidato;
 
-	public Cliente getCliente() {
+	public ClienteDAO getCliente() {
 		return this.badgeValidato.getCliente();	
 	}
 
@@ -17,7 +17,7 @@ public class ValidazioneBadge {
 	 */
 	public boolean findCodiceBadge(int codice) {
 
-	   this.badgeValidato = new Badge ();
+	   this.badgeValidato = new BadgeDAO ();
 	  return Societa.findBadge(this.badgeValidato, codice);
 	}
 	

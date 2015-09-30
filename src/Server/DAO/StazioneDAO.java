@@ -19,13 +19,13 @@ public class StazioneDAO {
 	private String indirizzo;
 	@OneToMany (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn (name ="idStazione")
-	private List<Batteria> disponibili;
+	private List<BatteriaDAO> disponibili;
 	
 	public StazioneDAO () {
-		this.disponibili = new ArrayList<Batteria>();
+		this.disponibili = new ArrayList<BatteriaDAO>();
 	}
 	
-	public List<Batteria> getAvailableBatteries (){
+	public List<BatteriaDAO> getAvailableBatteries (){
 		return this.disponibili;
 	}
 	

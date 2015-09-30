@@ -12,7 +12,7 @@ import java.util.Calendar;
 
 @Entity
 @Table(name = "Sostituzione")
-public class SostituzioneDAO {
+public class UltimaSostituzioneDAO {
 
 	@Id
 	private int ID;
@@ -26,27 +26,27 @@ public class SostituzioneDAO {
 	private BatteriaDAO batteria;
 	@OneToOne
 	@JoinColumn (name = "idAutovetturaCompatibile") 
-	private SostituzioneDAO autovettura;
+	private UltimaSostituzioneDAO autovettura;
 	
-	public SostituzioneDAO (){
+	public UltimaSostituzioneDAO (){
 	}
 	
-	public Calendar getDataOra() {
+	public Calendar getDateHour() {
 		return this.dataOra;
 	}
 
 	public int getID (){
 		return this.ID;
 	}
-	public StazioneDAO getStazione() {
+	public StazioneDAO getStation() {
 		return this.staz_sostituz;
 	}
 	
-	public BatteriaDAO getBatteria () {
+	public BatteriaDAO getBattery () {
 		return this.batteria;
 	}
 	
-	public void setDataOra(Calendar dataora) {
+	public void setDateHour(Calendar dataora) {
 		this.dataOra = dataora;
 		
 	}
@@ -55,11 +55,11 @@ public class SostituzioneDAO {
 		this.ID = cod;
 	}
 
-	public void setBatteria(BatteriaDAO batteria) {
+	public void setBattery(BatteriaDAO batteria) {
 		this.batteria = batteria;
 	}
 	
-	public void setStazione(StazioneDAO staz_sostituz) {
+	public void setStation(StazioneDAO staz_sostituz) {
 		this.staz_sostituz = staz_sostituz;
 	}
 
@@ -127,7 +127,7 @@ public class SostituzioneDAO {
 		return true;
 	}
 
-	public static SostituzioneDAO findSubstitution(String targa, int id){
+	public static UltimaSostituzioneDAO findSubstitution(String targa, int id){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
@@ -136,7 +136,7 @@ public class SostituzioneDAO {
 		query.setParameter("batt",id);
 		query.setParameter("auto",targa);
 		
-		ArrayList<SostituzioneDAO> result = (ArrayList<SostituzioneDAO>)query.list();
+		ArrayList<UltimaSostituzioneDAO> result = (ArrayList<UltimaSostituzioneDAO>)query.list();
 		
 		session.getTransaction().commit();
 		session.close();

@@ -10,28 +10,28 @@ import org.hibernate.SessionFactory;
 
 
 @Entity
-public class AutovetturaCompatibile {
+public class AutovetturaCompatibileDAO {
 
 	@Id
 	private String numeroTarga;
 	@ManyToOne (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn (name = "modello")  
-	private ModelloAutovettura modello;
+	private ModelloAutovetturaDAO modello;
 	@OneToOne
 	@JoinColumn (name = "idSostituzione") 
-	private Sostituzione sostituzione;
+	private UltimaSostituzioneDAO sostituzione;
 	
-	public AutovetturaCompatibile (){
+	public AutovetturaCompatibileDAO (){
 	
 	}
 		
-	public AutovetturaCompatibile getAuto (String targa){
+	public AutovetturaCompatibileDAO getAuto (String targa){
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		AutovetturaCompatibile trovato = (AutovetturaCompatibile) session.get(AutovetturaCompatibile.class, targa) ; 
+		AutovetturaCompatibileDAO trovato = (AutovetturaCompatibileDAO) session.get(AutovetturaCompatibileDAO.class, targa) ; 
 		
 		//chiudo la transazione e la sessione
 		session.getTransaction().commit();		
@@ -56,11 +56,11 @@ public class AutovetturaCompatibile {
 	}
 	
 
-	public ModelloAutovettura getModello() {
+	public ModelloAutovetturaDAO getModello() {
 		return this.modello;
 	}
 
-	public void setModello(ModelloAutovettura modello) {
+	public void setModello(ModelloAutovetturaDAO modello) {
 		this.modello = modello;
 	}
 

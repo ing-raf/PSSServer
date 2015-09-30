@@ -8,7 +8,7 @@ public class GestoreSostituzioni {
 	public static Server.BusinessLogic.UltimaSostituzione findLastSostituzione(AutovetturaCliente auto) {
 		
 		Server.BusinessLogic.UltimaSostituzione ultima = new Server.BusinessLogic.UltimaSostituzione();
-		Server.DAO.AutovetturaCompatibile a = auto.getAutovetturaCliente();
+		Server.DAO.AutovetturaCompatibileDAO a = auto.getAutovetturaCliente();
 		
 		ultima.setSostituzione(a.getLastRicambio());
 		
@@ -23,7 +23,7 @@ public class GestoreSostituzioni {
 	 */
 	public static Batteria updateSostituzione(AutovetturaCliente autovettura, int idStazione, Server.BusinessLogic.Batteria batteria) {
 
-		Server.DAO.AutovetturaCompatibile a = autovettura.getAutovetturaCliente();
+		Server.DAO.AutovetturaCompatibileDAO a = autovettura.getAutovetturaCliente();
 		Server.DAO.Sostituzione ultima = new Server.DAO.Sostituzione ();
 		ultima = a.getLastRicambio();
 		Server.DAO.StazioneDAO stazione = new Server.DAO.StazioneDAO();
@@ -31,7 +31,7 @@ public class GestoreSostituzioni {
 		if (ris == true ){
 			stazione.getStazione(idStazione);
 			Server.BusinessLogic.Batteria vecchia = new Server.BusinessLogic.Batteria();
-			Server.DAO.Batteria b = new Server.DAO.Batteria ();
+			Server.DAO.BatteriaDAO b = new Server.DAO.BatteriaDAO ();
 			b = ultima.updateSostituzione(stazione, batteria.getBatteria());
 			vecchia.setBatteria(b);
 			stazione.removeBatteria(batteria.getBatteria());

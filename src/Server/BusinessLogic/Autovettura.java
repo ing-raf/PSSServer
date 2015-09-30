@@ -1,10 +1,10 @@
 package Server.BusinessLogic;
 
-import Server.DAO.ModelloAutovettura;
+import Server.DAO.ModelloAutovetturaDAO;
 
 public class Autovettura {
 
-	private ModelloAutovettura autovettura;
+	private ModelloAutovetturaDAO autovettura;
 	
 	public String getModello() {
 		return this.autovettura.getModello();
@@ -18,12 +18,12 @@ public class Autovettura {
 	 * 
 	 * @param modelloAutovettura
 	 */
-	public void setAutovettura(ModelloAutovettura autovettura) {
+	public void setAutovettura(ModelloAutovetturaDAO autovettura) {
 		this.autovettura = autovettura;
 	}
 
 	
-	public ModelloAutovettura getAutovettura(){
+	public ModelloAutovetturaDAO getAutovettura(){
 		return this.autovettura;
 		
 	}

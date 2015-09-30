@@ -14,10 +14,10 @@ public class GestoreAutovetture {
 	 */
 	public static ArrayList<AutovetturaCliente> retrieveListaAutovetture(ValidazioneBadge validazionebadge) {
 		
-		Cliente cliente = validazionebadge.getCliente();
+		ClienteDAO cliente = validazionebadge.getCliente();
 		
 		ArrayList<AutovetturaCliente> listaAutovetture = new ArrayList<AutovetturaCliente>();
-		List<AutovetturaCompatibile> lista = cliente.getAutoPossedute();
+		List<AutovetturaCompatibileDAO> lista = cliente.getAutoPossedute();
 		
 		for(int i = 0; i<lista.size(); i++){
 			Server.BusinessLogic.AutovetturaCliente auto = new Server.BusinessLogic.AutovetturaCliente();
@@ -32,7 +32,7 @@ public class GestoreAutovetture {
 	public static ArrayList<Autovettura> retrieveListaModelli() {
 		
 		ArrayList<Autovettura> listaModelli = new ArrayList<Autovettura>();
-		List<ModelloAutovettura> lista = Societa.getListaModelli();
+		List<ModelloAutovetturaDAO> lista = Societa.getListaModelli();
 		
 		for(int i = 0; i<lista.size(); i++){
 			Autovettura m = new Autovettura();

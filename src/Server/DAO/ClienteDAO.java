@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 @Entity
-public class Cliente {
+public class ClienteDAO {
 
 	@Column
 	private String nome;
@@ -20,24 +20,24 @@ public class Cliente {
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn (name="idProprietario") 
-	private List<AutovetturaCompatibile> autovetturePossedute;
+	private List<AutovetturaCompatibileDAO> autovetturePossedute;
 	
 
 	public int getID (){
 		return this.Id;
 	}
 	
-	 public Cliente() {
-		this.autovetturePossedute = new ArrayList<AutovetturaCompatibile>();
+	 public ClienteDAO() {
+		this.autovetturePossedute = new ArrayList<AutovetturaCompatibileDAO>();
 	}
 
-	public Cliente getCliente (int cod){
+	public ClienteDAO getCliente (int cod){
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		Cliente trovato = (Cliente) session.get(Cliente.class, cod) ; 
+		ClienteDAO trovato = (ClienteDAO) session.get(ClienteDAO.class, cod) ; 
 					
 		session.getTransaction().commit();		
 		session.close();
@@ -73,17 +73,17 @@ public class Cliente {
 		this.dataNascita = d;
 	}
 	
-	public List<AutovetturaCompatibile> getAutoPossedute() {
+	public List<AutovetturaCompatibileDAO> getAutoPossedute() {
 		return this.autovetturePossedute;
 	}
 	
-	void insertAutoPossedute(AutovetturaCompatibile nuova) {
+	void insertAutoPossedute(AutovetturaCompatibileDAO nuova) {
 		this.autovetturePossedute.add(nuova);
 		this.update();
 	}
 	
 	
-	Cliente update() {
+	ClienteDAO update() {
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -100,7 +100,7 @@ public class Cliente {
 	
 	
 	
-	Cliente salva(){
+	ClienteDAO salva(){
 		//apro la sessione e la transazione
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();

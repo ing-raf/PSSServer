@@ -17,7 +17,7 @@ public class GestoreDisponibilita{
 		Server.DAO.StazioneDAO s = new Server.DAO.StazioneDAO();
 		if (Societa.findStazione(s, IDstazione) == false) return false;
 		try {
-			Server.DAO.Batteria b = new Server.DAO.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
+			Server.DAO.BatteriaDAO b = new Server.DAO.BatteriaDAO(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
 			s.insertBatteria(b);
 		} catch (Exception ex) {
 			return false;
@@ -29,10 +29,10 @@ public class GestoreDisponibilita{
 	public static ArrayList<Batteria> retrieveBatterieCompatibili(Autovettura modello, int IDstazione) {
 		
 		ArrayList<Batteria> batterieCompatibili = new ArrayList<Batteria>();
-		Server.DAO.ModelloAutovettura m = modello.getAutovettura();
+		Server.DAO.ModelloAutovetturaDAO m = modello.getAutovettura();
 		Server.DAO.StazioneDAO s = new Server.DAO.StazioneDAO();
 		Societa.findStazione(s, IDstazione);
-		List<Server.DAO.Batteria> lista = s.getBatterieDisp();
+		List<Server.DAO.BatteriaDAO> lista = s.getBatterieDisp();
 		
 		for(int i=0; i<lista.size(); i++){
 			
@@ -55,7 +55,7 @@ public class GestoreDisponibilita{
 			
 		ArrayList<Stazione> stazioniRemote = new ArrayList<Stazione>();
 		List<Server.DAO.StazioneDAO> listaS = Societa.getListaStazioni();
-		ModelloAutovettura m = modello.getAutovettura();
+		ModelloAutovetturaDAO m = modello.getAutovettura();
 		
 		int k;
 		boolean hit;
@@ -67,7 +67,7 @@ public class GestoreDisponibilita{
 			
 			if(listaS.get(i).getID() != IDstazione){
 				
-				List<Server.DAO.Batteria> listaB = listaS.get(i).getBatterieDisp();
+				List<Server.DAO.BatteriaDAO> listaB = listaS.get(i).getBatterieDisp();
 				
 				
 				while(hit != true && k < listaB.size()){
@@ -96,7 +96,7 @@ public class GestoreDisponibilita{
 		
 		Server.DAO.StazioneDAO s = new Server.DAO.StazioneDAO();
 		if ( Societa.findStazione(s, IDstazione) == false) return false;
-		Server.DAO.Batteria b = batteria.getBatteria();
+		Server.DAO.BatteriaDAO b = batteria.getBatteria();
 		
 		s.deleteBatteria(b);
 		
@@ -110,7 +110,7 @@ public class GestoreDisponibilita{
 	 */
 	public static boolean addBatteriaDisponibili(Batteria batteria, int IDstazione) {
 		
-		Server.DAO.Batteria b = batteria.getBatteria();
+		Server.DAO.BatteriaDAO b = batteria.getBatteria();
 		Server.DAO.StazioneDAO s = new Server.DAO.StazioneDAO();
 		
 		if ( Societa.findStazione(s, IDstazione) == false) return false;

@@ -1,10 +1,10 @@
 package Server.BusinessLogic;
 
-import Server.DAO.AutovetturaCompatibile;
+import Server.DAO.AutovetturaCompatibileDAO;
 
 public class AutovetturaCliente extends Autovettura {
 
-	private AutovetturaCompatibile autovettura;
+	private AutovetturaCompatibileDAO autovettura;
 	
 	public String getNumeroTarga() {
 		return autovettura.getNumeroTarga();
@@ -22,11 +22,11 @@ public class AutovetturaCliente extends Autovettura {
 	 * 
 	 * @param autovettura
 	 */
-	public void setAutovettura(AutovetturaCompatibile autovettura) {
+	public void setAutovettura(AutovetturaCompatibileDAO autovettura) {
 		this.autovettura = autovettura;
 	}
 	
-	public AutovetturaCompatibile getAutovetturaCliente(){
+	public AutovetturaCompatibileDAO getAutovetturaCliente(){
 		return this.autovettura;
 	}
 	

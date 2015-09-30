@@ -6,22 +6,22 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import Server.DAO.Badge;
+import Server.DAO.BadgeDAO;
 import Server.DAO.HibernateUtil;
-import Server.DAO.ModelloAutovettura;
+import Server.DAO.ModelloAutovetturaDAO;
 import Server.DAO.StazioneDAO;
 
 public class Societa{
 
-	public  static List<ModelloAutovettura> getListaModelli() {
-		List<ModelloAutovettura> trovate;
+	public  static List<ModelloAutovetturaDAO> getListaModelli() {
+		List<ModelloAutovetturaDAO> trovate;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 				
 		Query query = session.createQuery("from ModelloAutovettura");
 		
-		trovate = (List<ModelloAutovettura>)query.list();
+		trovate = (List<ModelloAutovetturaDAO>)query.list();
 				
 		session.getTransaction().commit();		
 		session.close();
@@ -33,7 +33,7 @@ public class Societa{
 	 * @param badge
 	 * @param codice
 	 */
-	public static boolean findBadge(Badge badge, int codice) {
+	public static boolean findBadge(BadgeDAO badge, int codice) {
 		
 		if (badge.getBadge(codice) == null)
 			return false;
