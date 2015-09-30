@@ -20,7 +20,7 @@ public class BatteriaDAO {
 	@Column
 	private int cicliRicaricaRimanenti;
 	@ManyToOne
-	@JoinColumn (name = "idModello") private ModelloAutovetturaDAO modello_compatibile;
+	@JoinColumn (name = "idModello") private ModelloAutovetturaDAO modello;
 	
 	public BatteriaDAO (){
 	}
@@ -35,7 +35,7 @@ public class BatteriaDAO {
 	}
 	
 	public ModelloAutovetturaDAO getModel() {
-		return this.modello_compatibile;
+		return this.modello;
 	}
 	
 	public int getCyclesRecharge() {
@@ -58,7 +58,7 @@ public class BatteriaDAO {
 	
 	
 	public void setModel(ModelloAutovetturaDAO modello_compatibile) {
-		this.modello_compatibile = modello_compatibile;
+		this.modello = modello_compatibile;
 	}
 
 
