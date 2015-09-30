@@ -13,13 +13,15 @@ import org.hibernate.SessionFactory;
 
 import Server.DAO.HibernateUtil;
 @Entity
+@Table(name = "Badge")
 public class BadgeDAO {
 	@Id
 	private int codice;
 	@Column
 	private float creditoResiduo;
 	@OneToOne
-	@JoinColumn(name="idCliente") ClienteDAO possessore;
+	@JoinColumn(name="idCliente") 
+	private ClienteDAO possessore;
 
 	public BadgeDAO(){
 		

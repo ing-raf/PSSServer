@@ -19,7 +19,7 @@ public class Societa{
 		Session session = sf.openSession();
 		session.beginTransaction();
 				
-		Query query = session.createQuery("from ModelloAutovettura");
+		Query query = session.createQuery("from ModelloAutovetturaDAO");
 		
 		trovate = (List<ModelloAutovetturaDAO>)query.list();
 				
@@ -47,7 +47,7 @@ public class Societa{
 		Session session = sf.openSession();
 		session.beginTransaction();
 				
-		Query query = session.createQuery("from Stazione");
+		Query query = session.createQuery("from StazioneDAO");
 		
 		trovate = (List<StazioneDAO>)query.list();
 				

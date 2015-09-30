@@ -21,8 +21,9 @@ public class Batteria {
 		this.ID = batteria.getID();
 		this.costoSostituzione = batteria.getCostSubstitution();
 		this.cicliRicaricaRimanenti = batteria.getCyclesRecharge();
-		this.modello.setModel(batteria.getModel().getModel());
-		this.modello.setBrand(batteria.getModel().getBrand());
+			this.modello = new ModelloAutovettura();
+			this.modello.setModel(batteria.getModel().getModel());
+			this.modello.setBrand(batteria.getModel().getBrand());
 	}
 	
 	public Batteria(int id, float costo, int cicli, ModelloAutovettura modello) throws Exception{
