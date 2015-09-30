@@ -44,13 +44,5 @@ public class Cliente {
 		this.dataNascita = date;
 	}
 	
-public boolean update(){
-		
-		ClienteDAO dao = ClienteDAO.findClient(this.getName(),this.getSurname(),this.getBirthDate());
-		this.nome = dao.getName();
-		this.cognome = dao.getSurname();
-		this.dataNascita = dao.getBirthDate();
-		return dao.update();
-		
-	}
+
 }
