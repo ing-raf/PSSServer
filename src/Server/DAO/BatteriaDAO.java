@@ -1,12 +1,16 @@
 package Server.DAO;
 
 import javax.persistence.*;
+
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 
 
 @Entity
+@Table (name = "Batteria")
+
 public class BatteriaDAO {
 
 	@Id
@@ -21,30 +25,20 @@ public class BatteriaDAO {
 	public BatteriaDAO (){
 	}
 	
-	
-	
-	public BatteriaDAO(int id, float costosostituzione, int maxcicliricarica, ModelloAutovetturaDAO mod) throws Exception {		
-		this.ID = id;
-		this.costoSostituzione = costosostituzione;
-		this.cicliRicaricaRimanenti = maxcicliricarica;
-		this.modello_compatibile = mod;
-		this.salva(); 
-	}
-	
 	public int getID() {
 		return this.ID;
 	}
 	
 
-	public float getCostoSostituzione() {
+	public float getCostSubstitution() {
 		return this.costoSostituzione;
 	}
 	
-	public ModelloAutovetturaDAO getModello() {
+	public ModelloAutovetturaDAO getModel() {
 		return this.modello_compatibile;
 	}
 	
-	public int getCicliRicarica() {
+	public int getCyclesRecharge() {
 		return this.cicliRicaricaRimanenti;
 	}
 
@@ -52,93 +46,91 @@ public class BatteriaDAO {
 		this.ID = id;
 	}
 	
-	void setCostoSostituzione(float costoSostituzione) {
+	void setCostSubstitution(float costoSostituzione) {
 		this.costoSostituzione = costoSostituzione;
 	}
 
 
 
-	public void setCicliRicarica(int cicli) {
+	public void setCyclesRecharge(int cicli) {
 		this.cicliRicaricaRimanenti = cicli;
 	}
 	
 	
-	void setModello(ModelloAutovetturaDAO modello_compatibile) {
+	void setModel(ModelloAutovetturaDAO modello_compatibile) {
 		this.modello_compatibile = modello_compatibile;
 	}
 
 
 
-	BatteriaDAO update() {
+	public boolean update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
 		session.beginTransaction();
 
-		session.update(this);
-		
-		session.getTransaction().commit();	
-		session.close();
-	
-		return this;
-	}
-	
-	BatteriaDAO salva() throws Exception{
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-	
-		try {
-			session.beginTransaction();
-			session.save(this);
-			session.getTransaction().commit();		
+		try{
+			session.update(this);
+			session.getTransaction().commit();
+		}catch(HibernateException he){
+			session.getTransaction().rollback();
+			return false;
+		}finally{
 			session.close();
-		}catch (Exception ex) {
-	        session.getTransaction().rollback();
-	        session.close();
-	 		System.err.println("exc nell'entity");
-	 		throw ex;			
 		}
-		
-		return this;
+		return true;
 	}
-
-	public BatteriaDAO getBatteria (int cod){
+	
+	
+	public boolean save() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
 		session.beginTransaction();
 
-		BatteriaDAO b = (BatteriaDAO) session.get(BatteriaDAO.class, cod) ; 
+		try{
+			session.save(this);
+			session.getTransaction().commit();
+		}catch(HibernateException he){
+			session.getTransaction().rollback();
+			return false;
+		}finally{
+			session.close();
+		}
+		return true;
+	}
+
+	public static BatteriaDAO findBatteria (int cod){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		
+		session.beginTransaction();
+
+		BatteriaDAO trovato = (BatteriaDAO) session.get(BatteriaDAO.class, cod) ; 
 				
 		session.getTransaction().commit();		
 		session.close();
-		if (b != null)	{
-			this.ID = b.getID();
-			this.costoSostituzione = b.getCostoSostituzione();
-			this.cicliRicaricaRimanenti = b.getCicliRicarica();
-			this.modello_compatibile = b.getModello();
-		}
 		
-		return b;
+		return trovato;
 				
 	}
 	
-	void elimina (BatteriaDAO b){
+	public boolean delete (){
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
-		session.beginTransaction();
-
-		session.delete(b);
-			
-		session.getTransaction().commit();	
-		session.close();
+		try {
+			session.delete(this);
+			session.getTransaction().commit();	
+		} catch (HibernateException he) {
+			session.getTransaction().rollback();
+			return false;
+		} finally {
+			session.close();
+		}
+	
+		return true;
 		
 	}
-	
-	
-
-	
-
 }
