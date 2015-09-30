@@ -33,15 +33,15 @@ public class Societa{
 	 * @param badge
 	 * @param codice
 	 */
-	public static boolean findBadge(BadgeDAO badge, int codice) {
+	public static boolean findBadge(int codice) {
 		
-		if (badge.getBadge(codice) == null)
+		if (BadgeDAO.findBadge(codice) == null)
 			return false;
 		else
 			return true;
 	}
 
-	public static List<StazioneDAO> getListaStazioni() {
+	public static List<StazioneDAO> getStationList() {
 		List<StazioneDAO> trovate;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -56,9 +56,9 @@ public class Societa{
 		return trovate;
 	}
 	
-	public static boolean findStazione (StazioneDAO stazione, int id){
+	public static boolean findStation (int id){
 		
-		if (stazione.getStazione(id) == null)
+		if (StazioneDAO.findStation(id) == null)
 			return false;
 		else
 			return true;
