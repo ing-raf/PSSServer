@@ -26,7 +26,7 @@ public class GestoreSostituzioni {
 		Server.DAO.AutovetturaCompatibile a = autovettura.getAutovetturaCliente();
 		Server.DAO.Sostituzione ultima = new Server.DAO.Sostituzione ();
 		ultima = a.getLastRicambio();
-		Server.DAO.Stazione stazione = new Server.DAO.Stazione();
+		Server.DAO.StazioneDAO stazione = new Server.DAO.StazioneDAO();
 		boolean ris = Societa.findStazione(stazione, idStazione);
 		if (ris == true ){
 			stazione.getStazione(idStazione);

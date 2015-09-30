@@ -16,7 +16,7 @@ public class Sostituzione {
 	private Calendar dataOra;
 	@ManyToOne  (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn (name = "idStazioneSostituzione")
-	private Stazione staz_sostituz;
+	private StazioneDAO staz_sostituz;
 	@OneToOne
 	@JoinColumn (name = "idBatteriaInserita")
 	private Batteria batteria;
@@ -32,7 +32,7 @@ public class Sostituzione {
 	public int getID (){
 		return this.ID;
 	}
-	public Stazione getStazione() {
+	public StazioneDAO getStazione() {
 		return this.staz_sostituz;
 	}
 
@@ -53,7 +53,7 @@ public class Sostituzione {
 		return this.batteria;
 	}
 	
-	public Batteria updateSostituzione (Stazione s, Batteria b){
+	public Batteria updateSostituzione (StazioneDAO s, Batteria b){
 		Batteria vecchia = this.getBatteria();
 		this.batteria = b;
 		this.staz_sostituz = s;
@@ -91,7 +91,7 @@ public class Sostituzione {
 		
 	}
 
-	void setStazione(Stazione staz_sostituz) {
+	void setStazione(StazioneDAO staz_sostituz) {
 		this.staz_sostituz = staz_sostituz;
 	}
 	

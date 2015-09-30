@@ -14,7 +14,7 @@ public class GestoreDisponibilita{
 	 */
 	public static boolean addBatteria(int IDstazione, int IDbatteria, float costosostituzione, int maxcicliricarica, Autovettura modello) {
 		
-		Server.DAO.Stazione s = new Server.DAO.Stazione();
+		Server.DAO.StazioneDAO s = new Server.DAO.StazioneDAO();
 		if (Societa.findStazione(s, IDstazione) == false) return false;
 		try {
 			Server.DAO.Batteria b = new Server.DAO.Batteria(IDbatteria, costosostituzione, maxcicliricarica, modello.getAutovettura());
@@ -30,7 +30,7 @@ public class GestoreDisponibilita{
 		
 		ArrayList<Batteria> batterieCompatibili = new ArrayList<Batteria>();
 		Server.DAO.ModelloAutovettura m = modello.getAutovettura();
-		Server.DAO.Stazione s = new Server.DAO.Stazione();
+		Server.DAO.StazioneDAO s = new Server.DAO.StazioneDAO();
 		Societa.findStazione(s, IDstazione);
 		List<Server.DAO.Batteria> lista = s.getBatterieDisp();
 		
@@ -54,7 +54,7 @@ public class GestoreDisponibilita{
 		
 			
 		ArrayList<Stazione> stazioniRemote = new ArrayList<Stazione>();
-		List<Server.DAO.Stazione> listaS = Societa.getListaStazioni();
+		List<Server.DAO.StazioneDAO> listaS = Societa.getListaStazioni();
 		ModelloAutovettura m = modello.getAutovettura();
 		
 		int k;
@@ -94,7 +94,7 @@ public class GestoreDisponibilita{
 	 */
 	public static boolean removeBatteria(Server.BusinessLogic.Batteria batteria, int IDstazione) {
 		
-		Server.DAO.Stazione s = new Server.DAO.Stazione();
+		Server.DAO.StazioneDAO s = new Server.DAO.StazioneDAO();
 		if ( Societa.findStazione(s, IDstazione) == false) return false;
 		Server.DAO.Batteria b = batteria.getBatteria();
 		
@@ -111,7 +111,7 @@ public class GestoreDisponibilita{
 	public static boolean addBatteriaDisponibili(Batteria batteria, int IDstazione) {
 		
 		Server.DAO.Batteria b = batteria.getBatteria();
-		Server.DAO.Stazione s = new Server.DAO.Stazione();
+		Server.DAO.StazioneDAO s = new Server.DAO.StazioneDAO();
 		
 		if ( Societa.findStazione(s, IDstazione) == false) return false;
 		int cicliNew = b.getCicliRicarica() - 1;

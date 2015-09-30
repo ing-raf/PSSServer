@@ -17,7 +17,7 @@ public class GestoreBatterie {
 	 */
 	public static ArrayList<Batteria> retrieveBatterieQuasiEsauste(int IDstazione) {
 		
-		Server.DAO.Stazione s = new Server.DAO.Stazione();
+		Server.DAO.StazioneDAO s = new Server.DAO.StazioneDAO();
 		Societa.findStazione(s, IDstazione);
 		ArrayList<Batteria> quasiEsauste = new ArrayList<Batteria>();
 		List<Server.DAO.Batteria> lista = s.getBatterieDisp();

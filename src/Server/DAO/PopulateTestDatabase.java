@@ -6,24 +6,24 @@ import java.util.List;
 public class PopulateTestDatabase {
 	
 	public static void populate() throws Exception {		
-		Stazione[] st = new Stazione[3];
+		StazioneDAO[] st = new StazioneDAO[3];
 		
-		st[0] = new Stazione();
+		st[0] = new StazioneDAO();
 		st[0].setID(1);
 		st[0].setNome("Stazione Centrale");
 		st[0].setIndirizzo("Piazzale Tecchio");
 	
-		st[1] = new Stazione();
+		st[1] = new StazioneDAO();
 		st[1].setID(2);
 		st[1].setNome("Stazione Agnoli");
 		st[1].setIndirizzo("Via Nuova Agnano");
 		
-		st[2] = new Stazione();
+		st[2] = new StazioneDAO();
 		st[2].setID(3);
 		st[2].setNome("Stazione Stadio");
 		st[2].setIndirizzo("Via Claudio");
 		
-		for (Stazione s : st) s.salva();
+		for (StazioneDAO s : st) s.salva();
 		
 		ModelloAutovettura[] ma = new ModelloAutovettura[7];
 		
@@ -333,7 +333,7 @@ public class PopulateTestDatabase {
 			
 	public static Batteria testStazione (int idStazione, int idBatteria, int cicliRicarica, float costo, int idModello) {
 		
-		Stazione s = new Stazione();
+		StazioneDAO s = new StazioneDAO();
 		s = s.getStazione(idStazione);
 		
 		List<Batteria> list = s.getBatterieDisp();
