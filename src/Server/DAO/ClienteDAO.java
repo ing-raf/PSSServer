@@ -3,6 +3,7 @@ package Server.DAO;
 import java.util.*;
 import javax.persistence.*;
 
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -22,16 +23,48 @@ public class ClienteDAO {
 	@JoinColumn (name="idProprietario") 
 	private List<AutovetturaCompatibileDAO> autovetturePossedute;
 	
-
+	public ClienteDAO() {
+		this.autovetturePossedute = new ArrayList<AutovetturaCompatibileDAO>();
+	}
+	
 	public int getID (){
 		return this.Id;
 	}
-	
-	 public ClienteDAO() {
-		this.autovetturePossedute = new ArrayList<AutovetturaCompatibileDAO>();
+
+	public String getName() {
+		return this.nome;
+	}	
+
+	public String getSurname() {
+		return this.cognome;
 	}
 
-	public ClienteDAO getCliente (int cod){
+	public Calendar getBirthDate() {
+		return this.dataNascita;
+	}
+	
+	public void setName (String n){
+		this.nome = n;
+	}
+	
+	public void setID (int cod){
+		this.Id=cod;
+	}
+	
+	public void setSurname (String c){
+		this.cognome = c;
+	}
+	
+	public void setDate (Calendar d){
+		this.dataNascita = d;
+	}
+	
+	public List<AutovetturaCompatibileDAO> getOwnedCars() {
+		return this.autovetturePossedute;
+	}
+	
+
+	public static ClienteDAO findClient (int cod){
 
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -44,75 +77,68 @@ public class ClienteDAO {
 					
 		return trovato;
 	}
-
-	public String getNome() {
-		return this.nome;
-	}
 	
-	public void setId (int cod){
-		this.Id=cod;
-	}
-
-	public String getCognome() {
-		return this.cognome;
-	}
-
-	public Calendar getDataNascita() {
-		return this.dataNascita;
-	}
-	
-	void setNome (String n){
-		this.nome = n;
-	}
-	
-	void setCognome (String c){
-		this.cognome = c;
-	}
-	
-	void setData (Calendar d){
-		this.dataNascita = d;
-	}
-	
-	public List<AutovetturaCompatibileDAO> getAutoPossedute() {
-		return this.autovetturePossedute;
-	}
-	
-	void insertAutoPossedute(AutovetturaCompatibileDAO nuova) {
-		this.autovetturePossedute.add(nuova);
-		this.update();
-	}
-	
-	
-	ClienteDAO update() {
-		//apro la sessione e la transazione
+	public boolean update() {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		session.update(this);
+		try{
+			
+			session.update(this);
+			session.getTransaction().commit();	
+		} catch(HibernateException e){
+			session.getTransaction().rollback();
+			return false;
 		
-		//chiudo la transazione e la sessione
-		session.getTransaction().commit();		
-		session.close();
+		} finally{
+				session.close();
+		}
 		
-		return this;
+		return true;
+		
 	}
 	
 	
 	
-	ClienteDAO salva(){
-		//apro la sessione e la transazione
+	public boolean save(){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
 
-		//salvo il cliente
-		session.save(this);
+		try{
+			
+			session.save(this);
+			session.getTransaction().commit();	
+		} catch(HibernateException e){
+			session.getTransaction().rollback();
+			return false;
 		
-		//chiudo la transazione e la sessione
-		session.getTransaction().commit();		
-		session.close();
+		} finally{
+				session.close();
+		}
 		
-		return this;
+		return true;
+		
+	}
+	
+	public boolean delete(){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		
+		try{
+			
+			session.delete(this);
+			session.getTransaction().commit();
+		} catch(HibernateException e){
+			session.getTransaction().rollback();
+			return false;
+		
+		} finally{
+				session.close();
+		}
+		
+		return true;
 	}
 }
