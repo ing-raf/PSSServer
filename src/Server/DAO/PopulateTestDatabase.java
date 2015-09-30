@@ -229,6 +229,8 @@ public class PopulateTestDatabase {
 		bg[3].setCode(5);
 		bg[3].setCredit(1000.00f);
 		bg[3].setClient(cl[0]);
+		
+		for (BadgeDAO b : bg) b.save();
 
 		UltimaSostituzioneDAO[] sost = new UltimaSostituzioneDAO[7];
 		Calendar[] scal = new Calendar[7];
