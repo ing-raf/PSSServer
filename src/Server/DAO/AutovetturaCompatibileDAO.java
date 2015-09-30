@@ -53,7 +53,7 @@ public class AutovetturaCompatibileDAO {
 		this.sostituzione = sostituzione;
 	}
 	
-	public static AutovetturaCompatibileDAO getAuto (String targa){
+	public static AutovetturaCompatibileDAO findCar (String targa){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();
