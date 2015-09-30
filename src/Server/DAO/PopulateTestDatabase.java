@@ -10,20 +10,20 @@ public class PopulateTestDatabase {
 		
 		st[0] = new StazioneDAO();
 		st[0].setID(1);
-		st[0].setNome("Stazione Centrale");
-		st[0].setIndirizzo("Piazzale Tecchio");
+		st[0].setName("Stazione Centrale");
+		st[0].setAddress("Piazzale Tecchio");
 	
 		st[1] = new StazioneDAO();
 		st[1].setID(2);
-		st[1].setNome("Stazione Agnoli");
-		st[1].setIndirizzo("Via Nuova Agnano");
+		st[1].setName("Stazione Agnoli");
+		st[1].setAddress("Via Nuova Agnano");
 		
 		st[2] = new StazioneDAO();
 		st[2].setID(3);
-		st[2].setNome("Stazione Stadio");
-		st[2].setIndirizzo("Via Claudio");
+		st[2].setName("Stazione Stadio");
+		st[2].setAddress("Via Claudio");
 		
-		for (StazioneDAO s : st) s.salva();
+		for (StazioneDAO s : st) s.save();
 		
 		ModelloAutovetturaDAO[] ma = new ModelloAutovetturaDAO[7];
 		
@@ -62,158 +62,171 @@ public class PopulateTestDatabase {
 		ma[6].setFornitore("Fiat");
 		ma[6].setModello("Panda");
 		
-		for (ModelloAutovetturaDAO m : ma) m.salva();
+		for (ModelloAutovetturaDAO m : ma) m.save();
 		
 		BatteriaDAO[] batt = new BatteriaDAO[15];
 		
 		batt[0] = new BatteriaDAO();
 		batt[0].setID(1);
-		batt[0].setCostoSostituzione(610.21f);
-		batt[0].setCicliRicarica(121);
-		batt[0].setModello(ma[1]);
+		batt[0].setCostSubstitution(610.21f);
+		batt[0].setCyclesRecharge(121);
+		batt[0].setModel(ma[1]);
 	
 		batt[1] = new BatteriaDAO();
 		batt[1].setID(2);
-		batt[1].setCostoSostituzione(550.50f);
-		batt[1].setCicliRicarica(4);
-		batt[1].setModello(ma[0]);
+		batt[1].setCostSubstitution(550.50f);
+		batt[1].setCyclesRecharge(4);
+		batt[1].setModel(ma[0]);
 		
 		batt[2] = new BatteriaDAO();
 		batt[2].setID(3);
-		batt[2].setCostoSostituzione(490.25f);
-		batt[2].setCicliRicarica(79);
-		batt[2].setModello(ma[0]);
+		batt[2].setCostSubstitution(490.25f);
+		batt[2].setCyclesRecharge(79);
+		batt[2].setModel(ma[0]);
 		
 		batt[3] = new BatteriaDAO();
 		batt[3].setID(9);
-		batt[3].setCostoSostituzione(250.25f);
-		batt[3].setCicliRicarica(3);
-		batt[3].setModello(ma[2]);
+		batt[3].setCostSubstitution(250.25f);
+		batt[3].setCyclesRecharge(3);
+		batt[3].setModel(ma[2]);
 		
 		batt[4] = new BatteriaDAO();
 		batt[4].setID(10);
-		batt[4].setCostoSostituzione(20.25f);
-		batt[4].setCicliRicarica(2);
-		batt[4].setModello(ma[5]);
+		batt[4].setCostSubstitution(20.25f);
+		batt[4].setCyclesRecharge(2);
+		batt[4].setModel(ma[5]);
 		
 		batt[5] = new BatteriaDAO();
 		batt[5].setID(12);
-		batt[5].setCostoSostituzione(21.50f);
-		batt[5].setCicliRicarica(20);
-		batt[5].setModello(ma[5]);
+		batt[5].setCostSubstitution(21.50f);
+		batt[5].setCyclesRecharge(20);
+		batt[5].setModel(ma[5]);
 		
 		batt[6] = new BatteriaDAO();
 		batt[6].setID(21);
-		batt[6].setCostoSostituzione(11.50f);
-		batt[6].setCicliRicarica(24);
-		batt[6].setModello(ma[6]);
+		batt[6].setCostSubstitution(11.50f);
+		batt[6].setCyclesRecharge(24);
+		batt[6].setModel(ma[6]);
 		
 		batt[7] = new BatteriaDAO();
 		batt[7].setID(22);
-		batt[7].setCostoSostituzione(9.90f);
-		batt[7].setCicliRicarica(19);
-		batt[7].setModello(ma[6]);
+		batt[7].setCostSubstitution(9.90f);
+		batt[7].setCyclesRecharge(19);
+		batt[7].setModel(ma[6]);
 		
 		batt[8] = new BatteriaDAO();
 		batt[8].setID(31);
-		batt[8].setCostoSostituzione(40.55f);
-		batt[8].setCicliRicarica(6);
-		batt[8].setModello(ma[3]);
+		batt[8].setCostSubstitution(40.55f);
+		batt[8].setCyclesRecharge(6);
+		batt[8].setModel(ma[3]);
 		
 		batt[9] = new BatteriaDAO();
 		batt[9].setID(32);
-		batt[9].setCostoSostituzione(10.23f);
-		batt[9].setCicliRicarica(21);
-		batt[9].setModello(ma[5]);
+		batt[9].setCostSubstitution(10.23f);
+		batt[9].setCyclesRecharge(21);
+		batt[9].setModel(ma[5]);
 		
 		batt[10] = new BatteriaDAO();
 		batt[10].setID(33);
-		batt[10].setCostoSostituzione(550.55f);
-		batt[10].setCicliRicarica(78);
-		batt[10].setModello(ma[1]);
+		batt[10].setCostSubstitution(550.55f);
+		batt[10].setCyclesRecharge(78);
+		batt[10].setModel(ma[1]);
 		
 		batt[11] = new BatteriaDAO();
 		batt[11].setID(34);
-		batt[11].setCostoSostituzione(470.98f);
-		batt[11].setCicliRicarica(56);
-		batt[11].setModello(ma[2]);
+		batt[11].setCostSubstitution(470.98f);
+		batt[11].setCyclesRecharge(56);
+		batt[11].setModel(ma[2]);
 		
 		batt[12] = new BatteriaDAO();
 		batt[12].setID(35);
-		batt[12].setCostoSostituzione(450.99f);
-		batt[12].setCicliRicarica(70);
-		batt[12].setModello(ma[2]);
+		batt[12].setCostSubstitution(450.99f);
+		batt[12].setCyclesRecharge(70);
+		batt[12].setModel(ma[2]);
 		
 		batt[13] = new BatteriaDAO();
 		batt[13].setID(36);
-		batt[13].setCostoSostituzione(530.30f);
-		batt[13].setCicliRicarica(108);
-		batt[13].setModello(ma[0]);
+		batt[13].setCostSubstitution(530.30f);
+		batt[13].setCyclesRecharge(108);
+		batt[13].setModel(ma[0]);
 		
 		batt[14] = new BatteriaDAO();
 		batt[14].setID(37);
-		batt[14].setCostoSostituzione(25.30f);
-		batt[14].setCicliRicarica(20);
-		batt[14].setModello(ma[4]);
+		batt[14].setCostSubstitution(25.30f);
+		batt[14].setCyclesRecharge(20);
+		batt[14].setModel(ma[4]);
 		
-		for (BatteriaDAO b : batt) b.salva();
+		for (BatteriaDAO b : batt) b.save();
 		
-		st[2].insertBatteria(batt[0]);
-		st[0].insertBatteria(batt[1]);
-		st[0].insertBatteria(batt[2]);
-		st[1].insertBatteria(batt[3]);
-		st[1].insertBatteria(batt[4]);
-		st[2].insertBatteria(batt[5]);
-		st[1].insertBatteria(batt[6]);
-		st[0].insertBatteria(batt[7]);
+		st[2].setAvailableBatteries(batt[0]);
+		st[0].setAvailableBatteries(batt[1]);
+		st[0].setAvailableBatteries(batt[2]);
+		st[1].setAvailableBatteries(batt[3]);
+		st[1].setAvailableBatteries(batt[4]);
+		st[2].setAvailableBatteries(batt[5]);
+		st[1].setAvailableBatteries(batt[6]);
+		st[0].setAvailableBatteries(batt[7]);
 		
 		ClienteDAO[] cl = new ClienteDAO[4];
 		Calendar[] cal = new Calendar[4];
 		
 		cl[0] = new ClienteDAO();
-		cl[0].setId(-2);
-		cl[0].setNome("Sun");
-		cl[0].setCognome("Hu");
+		cl[0].setID(-2);
+		cl[0].setName("Sun");
+		cl[0].setSurname("Hu");
 		cal[0] = Calendar.getInstance();
 		cal[0].clear();
 		cal[0].set(1990, 10, 21);
-		cl[0].setData(cal[0]);
+		cl[0].setDate(cal[0]);
 		
 		cl[1] = new ClienteDAO();
-		cl[1].setId(0);
-		cl[1].setNome("Abbas");
-		cl[1].setCognome("Aziz");
+		cl[1].setID(0);
+		cl[1].setName("Abbas");
+		cl[1].setSurname("Aziz");
 		cal[1] = Calendar.getInstance();
 		cal[1].clear();
 		cal[1].set(1996, 04, 13);
-		cl[1].setData(cal[1]);
+		cl[1].setDate(cal[1]);
 		
 		cl[2] = new ClienteDAO();
-		cl[2].setId(1);
-		cl[2].setNome("Rossi");
-		cl[2].setCognome("Mario");
+		cl[2].setID(1);
+		cl[2].setName("Rossi");
+		cl[2].setSurname("Mario");
 		cal[2] = Calendar.getInstance();
 		cal[2].clear();
 		cal[2].set(1984, 07, 03);
-		cl[2].setData(cal[2]);
+		cl[2].setDate(cal[2]);
 		
 		cl[3] = new ClienteDAO();
-		cl[3].setId(3);
-		cl[3].setNome("Brambilla");
-		cl[3].setCognome("Paolo");
+		cl[3].setID(3);
+		cl[3].setName("Brambilla");
+		cl[3].setSurname("Paolo");
 		cal[3] = Calendar.getInstance();
 		cal[3].clear();
 		cal[3].set(1965, 01, 30);
-		cl[3].setData(cal[3]);
+		cl[3].setDate(cal[3]);
 		
-		for (ClienteDAO c : cl) c.salva();
+		for (ClienteDAO c : cl) c.save();
 		
 		BadgeDAO[] bg = new BadgeDAO[4];
 		
-		bg[0] = new BadgeDAO(-3, 50.00f, cl[2]);	
-		bg[1] = new BadgeDAO(0, 18.21f, cl[3]);		
-		bg[2] = new BadgeDAO(1, 10.00f, cl[1]);		
-		bg[3] = new BadgeDAO(5, 1000.00f, cl[0]);
+	
+		bg[0].setCode(-3);
+		bg[0].setCredit(50.00f);
+		bg[0].setClient(cl[2]);
+			
+		bg[1].setCode(0);
+		bg[1].setCredit(18.21f);
+		bg[1].setClient(cl[3]);
+		
+		
+		bg[2].setCode(1);
+		bg[2].setCredit(10.00f);
+		bg[2].setClient(cl[1]);
+		
+		bg[0].setCode(5);
+		bg[0].setCredit(1000.00f);
+		bg[0].setClient(cl[0]);
 
 		UltimaSostituzioneDAO[] sost = new UltimaSostituzioneDAO[7];
 		Calendar[] scal = new Calendar[7];
@@ -223,126 +236,125 @@ public class PopulateTestDatabase {
 		scal[0] = Calendar.getInstance();
 		scal[0].clear();
 		scal[0].set(2015, Calendar.AUGUST, 29, 18, 32);
-		sost[0].setDataOra(scal[0]);
-		sost[0].setBatteria(batt[8]);
-		sost[0].setStazione(st[1]);
+		sost[0].setDateHour(scal[0]);
+		sost[0].setBattery(batt[8]);
+		sost[0].setStation(st[1]);
 		
 		sost[1] = new UltimaSostituzioneDAO();
 		sost[1].setID(3);
 		scal[1] = Calendar.getInstance();
 		scal[1].clear();
 		scal[1].set(2015, Calendar.JULY, 20, 21, 12);
-		sost[1].setDataOra(scal[1]);
-		sost[1].setBatteria(batt[9]);
-		sost[1].setStazione(st[0]);
+		sost[1].setDateHour(scal[1]);
+		sost[1].setBattery(batt[9]);
+		sost[1].setStation(st[0]);
 		
 		sost[2] = new UltimaSostituzioneDAO();
 		sost[2].setID(5);
 		scal[2] = Calendar.getInstance();
 		scal[2].clear();
 		scal[2].set(2015, Calendar.SEPTEMBER, 02, 10, 15);
-		sost[2].setDataOra(scal[2]);
-		sost[2].setBatteria(batt[10]);
-		sost[2].setStazione(st[0]);
+		sost[2].setDateHour(scal[2]);
+		sost[2].setBattery(batt[10]);
+		sost[2].setStation(st[0]);
 		
 		sost[3] = new UltimaSostituzioneDAO();
 		sost[3].setID(6);
 		scal[3] = Calendar.getInstance();
 		scal[3].clear();
 		scal[3].set(2015, Calendar.SEPTEMBER, 01, 13, 30);
-		sost[3].setDataOra(scal[3]);
-		sost[3].setBatteria(batt[11]);
-		sost[3].setStazione(st[2]);
+		sost[3].setDateHour(scal[3]);
+		sost[3].setBattery(batt[11]);
+		sost[3].setStation(st[2]);
 		
 		sost[4] = new UltimaSostituzioneDAO();
 		sost[4].setID(7);
 		scal[4] = Calendar.getInstance();
 		scal[4].clear();
 		scal[4].set(2015, Calendar.AUGUST, 20, 9, 20);
-		sost[4].setDataOra(scal[4]);
-		sost[4].setBatteria(batt[12]);
-		sost[4].setStazione(st[1]);
+		sost[4].setDateHour(scal[4]);
+		sost[4].setBattery(batt[12]);
+		sost[4].setStation(st[1]);
 		
 		sost[5] = new UltimaSostituzioneDAO();
 		sost[5].setID(10);
 		scal[5] = Calendar.getInstance();
 		scal[5].clear();
 		scal[5].set(2015, Calendar.JULY, 15, 18, 45);
-		sost[5].setDataOra(scal[5]);
-		sost[5].setBatteria(batt[13]);
-		sost[5].setStazione(st[1]);
+		sost[5].setDateHour(scal[5]);
+		sost[5].setBattery(batt[13]);
+		sost[5].setStation(st[1]);
 		
 		sost[6] = new UltimaSostituzioneDAO();
 		sost[6].setID(11);
 		scal[6] = Calendar.getInstance();
 		scal[6].clear();
 		scal[6].set(2015, Calendar.SEPTEMBER, 12, 15, 29);
-		sost[6].setDataOra(scal[6]);
-		sost[6].setBatteria(batt[14]);
-		sost[6].setStazione(st[0]);
+		sost[6].setDateHour(scal[6]);
+		sost[6].setBattery(batt[14]);
+		sost[6].setStation(st[0]);
 		
-		for (UltimaSostituzioneDAO s : sost) s.salva();
+		for (UltimaSostituzioneDAO s : sost) s.save();
 		
 		AutovetturaCompatibileDAO[] ac = new AutovetturaCompatibileDAO[7];
 		
 		ac[0] = new AutovetturaCompatibileDAO();
-		ac[0].setNumeroTarga("AS 110 WA");
-		ac[0].setModello(ma[3]);
+		ac[0].setNumberPlate("AS 110 WA");
+		ac[0].setModel(ma[3]);
 		ac[0].setLastRicambio(sost[0]);
 	
 		ac[1] = new AutovetturaCompatibileDAO();
-		ac[1].setNumeroTarga("CB 739 HJ");
-		ac[1].setModello(ma[5]);
+		ac[1].setNumberPlate("CB 739 HJ");
+		ac[1].setModel(ma[5]);
 		ac[1].setLastRicambio(sost[1]);
 		
 		ac[2] = new AutovetturaCompatibileDAO();
-		ac[2].setNumeroTarga("DZ 120 FP");
-		ac[2].setModello(ma[1]);
+		ac[2].setNumberPlate("DZ 120 FP");
+		ac[2].setModel(ma[1]);
 		ac[2].setLastRicambio(sost[2]);
 	
 		ac[3] = new AutovetturaCompatibileDAO();
-		ac[3].setNumeroTarga("EA 210 BB");
-		ac[3].setModello(ma[2]);
+		ac[3].setNumberPlate("EA 210 BB");
+		ac[3].setModel(ma[2]);
 		ac[3].setLastRicambio(sost[3]);
 		
 		ac[4] = new AutovetturaCompatibileDAO();
-		ac[4].setNumeroTarga("ED 190 ES");
-		ac[4].setModello(ma[2]);
+		ac[4].setNumberPlate("ED 190 ES");
+		ac[4].setModel(ma[2]);
 		ac[4].setLastRicambio(sost[4]);
 	
 		ac[5] = new AutovetturaCompatibileDAO();
-		ac[5].setNumeroTarga("EF 580 AA");
-		ac[5].setModello(ma[0]);
+		ac[5].setNumberPlate("EF 580 AA");
+		ac[5].setModel(ma[0]);
 		ac[5].setLastRicambio(sost[5]);
 		
 		ac[6] = new AutovetturaCompatibileDAO();
-		ac[6].setNumeroTarga("EZ 711 PL");
-		ac[6].setModello(ma[4]);
+		ac[6].setNumberPlate("EZ 711 PL");
+		ac[6].setModel(ma[4]);
 		ac[6].setLastRicambio(sost[6]);
 		
-		for (AutovetturaCompatibileDAO a : ac) a.salva();
+		for (AutovetturaCompatibileDAO a : ac) a.save();
 		
-		cl[1].insertAutoPossedute(ac[0]);
-		cl[3].insertAutoPossedute(ac[1]);
-		cl[0].insertAutoPossedute(ac[2]);
-		cl[0].insertAutoPossedute(ac[3]);
-		cl[0].insertAutoPossedute(ac[4]);
-		cl[0].insertAutoPossedute(ac[5]);
-		cl[0].insertAutoPossedute(ac[6]);
+		cl[1].setOwnedCars(ac[0]);
+		cl[3].setOwnedCars(ac[1]);
+		cl[0].setOwnedCars(ac[2]);
+		cl[0].setOwnedCars(ac[3]);
+		cl[0].setOwnedCars(ac[4]);
+		cl[0].setOwnedCars(ac[5]);
+		cl[0].setOwnedCars(ac[6]);
 	}
 			
 	public static BatteriaDAO testStazione (int idStazione, int idBatteria, int cicliRicarica, float costo, int idModello) {
 		
-		StazioneDAO s = new StazioneDAO();
-		s = s.getStazione(idStazione);
+		StazioneDAO s = StazioneDAO.findStation(idStazione);
 		
-		List<BatteriaDAO> list = s.getBatterieDisp();
+		List<BatteriaDAO> list = s.getAvailableBatteries();
 		int k = 0;
 		while (k < list.size() ){
 			if ((list.get(k).getID() == idBatteria) && 
-				(list.get(k).getCicliRicarica() == cicliRicarica) && 
-				(Float.compare(list.get(k).getCostoSostituzione(), costo) == 0) && 
-				(list.get(k).getModello().getID() == idModello)){
+				(list.get(k).getCyclesRecharge() == cicliRicarica) && 
+				(Float.compare(list.get(k).getCostSubstitution(), costo) == 0) && 
+				(list.get(k).getModel().getID() == idModello)){
 					return list.get(k);
 				} 
 				k++;
@@ -352,14 +364,12 @@ public class PopulateTestDatabase {
 	}
 	
 	public static BatteriaDAO testSostituzione (String targa){
-		AutovetturaCompatibileDAO auto = new AutovetturaCompatibileDAO ();
-		
-		auto.getAuto(targa);
+		AutovetturaCompatibileDAO auto = AutovetturaCompatibileDAO.findCar(targa);
 		
 		if (auto != null){
 			UltimaSostituzioneDAO s = new UltimaSostituzioneDAO ();
-			s = auto.getLastRicambio();		
-			return s.getBatteria();		
+			s = auto.getLastSubstitution();		
+			return s.getBattery();		
 		}
 		return null;
 	}

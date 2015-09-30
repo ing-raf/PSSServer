@@ -63,6 +63,10 @@ public class ClienteDAO {
 		return this.autovetturePossedute;
 	}
 	
+	public void setOwnedCars(AutovetturaCompatibileDAO auto) {
+		this.autovetturePossedute.add(auto);
+	}
+	
 
 	public static ClienteDAO findClient (int cod){
 
