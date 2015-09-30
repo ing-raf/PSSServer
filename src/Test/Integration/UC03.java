@@ -10,7 +10,7 @@ import org.junit.Test;
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;
 import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
 import Server.DAO.PopulateTestDatabase;
-import Server.DAO.Stazione;
+import Server.DAO.StazioneDAO;
 import Server.RMIInterface.Autovettura;
 
 public class UC03 {
@@ -22,7 +22,7 @@ public class UC03 {
 	public void tearDown() throws Exception {
 		
 		if (inserita != null) {
-			Stazione s = new Stazione();
+			StazioneDAO s = new StazioneDAO();
 			s = s.getStazione(this.idStazione);
 			s.deleteBatteria(this.inserita);
 		}
