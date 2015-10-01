@@ -1,21 +1,19 @@
 package Server.Entity;
 
+import Server.DAO.ModelloAutovetturaDAO;
+
 public class ModelloAutovettura {
 
-	private int ID;
 	private String fornitore;
 	private String modello;
 	
 	public ModelloAutovettura(){
 		
 	}
-	
-	public int getID() {
-		return this.ID;
-	}
-	
-	public void setID(int iD) {
-		this.ID = iD;
+
+	public ModelloAutovettura(ModelloAutovetturaDAO dao) {
+		this.fornitore = dao.getBrand();
+		this.modello = dao.getModel();
 	}
 	
 	public String getBrand() {
@@ -32,6 +30,14 @@ public class ModelloAutovettura {
 	
 	public void setModel(String modello) {
 		this.modello = modello;
+	}
+	
+	public ModelloAutovetturaDAO prepareDAO() {
+		ModelloAutovetturaDAO dao = new ModelloAutovetturaDAO();
+		dao.setBrand(this.fornitore);
+		dao.setModel(this.modello);
+		dao.setID();
+		return dao;
 	}
 	
 	
