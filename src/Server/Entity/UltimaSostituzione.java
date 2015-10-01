@@ -81,15 +81,8 @@ public class UltimaSostituzione {
 		this.autovettura = autovettura;
 	}*/
 	
-	public boolean update(String targa, Batteria vecchia ) {
+	public boolean update(String targa ) {
 		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
-		vecchia.setID(dao.getBattery().getID());
-		vecchia.setCostSubstitution(dao.getBattery().getCostSubstitution());
-		vecchia.setCyclesRecharge(dao.getBattery().getCyclesRecharge());
-		ModelloAutovettura mode = new ModelloAutovettura ();
-		mode.setBrand(dao.getBattery().getModel().getBrand());
-		mode.setModel(dao.getBattery().getModel().getModel());
-		vecchia.setModel(mode);
 		
 		StazioneDAO stazione = new StazioneDAO();
 		stazione.setAddress(this.staz_sostituz.getAddress());
