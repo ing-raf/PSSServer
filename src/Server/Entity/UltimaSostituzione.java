@@ -57,10 +57,18 @@ public class UltimaSostituzione {
 		dao.setDateHour(this.dataOra);
 		dao.setBattery( this.batteria.prepareDAO() );
 		dao.setStation( this.staz_sostituz.prepareDAO() );
+		dao.setID();
+		return dao;
 	}
 	
-	public boolean update(String targa ) {
-/*		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
+	public boolean update() {
+		this.staz_sostituz.removeBattery(this.batteria);
+		UltimaSostituzioneDAO dao = this.prepareDAO();
+		return dao.update();
+	}
+	
+/*	public boolean update(String targa ) {
+		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
 //		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
 		
 		dao.setID(this.sporcata);

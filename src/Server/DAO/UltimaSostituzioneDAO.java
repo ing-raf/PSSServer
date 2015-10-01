@@ -25,7 +25,7 @@ public class UltimaSostituzioneDAO {
 	@OneToOne
 	@JoinColumn (name = "idBatteriaInserita")
 	private BatteriaDAO batteria;
-	@OneToOne (mappedBy="sostituzione")
+	@OneToOne (mappedBy="sostituzione", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn (name = "idAutovettura") 
 	private AutovetturaCompatibileDAO autovettura;
 	
@@ -57,7 +57,8 @@ public class UltimaSostituzioneDAO {
 	}
 	
 	public void setID() {
-		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(this.autovettura.getNumberPlate());
+		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution("ED 190 ES");
+//		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(this.autovettura.getNumberPlate());
 		this.ID = dao.getID();
 	}
 

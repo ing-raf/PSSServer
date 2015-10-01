@@ -87,12 +87,11 @@ public class Stazione {
 	}
 	
 	public void removeBattery (Batteria vecchia){
-		if (vecchia == null ) System.err.println("lota");
-		else if (this.disponibili == null) System.err.println("merda");
 		for (Batteria b: this.disponibili){
-			if (b.equals(vecchia))
-				this.disponibili.remove(vecchia);
-			
+			if (b.equals(vecchia)) {
+				this.disponibili.remove(vecchia);	
+				break;
+			}
 		}
 		
 	}
