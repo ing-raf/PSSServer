@@ -1,5 +1,6 @@
 package Server.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Server.DAO.BatteriaDAO;
@@ -18,6 +19,18 @@ public class Stazione {
 		this.ID = dao.getID();
 		this.nome = dao.getName();
 		this.indirizzo = dao.getAddress();
+		this.disponibili = new ArrayList<Batteria> ();
+		for (BatteriaDAO b: dao.getAvailableBatteries()){
+			Batteria batt = new Batteria ();
+			batt.setID(b.getID());
+			batt.setCostSubstitution(b.getCostSubstitution());
+			batt.setCyclesRecharge(b.getCyclesRecharge());
+			ModelloAutovettura mod = new ModelloAutovettura ();
+			mod.setBrand(b.getModel().getBrand());
+			mod.setModel(b.getModel().getModel());
+			batt.setModel(mod);
+			this.disponibili.add(batt);
+		}
 	}
 	
 	public int getID(){
@@ -52,7 +65,18 @@ public class Stazione {
 		this.disponibili.add(b);
 	}
 	
-public boolean update(){
+	public void removeBattery (Batteria vecchia){
+		if (vecchia == null ) System.err.println("lota");
+		else if (this.disponibili == null) System.err.println("merda");
+		for (Batteria b: this.disponibili){
+			if (b.equals(vecchia))
+				this.disponibili.remove(vecchia);
+			
+		}
+		
+	}
+	
+	public boolean update(){
 		
 		StazioneDAO dao = StazioneDAO.findStation(this.getID());
 		dao.setAddress(this.getAddress());
@@ -74,4 +98,5 @@ public boolean update(){
 		return dao.update();
 		
 	}
+	
 }

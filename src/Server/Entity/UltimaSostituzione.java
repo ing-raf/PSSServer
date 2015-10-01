@@ -12,7 +12,7 @@ public class UltimaSostituzione {
 	private Calendar dataOra;
 	private Stazione staz_sostituz;
 	private Batteria batteria;
-	private AutovetturaCompatibile autovettura;
+	//private AutovetturaCompatibile autovettura;
 	
 	public UltimaSostituzione() {
 		
@@ -56,16 +56,24 @@ public class UltimaSostituzione {
 		this.batteria = batteria;
 	}
 
-	public AutovetturaCompatibile getCar() {
+	/*public AutovetturaCompatibile getCar() {
 		return autovettura;
 	}
 
 	public void setCar(AutovetturaCompatibile autovettura) {
 		this.autovettura = autovettura;
-	}
+	}*/
 	
-	public boolean update() {
-		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
+	public boolean update(String targa, Batteria vecchia ) {
+		
+		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
+		vecchia.setID(dao.getBattery().getID());
+		vecchia.setCostSubstitution(dao.getBattery().getCostSubstitution());
+		vecchia.setCyclesRecharge(dao.getBattery().getCyclesRecharge());
+		ModelloAutovettura mode = new ModelloAutovettura ();
+		mode.setBrand(dao.getBattery().getModel().getBrand());
+		mode.setModel(dao.getBattery().getModel().getModel());
+		vecchia.setModel(mode);
 		
 		StazioneDAO stazione = new StazioneDAO();
 		stazione.setAddress(this.staz_sostituz.getAddress());
@@ -81,25 +89,30 @@ public class UltimaSostituzione {
 				mod.setBrand( stazione.getAvailableBatteries().get(i).getModel().getBrand() );
 				mod.setModel( stazione.getAvailableBatteries().get(i).getModel().getModel() );
 			batt.setModel(mod);
-			
 			stazione.setAvailableBatteries(batt);
 		}
 		
+		
 		dao.setStation(stazione);
 		
-		Batteria batteria = new Batteria();
+		BatteriaDAO batteria = new BatteriaDAO();
 		batteria.setCostSubstitution(this.batteria.getCostSubstitution());
 		batteria.setCyclesRecharge(this.batteria.getCyclesRecharge());
 		batteria.setID(this.batteria.getID());
-		batteria.setModel(this.batteria.getModel());
-		dao.setBattery(dao.getBattery());
+		ModelloAutovetturaDAO mod = new ModelloAutovetturaDAO ();
+		mod.setBrand(this.getBattery().getModel().getBrand());
+		mod.setModel(this.getBattery().getModel().getModel());
+		batteria.setModel(mod);
+		dao.setBattery(batteria);
 		
 		dao.setDateHour(this.dataOra);
 		
-		if(!dao.update()){
+		if (!dao.getStation().update())
 			return false;
-		}else
-			return true;
+		
+		//UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution("ED 190 ES");
+		
+		return dao.update();
 	}
 
 }

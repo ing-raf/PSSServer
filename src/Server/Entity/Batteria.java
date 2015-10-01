@@ -93,4 +93,18 @@ public class Batteria {
 		}else
 			return true;
 	}
+	
+	public boolean equals (Object obj){
+		Batteria b = (Batteria) obj;  
+		if ((b.getID() == this.getID()) &&
+				(Float.compare(b.getCostSubstitution(), this.getCostSubstitution()) == 0) && 
+				(b.getCyclesRecharge() == this.getCyclesRecharge())) 
+			return true;
+		else
+			return false;
+		
+				
+	
+	
+	}
 }
