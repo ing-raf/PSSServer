@@ -1,7 +1,10 @@
 package Server.Entity;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import Server.DAO.AutovetturaCompatibileDAO;
 import Server.DAO.ClienteDAO;
 
 
@@ -10,16 +13,42 @@ public class Cliente {
 	private String nome;
 	private String cognome;
 	private Calendar dataNascita;
+	private ArrayList<AutovetturaCompatibile> autovetturePossedute;
 	
-	public Cliente(String n, String s, Calendar d){
+	public static Cliente getClient (String n, String s, Calendar d){
 		
 		ClienteDAO dao = ClienteDAO.findClient(n, s, d);
+		
+		return new Cliente (dao);
+	}
+	
+	public Cliente (ClienteDAO dao){
 		this.nome = dao.getName();
 		this.cognome = dao.getSurname();
 		this.dataNascita = dao.getBirthDate();
+		this.autovetturePossedute = new ArrayList<AutovetturaCompatibile> ();
+		for (AutovetturaCompatibileDAO a: dao.getOwnedCars()){
+			this.autovetturePossedute.add(new AutovetturaCompatibile (a));
+		}
 
 	}
 	
+	public ClienteDAO prepareDAO (){
+		ClienteDAO dao = new ClienteDAO();
+		dao.setName(this.nome);
+		dao.setSurname(this.cognome);
+		dao.setDate(this.dataNascita);
+		for (AutovetturaCompatibile a: this.autovetturePossedute){
+			dao.setOwnedCars(a.prepareDAO());
+		}
+		return dao;
+		
+	}
+	
+	public Cliente() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getName(){
 		return this.nome;
 	}

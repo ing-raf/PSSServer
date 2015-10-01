@@ -1,5 +1,6 @@
 package Server.Entity;
 
+import Server.DAO.AutovetturaCompatibileDAO;
 import Server.DAO.BadgeDAO;
 
 public class Badge {
@@ -8,13 +9,23 @@ public class Badge {
 	private float creditoResiduo;
 	private Cliente possessore;
 	
-	public Badge(int cod){
+	public static Badge getBadge(int cod){
 		
 		BadgeDAO dao = BadgeDAO.findBadge(cod);
+		return new Badge (dao);
+
+	}
+	
+	public Badge (BadgeDAO dao) {
 		this.codice = dao.getCode();
 		this.creditoResiduo = dao.getCredit();
-		this.possessore = new Cliente(dao.getClient().getName(),dao.getClient().getSurname(),dao.getClient().getBirthDate());
-
+		this.possessore = new Cliente ();
+		this.possessore.setName(dao.getClient().getName());
+		this.possessore.setSurname(dao.getClient().getSurname());
+		this.possessore.setBirthDate(dao.getClient().getBirthDate());
+		for (AutovetturaCompatibileDAO a: dao.getClient().getOwnedCars()){
+			this.getClient().autovetturePossedute.add(new AutovetturaCompatibile (a));
+		}
 	}
 
 	public int getCode(){
