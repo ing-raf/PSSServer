@@ -23,6 +23,10 @@ public class meindiprova {
 		locale.setAvailableBatteries(old);
 		System.err.println( locale.update() );
 		
+		PopulateTestDatabase.populate();
+		
+		System.err.println("Ho ripopolato");
+		
 	}
 
 }

@@ -56,13 +56,15 @@ public class UltimaSostituzioneDAO {
 		this.ID = cod;
 	}
 	
-	public void setID() {
-		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution("ED 190 ES");
-//		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(this.autovettura.getNumberPlate());
-		this.ID = dao.getID();
+	private void setID() {
+		if (this.batteria != null) {
+			UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(this.batteria.getID());
+			this.ID = dao.getID();
+		}
 	}
 
 	public void setBattery(BatteriaDAO batteria) {
+		this.setID();
 		this.batteria = batteria;
 	}
 	
@@ -141,6 +143,24 @@ public class UltimaSostituzioneDAO {
 		
 		Query query = session.createQuery("select Sost from UltimaSostituzioneDAO as Sost inner join Sost.autovettura as a where a.numeroTarga = :auto");
 		query.setParameter("auto",targa);
+		ArrayList<UltimaSostituzioneDAO> result = (ArrayList<UltimaSostituzioneDAO>) query.list();
+		
+		session.getTransaction().commit();
+		session.close();
+		
+		if (result.isEmpty() == true)
+			return null;
+		else
+			return result.get(0) ;
+	}
+	
+	private static UltimaSostituzioneDAO findSubstitution(int idBatteria){
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+		
+		Query query = session.createQuery("select Sost from UltimaSostituzioneDAO as Sost inner join Sost.batteria as b where b.id = :batt");
+		query.setParameter("batt",idBatteria);
 		ArrayList<UltimaSostituzioneDAO> result = (ArrayList<UltimaSostituzioneDAO>) query.list();
 		
 		session.getTransaction().commit();
