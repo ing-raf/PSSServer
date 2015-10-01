@@ -55,7 +55,7 @@ public class UltimaSostituzione {
 	public UltimaSostituzioneDAO prepareDAO() {
 		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
 		dao.setDateHour(this.dataOra);
-		dao.setBattery( this.batteria.preopareDAO() );
+		dao.setBattery( this.batteria.prepareDAO() );
 		dao.setStation( this.staz_sostituz.prepareDAO() );
 	}
 	

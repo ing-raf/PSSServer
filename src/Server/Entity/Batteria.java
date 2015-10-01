@@ -81,7 +81,7 @@ public class Batteria {
 		dao.setCostSubstitution(this.costoSostituzione);
 		dao.setCyclesRecharge(this.cicliRicaricaRimanenti);
 		dao.setID(this.ID);
-		dao.setModel(new ModelloAutovettura.prepareDAO());
+		dao.setModel(this.modello.prepareDAO());
 		
 		return dao;
 	}
