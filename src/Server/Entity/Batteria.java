@@ -21,13 +21,15 @@ public class Batteria {
 		this.modello = new ModelloAutovettura(dao.getModel());
 	}
 	
-	public static Batteria getBattery(int id){
-		BatteriaDAO dao = BatteriaDAO.findBatteria(id);
-		return new Batteria(dao);
-	}
-	
-	public Batteria(int id, float costo, int cicli, ModelloAutovettura modello) throws Exception{
+	public Batteria(int id, float costo, int cicli, ModelloAutovettura modello) {
+		this.ID = id;
+		this.costoSostituzione = costo;
+		this.cicliRicaricaRimanenti = cicli;
+		this.modello = modello;
 		
+		BatteriaDAO dao = this.prepareDAO();
+		dao.save();
+	/*	
 		BatteriaDAO batteria = new BatteriaDAO();
 		batteria.setID(id);
 		batteria.setCostSubstitution(costo);
@@ -40,11 +42,16 @@ public class Batteria {
 		batteria.setModel(modelloDAO);
 		
 		if(!batteria.save())
-			throw new Exception();
+			throw new Exception(); */
 	}
 	
 	public int getID(){
 		return this.ID;
+	}
+	
+	public static Batteria getBattery(int id){
+		BatteriaDAO dao = BatteriaDAO.findBatteria(id);
+		return new Batteria(dao);
 	}
 	
 	public float getCostSubstitution(){
