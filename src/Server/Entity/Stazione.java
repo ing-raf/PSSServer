@@ -14,31 +14,31 @@ public class Stazione {
 	private String indirizzo;
 	private List<Batteria> disponibili;
 	
-	public Stazione(int cod){
-		
-		StazioneDAO dao = new StazioneDAO ();
-		dao = StazioneDAO.findStation(cod);
+	
+	
+	public Stazione() {
+		this.disponibili = new ArrayList <Batteria> ();
+	}
+
+	
+	public Stazione(StazioneDAO dao){
 		this.ID = dao.getID();
 		this.nome = dao.getName();
 		this.indirizzo = dao.getAddress();
 		this.disponibili = new ArrayList<Batteria> ();
 		for (BatteriaDAO b: dao.getAvailableBatteries()){
-			Batteria batt = new Batteria ();
-			batt.setID(b.getID());
-			batt.setCostSubstitution(b.getCostSubstitution());
-			batt.setCyclesRecharge(b.getCyclesRecharge());
-			ModelloAutovettura mod = new ModelloAutovettura ();
-			mod.setBrand(b.getModel().getBrand());
-			mod.setModel(b.getModel().getModel());
-			batt.setModel(mod);
 			
-			this.disponibili.add(batt);
+			this.disponibili.add(new Batteria(b));
 		}
+		
 	}
 	
-	public Stazione() {
-		this.disponibili = new ArrayList <Batteria> ();
+	public static Stazione getStation(int cod){
+		
+		StazioneDAO dao = StazioneDAO.findStation(cod);
+		return  new Stazione(dao);
 	}
+	
 
 	public int getID(){
 		return this.ID;
@@ -70,6 +70,20 @@ public class Stazione {
 	
 	public void setAvailableBatteries (Batteria b){
 		this.disponibili.add(b);
+	}
+	
+	public StazioneDAO prepareDAO(){
+		StazioneDAO dao = new StazioneDAO();
+		
+		dao.setAddress(this.indirizzo);
+		dao.setID(this.ID);
+		dao.setName(this.nome);
+		
+		for(Batteria b : this.getAvailableBatteries()){
+			dao.setAvailableBatteries(b.prepareDAO());
+		}
+		
+		return dao;
 	}
 	
 	public void removeBattery (Batteria vecchia){

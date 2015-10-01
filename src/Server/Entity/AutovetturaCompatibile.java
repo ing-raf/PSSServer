@@ -8,22 +8,23 @@ public class AutovetturaCompatibile {
 	private ModelloAutovettura modello;
 	private UltimaSostituzione sostituzione;
 	
-	public AutovetturaCompatibile(String numeroTarga) {
+	public AutovetturaCompatibile() {
 		
-		AutovetturaCompatibileDAO dao = AutovetturaCompatibileDAO.findCar(numeroTarga);
+	}
+	
+	public AutovetturaCompatibile(AutovetturaCompatibileDAO dao) {
+		
 		this.numeroTarga = dao.getNumberPlate();
-		this.modello = new ModelloAutovettura();
-			this.modello.setModel( dao.getModel().getModel() );
-			this.modello.setBrand( dao.getModel().getBrand() );
-		this.sostituzione = new UltimaSostituzione();
-			this.sostituzione.setDateHour ( dao.getLastSubstitution().getDateHour() );
-				Batteria batteria = new Batteria();
-				batteria.setID( dao.getLastSubstitution().getBattery().getID() );
-				batteria.setCostSubstitution( dao.getLastSubstitution().getBattery().getCostSubstitution() );
-				batteria.setCyclesRecharge( dao.getLastSubstitution().getBattery().getCyclesRecharge() );
-				batteria.setModel(this.modello);
-			this.sostituzione.setBattery(batteria);
+		this.modello = new ModelloAutovettura( dao.getModel() );
+		this.sostituzione = new UltimaSostituzione (dao.getLastSubstitution() );
 		
+	}
+	
+	public static AutovetturaCompatibile getCar (String numeroTarga) {
+		
+		AutovetturaCompatibileDAO dao = AutovetturaCompatibileDAO.findCar(numeroTarga); 
+		return new AutovetturaCompatibile(dao);
+
 	}
 	
 	public String getNumberPlate() {
@@ -48,5 +49,15 @@ public class AutovetturaCompatibile {
 	
 	public void setLastSubstitution(UltimaSostituzione sostituzione) {
 		this.sostituzione = sostituzione;
+	}
+	
+	public AutovetturaCompatibileDAO prepareDAO() {
+		AutovetturaCompatibileDAO dao = new AutovetturaCompatibileDAO();
+		
+		dao.setNumberPlate(this.numeroTarga);
+		dao.setModel( this.modello.prepareDAO() );
+		dao.setLastRicambio( this.sostituzione.prepareDAO() );
+		
+		return dao;
 	}
 }
