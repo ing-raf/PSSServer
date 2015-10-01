@@ -52,8 +52,13 @@ public class UltimaSostituzioneDAO {
 		
 	}
 	
-	public void setID (int cod){
+	void setID (int cod){
 		this.ID = cod;
+	}
+	
+	public void setID() {
+		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(this.autovettura.getNumberPlate());
+		this.ID = dao.getID();
 	}
 
 	public void setBattery(BatteriaDAO batteria) {

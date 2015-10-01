@@ -32,5 +32,13 @@ public class ModelloAutovettura {
 		this.modello = modello;
 	}
 	
+	public ModelloAutovetturaDAO prepareDAO() {
+		ModelloAutovetturaDAO dao = new ModelloAutovetturaDAO();
+		dao.setBrand(this.fornitore);
+		dao.setModel(this.modello);
+		dao.setID();
+		return dao;
+	}
+	
 	
 }

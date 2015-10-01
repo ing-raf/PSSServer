@@ -28,7 +28,7 @@ public class ModelloAutovetturaDAO {
 		
 	}
 	
-	public int getID () {
+	int getID () {
 		return this.ID;
 	}
 	public String getModel() {
@@ -52,10 +52,10 @@ public class ModelloAutovetturaDAO {
 		this.ID = ID;
 	}
 	
-	 public  void setID () {
-		 ModelloAutovetturaDAO mod = ModelloAutovetturaDAO.findModelloAuto(this.modello, this.fornitore);
+	public void setID () {
+		ModelloAutovetturaDAO mod = ModelloAutovetturaDAO.findModelloAuto(this.modello, this.fornitore);
 		this.ID = mod.getID();
-	 }
+	}
 
 	public static ModelloAutovetturaDAO findModelloAuto (String mod, String forni){
 				SessionFactory sf = HibernateUtil.getSessionFactory();

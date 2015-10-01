@@ -12,43 +12,20 @@ public class UltimaSostituzione {
 	private Calendar dataOra;
 	private Stazione staz_sostituz;
 	private Batteria batteria;
-	//private AutovetturaCompatibile autovettura;
-	private int sporcata;
 	
 	public UltimaSostituzione() {
 		
 	}
 	
-	public UltimaSostituzione(String targa) {
+	public static UltimaSostituzione getLastSubstitution (String targa) {
 		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
-		sporcata = dao.getID();
+		return new UltimaSostituzione(dao);
+	}
+	
+	public UltimaSostituzione(UltimaSostituzioneDAO dao) {
 		this.dataOra = dao.getDateHour();
-		this.batteria = new Batteria();
-			this.batteria.setID( dao.getBattery().getID() );
-			this.batteria.setCostSubstitution( dao.getBattery().getCostSubstitution() );
-			this.batteria.setCyclesRecharge( dao.getBattery().getCyclesRecharge() );
-				ModelloAutovettura modello = new ModelloAutovettura();
-				modello.setBrand( dao.getBattery().getModel().getBrand() );
-				modello.setModel( dao.getBattery().getModel().getModel() );
-				this.batteria.setModel(modello);
-				this.staz_sostituz = new Stazione ();
-			this.staz_sostituz.setAddress(dao.getStation().getAddress());
-			this.staz_sostituz.setName(dao.getStation().getName());
-			this.staz_sostituz.setID(dao.getStation().getID());
-			
-			for (BatteriaDAO b: dao.getStation().getAvailableBatteries()){
-				Batteria batt = new Batteria ();
-				batt.setID(b.getID());
-				batt.setCostSubstitution(b.getCostSubstitution());
-				batt.setCyclesRecharge(b.getCyclesRecharge());
-				ModelloAutovettura mod = new ModelloAutovettura ();
-				mod.setBrand(b.getModel().getBrand());
-				mod.setModel(b.getModel().getModel());
-				batt.setModel(mod);
-				
-				this.staz_sostituz.setAvailableBatteries(batt);
-			}
-
+		this.staz_sostituz = new Stazione ( dao.getStation() );
+		this.batteria = new Batteria ( dao.getBattery() ); 
 	}
 	
 	public Calendar getDateHour() {
@@ -74,17 +51,16 @@ public class UltimaSostituzione {
 	public void setBattery(Batteria batteria) {
 		this.batteria = batteria;
 	}
-
-	/*public AutovetturaCompatibile getCar() {
-		return autovettura;
+	
+	public UltimaSostituzioneDAO prepareDAO() {
+		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
+		dao.setDateHour(this.dataOra);
+		dao.setBattery( this.batteria.preopareDAO() );
+		dao.setStation( this.staz_sostituz.prepareDAO() );
 	}
-
-	public void setCar(AutovetturaCompatibile autovettura) {
-		this.autovettura = autovettura;
-	}*/
 	
 	public boolean update(String targa ) {
-		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
+/*		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
 //		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
 		
 		dao.setID(this.sporcata);
@@ -122,6 +98,6 @@ public class UltimaSostituzione {
 		dao.setDateHour(this.dataOra);
 		
 		return dao.update();
-	}
+	} */
 
 }
