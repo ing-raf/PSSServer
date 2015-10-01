@@ -105,6 +105,7 @@ public class StazioneDAO {
 			session.getTransaction().commit();	
 		} catch (HibernateException he) {
 			session.getTransaction().rollback();
+			he.printStackTrace();
 			return false;
 		} finally {
 			session.close();

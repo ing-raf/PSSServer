@@ -35,8 +35,8 @@ public class Batteria {
 		
 		ModelloAutovetturaDAO modelloDAO = new ModelloAutovetturaDAO();
 		modelloDAO.setModel(modello.getModel());
-		modelloDAO.setID(modello.getID());
 		modelloDAO.setBrand(modello.getBrand());
+		modelloDAO.setID();
 		batteria.setModel(modelloDAO);
 		
 		if(!batteria.save())

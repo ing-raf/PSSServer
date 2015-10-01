@@ -15,7 +15,9 @@ public class Stazione {
 	private List<Batteria> disponibili;
 	
 	public Stazione(int cod){
-		StazioneDAO dao = StazioneDAO.findStation(cod);
+		
+		StazioneDAO dao = new StazioneDAO ();
+		dao = StazioneDAO.findStation(cod);
 		this.ID = dao.getID();
 		this.nome = dao.getName();
 		this.indirizzo = dao.getAddress();
@@ -29,10 +31,15 @@ public class Stazione {
 			mod.setBrand(b.getModel().getBrand());
 			mod.setModel(b.getModel().getModel());
 			batt.setModel(mod);
+			
 			this.disponibili.add(batt);
 		}
 	}
 	
+	public Stazione() {
+		this.disponibili = new ArrayList <Batteria> ();
+	}
+
 	public int getID(){
 		return this.ID;
 	}
@@ -78,19 +85,20 @@ public class Stazione {
 	
 	public boolean update(){
 		
-		StazioneDAO dao = StazioneDAO.findStation(this.getID());
+		StazioneDAO dao = StazioneDAO.findStation(this.getID() );
 		dao.setAddress(this.getAddress());
 		dao.setID(this.getID());
 		dao.setName(this.getName());
 		
-		for(int i=0; i<this.getAvailableBatteries().size(); i++){
+		for(Batteria b: this.disponibili){
 			BatteriaDAO batt = new BatteriaDAO();
-			batt.setID( this.getAvailableBatteries().get(i).getID() );
-			batt.setCostSubstitution( this.getAvailableBatteries().get(i).getCostSubstitution() );
-			batt.setCyclesRecharge( this.getAvailableBatteries().get(i).getCyclesRecharge() );
+			batt.setID(b.getID() );
+			batt.setCostSubstitution(b.getCostSubstitution() );
+			batt.setCyclesRecharge( b.getCyclesRecharge() );
 				ModelloAutovetturaDAO mod = new ModelloAutovetturaDAO();
-				mod.setBrand( this.getAvailableBatteries().get(i).getModel().getBrand() );
-				mod.setModel( this.getAvailableBatteries().get(i).getModel().getModel() );
+				mod.setBrand( b.getModel().getBrand() );
+				mod.setModel( b.getModel().getModel() );
+				mod.setID();
 			batt.setModel(mod);
 			
 			dao.setAvailableBatteries(batt);
