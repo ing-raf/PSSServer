@@ -45,6 +45,7 @@ public class Cliente {
 		
 	}
 	
+	
 	public Cliente() {
 		// TODO Auto-generated constructor stub
 	}
@@ -57,6 +58,9 @@ public class Cliente {
 		return this.cognome;
 	}
 	
+	public ArrayList<AutovetturaCompatibile> getOwnedCars() {
+		return this.autovetturePossedute;
+	}
 	public Calendar getBirthDate(){
 		return this.dataNascita;
 	}

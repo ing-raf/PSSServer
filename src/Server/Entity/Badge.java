@@ -19,15 +19,17 @@ public class Badge {
 	public Badge (BadgeDAO dao) {
 		this.codice = dao.getCode();
 		this.creditoResiduo = dao.getCredit();
-		this.possessore = new Cliente ();
-		this.possessore.setName(dao.getClient().getName());
-		this.possessore.setSurname(dao.getClient().getSurname());
-		this.possessore.setBirthDate(dao.getClient().getBirthDate());
-		for (AutovetturaCompatibileDAO a: dao.getClient().getOwnedCars()){
-			this.getClient().autovetturePossedute.add(new AutovetturaCompatibile (a));
-		}
+		this.possessore = new Cliente (dao.getClient());
+		
 	}
 
+	public BadgeDAO prepareDAO (){
+		BadgeDAO dao = new BadgeDAO ();
+		dao.setClient(this.getClient().prepareDAO());
+		dao.setCode(this.codice);
+		dao.setCredit(this.creditoResiduo);
+		return dao;
+	}
 	public int getCode(){
 		return this.codice;
 	}
