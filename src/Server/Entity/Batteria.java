@@ -14,16 +14,16 @@ public class Batteria {
 		
 	}
 	
-	public Batteria(int id){
-		BatteriaDAO batteria = new BatteriaDAO();
-		batteria = BatteriaDAO.findBatteria(id);
-		
-		this.ID = batteria.getID();
-		this.costoSostituzione = batteria.getCostSubstitution();
-		this.cicliRicaricaRimanenti = batteria.getCyclesRecharge();
-			this.modello = new ModelloAutovettura();
-			this.modello.setModel(batteria.getModel().getModel());
-			this.modello.setBrand(batteria.getModel().getBrand());
+	public Batteria(BatteriaDAO dao){
+		this.ID = dao.getID();
+		this.cicliRicaricaRimanenti = dao.getCyclesRecharge();
+		this.costoSostituzione = dao.getCostSubstitution();
+		this.modello = new ModelloAutovettura(dao.getModel());
+	}
+	
+	public static Batteria getBattery(int id){
+		BatteriaDAO dao = BatteriaDAO.findBatteria(id);
+		return new Batteria(dao);
 	}
 	
 	public Batteria(int id, float costo, int cicli, ModelloAutovettura modello) throws Exception{
@@ -73,6 +73,17 @@ public class Batteria {
 	
 	public void setModel(ModelloAutovettura modello){
 		this.modello = modello;
+	}
+	
+	public BatteriaDAO prepareDAO(){
+		BatteriaDAO dao = new BatteriaDAO();
+		
+		dao.setCostSubstitution(this.costoSostituzione);
+		dao.setCyclesRecharge(this.cicliRicaricaRimanenti);
+		dao.setID(this.ID);
+		dao.setModel(new ModelloAutovettura.prepareDAO());
+		
+		return dao;
 	}
 	
 	public boolean update(int id){
