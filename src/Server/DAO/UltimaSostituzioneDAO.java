@@ -129,7 +129,6 @@ public class UltimaSostituzioneDAO {
 	}
 
 	public static UltimaSostituzioneDAO findSubstitution(String targa){
-		//AutovetturaCompatibileDAO auto_v = AutovetturaCompatibileDAO.findCar(targa);
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		session.beginTransaction();

@@ -1,5 +1,6 @@
 package Server.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Server.DAO.BatteriaDAO;
@@ -14,12 +15,31 @@ public class Stazione {
 	private List<Batteria> disponibili;
 	
 	public Stazione(int cod){
-		StazioneDAO dao = StazioneDAO.findStation(cod);
+		
+		StazioneDAO dao = new StazioneDAO ();
+		dao = StazioneDAO.findStation(cod);
 		this.ID = dao.getID();
 		this.nome = dao.getName();
 		this.indirizzo = dao.getAddress();
+		this.disponibili = new ArrayList<Batteria> ();
+		for (BatteriaDAO b: dao.getAvailableBatteries()){
+			Batteria batt = new Batteria ();
+			batt.setID(b.getID());
+			batt.setCostSubstitution(b.getCostSubstitution());
+			batt.setCyclesRecharge(b.getCyclesRecharge());
+			ModelloAutovettura mod = new ModelloAutovettura ();
+			mod.setBrand(b.getModel().getBrand());
+			mod.setModel(b.getModel().getModel());
+			batt.setModel(mod);
+			
+			this.disponibili.add(batt);
+		}
 	}
 	
+	public Stazione() {
+		this.disponibili = new ArrayList <Batteria> ();
+	}
+
 	public int getID(){
 		return this.ID;
 	}
@@ -52,26 +72,43 @@ public class Stazione {
 		this.disponibili.add(b);
 	}
 	
-public boolean update(){
+	public void removeBattery (Batteria vecchia){
+		if (vecchia == null ) System.err.println("lota");
+		else if (this.disponibili == null) System.err.println("merda");
+		for (Batteria b: this.disponibili){
+			if (b.equals(vecchia))
+				this.disponibili.remove(vecchia);
+			
+		}
 		
-		StazioneDAO dao = StazioneDAO.findStation(this.getID());
+	}
+	
+	public boolean update(){
+		
+		StazioneDAO dao = new StazioneDAO();
+//		StazioneDAO dao = StazioneDAO.findStation(this.getID() );
+//		if (!dao.getAvailableBatteries().isEmpty())
+//			System.err.println("Puttana maiala");
 		dao.setAddress(this.getAddress());
 		dao.setID(this.getID());
 		dao.setName(this.getName());
 		
-		for(int i=0; i<this.getAvailableBatteries().size(); i++){
+		for(Batteria b: this.disponibili){
 			BatteriaDAO batt = new BatteriaDAO();
-			batt.setID( this.getAvailableBatteries().get(i).getID() );
-			batt.setCostSubstitution( this.getAvailableBatteries().get(i).getCostSubstitution() );
-			batt.setCyclesRecharge( this.getAvailableBatteries().get(i).getCyclesRecharge() );
+			batt.setID(b.getID() );
+			batt.setCostSubstitution(b.getCostSubstitution() );
+			batt.setCyclesRecharge( b.getCyclesRecharge() );
 				ModelloAutovetturaDAO mod = new ModelloAutovetturaDAO();
-				mod.setBrand( this.getAvailableBatteries().get(i).getModel().getBrand() );
-				mod.setModel( this.getAvailableBatteries().get(i).getModel().getModel() );
+				mod.setBrand( b.getModel().getBrand() );
+				mod.setModel( b.getModel().getModel() );
+				mod.setID();
 			batt.setModel(mod);
 			
 			dao.setAvailableBatteries(batt);
 		}
+		
 		return dao.update();
 		
 	}
+	
 }

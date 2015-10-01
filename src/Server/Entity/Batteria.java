@@ -35,8 +35,8 @@ public class Batteria {
 		
 		ModelloAutovetturaDAO modelloDAO = new ModelloAutovetturaDAO();
 		modelloDAO.setModel(modello.getModel());
-		modelloDAO.setID(modello.getID());
 		modelloDAO.setBrand(modello.getBrand());
+		modelloDAO.setID();
 		batteria.setModel(modelloDAO);
 		
 		if(!batteria.save())
@@ -92,5 +92,19 @@ public class Batteria {
 			return false;
 		}else
 			return true;
+	}
+	
+	public boolean equals (Object obj){
+		Batteria b = (Batteria) obj;  
+		if ((b.getID() == this.getID()) &&
+				(Float.compare(b.getCostSubstitution(), this.getCostSubstitution()) == 0) && 
+				(b.getCyclesRecharge() == this.getCyclesRecharge())) 
+			return true;
+		else
+			return false;
+		
+				
+	
+	
 	}
 }
