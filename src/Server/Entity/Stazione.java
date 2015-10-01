@@ -12,7 +12,7 @@ public class Stazione {
 	private int ID;	
 	private String nome;
 	private String indirizzo;
-	private List<Batteria> disponibili;
+	private ArrayList<Batteria> disponibili;
 	
 	
 	
