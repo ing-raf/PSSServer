@@ -82,7 +82,6 @@ public class UltimaSostituzione {
 	}*/
 	
 	public boolean update(String targa, Batteria vecchia ) {
-		int temp;
 		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
 		vecchia.setID(dao.getBattery().getID());
 		vecchia.setCostSubstitution(dao.getBattery().getCostSubstitution());
@@ -126,7 +125,7 @@ public class UltimaSostituzione {
 		dao.setBattery(batteria);
 		dao.setDateHour(this.dataOra);
 		
-		System.out.println("" +dao.getStation().getAvailableBatteries().size() + dao.getBattery().getModel().getID());
+//		System.out.println("" +dao.getStation().getAvailableBatteries().size() + dao.getBattery().getModel().getID());
 		
 		//UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution("ED 190 ES");
 	

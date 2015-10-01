@@ -85,7 +85,10 @@ public class Stazione {
 	
 	public boolean update(){
 		
-		StazioneDAO dao = StazioneDAO.findStation(this.getID() );
+		StazioneDAO dao = new StazioneDAO();
+//		StazioneDAO dao = StazioneDAO.findStation(this.getID() );
+//		if (!dao.getAvailableBatteries().isEmpty())
+//			System.err.println("Puttana maiala");
 		dao.setAddress(this.getAddress());
 		dao.setID(this.getID());
 		dao.setName(this.getName());
@@ -103,6 +106,7 @@ public class Stazione {
 			
 			dao.setAvailableBatteries(batt);
 		}
+		
 		return dao.update();
 		
 	}
