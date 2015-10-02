@@ -40,5 +40,13 @@ public class ModelloAutovettura {
 		return dao;
 	}
 	
+	public boolean equals (Object obj){
+		ModelloAutovettura b = (ModelloAutovettura) obj;  
+		if ((b.getBrand().equals(this.fornitore)) && 
+				(b.getModel().equals(this.modello)))
+			return true;
+		else
+			return false;
+	}
 	
 }
