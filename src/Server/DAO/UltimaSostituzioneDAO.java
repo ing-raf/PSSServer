@@ -19,7 +19,7 @@ public class UltimaSostituzioneDAO {
 
 	@Id
 	//@GeneratedValue
-	private int ID;
+	public int ID;
 	@Column 
 	private Calendar dataOra;
 	@ManyToOne  (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
@@ -63,11 +63,13 @@ public class UltimaSostituzioneDAO {
 		if (this.batteria != null) {
 			UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(this.batteria.getID());
 			this.ID = dao.getID();
+		} else {
+			System.err.println("Vi uccido tutti");
 		}
 	}
 
 	public void setBattery(BatteriaDAO batteria) {
-		this.setID();
+//		this.setID();
 		this.batteria = batteria;
 	}
 	

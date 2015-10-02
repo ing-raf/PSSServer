@@ -2,6 +2,7 @@ package Server.Entity;
 
 import java.util.Calendar;
 
+import Server.DAO.AutovetturaCompatibileDAO;
 import Server.DAO.BatteriaDAO;
 import Server.DAO.ModelloAutovetturaDAO;
 import Server.DAO.StazioneDAO;
@@ -18,6 +19,7 @@ public class UltimaSostituzione {
 	}
 	
 	public static UltimaSostituzione getLastSubstitution (String targa) {
+
 		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
 		return new UltimaSostituzione(dao);
 	}
@@ -52,22 +54,24 @@ public class UltimaSostituzione {
 		this.batteria = batteria;
 	}
 	
-	public UltimaSostituzioneDAO prepareDAO() {
-		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
+	public UltimaSostituzioneDAO prepareDAO(String targa) {
+		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
+		System.err.println(this.getClass() + " pripeirDAO " + dao.ID);
+//		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
 		dao.setDateHour(this.dataOra);
 		dao.setBattery( this.batteria.prepareDAO() );
 		dao.setStation( this.staz_sostituz.prepareDAO() );
 		return dao;
 	}
 	
-	public boolean update() {
+	public boolean update(String targa) {
 		this.staz_sostituz.removeBattery(this.batteria);
-		UltimaSostituzioneDAO dao = this.prepareDAO();
+		UltimaSostituzioneDAO dao = this.prepareDAO(targa);
 		return dao.update();
 	}
 	
-	public boolean delete() {
-		UltimaSostituzioneDAO dao = this.prepareDAO();
+	public boolean delete(String targa) {
+		UltimaSostituzioneDAO dao = this.prepareDAO(targa);
 		return dao.delete();
 	}
 	

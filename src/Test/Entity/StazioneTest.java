@@ -66,7 +66,7 @@ public class StazioneTest {
 
 	@Test
 	public void testGetAvailableBatteries() {
-		final String idTest = "Test di getAddress";
+		final String idTest = "Test di getAvailableBatteries";
 		
 		assertEquals(idTest + " riuscito", Batteria.getBattery(2), test.getAvailableBatteries().get(0) );
 		assertEquals(idTest + " riuscito", Batteria.getBattery(3), test.getAvailableBatteries().get(1) );

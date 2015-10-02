@@ -56,11 +56,9 @@ public class AutovetturaCompatibile {
 		
 		dao.setNumberPlate(this.numeroTarga);
 		dao.setModel( this.modello.prepareDAO() );
-		dao.setLastRicambio( this.sostituzione.prepareDAO() );
-		
+		dao.setLastRicambio( this.sostituzione.prepareDAO(numeroTarga) );
 		return dao;
 	}
-	
 
 	public boolean equals (Object obj){
 		AutovetturaCompatibile a = (AutovetturaCompatibile) obj;  
@@ -72,4 +70,10 @@ public class AutovetturaCompatibile {
 			return false;
 	}
 	
+	public boolean update(){
+		AutovetturaCompatibileDAO dao = this.prepareDAO();
+		this.sostituzione.update(this.numeroTarga);
+		return dao.update();		
+	}
+
 }
