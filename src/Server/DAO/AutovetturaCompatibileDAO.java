@@ -7,6 +7,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import Server.Entity.AutovetturaCompatibile;
+
 
 
 @Entity
@@ -123,6 +125,16 @@ public class AutovetturaCompatibileDAO {
 		}
 	
 		return true;
+	}
+	
+	public boolean equals (Object obj){
+		AutovetturaCompatibileDAO a = (AutovetturaCompatibileDAO) obj;  
+		if ((a.getNumberPlate().equals(this.numeroTarga)) && 
+				(a.getModel().equals(this.modello)) &&
+				(a.getLastSubstitution().equals(this.sostituzione)))
+			return true;
+		else
+			return false;
 	}
 
 }
