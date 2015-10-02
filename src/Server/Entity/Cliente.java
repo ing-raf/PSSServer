@@ -77,5 +77,16 @@ public class Cliente {
 		this.dataNascita = date;
 	}
 	
+	public boolean equals (Object obj){
+		Cliente c = (Cliente) obj;  
+		if ((this.nome.equals(c.getName())) &&
+				(this.cognome.equals(c.getSurname())) && 
+				(this.dataNascita.equals(c.getBirthDate()))) 
+			return true;
+		else
+			return false;
+	
+	}
+	
 
 }
