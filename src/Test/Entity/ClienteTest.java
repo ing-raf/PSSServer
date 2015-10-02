@@ -106,7 +106,7 @@ public class ClienteTest {
 		
 		assertEquals(idTest + " riuscito", 5 , list.size());
 		
-		for (AutovetturaCompatibile a: ac){
+		for (AutovetturaCompatibile a : list){
 		assertEquals(idTest + " riuscito", true , list.contains(a));
 				}
 		
