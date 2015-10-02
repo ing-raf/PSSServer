@@ -1,7 +1,6 @@
 package Server.Entity;
 
 import Server.DAO.AutovetturaCompatibileDAO;
-import Server.DAO.StazioneDAO;
 
 public class AutovetturaCompatibile {
 
@@ -57,8 +56,7 @@ public class AutovetturaCompatibile {
 		
 		dao.setNumberPlate(this.numeroTarga);
 		dao.setModel( this.modello.prepareDAO() );
-		dao.setLastRicambio( this.sostituzione.prepareDAO() );
-		
+		dao.setLastRicambio( this.sostituzione.prepareDAO(numeroTarga) );
 		return dao;
 	}
 
@@ -72,8 +70,9 @@ public class AutovetturaCompatibile {
 			return false;
 	}
 	
-	public boolean update(){	
-		AutovetturaCompatibileDAO dao = this.prepareDAO();		
+	public boolean update(){
+		AutovetturaCompatibileDAO dao = this.prepareDAO();
+		this.sostituzione.update(this.numeroTarga);
 		return dao.update();		
 	}
 

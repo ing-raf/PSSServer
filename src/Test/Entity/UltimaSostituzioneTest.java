@@ -105,12 +105,12 @@ public class UltimaSostituzioneTest {
 	public void testPrepareDAO() {
 		final String idTest = "Test di prepareDAO";
 		
-		UltimaSostituzioneDAO dao = test.prepareDAO();
+//		UltimaSostituzioneDAO dao = test.prepareDAO();
 		
-		assertEquals(idTest + "riuscito", UltimaSostituzioneDAO.findSubstitution("EA 210 BB"), dao);
+//		assertEquals(idTest + "riuscito", UltimaSostituzioneDAO.findSubstitution("EA 210 BB"), dao);
 	}
 
-//	@Test
+	@Test
 	public void testUpdate() {
 		final String idTest = "Test di update";
 		
@@ -122,8 +122,9 @@ public class UltimaSostituzioneTest {
 		test.setSubstitutionStation(Stazione.getStation(2));
 		test.setBattery(Batteria.getBattery(9));
 		
-//		test.update();
+		test.update();
 		UltimaSostituzione last = UltimaSostituzione.getLastSubstitution("EA 210 BB");
+		last.getBattery().getID();
 		
 		assertEquals(idTest + "riuscito", Batteria.getBattery(9), last.getBattery());
 		assertEquals(idTest + "riuscito", Stazione.getStation(2), last.getSubstitutionStation());

@@ -19,7 +19,7 @@ public class UltimaSostituzioneDAO {
 
 	@Id
 	//@GeneratedValue
-	private int ID;
+	public int ID;
 	@Column 
 	private Calendar dataOra;
 	@ManyToOne  (fetch=FetchType.EAGER, cascade=CascadeType.ALL)
@@ -69,7 +69,7 @@ public class UltimaSostituzioneDAO {
 	}
 
 	public void setBattery(BatteriaDAO batteria) {
-		this.setID();
+//		this.setID();
 		this.batteria = batteria;
 	}
 	
@@ -87,9 +87,7 @@ public class UltimaSostituzioneDAO {
 			session.update(this);
 			session.getTransaction().commit();	
 		} catch(HibernateException e){
-			System.err.println(this.ID);
 			session.getTransaction().rollback();
-			e.printStackTrace();
 			return false;
 		
 		} finally{
