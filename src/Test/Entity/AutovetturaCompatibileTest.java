@@ -27,7 +27,7 @@ public class AutovetturaCompatibileTest {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		PopulateTestDatabase.populate();
-//		oracle = AutovetturaCompatibile.getCar("EA 210 BB");
+		oracle = AutovetturaCompatibile.getCar("EA 210 BB");
 	}
 
 	@Before
@@ -35,7 +35,7 @@ public class AutovetturaCompatibileTest {
 		test = AutovetturaCompatibile.getCar("EA 210 BB");
 	}
 
-//	@Test
+	@Test
 	public void testAutovetturaCompatibileAutovetturaCompatibileDAO() {
 		final String idTest = "Test del costruttore dal DAO";
 		
@@ -45,14 +45,14 @@ public class AutovetturaCompatibileTest {
 		assertEquals(idTest + " riuscito", oracle, nuova);
 	}
 
-//	@Test
+	@Test
 	public void testGetNumberPlate() {
 		final String idTest = "Test di getNumberPlate";
 		
 		assertEquals(idTest + " riuscito", "EA 210 BB", test.getNumberPlate());
 	}
 
-//	@Test
+	@Test
 	public void testSetNumberPlate() {
 		final String idTest = "Test di setNumberPlate";
 		
@@ -60,7 +60,7 @@ public class AutovetturaCompatibileTest {
 		assertEquals(idTest +  "riuscito", "PS 300 SS", test.getNumberPlate());
 	}
 
-//	@Test
+	@Test
 	public void testGetModel() {
 		final String idTest = "Test di getModel";
 		
@@ -71,7 +71,7 @@ public class AutovetturaCompatibileTest {
 		
 	}
 
-//	@Test
+	@Test
 	public void testSetModel() {
 		final String idTest = "Test di setModel";
 		
@@ -83,7 +83,7 @@ public class AutovetturaCompatibileTest {
 		assertEquals(idTest + "riuscito", true, test.getModel().equals(m));
 	}
 
-//	@Test
+	@Test
 	public void testGetLastSubstitution() {
 		final String idTest = "Test di getLastSubstitution";
 		
@@ -93,7 +93,7 @@ public class AutovetturaCompatibileTest {
 		assertEquals(idTest + "riuscito", true, u.equals(test.getLastSubstitution()));
 	}
 
-//	@Test
+	@Test
 	public void testSetLastSubstitution() {
 		final String idTest = "Test di setLastSubstitution";
 		Batteria b = Batteria.getBattery(21);
@@ -112,7 +112,7 @@ public class AutovetturaCompatibileTest {
 		assertEquals(idTest + "riuscito", true, u.equals(test.getLastSubstitution()));
 	}
 
-//	@Test
+	@Test
 	public void testPrepareDAO() {
 		final String idTest = "Test di prepareDAO";
 		
@@ -122,7 +122,7 @@ public class AutovetturaCompatibileTest {
 	}
 	
 	@Test
-	public void update(){
+	public void testUpdate(){
 		final String idTest = "Test di update";
 		
 		UltimaSostituzione last = new UltimaSostituzione();
@@ -136,8 +136,7 @@ public class AutovetturaCompatibileTest {
 		last.setBattery(Batteria.getBattery(9));
 		
 		test.setLastSubstitution(last);
-		System.err.println(this.getClass() + " ID batteria da sostituire " + test.getLastSubstitution().getBattery().getID());
-		assertTrue("Amalfilota muori", test.update());
+		assertTrue(idTest + " riuscito", test.update());
 		
 		
 	}

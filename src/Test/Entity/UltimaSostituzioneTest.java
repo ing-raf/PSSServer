@@ -16,18 +16,19 @@ import Server.Entity.UltimaSostituzione;
 
 public class UltimaSostituzioneTest {
 	
+	private static final String targa = "EA 210 BB";
 	private static UltimaSostituzione oracle = null;
 	private UltimaSostituzione test = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		PopulateTestDatabase.populate();
-		oracle = UltimaSostituzione.getLastSubstitution("EA 210 BB");
+		oracle = UltimaSostituzione.getLastSubstitution(targa);
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		test = UltimaSostituzione.getLastSubstitution("EA 210 BB");
+		test = UltimaSostituzione.getLastSubstitution(targa);
 	}
 
 //	@After
@@ -35,17 +36,17 @@ public class UltimaSostituzioneTest {
 	//	oracle.update();
 	}
 
-//	@Test
+	@Test
 	public void testUltimaSostituzioneDAO() {
 		final String idTest = "Test del costruttore dal DAO";
 		
-		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution("EA 210 BB");
+		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
 		UltimaSostituzione nuova = new UltimaSostituzione(dao);
 		
 		assertEquals(idTest + " riuscito", oracle, nuova);		
 	}
 
-//	@Test
+	@Test
 	public void testGetDateHour() {
 		final String idTest = "Test di getDateHour";
 		
@@ -55,7 +56,7 @@ public class UltimaSostituzioneTest {
 		assertEquals(idTest + " riuscito", data, test.getDateHour());
 	}
 
-//	@Test
+	@Test
 	public void testSetDateHour() {
 		final String idTest = "Test di setDateHour";
 		
@@ -67,7 +68,7 @@ public class UltimaSostituzioneTest {
 		assertEquals(idTest + "riuscito", data, test.getDateHour());
 	}
 
-//	@Test
+	@Test
 	public void testGetSubstitutionStation() {
 		final String idTest = "Test di getSubstitutionStation";
 		
@@ -75,7 +76,7 @@ public class UltimaSostituzioneTest {
 		assertEquals(idTest + "riuscito", s, test.getSubstitutionStation());
 	}
 
-//	@Test
+	@Test
 	public void testSetSubstitutionStation() {
 		final String idTest = "Test di setSubstitutionStation";
 		
@@ -84,7 +85,7 @@ public class UltimaSostituzioneTest {
 		assertEquals(idTest + "riuscito", s, test.getSubstitutionStation());
 	}
 
-//	@Test
+	@Test
 	public void testGetBattery() {
 		final String idTest = "Test di getBattery";
 		
@@ -92,7 +93,7 @@ public class UltimaSostituzioneTest {
 		assertEquals(idTest + "riuscito", b, test.getBattery());
 	}
 
-//	@Test
+	@Test
 	public void testSetBattery() {
 		final String idTest = "Test di setBattery";
 		
@@ -101,13 +102,13 @@ public class UltimaSostituzioneTest {
 		assertEquals(idTest + "riuscito", b, test.getBattery());
 	}
 
-//	@Test
+	@Test
 	public void testPrepareDAO() {
 		final String idTest = "Test di prepareDAO";
 		
-//		UltimaSostituzioneDAO dao = test.prepareDAO();
+		UltimaSostituzioneDAO dao = test.prepareDAO(targa);
 		
-//		assertEquals(idTest + "riuscito", UltimaSostituzioneDAO.findSubstitution("EA 210 BB"), dao);
+		assertEquals(idTest + "riuscito", UltimaSostituzioneDAO.findSubstitution(targa), dao);
 	}
 
 	@Test
@@ -122,8 +123,8 @@ public class UltimaSostituzioneTest {
 		test.setSubstitutionStation(Stazione.getStation(2));
 		test.setBattery(Batteria.getBattery(9));
 		
-		test.update();
-		UltimaSostituzione last = UltimaSostituzione.getLastSubstitution("EA 210 BB");
+		test.update(targa);
+		UltimaSostituzione last = UltimaSostituzione.getLastSubstitution(targa);
 		last.getBattery().getID();
 		
 		assertEquals(idTest + "riuscito", Batteria.getBattery(9), last.getBattery());
