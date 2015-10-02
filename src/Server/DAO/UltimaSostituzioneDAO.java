@@ -63,6 +63,8 @@ public class UltimaSostituzioneDAO {
 		if (this.batteria != null) {
 			UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(this.batteria.getID());
 			this.ID = dao.getID();
+		} else {
+			System.err.println("Vi uccido tutti");
 		}
 	}
 
@@ -85,7 +87,9 @@ public class UltimaSostituzioneDAO {
 			session.update(this);
 			session.getTransaction().commit();	
 		} catch(HibernateException e){
+			System.err.println(this.ID);
 			session.getTransaction().rollback();
+			e.printStackTrace();
 			return false;
 		
 		} finally{

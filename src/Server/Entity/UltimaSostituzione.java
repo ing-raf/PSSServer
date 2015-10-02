@@ -2,6 +2,7 @@ package Server.Entity;
 
 import java.util.Calendar;
 
+import Server.DAO.AutovetturaCompatibileDAO;
 import Server.DAO.BatteriaDAO;
 import Server.DAO.ModelloAutovetturaDAO;
 import Server.DAO.StazioneDAO;
@@ -56,11 +57,12 @@ public class UltimaSostituzione {
 		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
 		dao.setDateHour(this.dataOra);
 		dao.setBattery( this.batteria.prepareDAO() );
+		dao.setBattery( this.batteria.prepareDAO() );
 		dao.setStation( this.staz_sostituz.prepareDAO() );
 		return dao;
 	}
 	
-	public boolean update() {
+	boolean update() {
 		this.staz_sostituz.removeBattery(this.batteria);
 		UltimaSostituzioneDAO dao = this.prepareDAO();
 		return dao.update();

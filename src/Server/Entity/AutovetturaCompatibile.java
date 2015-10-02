@@ -1,6 +1,7 @@
 package Server.Entity;
 
 import Server.DAO.AutovetturaCompatibileDAO;
+import Server.DAO.StazioneDAO;
 
 public class AutovetturaCompatibile {
 
@@ -60,7 +61,6 @@ public class AutovetturaCompatibile {
 		
 		return dao;
 	}
-	
 
 	public boolean equals (Object obj){
 		AutovetturaCompatibile a = (AutovetturaCompatibile) obj;  
@@ -72,4 +72,9 @@ public class AutovetturaCompatibile {
 			return false;
 	}
 	
+	public boolean update(){	
+		AutovetturaCompatibileDAO dao = this.prepareDAO();		
+		return dao.update();		
+	}
+
 }

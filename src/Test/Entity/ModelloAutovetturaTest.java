@@ -31,7 +31,7 @@ public class ModelloAutovetturaTest {
 	}
 
 	@Test
-	public void testModelloAutovetturaModelloAutovetturaDAO() {
+	public void testModelloAutovetturaDAO() {
 		final String idTest = "Test del costruttore dal DAO";
 		
 		ModelloAutovetturaDAO dao = ModelloAutovetturaDAO.findModelloAuto("207", "Peugeot");
