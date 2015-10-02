@@ -1,39 +1,31 @@
 package Server.BusinessLogic;
 
-import Server.DAO.AutovetturaCompatibileDAO;
+import Server.Entity.AutovetturaCompatibile;
 
 public class AutovetturaCliente extends Autovettura {
 
-	private AutovetturaCompatibileDAO autovettura;
+	private String numeroTarga;
 	
-	public String getNumeroTarga() {
-		return autovettura.getNumeroTarga();
-	}
-	
-	public String getModello() {
-		return this.autovettura.getModello().getModello();
-	}
-
-	public String getFornitore() {
-		return this.autovettura.getModello().getFornitore();
-	}
-
-	/**
-	 * 
-	 * @param autovettura
-	 */
-	public void setAutovettura(AutovetturaCompatibileDAO autovettura) {
-		this.autovettura = autovettura;
+	public AutovetturaCliente(){
+		super();
 	}
 	
-	public AutovetturaCompatibileDAO getAutovetturaCliente(){
-		return this.autovettura;
+	public AutovetturaCliente(String fornitore, String modello, String numeroTarga) {
+		super(fornitore, modello);
+		this.setNumberPlate(numeroTarga);
 	}
 	
-	public Autovettura getModelloAutovettura(){
-		Autovettura a = new Autovettura();
-		a.setAutovettura(this.autovettura.getModello());
-		return a;
+	public AutovetturaCliente(AutovetturaCompatibile autovettura) {
+		super( autovettura.getModel() );
+		this.setNumberPlate( autovettura.getNumberPlate() );
+	}
+	
+	public String getNumberPlate() {
+		return this.numeroTarga;
+	}
+	
+	public void setNumberPlate(String numeroTarga) {
+		this.numeroTarga = numeroTarga;
 	}
 
 }
