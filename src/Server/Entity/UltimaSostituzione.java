@@ -71,5 +71,15 @@ public class UltimaSostituzione {
 		return dao.delete();
 	}
 	
+	public boolean equals (Object obj) {
+		UltimaSostituzione sost = (UltimaSostituzione) obj;
+		if ((this.batteria.equals(sost.getBattery())) && 
+				(this.getSubstitutionStation().equals(sost.getSubstitutionStation())) && 
+				(this.dataOra.equals(sost.getDateHour())))
+			return true;
+		else
+			return false;
+	}
+	
 	
 }
