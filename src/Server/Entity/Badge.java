@@ -28,7 +28,7 @@ public class Badge {
 	}
 
 	public BadgeDAO prepareDAO (){
-		BadgeDAO dao = new BadgeDAO ();
+		BadgeDAO dao =  new BadgeDAO ();
 		dao.setClient(this.getClient().prepareDAO());
 		dao.setCode(this.codice);
 		dao.setCredit(this.creditoResiduo);
@@ -60,10 +60,22 @@ public class Badge {
 	
 	public boolean update(){
 		
-		BadgeDAO dao = BadgeDAO.findBadge(this.getCode());
+		BadgeDAO dao = new BadgeDAO();
+		dao.setCode(this.getCode());
+		dao.setClient(this.getClient().prepareDAO());
 		dao.setCredit(this.getCredit());
 		
 		return dao.update();
 		
 	}
+	
+	public boolean equals (Object obj){
+		Badge b = (Badge) obj;  
+		if ((b.getCode() == this.codice) &&
+				(Float.compare(b.getCredit(), this.creditoResiduo) == 0) && 
+				(b.getClient().equals(this.possessore))) 
+			return true;
+		else
+			return false;
+		}
 }

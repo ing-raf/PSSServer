@@ -39,19 +39,16 @@ public class BadgeTest {
 		oracle.update();
 	}
 
-	@Test
-	public void testGetBadge() {
-		fail("Not yet implemented");
-	}
+	
 
 
 	@Test
 	public void testPrepareDAO() {
 		final String idTest = "Test di prepareDAO";
+		Badge p = Badge.getBadge(1);
+		BadgeDAO dao = p.prepareDAO();
 		
-		BadgeDAO dao = test.prepareDAO();
-		
-		assertEquals(idTest + "riuscito", BadgeDAO.findBadge(0), dao);
+		assertEquals(idTest + "riuscito", BadgeDAO.findBadge(1), dao);
 	}
 
 	@Test
@@ -65,18 +62,18 @@ public class BadgeTest {
 	public void testGetCredit() {
 		final String idTest = "Test di getCredit";
 		
-		assertEquals(idTest + " riuscito", true, Float.compare((float) 18.21, test.getCredit()));
+		assertEquals(idTest + " riuscito", 18.21, test.getCredit(),0.001);
 	}
 
 	@Test
 	public void testGetClient() {
 		final String idTest = "Test di getClient";
-		Calendar d = Calendar.getInstance();
-		d.clear();
-		d.set(1965, 0, 30);
-		Cliente c = Cliente.getClient("Paolo", "Brambilla", d);
-		
-		assertEquals(idTest + " riuscito", true, c.equals(test.getClient()));
+			Calendar data  = Calendar.getInstance();
+			data.clear();
+			data.set(1965, 01, 30);
+			Cliente c = Cliente.getClient(test.getClient().getName(), test.getClient().getSurname(), test.getClient().getBirthDate());
+			
+		assertEquals(idTest + " riuscito", true, test.getClient().equals(c));
 	}
 
 	@Test
@@ -92,7 +89,7 @@ public class BadgeTest {
 		final String idTest = "Test di setCredit";
 		
 		test.setCredit(249.5f);
-		assertEquals(idTest +  "riuscito", true, Float.compare(249.5f, test.getCredit()));
+		assertEquals(idTest +  "riuscito", 249.5, test.getCredit(),0.001);
 	}
 
 	@Test
@@ -100,8 +97,8 @@ public class BadgeTest {
 		final String idTest = "Test di setClient";
 		Calendar d = Calendar.getInstance();
 		d.clear();
-		d.set(1984, 6, 3);
-		Cliente c = Cliente.getClient("Mario", "Rossi", d);
+		d.set(1984, 07, 03);
+		Cliente c = Cliente.getClient("Rossi", "Mario", d);
 		
 		test.setClient(c);
 		
@@ -116,7 +113,7 @@ public class BadgeTest {
 		
 		test.update();
 		
-		assertEquals(idTest + "riuscito", true, Float.compare(300.8f, test.getCredit()));
+		assertEquals(idTest + "riuscito", 300.8f,  test.getCredit(),0.001);
 	}
 
 }

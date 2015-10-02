@@ -129,4 +129,17 @@ public class BadgeDAO {
 		
 		return true;
 	}
+	
+	public boolean equals (Object obj){
+		BadgeDAO b = (BadgeDAO) obj; 
+		if ((b.getCode() == this.codice) &&
+				(Float.compare(b.getCredit(), this.creditoResiduo) == 0) && 
+				(b.getClient().equals(this.possessore))) 
+			return true;
+		else
+			return false;
+			
+		}
+	
+	
 }

@@ -158,14 +158,24 @@ public class ClienteDAO {
 		
 		return true;
 	}
+	
 	public boolean equals (Object obj){
 		ClienteDAO c = (ClienteDAO) obj;  
+
 		if ((this.nome.equals(c.getName())) &&
 				(this.cognome.equals(c.getSurname())) && 
-				(this.dataNascita.equals(c.getBirthDate()))) 
+				(this.dataNascita.equals(c.getBirthDate())) &&
+				(this.autovetturePossedute.size() == c.getOwnedCars().size())) {
+			for (int i = 0; i < this.autovetturePossedute.size(); i++){
+				if (!(c.getOwnedCars().get(i).equals(this.autovetturePossedute.get(i))))
+					return false;	
+			}
 			return true;
-		else
-			return false;
+		}
+			
+		else{
+			System.err.println("Errore size " + this.autovetturePossedute.size() + " " +c.getOwnedCars().size() );
+			return false;}
 	
 	}
 }

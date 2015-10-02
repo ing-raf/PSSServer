@@ -34,11 +34,11 @@ public class Cliente {
 	}
 	
 	public ClienteDAO prepareDAO (){
-		ClienteDAO dao = new ClienteDAO();
+		ClienteDAO dao = new ClienteDAO ();
 		dao.setName(this.nome);
 		dao.setSurname(this.cognome);
 		dao.setDate(this.dataNascita);
-		for (AutovetturaCompatibile a: this.autovetturePossedute){
+		for(AutovetturaCompatibile a : this.autovetturePossedute){
 			dao.setOwnedCars(a.prepareDAO());
 		}
 		return dao;
@@ -79,9 +79,16 @@ public class Cliente {
 	
 	public boolean equals (Object obj){
 		Cliente c = (Cliente) obj;  
+		
+		for (int i = 0; i < this.autovetturePossedute.size(); i++){
+			if (!(c.getOwnedCars().get(i).equals(this.autovetturePossedute.get(i))))
+				return false;	
+		}
+		
 		if ((this.nome.equals(c.getName())) &&
 				(this.cognome.equals(c.getSurname())) && 
-				(this.dataNascita.equals(c.getBirthDate()))) 
+				(this.dataNascita.equals(c.getBirthDate())) &&
+				(this.autovetturePossedute.size() == c.getOwnedCars().size())) 
 			return true;
 		else
 			return false;
