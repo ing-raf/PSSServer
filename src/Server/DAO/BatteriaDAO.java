@@ -6,6 +6,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import Server.Entity.Batteria;
+
 
 
 @Entity
@@ -132,5 +134,16 @@ public class BatteriaDAO {
 	
 		return true;
 		
+	}
+	
+	public boolean equals (Object obj){
+		BatteriaDAO b = (BatteriaDAO) obj;  
+		if ((b.getID() == this.getID()) &&
+				(Float.compare(b.getCostSubstitution(), this.getCostSubstitution()) == 0) && 
+				(b.getCyclesRecharge() == this.getCyclesRecharge())) 
+			return true;
+		else
+			return false;
+	
 	}
 }
