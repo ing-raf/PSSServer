@@ -50,7 +50,7 @@ public class Batteria {
 	}
 	
 	public static Batteria getBattery(int id){
-		BatteriaDAO dao = BatteriaDAO.findBatteria(id);
+		BatteriaDAO dao = BatteriaDAO.findBattery(id);
 		return new Batteria(dao);
 	}
 	

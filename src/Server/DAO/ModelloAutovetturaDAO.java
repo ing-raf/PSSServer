@@ -7,6 +7,9 @@ import javax.persistence.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import Server.Entity.ModelloAutovettura;
+
 import org.hibernate.HibernateException;
 
 
@@ -142,4 +145,6 @@ public class ModelloAutovetturaDAO {
 		else
 			return false;
 	}
+	
+	
 }

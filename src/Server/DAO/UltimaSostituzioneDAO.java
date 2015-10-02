@@ -5,6 +5,9 @@ import javax.persistence.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import Server.Entity.UltimaSostituzione;
+
 import org.hibernate.Query;
 
 import java.util.ArrayList;
@@ -170,6 +173,16 @@ public class UltimaSostituzioneDAO {
 			return null;
 		else
 			return result.get(0) ;
+	}
+	
+	public boolean equals (Object obj) {
+		UltimaSostituzioneDAO sost = (UltimaSostituzioneDAO) obj;
+		if ((this.batteria.equals(sost.getBattery())) && 
+				(this.getStation().equals(sost.getStation())) && 
+				(this.dataOra.equals(sost.getDateHour())))
+			return true;
+		else
+			return false;
 	}
 
 }

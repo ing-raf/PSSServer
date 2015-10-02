@@ -102,7 +102,7 @@ public class BatteriaDAO {
 		return true;
 	}
 
-	public static BatteriaDAO findBatteria (int cod){
+	public static BatteriaDAO findBattery (int cod){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
