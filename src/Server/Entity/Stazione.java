@@ -52,7 +52,7 @@ public class Stazione {
 		return this.indirizzo;
 	}
 	
-	public List<Batteria> getAvailableBatteries (){
+	public ArrayList<Batteria> getAvailableBatteries (){
 		return this.disponibili;
 	}
 
