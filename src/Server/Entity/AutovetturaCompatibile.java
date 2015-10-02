@@ -60,4 +60,16 @@ public class AutovetturaCompatibile {
 		
 		return dao;
 	}
+	
+
+	public boolean equals (Object obj){
+		AutovetturaCompatibile a = (AutovetturaCompatibile) obj;  
+		if ((a.getNumberPlate().equals(this.numeroTarga)) && 
+				(a.getModel().equals(this.modello)) &&
+				(a.getLastSubstitution().equals(this.sostituzione)))
+			return true;
+		else
+			return false;
+	}
+	
 }

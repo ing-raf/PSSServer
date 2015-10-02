@@ -64,12 +64,10 @@ public class AutovetturaCompatibileTest {
 	public void testGetModel() {
 		final String idTest = "Test di getModel";
 		
-		test = AutovetturaCompatibile.getCar("EA 210 BB");
 		ModelloAutovettura m = new ModelloAutovettura();
 		m.setBrand("Mercedes");
 		m.setModel("SLK");
-		
-		assertEquals(idTest + "riuscito", m.equals(test.getModel()));
+		assertEquals(idTest + "riuscito", true, test.getModel().equals(m));
 		
 	}
 
@@ -82,7 +80,7 @@ public class AutovetturaCompatibileTest {
 		m.setModel("Panda");
 		test.setModel(m);
 		
-		assertEquals(idTest + "riuscito", m.equals(test.getModel()));
+		assertEquals(idTest + "riuscito", true, test.getModel().equals(m));
 	}
 
 	@Test
@@ -92,7 +90,7 @@ public class AutovetturaCompatibileTest {
 		test = AutovetturaCompatibile.getCar("EA 210 BB");
 		UltimaSostituzione u = UltimaSostituzione.getLastSubstitution("EA 210 BB");	
 		
-		assertEquals(idTest + "riuscito", u.equals(test.getLastSubstitution()));
+		assertEquals(idTest + "riuscito", true, u.equals(test.getLastSubstitution()));
 	}
 
 	@Test
@@ -100,7 +98,7 @@ public class AutovetturaCompatibileTest {
 		final String idTest = "Test di setLastSubstitution";
 		Batteria b = Batteria.getBattery(21);
 		Stazione s = Stazione.getStation(2);
-		Calendar d = null;
+		Calendar d = Calendar.getInstance();
 		d.clear();
 		d.set(2015, 10, 02, 12, 8);
 		UltimaSostituzione u = new UltimaSostituzione();
@@ -108,7 +106,9 @@ public class AutovetturaCompatibileTest {
 		u.setDateHour(d);
 		u.setSubstitutionStation(s);
 		
-		assertEquals(idTest + "riuscito", u.equals(test.setLastSubstitution(u)));
+		test = AutovetturaCompatibile.getCar("EA 210 BB");
+		test.setLastSubstitution(u);
+		assertEquals(idTest + "riuscito", true, u.equals(test.getLastSubstitution()));
 	}
 
 	@Test
