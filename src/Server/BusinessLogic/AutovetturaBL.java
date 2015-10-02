@@ -2,21 +2,21 @@ package Server.BusinessLogic;
 
 import Server.Entity.ModelloAutovettura;
 
-public class Autovettura {
+public class AutovetturaBL {
 
 	private String modello;
 	private String fornitore;
 	
-	public Autovettura() {
+	public AutovetturaBL() {
 		
 	}
 	
-	public Autovettura(String modello, String fornitore) {
+	public AutovetturaBL(String modello, String fornitore) {
 		this.setBrand(fornitore);
 		this.setModel(modello);
 	}
 	
-	public Autovettura(ModelloAutovettura autovettura) {
+	public AutovetturaBL(ModelloAutovettura autovettura) {
 		this.setBrand(autovettura.getBrand());
 		this.setModel(autovettura.getModel());
 	}

@@ -2,20 +2,20 @@ package Server.BusinessLogic;
 
 import Server.Entity.AutovetturaCompatibile;
 
-public class AutovetturaCliente extends Autovettura {
+public class AutovetturaClienteBL extends AutovetturaBL {
 
 	private String numeroTarga;
 	
-	public AutovetturaCliente(){
+	public AutovetturaClienteBL(){
 		super();
 	}
 	
-	public AutovetturaCliente(String fornitore, String modello, String numeroTarga) {
+	public AutovetturaClienteBL(String fornitore, String modello, String numeroTarga) {
 		super(fornitore, modello);
 		this.setNumberPlate(numeroTarga);
 	}
 	
-	public AutovetturaCliente(AutovetturaCompatibile autovettura) {
+	public AutovetturaClienteBL(AutovetturaCompatibile autovettura) {
 		super( autovettura.getModel() );
 		this.setNumberPlate( autovettura.getNumberPlate() );
 	}
