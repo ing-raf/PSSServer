@@ -16,6 +16,10 @@ public class Badge {
 
 	}
 	
+	public Badge(){
+		
+	}
+	
 	public Badge (BadgeDAO dao) {
 		this.codice = dao.getCode();
 		this.creditoResiduo = dao.getCredit();
