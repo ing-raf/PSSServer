@@ -106,4 +106,23 @@ public class Stazione {
 		return dao.delete();
 	}
 	
+	public boolean equals (Object obj){
+		Stazione s = (Stazione) obj;  
+		
+		for (int i = 0; i < this.disponibili.size(); i++){
+			if (!(s.getAvailableBatteries().get(i).equals(this.disponibili.get(i))))
+				return false;	
+		}
+	
+		
+		if ((s.getID() == this.ID) &&
+				(s.getAddress().equals(this.indirizzo)) && 
+				(s.getName().equals(this.nome)))
+				
+			return true;
+		else
+			return false;
+	
+	}
+	
 }

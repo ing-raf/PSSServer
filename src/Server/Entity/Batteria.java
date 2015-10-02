@@ -111,9 +111,6 @@ public class Batteria {
 			return true;
 		else
 			return false;
-		
-				
-	
 	
 	}
 }
