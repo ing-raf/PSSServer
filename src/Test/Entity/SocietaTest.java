@@ -2,48 +2,92 @@ package Test.Entity;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
+import java.util.ArrayList;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import Server.DAO.PopulateTestDatabase;
+import Server.Entity.ModelloAutovettura;
+import Server.Entity.Societa;
+import Server.Entity.Stazione;
 
 public class SocietaTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
+		PopulateTestDatabase.populate();
 	}
 
 	@Test
-	public void testGetListaModelli() {
-		fail("Not yet implemented");
+	public void testGetModelList() {
+		final String idTest = "Test di getModelList";
+		
+		ModelloAutovettura[] oracle = new ModelloAutovettura[] { 
+				new ModelloAutovettura(),
+				new ModelloAutovettura(),
+				new ModelloAutovettura(),
+				new ModelloAutovettura(),
+				new ModelloAutovettura(),
+				new ModelloAutovettura(),
+				new ModelloAutovettura()};
+		
+		oracle[0].setBrand("Maserati");
+		oracle[0].setModel("Quattroporte");
+		oracle[1].setBrand("Lamborghini");
+		oracle[1].setModel("Gallardo");
+		oracle[2].setBrand("Mercedes");
+		oracle[2].setModel("SLK");
+		oracle[3].setBrand("Alfa Romeo");
+		oracle[3].setModel("Giulietta");
+		oracle[4].setBrand("Alfa Romeo");
+		oracle[4].setModel("Mito");
+		oracle[5].setBrand("Peugeot");
+		oracle[5].setModel("207");
+		oracle[6].setBrand("Fiat");
+		oracle[6].setModel("Panda");
+		
+		ArrayList<ModelloAutovettura> listaModelli = Societa.getModelList();
+		
+		assertEquals(idTest + " riuscito", 7, listaModelli.size() );
+		
+		for (ModelloAutovettura m : oracle) {
+			System.err.println(m.getModel());
+			assertTrue(idTest + " riuscito", listaModelli.contains(m));
+		}
 	}
 
 	@Test
 	public void testFindBadge() {
-		fail("Not yet implemented");
+		final String idTest = "Test di findBadge";
+		assertTrue (idTest + " riuscito", Societa.findBadge(0));
+		assertFalse (idTest + " riuscito", Societa.findBadge(4));
 	}
 
 	@Test
 	public void testGetStationList() {
-		fail("Not yet implemented");
+		final String idTest = "Test di getStationList";
+		
+		Stazione[] oracle = new Stazione[] { 
+				Stazione.getStation(1),
+				Stazione.getStation(2),
+				Stazione.getStation(3)};
+		
+		ArrayList<Stazione> listaStazioni = Societa.getStationList();
+		
+		assertEquals(idTest + " riuscito", 3, listaStazioni.size() );
+		
+		for (Stazione s : oracle) 
+			assertTrue(idTest + " riuscito", listaStazioni.contains(s));
 	}
 
 	@Test
 	public void testFindStation() {
-		fail("Not yet implemented");
+		final String idTest = "Test di findStation";
+		
+		assertTrue (idTest + " riuscito", Societa.findStation(1));
+		assertFalse (idTest + " riuscito", Societa.findStation(0));
+		
 	}
 
 }

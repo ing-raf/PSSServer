@@ -1,5 +1,6 @@
 package Server.Entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -13,7 +14,7 @@ import Server.DAO.StazioneDAO;
 
 public class Societa{
 
-	public  static List<ModelloAutovetturaDAO> getListaModelli() {
+	public  static ArrayList<ModelloAutovettura> getModelList() {
 		List<ModelloAutovetturaDAO> trovate;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -25,12 +26,16 @@ public class Societa{
 				
 		session.getTransaction().commit();		
 		session.close();
-		return trovate;
+		
+		ArrayList<ModelloAutovettura> ritorno = new ArrayList<ModelloAutovettura>( trovate.size() );
+		
+		for (ModelloAutovetturaDAO m : trovate) ritorno.add(new ModelloAutovettura(m));
+		
+		return ritorno;
 	}
 
 	/**
 	 * 
-	 * @param badge
 	 * @param codice
 	 */
 	public static boolean findBadge(int codice) {
@@ -41,7 +46,7 @@ public class Societa{
 			return true;
 	}
 
-	public static List<StazioneDAO> getStationList() {
+	public static ArrayList<Stazione> getStationList() {
 		List<StazioneDAO> trovate;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -53,7 +58,13 @@ public class Societa{
 				
 		session.getTransaction().commit();		
 		session.close();
-		return trovate;
+
+
+		ArrayList<Stazione> ritorno = new ArrayList<Stazione>( trovate.size() );
+		
+		for (StazioneDAO m : trovate) ritorno.add(new Stazione(m));
+		
+		return ritorno;
 	}
 	
 	public static boolean findStation (int id){
