@@ -106,6 +106,7 @@ public class AutovetturaCompatibileTest {
 		u.setDateHour(d);
 		u.setSubstitutionStation(s);
 		
+		
 		test = AutovetturaCompatibile.getCar("EA 210 BB");
 		test.setLastSubstitution(u);
 		assertEquals(idTest + "riuscito", true, u.equals(test.getLastSubstitution()));
