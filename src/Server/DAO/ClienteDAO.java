@@ -6,6 +6,9 @@ import javax.persistence.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import Server.Entity.Cliente;
+
 import org.hibernate.Query;
 
 @Entity
@@ -154,5 +157,15 @@ public class ClienteDAO {
 		}
 		
 		return true;
+	}
+	public boolean equals (Object obj){
+		ClienteDAO c = (ClienteDAO) obj;  
+		if ((this.nome.equals(c.getName())) &&
+				(this.cognome.equals(c.getSurname())) && 
+				(this.dataNascita.equals(c.getBirthDate()))) 
+			return true;
+		else
+			return false;
+	
 	}
 }
