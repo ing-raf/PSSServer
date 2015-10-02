@@ -7,6 +7,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import Server.Entity.Stazione;
+
 @Entity
 @Table(name = "Stazione")
 public class StazioneDAO {
@@ -133,15 +135,26 @@ public class StazioneDAO {
 		return true;
 	}
 	
-	public boolean equals (Object obj) {
-		StazioneDAO stazione = (StazioneDAO) obj;
-		if ((this.nome.equals(stazione.getName())) 
-				&& (this.indirizzo.equals(stazione.getAddress())) 
-				&& (this.ID == stazione.getID()))
+	public boolean equals (Object obj){
+		StazioneDAO s = (StazioneDAO) obj;  
+		
+		for (int i = 0; i < this.disponibili.size(); i++){
+			if (!(s.getAvailableBatteries().get(i).equals(this.disponibili.get(i))))
+				return false;	
+		}
+	
+		
+		if ((s.getID() == this.ID) &&
+				(s.getAddress().equals(this.indirizzo)) && 
+				(s.getName().equals(this.nome)) &&
+				(s.getAvailableBatteries().size() == this.disponibili.size()))
+				
 			return true;
 		else
 			return false;
+	
 	}
+	
 	
 /*	private int findIndex (BatteriaDAO vecchia){
 		int index=0,k=0;

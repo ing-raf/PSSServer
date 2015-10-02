@@ -117,7 +117,8 @@ public class Stazione {
 		
 		if ((s.getID() == this.ID) &&
 				(s.getAddress().equals(this.indirizzo)) && 
-				(s.getName().equals(this.nome)))
+				(s.getName().equals(this.nome)) &&
+				(s.getAvailableBatteries().size() == this.disponibili.size()))
 				
 			return true;
 		else
