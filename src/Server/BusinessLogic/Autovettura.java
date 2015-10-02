@@ -1,32 +1,40 @@
 package Server.BusinessLogic;
 
-import Server.DAO.ModelloAutovetturaDAO;
+import Server.Entity.ModelloAutovettura;
 
 public class Autovettura {
 
-	private ModelloAutovetturaDAO autovettura;
+	private String modello;
+	private String fornitore;
 	
-	public String getModello() {
-		return this.autovettura.getModello();
-	}
-
-	public String getFornitore() {
-		return this.autovettura.getFornitore();
-	}
-
-	/**
-	 * 
-	 * @param modelloAutovettura
-	 */
-	public void setAutovettura(ModelloAutovetturaDAO autovettura) {
-		this.autovettura = autovettura;
-	}
-
-	
-	public ModelloAutovetturaDAO getAutovettura(){
-		return this.autovettura;
+	public Autovettura() {
 		
 	}
 	
+	public Autovettura(String modello, String fornitore) {
+		this.setBrand(fornitore);
+		this.setModel(modello);
+	}
+	
+	public Autovettura(ModelloAutovettura autovettura) {
+		this.setBrand(autovettura.getBrand());
+		this.setModel(autovettura.getModel());
+	}
+	
+	public String getModel() {
+		return this.modello;
+	}
 
+	public String getBrand() {
+		return this.fornitore;
+	}
+
+	public void setModel(String modello) {
+		this.modello = modello;
+	}
+	
+	public void setBrand(String fornitore) {
+		this.fornitore = fornitore;
+	}
+	
 }
