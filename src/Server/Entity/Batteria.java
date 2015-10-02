@@ -93,23 +93,14 @@ public class Batteria {
 		return dao;
 	}
 	
-	public boolean update(int id){
-		BatteriaDAO batteria = new BatteriaDAO();
-		batteria = BatteriaDAO.findBatteria(id);
-		
-		batteria.setCyclesRecharge(this.cicliRicaricaRimanenti);
-		batteria.setCostSubstitution(this.costoSostituzione);
-		
-		ModelloAutovetturaDAO modelloDAO = new ModelloAutovetturaDAO();
-		
-		modelloDAO.setModel(this.modello.getModel());
-		modelloDAO.setBrand(this.modello.getBrand());
-		batteria.setModel(modelloDAO);
-
-		if(!batteria.update()){
-			return false;
-		}else
-			return true;
+	public boolean update(){
+		BatteriaDAO dao = this.prepareDAO();
+		return dao.update();
+	}
+	
+	public boolean delete() {
+		BatteriaDAO dao = this.prepareDAO();
+		return dao.delete();
 	}
 	
 	public boolean equals (Object obj){

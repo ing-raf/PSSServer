@@ -8,7 +8,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import Server.Entity.Stazione;
+
 public class StazioneTest {
+	
+	Stazione test = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -24,6 +28,7 @@ public class StazioneTest {
 
 	@After
 	public void tearDown() throws Exception {
+		
 	}
 
 	@Test

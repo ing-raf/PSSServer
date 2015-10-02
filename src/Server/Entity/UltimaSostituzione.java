@@ -66,5 +66,10 @@ public class UltimaSostituzione {
 		return dao.update();
 	}
 	
+	public boolean delete() {
+		UltimaSostituzioneDAO dao = this.prepareDAO();
+		return dao.delete();
+	}
+	
 	
 }

@@ -96,32 +96,14 @@ public class Stazione {
 		
 	}
 	
-	public boolean update(){
-		
-		StazioneDAO dao = new StazioneDAO();
-//		StazioneDAO dao = StazioneDAO.findStation(this.getID() );
-//		if (!dao.getAvailableBatteries().isEmpty())
-//			System.err.println("Puttana maiala");
-		dao.setAddress(this.getAddress());
-		dao.setID(this.getID());
-		dao.setName(this.getName());
-		
-		for(Batteria b: this.disponibili){
-			BatteriaDAO batt = new BatteriaDAO();
-			batt.setID(b.getID() );
-			batt.setCostSubstitution(b.getCostSubstitution() );
-			batt.setCyclesRecharge( b.getCyclesRecharge() );
-				ModelloAutovetturaDAO mod = new ModelloAutovetturaDAO();
-				mod.setBrand( b.getModel().getBrand() );
-				mod.setModel( b.getModel().getModel() );
-				mod.setID();
-			batt.setModel(mod);
-			
-			dao.setAvailableBatteries(batt);
-		}
-		
-		return dao.update();
-		
+	public boolean update(){	
+		StazioneDAO dao = this.prepareDAO();		
+		return dao.update();		
+	}
+	
+	public boolean delete() {
+		StazioneDAO dao = this.prepareDAO();
+		return dao.delete();
 	}
 	
 }
