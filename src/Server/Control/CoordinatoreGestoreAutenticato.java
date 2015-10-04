@@ -115,7 +115,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	}
 
 
-	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {	
+	public UltimaSostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {	
 		Server.BusinessLogic.UltimaSostituzione sostituzione = GestoreSostituzioni.findLastSostituzione( (Server.BusinessLogic.AutovetturaCliente)this.lastElenco.get(autovettura) );
 		UltimaSostituzione ultima = new UltimaSostituzione();
 		ultima.setSostituzione(sostituzione);

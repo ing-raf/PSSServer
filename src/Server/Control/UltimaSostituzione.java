@@ -1,12 +1,7 @@
 package Server.Control;
 
-import java.util.Calendar;
+public class UltimaSostituzione implements Server.RMIInterface.UltimaSostituzione {
 
-public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8677490410508960918L;
 	private int giorno;
 	private int mese;
@@ -17,47 +12,67 @@ public class UltimaSostituzione implements Server.RMIInterface.Sostituzione {
 	private String indirizzoStazione;
 	private int IDBatteria;
 
-	public int getGiorno() {
+	public int getDay() {
 		return this.giorno;
 	}
+	
+	public void setDay(int giorno) {
+		this.giorno = giorno;
+	}
 
-	public int getMese() {
+	public int getMonth() {
 		return this.mese;
 	}
+	
+	public void setMonth(int mese) {
+		this.mese = mese;
+	}
 
-	public int getAnno() {
+	public int getYear() {
 		return this.anno;
 	}
+	
+	public void setYear(int anno) {
+		this.anno = anno;
+	}
 
-	public int getOra() {
+	public int getHour() {
 		return this.ora;
 	}
+	
+	public void setHour(int ora) {
+		this.ora = ora;
+	}
 
-	public int getMinuti() {
+	public int getMinutes() {
 		return this.minuti;
 	}
+	
+	public void setMinutes(int minuti) {
+		this.minuti = minuti;
+	}
 
-	public String getNomeStazione() {
+	public String getStationName() {
 		return this.nomeStazione;
 	}
+	
+	public void setStationName(String nomeStazione) {
+		this.nomeStazione = nomeStazione;
+	}
 
-	public String getIndirizzoStazione() {
+	public String getStationAddress() {
 		return this.indirizzoStazione;
 	}
+	
+	public void setStationAddress(String indirizzoStazione) {
+		this.indirizzoStazione = indirizzoStazione;
+	}
 
-	public int getIDBatteria() {
+	public int getBatteryID() {
 		return this.IDBatteria;
 	}
-
-	public void setSostituzione(Server.BusinessLogic.UltimaSostituzione sostituzione) {
-		this.giorno = sostituzione.getDataOra().get(Calendar.DATE);
-		this.mese = sostituzione.getDataOra().get(Calendar.MONTH);
-		this.anno = sostituzione.getDataOra().get(Calendar.YEAR);
-		this.ora = sostituzione.getDataOra().get(Calendar.HOUR_OF_DAY);
-		this.minuti = sostituzione.getDataOra().get(Calendar.MINUTE);
-		this.nomeStazione = sostituzione.getNomeStazione();
-		this.indirizzoStazione = sostituzione.getIndirizzoStazione();
-		this.IDBatteria = sostituzione.getIDBatteria();
+	
+	public void setBatteryID(int IDBatteria) {
+		this.IDBatteria = IDBatteria;
 	}
-
 }

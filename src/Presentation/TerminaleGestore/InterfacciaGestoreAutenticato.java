@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import Server.RMIInterface.Autovettura;
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Batteria;
-import Server.RMIInterface.Sostituzione;
+import Server.RMIInterface.UltimaSostituzione;
 import Server.RMIInterface.Stazione;
 
 public interface InterfacciaGestoreAutenticato {
@@ -21,6 +21,6 @@ public interface InterfacciaGestoreAutenticato {
 
 	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception;
 
-	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception;
+	public UltimaSostituzione retrieveUltimaSostituzione(int autovettura) throws Exception;
 
 }

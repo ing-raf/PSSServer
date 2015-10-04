@@ -8,7 +8,7 @@ import Server.RMIInterface.Autovettura;
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Batteria;
 import Server.RMIInterface.ServiziGestore;
-import Server.RMIInterface.Sostituzione;
+import Server.RMIInterface.UltimaSostituzione;
 import Server.RMIInterface.Stazione;
 
 public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticato {
@@ -55,7 +55,7 @@ public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticat
 	}
 
 	@Override
-	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {
+	public UltimaSostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {
 		return this.stub.retrieveUltimaSostituzione(autovettura);
 	}
 

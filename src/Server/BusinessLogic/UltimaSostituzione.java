@@ -2,51 +2,43 @@ package Server.BusinessLogic;
 
 import java.util.Calendar;
 
-import Server.DAO.Sostituzione;
-
 public class UltimaSostituzione {
 	
-	private Sostituzione sostituzione;
+	private Calendar dataOra;
+	private String nomeStazione;
+	private String indirizzoStazione;
+	private int IDBatteria;
 
-	public int getGiorno() {
-		return this.sostituzione.getDataOra().get(Calendar.DATE);
+	public Calendar getDateHour() {
+		return this.dataOra;
+	}
+	
+	public void setDateHour(Calendar dataOra) {
+		this.dataOra = dataOra;
 	}
 
-	public int getMese() {
-		return this.sostituzione.getDataOra().get(Calendar.MONTH);
+	public String getStationName() {
+		return this.nomeStazione;
+	}
+	
+	public void setStationName(String nomeStazione) {
+		this.nomeStazione = nomeStazione;
 	}
 
-	public int getAnno() {
-		return this.sostituzione.getDataOra().get(Calendar.YEAR);
+	public String getStationAddress() {
+		return this.indirizzoStazione;
+	}
+	
+	public void setStationAddress(String indirizzoStazione) {
+		this.indirizzoStazione = indirizzoStazione;
 	}
 
-	public int getOra() {
-		return this.sostituzione.getDataOra().get(Calendar.HOUR_OF_DAY);
+	public int getBatteryID() {
+		return this.IDBatteria;
 	}
-
-	public int getMinuti() {
-		return this.sostituzione.getDataOra().get(Calendar.MINUTE);
-	}
-
-	public void setSostituzione(Server.DAO.Sostituzione sos) {
-		this.sostituzione = sos;
-	}
-
-
-	public String getNomeStazione() {
-		return this.sostituzione.getStazione().getNome();
-	}
-
-	public String getIndirizzoStazione() {
-		return this.sostituzione.getStazione().getIndirizzo();
-	}
-
-	public int getIDBatteria() {
-		return this.sostituzione.getBatteria().getID();
-	}
-
-	public Calendar getDataOra() {
-		return this.sostituzione.getDataOra();
+	
+	public void setBatteryID(int IDBatteria) {
+		this.IDBatteria = IDBatteria;
 	}
 
 }

@@ -1,4 +1,4 @@
-package Server.BusinessLogic;
+package Server.OLD;
 
 import Server.DAO.*;
 import Server.Entity.Societa;
@@ -24,7 +24,7 @@ public class GestoreSostituzioni {
 	public static Batteria updateSostituzione(AutovetturaCliente autovettura, int idStazione, Server.BusinessLogic.Batteria batteria) {
 
 		Server.DAO.AutovetturaCompatibileDAO a = autovettura.getAutovetturaCliente();
-		Server.DAO.Sostituzione ultima = new Server.DAO.Sostituzione ();
+		Server.DAO.UltimaSostituzione ultima = new Server.DAO.UltimaSostituzione ();
 		ultima = a.getLastRicambio();
 		Server.DAO.StazioneDAO stazione = new Server.DAO.StazioneDAO();
 		boolean ris = Societa.findStazione(stazione, idStazione);

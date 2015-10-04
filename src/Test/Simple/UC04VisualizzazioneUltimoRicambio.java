@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;
 import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
 import Server.RMIInterface.AutovetturaCliente;
-import Server.RMIInterface.Sostituzione;
+import Server.RMIInterface.UltimaSostituzione;
 
 public class UC04VisualizzazioneUltimoRicambio {
 	
@@ -72,7 +72,7 @@ public class UC04VisualizzazioneUltimoRicambio {
 			System.exit(0);
 		}
 		
-		Sostituzione ultima = null;
+		UltimaSostituzione ultima = null;
 		
 		try {
 			ultima = client.retrieveUltimaSostituzione(indice);
