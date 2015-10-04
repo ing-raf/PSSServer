@@ -1,7 +1,5 @@
 package Server.BusinessLogic;
 
-import Server.Entity.ModelloAutovettura;
-
 public class BatteriaBL {
 
 	private int ID;
@@ -9,6 +7,19 @@ public class BatteriaBL {
 	private int cicliRicaricaRimanenti;
 	private String modello;
 	private String fornitore;
+	
+	public BatteriaBL() {
+		
+	}
+	
+	public BatteriaBL (int ID, float costoSostituzione, int cicliRicaricaRimanenti,
+			String modello, String fornitore) {
+		this.setID(ID);
+		this.setCostSubstitution(costoSostituzione);
+		this.setCyclesRecharge(cicliRicaricaRimanenti);
+		this.setModel(modello);
+		this.setBrand(fornitore);
+	}
 	
 	public int getID() {
 		return this.ID;

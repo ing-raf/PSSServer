@@ -2,13 +2,24 @@ package Server.BusinessLogic;
 
 import java.util.Calendar;
 
-public class UltimaSostituzione {
+public class UltimaSostituzioneBL {
 	
 	private Calendar dataOra;
 	private String nomeStazione;
 	private String indirizzoStazione;
 	private int IDBatteria;
 
+	public UltimaSostituzioneBL() {
+		
+	}
+	
+	public UltimaSostituzioneBL(Calendar dataOra, String nomeStazione, String indirizzoStazione, int IDBatteria) {
+		this.setDateHour(dataOra);
+		this.setStationName(nomeStazione);
+		this.setStationAddress(indirizzoStazione);
+		this.setBatteryID(IDBatteria);
+	}
+	
 	public Calendar getDateHour() {
 		return this.dataOra;
 	}

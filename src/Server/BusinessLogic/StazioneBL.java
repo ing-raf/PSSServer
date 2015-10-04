@@ -6,6 +6,16 @@ public class StazioneBL {
 	private String nome;
 	private String indirizzo;
 	
+	public StazioneBL() {
+		
+	}
+	
+	public StazioneBL(int ID, String nome, String indirizzo) {
+		this.setID(ID);
+		this.setName(nome);
+		this.setAddress(indirizzo);
+	}
+	
 	public int getID() {
 		return this.ID;
 	}

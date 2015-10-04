@@ -1,6 +1,6 @@
 package Server.Control;
 
-public class UltimaSostituzione implements Server.RMIInterface.UltimaSostituzione {
+public class UltimaSostituzioneC implements Server.RMIInterface.UltimaSostituzione {
 
 	private static final long serialVersionUID = 8677490410508960918L;
 	private int giorno;
