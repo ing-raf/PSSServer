@@ -105,7 +105,7 @@ public class Autenticato extends Stato {
 		if ( this.badgeAutenticato.verifyCredito(costo) ) {
 			this.badgeAutenticato.debitBatteria(costo);
 		
-			this.startDeviceConnection(coordinatore.getHostname(), coordinatore.getPortSostituzione()) ;
+			this.startDeviceConnection(coordinatore.getSubstitutionDeviceHostname(), coordinatore.getSubstitutionDevicePort()) ;
 			if ( this.removeBatteria() == true) {
 
 				if ( this.installBatteria(indiceBatteria) == true ) {

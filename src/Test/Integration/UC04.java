@@ -10,7 +10,7 @@ import org.junit.Test;
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;
 import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
 import Server.RMIInterface.AutovetturaCliente;
-import Server.RMIInterface.Sostituzione;
+import Server.RMIInterface.UltimaSostituzione;
 
 public class UC04 {
 
@@ -72,7 +72,7 @@ public class UC04 {
 			fail(idTest + " riuscito");
 		}
 					
-		Sostituzione ultima = null;
+		UltimaSostituzione ultima = null;
 		
 		try {
 			ultima = client.retrieveUltimaSostituzione(indiceAutovettura);
@@ -125,7 +125,7 @@ public class UC04 {
 		}
 
 		
-		Sostituzione ultima = null;
+		UltimaSostituzione ultima = null;
 		
 		try {
 			ultima = client.retrieveUltimaSostituzione(indiceAutovettura);

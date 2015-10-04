@@ -6,7 +6,7 @@ import Server.RMIInterface.Autovettura;
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Batteria;
 import Server.RMIInterface.ServiziGestoreAndroid;
-import Server.RMIInterface.Sostituzione;
+import Server.RMIInterface.UltimaSostituzione;
 import Server.RMIInterface.Stazione;
 
 
@@ -58,7 +58,7 @@ public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutentica
 	}
 
 	@Override
-	public Sostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {
+	public UltimaSostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {
 		return this.stub.retrieveUltimaSostituzione(autovettura);
 	}
 

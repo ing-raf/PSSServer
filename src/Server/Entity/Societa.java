@@ -14,7 +14,7 @@ import Server.DAO.StazioneDAO;
 
 public class Societa{
 
-	public  static ArrayList<ModelloAutovettura> getModelList() {
+	public static ArrayList<ModelloAutovettura> getModelList() {
 		List<ModelloAutovetturaDAO> trovate;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
