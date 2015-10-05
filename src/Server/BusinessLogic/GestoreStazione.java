@@ -1,5 +1,8 @@
 package Server.BusinessLogic;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import Server.Entity.AutovetturaCompatibile;
 import Server.Entity.Batteria;
 import Server.Entity.ModelloAutovettura;
@@ -10,12 +13,112 @@ import Server.Entity.UltimaSostituzione;
 public class GestoreStazione {
 	
 	private int ID;
+	private int soglia;
 	
-	public GestoreStazione(int ID) {
+	public GestoreStazione(int ID, int soglia) {
 		this.ID = ID;
+		this.soglia = soglia;
 	}
 	
-	public boolean updateSostituzione(AutovetturaClienteBL auto, BatteriaBL nuova, BatteriaBL vecchia) {
+	public boolean insertBattery(BatteriaBL nuova) {
+		Societa laSocieta = Societa.getSociety();
+		Stazione locale = laSocieta.getStation(this.ID);
+		
+		ModelloAutovettura modello = new ModelloAutovettura();
+		modello.setBrand( nuova.getBrand() );
+		modello.setModel( nuova.getModel() );
+		Batteria b = new Batteria( nuova.getID(), nuova.getCostSubstitution(),
+				nuova.getCyclesRecharge(), modello);
+		
+		locale.setAvailableBatteries(b);
+		return locale.update();
+	}
+	
+	public boolean addBattery(BatteriaBL nuova) {
+		Societa laSocieta = Societa.getSociety();
+		Stazione locale = laSocieta.getStation(this.ID);
+		
+		Batteria b = new Batteria();
+		b.setID( nuova.getID() );
+		b.setCostSubstitution( nuova.getCostSubstitution() );
+		b.setCyclesRecharge( nuova.getCyclesRecharge() );
+			ModelloAutovettura modello = new ModelloAutovettura();
+			modello.setBrand( nuova.getBrand() );
+			modello.setModel( nuova.getModel() );
+		b.setModel(modello);
+		
+		locale.setAvailableBatteries(b);
+		return locale.update();
+	}
+	
+	public boolean verifyRecharge(BatteriaBL rimossa) {
+		if (rimossa.getCyclesRecharge() > 0) return true;
+		else return false;
+	}
+	
+	public boolean discardBattery(BatteriaBL esausta) {
+		
+		Batteria exhausted = new Batteria();
+		exhausted.setID( esausta.getID() );		
+		return exhausted.delete();
+		
+	}
+	
+	public ArrayList<BatteriaBL> retrieveCompatibleBatteries (AutovetturaBL modello) {
+		Societa laSocieta = Societa.getSociety();
+		Stazione locale = laSocieta.getStation(this.ID);
+		
+		ModelloAutovettura model = new ModelloAutovettura();
+		model.setModel( modello.getModel() );
+		model.setBrand( model.getBrand() );
+		
+		ArrayList<BatteriaBL> elencoBatterie = new ArrayList<BatteriaBL>();
+		
+		for (Batteria b : locale.getAvailableBatteries()) {
+			if ( b.getModel().equals(model) ) 
+				elencoBatterie.add( new BatteriaBL(b.getID(), b.getCostSubstitution(), b.getCyclesRecharge(),
+						b.getModel().getModel(), b.getModel().getBrand() ) );
+			
+		}
+		
+		return elencoBatterie;
+		
+	}
+	
+	public ArrayList<StazioneBL> remoteRetrieveCompatibleBatteries (AutovetturaBL modello) {
+		
+		ModelloAutovettura model = new ModelloAutovettura();
+		model.setModel( modello.getModel() );
+		model.setBrand( model.getBrand() );
+		
+		Societa laSocieta = Societa.getSociety();
+		
+		ArrayList<StazioneBL> elencoStazioni = new ArrayList<StazioneBL>(); 
+		
+		for (Stazione s : laSocieta.getStationList() ) 
+			if (!s.equals(laSocieta.getStation(this.ID))) {
+				
+				ArrayList<Batteria> listaBatterie = s.getAvailableBatteries();
+				
+				boolean hit = false;
+				int k = 0;
+				
+				while (hit == false && k < listaBatterie.size()) {
+					
+					if ( listaBatterie.get(k).getModel().equals(model) ) {
+						elencoStazioni.add( new StazioneBL (s.getID(), s.getName(), s.getAddress()));
+						hit = true;
+					}
+					k++;
+					
+				}
+				
+			}
+		
+		return elencoStazioni;
+	}
+	
+	public boolean updateSubstitution(AutovetturaClienteBL auto, BatteriaBL nuova, BatteriaBL vecchia) {
 		AutovetturaCompatibile car = 
 				AutovetturaCompatibile.getCar(auto.getNumberPlate());
 		
@@ -38,9 +141,33 @@ public class GestoreStazione {
 		Societa laSocieta = Societa.getSociety();
 		Stazione locale = laSocieta.getStation(this.ID);
 		
+		UltimaSostituzione update = new UltimaSostituzione();
 		
+		update.setBattery(fresh);
+		update.setDateHour( Calendar.getInstance() );
+		update.setSubstitutionStation(locale);
+		car.setLastSubstitution(update);
 		
-		return true;
+		return car.update();
+	}
+	
+	public ArrayList<BatteriaBL> retrieveNearlyExhaustedBatteries() {
+		
+		Societa laSocieta = Societa.getSociety();
+		Stazione locale = laSocieta.getStation(this.ID);
+		
+		ArrayList<Batteria> listaBatterie = locale.getAvailableBatteries();
+		ArrayList<BatteriaBL> elencoBatterie = new ArrayList<BatteriaBL>( listaBatterie.size() );
+		
+		for(Batteria b : listaBatterie) {
+			if (b.getCyclesRecharge() < this.soglia) {
+				elencoBatterie.add( new BatteriaBL(b.getID(), b.getCostSubstitution(), 
+						b.getCyclesRecharge(), b.getModel().getModel(), b.getModel().getBrand()) );
+			}
+		}
+		
+		return elencoBatterie;
+		
 	}
 
 }
