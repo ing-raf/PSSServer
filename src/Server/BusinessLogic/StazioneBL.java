@@ -1,7 +1,5 @@
 package Server.BusinessLogic;
 
-import Server.Entity.Stazione;
-
 public class StazioneBL {
 	
 	private int ID;

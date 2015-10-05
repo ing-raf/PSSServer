@@ -4,8 +4,8 @@ import java.io.*;
 
 public interface Autovettura extends Serializable {
 
-	String getModello();
+	String getModel();
 
-	String getFornitore();
+	String getBrand();
 
 }

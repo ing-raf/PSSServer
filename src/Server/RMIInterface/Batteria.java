@@ -6,6 +6,6 @@ public interface Batteria extends Serializable {
 	
 	int getID();
 
-	float getCosto();
+	float getCostSubstitution();
 
 }
