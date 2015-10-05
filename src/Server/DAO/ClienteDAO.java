@@ -7,7 +7,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import Server.Entity.Cliente;
+
 
 import org.hibernate.Query;
 
@@ -84,6 +84,7 @@ public class ClienteDAO {
 		query.setParameter("cogn", c);
 		query.setParameter("data", d);
 		
+		@SuppressWarnings("unchecked")
 		ArrayList<ClienteDAO> result = (ArrayList<ClienteDAO>)query.list();
 		
 		session.getTransaction().commit();		

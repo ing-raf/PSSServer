@@ -1,10 +1,10 @@
 package Server.Entity;
 
 import java.util.ArrayList;
-import java.util.List;
+
 
 import Server.DAO.BatteriaDAO;
-import Server.DAO.ModelloAutovetturaDAO;
+
 import Server.DAO.StazioneDAO;
 
 public class Stazione {
@@ -21,7 +21,7 @@ public class Stazione {
 	}
 
 	
-	public Stazione(StazioneDAO dao){
+	Stazione(StazioneDAO dao){
 		this.ID = dao.getID();
 		this.nome = dao.getName();
 		this.indirizzo = dao.getAddress();
@@ -33,7 +33,7 @@ public class Stazione {
 		
 	}
 	
-	public static Stazione getStation(int cod){
+	static Stazione getStation(int cod){
 		
 		StazioneDAO dao = StazioneDAO.findStation(cod);
 		return  new Stazione(dao);

@@ -1,6 +1,6 @@
 package Server.Entity;
 
-import Server.DAO.AutovetturaCompatibileDAO;
+
 import Server.DAO.BadgeDAO;
 
 public class Badge {
@@ -9,7 +9,7 @@ public class Badge {
 	private float creditoResiduo;
 	private Cliente possessore;
 	
-	public static Badge getBadge(int cod){
+	static Badge getBadge(int cod){
 		
 		BadgeDAO dao = BadgeDAO.findBadge(cod);
 		return new Badge (dao);
@@ -20,7 +20,7 @@ public class Badge {
 		
 	}
 	
-	public Badge (BadgeDAO dao) {
+	 Badge (BadgeDAO dao) {
 		this.codice = dao.getCode();
 		this.creditoResiduo = dao.getCredit();
 		this.possessore = new Cliente (dao.getClient());

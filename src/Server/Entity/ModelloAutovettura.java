@@ -11,7 +11,7 @@ public class ModelloAutovettura {
 		
 	}
 
-	public ModelloAutovettura(ModelloAutovetturaDAO dao) {
+	ModelloAutovettura(ModelloAutovetturaDAO dao) {
 		this.fornitore = dao.getBrand();
 		this.modello = dao.getModel();
 	}

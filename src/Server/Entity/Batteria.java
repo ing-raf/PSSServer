@@ -1,7 +1,7 @@
 package Server.Entity;
 
 import Server.DAO.BatteriaDAO;
-import Server.DAO.ModelloAutovetturaDAO;
+
 
 public class Batteria {
 	
@@ -14,7 +14,7 @@ public class Batteria {
 		
 	}
 	
-	public Batteria(BatteriaDAO dao){
+	Batteria(BatteriaDAO dao){
 		this.ID = dao.getID();
 		this.cicliRicaricaRimanenti = dao.getCyclesRecharge();
 		this.costoSostituzione = dao.getCostSubstitution();
@@ -49,7 +49,7 @@ public class Batteria {
 		return this.ID;
 	}
 	
-	public static Batteria getBattery(int id){
+	static Batteria getBattery(int id){
 		BatteriaDAO dao = BatteriaDAO.findBattery(id);
 		return new Batteria(dao);
 	}

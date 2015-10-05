@@ -6,7 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import Server.Entity.UltimaSostituzione;
+
 
 import org.hibernate.Query;
 
@@ -59,6 +59,7 @@ public class UltimaSostituzioneDAO {
 		this.ID = cod;
 	}
 	
+	/*@SuppressWarnings("unused")
 	private void setID() {
 		if (this.batteria != null) {
 			UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(this.batteria.getID());
@@ -66,7 +67,7 @@ public class UltimaSostituzioneDAO {
 		} else {
 			System.err.println("Vi uccido tutti");
 		}
-	}
+	}*/
 
 	public void setBattery(BatteriaDAO batteria) {
 //		this.setID();
@@ -148,6 +149,7 @@ public class UltimaSostituzioneDAO {
 		
 		Query query = session.createQuery("select Sost from UltimaSostituzioneDAO as Sost inner join Sost.autovettura as a where a.numeroTarga = :auto");
 		query.setParameter("auto",targa);
+		@SuppressWarnings("unchecked")
 		ArrayList<UltimaSostituzioneDAO> result = (ArrayList<UltimaSostituzioneDAO>) query.list();
 		
 		session.getTransaction().commit();
@@ -159,6 +161,7 @@ public class UltimaSostituzioneDAO {
 			return result.get(0) ;
 	}
 	
+	@SuppressWarnings("unused")
 	private static UltimaSostituzioneDAO findSubstitution(int idBatteria){
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -166,6 +169,7 @@ public class UltimaSostituzioneDAO {
 		
 		Query query = session.createQuery("select Sost from UltimaSostituzioneDAO as Sost inner join Sost.batteria as b where b.id = :batt");
 		query.setParameter("batt",idBatteria);
+		@SuppressWarnings("unchecked")
 		ArrayList<UltimaSostituzioneDAO> result = (ArrayList<UltimaSostituzioneDAO>) query.list();
 		
 		session.getTransaction().commit();

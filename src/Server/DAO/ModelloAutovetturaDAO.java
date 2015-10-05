@@ -8,7 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import Server.Entity.ModelloAutovettura;
+
 
 import org.hibernate.HibernateException;
 
@@ -60,6 +60,7 @@ public class ModelloAutovetturaDAO {
 		this.ID = mod.getID();
 	}
 
+	@SuppressWarnings("unchecked")
 	public static ModelloAutovetturaDAO findModelloAuto (String mod, String forni){
 				SessionFactory sf = HibernateUtil.getSessionFactory();
 				Session session = sf.openSession();

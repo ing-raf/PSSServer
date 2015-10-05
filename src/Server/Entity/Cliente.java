@@ -2,7 +2,7 @@ package Server.Entity;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+
 
 import Server.DAO.AutovetturaCompatibileDAO;
 import Server.DAO.ClienteDAO;
@@ -15,14 +15,14 @@ public class Cliente {
 	private Calendar dataNascita;
 	private ArrayList<AutovetturaCompatibile> autovetturePossedute;
 	
-	public static Cliente getClient (String n, String s, Calendar d){
+	static Cliente getClient (String n, String s, Calendar d){
 		
 		ClienteDAO dao = ClienteDAO.findClient(n, s, d);
 		
 		return new Cliente (dao);
 	}
 	
-	public Cliente (ClienteDAO dao){
+	Cliente (ClienteDAO dao){
 		this.nome = dao.getName();
 		this.cognome = dao.getSurname();
 		this.dataNascita = dao.getBirthDate();

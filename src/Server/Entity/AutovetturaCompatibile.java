@@ -12,7 +12,7 @@ public class AutovetturaCompatibile {
 		
 	}
 	
-	public AutovetturaCompatibile(AutovetturaCompatibileDAO dao) {
+	AutovetturaCompatibile(AutovetturaCompatibileDAO dao) {
 		
 		this.numeroTarga = dao.getNumberPlate();
 		this.modello = new ModelloAutovettura( dao.getModel() );
@@ -20,7 +20,7 @@ public class AutovetturaCompatibile {
 		
 	}
 	
-	public static AutovetturaCompatibile getCar (String numeroTarga) {
+	static AutovetturaCompatibile getCar (String numeroTarga) {
 		
 		AutovetturaCompatibileDAO dao = AutovetturaCompatibileDAO.findCar(numeroTarga); 
 		return new AutovetturaCompatibile(dao);

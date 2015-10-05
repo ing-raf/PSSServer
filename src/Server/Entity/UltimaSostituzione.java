@@ -2,10 +2,7 @@ package Server.Entity;
 
 import java.util.Calendar;
 
-import Server.DAO.AutovetturaCompatibileDAO;
-import Server.DAO.BatteriaDAO;
-import Server.DAO.ModelloAutovetturaDAO;
-import Server.DAO.StazioneDAO;
+
 import Server.DAO.UltimaSostituzioneDAO;
 
 public class UltimaSostituzione {
@@ -18,13 +15,13 @@ public class UltimaSostituzione {
 		
 	}
 	
-	public static UltimaSostituzione getLastSubstitution (String targa) {
+	static UltimaSostituzione getLastSubstitution (String targa) {
 
 		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
 		return new UltimaSostituzione(dao);
 	}
 	
-	public UltimaSostituzione(UltimaSostituzioneDAO dao) {
+	UltimaSostituzione(UltimaSostituzioneDAO dao) {
 		this.dataOra = dao.getDateHour();
 		this.staz_sostituz = new Stazione ( dao.getStation() );
 		this.batteria = new Batteria ( dao.getBattery() ); 
