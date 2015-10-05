@@ -11,6 +11,21 @@ public class UltimaSostituzioneC implements Server.RMIInterface.UltimaSostituzio
 	private String nomeStazione;
 	private String indirizzoStazione;
 	private int IDBatteria;
+	
+	public UltimaSostituzioneC(){
+		
+	}
+	
+	public UltimaSostituzioneC(int giorno, int mese, int anno, int ora, int minuti, String nomeStazione, String indirizzoStazione, int IDBatteria) {
+		this.setDay(giorno);
+		this.setMonth(mese);
+		this.setYear(anno);
+		this.setHour(ora);
+		this.setMinutes(minuti);
+		this.setStationName(nomeStazione);
+		this.setStationAddress(indirizzoStazione);
+		this.setBatteryID(IDBatteria);
+	}
 
 	public int getDay() {
 		return this.giorno;
