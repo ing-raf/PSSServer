@@ -16,8 +16,13 @@ public class GestoreStazione {
 	private int soglia;
 	
 	public GestoreStazione(int ID, int soglia) {
+		
+		Societa laSocieta = Societa.getSociety();
+		if ( !laSocieta.findStation(ID) )
+			throw new NullPointerException("Stazione non presente");
 		this.ID = ID;
 		this.soglia = soglia;
+		
 	}
 	
 	public boolean insertBattery(BatteriaBL nuova) {
