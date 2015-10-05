@@ -1,5 +1,6 @@
 package Server.BusinessLogic;
 
+import Server.Entity.AutovetturaCompatibile;
 import Server.Entity.ModelloAutovettura;
 
 public class AutovetturaBL {
@@ -35,6 +36,15 @@ public class AutovetturaBL {
 	
 	public void setBrand(String fornitore) {
 		this.fornitore = fornitore;
+	}
+	
+	public boolean equals (Object obj){
+		AutovetturaBL a = (AutovetturaBL) obj;  
+		if ((a.getModel().equals(this.modello)) &&
+			(a.getBrand().equals(this.fornitore)))
+			return true;
+		else
+			return false;
 	}
 	
 }

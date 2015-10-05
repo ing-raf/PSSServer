@@ -2,14 +2,15 @@ package Test.BusinessLogic;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
-
+import Server.BusinessLogic.AutovetturaClienteBL;
 import Server.BusinessLogic.GestoreBadge;
-import Server.BusinessLogic.GestoreStazione;
+import Server.BusinessLogic.UltimaSostituzioneBL;
+import Server.DAO.BadgeDAO;
 import Server.DAO.PopulateTestDatabase;
 
 public class GestoreBadgeTest {
@@ -53,24 +54,48 @@ public class GestoreBadgeTest {
 		}
 	}
 
-	//@Test
+	@Test
 	public void testVerifyCredit() {
-		fail("Not yet implemented");
+		final String idTest = "Test del verifyCredit";
+		GestoreBadge gb = new GestoreBadge(5);
+		assertTrue(idTest + " riuscito", gb.verifyCredit(400.00f));
 	}
 
-	//@Test
+	@Test
 	public void testDebit() {
-		fail("Not yet implemented");
+		final String idTest = "Test del Debit";
+		GestoreBadge gb = new GestoreBadge(5);
+		gb.debit(400.00f);
+		BadgeDAO dao = BadgeDAO.findBadge(5);
+		assertEquals(idTest + " riuscito", 600.00,dao.getCredit(), 0.001);
 	}
 
-	//@Test
+	@Test
 	public void testRetrieveCarList() {
-		fail("Not yet implemented");
+		final String idTest = "Test del RetrieveCarList ";
+		GestoreBadge gb = new GestoreBadge(0);
+		ArrayList<AutovetturaClienteBL> list = gb.retrieveCarList();
+		
+		AutovetturaClienteBL test = new AutovetturaClienteBL("Peugeot","207","CB 739 HJ");
+		assertEquals(idTest + " riuscito", test,list.get(0));
+		
+		
 	}
 
-	//@Test
+	
+	@Test
 	public void testFindLastSubstitution() {
-		fail("Not yet implemented");
+		final String idTest = "Test del FindLastSubstitution ";
+		GestoreBadge gb = new GestoreBadge(0);
+		UltimaSostituzioneBL usbl = gb.findLastSubstitution("CB 739 HJ");
+		Calendar data  = Calendar.getInstance();
+		data.clear();
+		data.set(2015, Calendar.JULY, 20,21,12);
+		
+		UltimaSostituzioneBL oracolo = new UltimaSostituzioneBL (data,"Stazione Centrale","Piazzale Tecchio", 32);
+		assertEquals(idTest + " riuscito", oracolo,usbl);
+		
+		
 	}
 
 }

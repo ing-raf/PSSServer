@@ -2,6 +2,8 @@ package Server.BusinessLogic;
 
 import java.util.Calendar;
 
+import Server.Entity.UltimaSostituzione;
+
 public class UltimaSostituzioneBL {
 	
 	private Calendar dataOra;
@@ -50,6 +52,17 @@ public class UltimaSostituzioneBL {
 	
 	public void setBatteryID(int IDBatteria) {
 		this.IDBatteria = IDBatteria;
+	}
+	
+	public boolean equals (Object obj) {
+		UltimaSostituzioneBL sost = (UltimaSostituzioneBL) obj;
+		if ((this.IDBatteria == sost.getBatteryID()) && 
+				(this.indirizzoStazione.equals(sost.getStationAddress())) && 
+				(this.dataOra.equals(sost.getDateHour())) &&
+				(this.nomeStazione.equals(sost.getStationName())))
+			return true;
+		else
+			return false;
 	}
 
 }

@@ -27,5 +27,15 @@ public class AutovetturaClienteBL extends AutovetturaBL {
 	public void setNumberPlate(String numeroTarga) {
 		this.numeroTarga = numeroTarga;
 	}
+	
+	public boolean equals (Object obj){
+		AutovetturaClienteBL a = (AutovetturaClienteBL) obj;  
+		if ((a.getNumberPlate().equals(this.numeroTarga)) && 
+				(a.getModel().equals(this.getModel())))
+				
+			return true;
+		else
+			return false;
+	}
 
 }

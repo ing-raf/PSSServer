@@ -37,6 +37,7 @@ public class GestoreBadge {
 		Badge badge = laSocieta.getBadge(this.codice);
 		
 		badge.setCredit( badge.getCredit() - costo);
+		badge.update();
 		
 	}
 	
