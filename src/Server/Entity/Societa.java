@@ -56,7 +56,7 @@ public class Societa{
 		return theSociety.modelList;
 	}
 
-	public static boolean findBadge(int codice) {
+	public boolean findBadge(int codice) {
 		Badge temp = Badge.getBadge(codice);
 		if (temp == null)
 			return false;
@@ -66,7 +66,7 @@ public class Societa{
 		}
 	}
 
-	public static boolean findStation(int ID) {
+	public boolean findStation(int ID) {
 		Stazione temp = Stazione.getStation(ID);
 		if (temp == null)
 			return false;

@@ -76,7 +76,7 @@ public class UltimaSostituzioneTest {
 		final String idTest = "Test di getSubstitutionStation";
 		
 		Stazione s = null;
-		if (Societa.findStation(3))
+		if (s_test.findStation(3))
 			s = s_test.getStation(3);		
 		assertEquals(idTest + "riuscito", s, test.getSubstitutionStation());
 	}
@@ -86,7 +86,7 @@ public class UltimaSostituzioneTest {
 		final String idTest = "Test di setSubstitutionStation";
 		
 		Stazione s = null;
-		if (Societa.findStation(1))
+		if (s_test.findStation(1))
 			s = s_test.getStation(1);
 		test.setSubstitutionStation(s);
 		assertEquals(idTest + "riuscito", s, test.getSubstitutionStation());
@@ -127,7 +127,7 @@ public class UltimaSostituzioneTest {
 		data.set(2015, 10, 2, 12, 27);		
 		test.setDateHour(data);
 		Stazione s = null;
-		if (Societa.findStation(2))
+		if (s_test.findStation(2))
 			s = s_test.getStation(2);
 		test.setSubstitutionStation(s);
 		test.setBattery(Batteria.getBattery(9));

@@ -99,7 +99,7 @@ public class AutovetturaCompatibileTest {
 		final String idTest = "Test di setLastSubstitution";
 		Batteria b = Batteria.getBattery(21);
 		Stazione s = null;
-		if (Societa.findStation(2))
+		if (s_test.findStation(2))
 			s = s_test.getStation(2);
 		Calendar d = Calendar.getInstance();
 		d.clear();

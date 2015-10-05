@@ -63,8 +63,8 @@ public class SocietaTest {
 	@Test
 	public void testFindBadge() {
 		final String idTest = "Test di findBadge";
-		assertTrue (idTest + " riuscito", Societa.findBadge(0));
-		assertFalse (idTest + " riuscito", Societa.findBadge(4));
+		assertTrue (idTest + " riuscito", s_test.findBadge(0));
+		assertFalse (idTest + " riuscito", s_test.findBadge(4));
 	}
 
 	@Test
@@ -73,10 +73,11 @@ public class SocietaTest {
 		
 		Stazione[] oracle = new Stazione[3] ;
 		
-		if (Societa.findStation(1) && Societa.findStation(2) && Societa.findStation(3)){
+		if (s_test.findStation(1) && s_test.findStation(2) && s_test.findStation(3)){
 			oracle [0] = s_test.getStation(1);
 			oracle [1] = s_test.getStation(2);
 			oracle [2] = s_test.getStation(3);
+			
 			ArrayList<Stazione> listaStazioni = s_test.getStationList();
 		
 			assertEquals(idTest + " riuscito", 3, listaStazioni.size() );
@@ -90,8 +91,8 @@ public class SocietaTest {
 	public void testFindStation() {
 		final String idTest = "Test di findStation";
 		
-		assertTrue (idTest + " riuscito", Societa.findStation(1));
-		assertFalse (idTest + " riuscito", Societa.findStation(0));
+		assertTrue (idTest + " riuscito", s_test.findStation(1));
+		assertFalse (idTest + " riuscito", s_test.findStation(0));
 		
 	}
 

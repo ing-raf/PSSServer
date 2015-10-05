@@ -23,13 +23,13 @@ public class StazioneTest {
 	public static void setUpBeforeClass() throws Exception {
 		PopulateTestDatabase.populate();
 		s_test = Societa.getSociety();
-		if (Societa.findStation(1))
+		if (s_test.findStation(1))
 			oracle = s_test.getStation(1);
 	}
 	
 	@Before
 	public void setUp() throws Exception {
-		if (Societa.findStation(1))
+		if (s_test.findStation(1))
 			test = s_test.getStation(1);
 	}
 
@@ -132,7 +132,7 @@ public class StazioneTest {
 		
 		test.update();
 		Stazione s = null;
-		if (Societa.findStation(2))
+		if (s_test.findStation(2))
 			s = s_test.getStation(2);
 		
 		

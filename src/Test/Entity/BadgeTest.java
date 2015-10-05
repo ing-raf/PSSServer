@@ -26,13 +26,13 @@ public class BadgeTest {
 	public static void setUpBeforeClass() throws Exception {
 		PopulateTestDatabase.populate();
 		s_test = Societa.getSociety();
-		if (Societa.findBadge(0))
+		if (s_test.findBadge(0))
 			oracle = s_test.getBadge(0);
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		if (Societa.findBadge(0))
+		if (s_test.findBadge(0))
 			test = s_test.getBadge(0);
 	}
 
@@ -48,10 +48,10 @@ public class BadgeTest {
 	public void testPrepareDAO() {
 		final String idTest = "Test di prepareDAO";
 		Badge p = null;
-		if (Societa.findBadge(1))
+		if (s_test.findBadge(1))
 			 p = s_test.getBadge(1);
 		BadgeDAO dao = p.prepareDAO();
-		
+	
 		assertEquals(idTest + "riuscito", BadgeDAO.findBadge(1), dao);
 	}
 
