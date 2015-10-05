@@ -3,6 +3,7 @@ package Test.BusinessLogic;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,12 +12,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Server.BusinessLogic.AutovetturaBL;
+import Server.BusinessLogic.AutovetturaClienteBL;
 import Server.BusinessLogic.BatteriaBL;
 import Server.BusinessLogic.GestoreStazione;
 import Server.BusinessLogic.StazioneBL;
 import Server.DAO.BatteriaDAO;
 import Server.DAO.PopulateTestDatabase;
 import Server.DAO.StazioneDAO;
+import Server.Entity.Batteria;
+import Server.Entity.Societa;
+import Server.Entity.UltimaSostituzione;
 
 public class GestoreStazioneTest {
 
@@ -143,9 +148,35 @@ public class GestoreStazioneTest {
 		assertEquals(idTest + " riuscito", new StazioneBL(2, "Stazione Agnoli","Via Nuova Agnano"), trovate.get(0));
 	}
 
-//	@Test
+	@Test
 	public void testUpdateSubstitution() {
-		fail("Not yet implemented");
+		final String idTest = "Test di UpdateSubstitution";
+		
+		GestoreStazione gs = new GestoreStazione(1, 5);
+		
+		BatteriaBL vecchia = new BatteriaBL();
+		
+		Calendar momentoSostituzione = Calendar.getInstance();
+		momentoSostituzione.clear();
+		momentoSostituzione.set(Calendar.getInstance().get(Calendar.YEAR),
+				Calendar.getInstance().get(Calendar.MONTH), 
+				Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+				Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+				Calendar.getInstance().get(Calendar.MINUTE) );
+		
+		AutovetturaClienteBL car = new AutovetturaClienteBL("Maserati", "Quattroporte", "EF 580 AA");
+		
+		assertTrue(idTest + " riuscito", gs.updateSubstitution(car, new BatteriaBL(3, 490.25f, 79, "Quattroporte", "Maserati"), vecchia) );
+		
+		assertEquals(idTest + " riuscito", new BatteriaBL(36, 530.3f, 108, "Quattroporte", "Maserati"), vecchia);
+		
+		assertEquals(idTest + " riuscito", Batteria.getBattery(3),  UltimaSostituzione.getLastSubstitution("EF 580 AA").getBattery());
+		
+		Societa laSocieta = Societa.getSociety();
+		
+		assertEquals(idTest + " riuscito",  laSocieta.getStation(1), UltimaSostituzione.getLastSubstitution("EF 580 AA").getSubstitutionStation() );
+		
+		assertTrue(idTest + " riuscito", UltimaSostituzione.getLastSubstitution("EF 580 AA").getDateHour().compareTo(momentoSostituzione) >= 0);
 	}
 
 	@Test

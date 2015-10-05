@@ -138,7 +138,7 @@ public class GestoreStazione {
 		vecchia.setCostSubstitution(old.getCostSubstitution());
 		vecchia.setCyclesRecharge(old.getCyclesRecharge());
 		vecchia.setBrand(old.getModel().getBrand());
-		vecchia.setModel(old.getModel().getBrand());
+		vecchia.setModel(old.getModel().getModel());
 		
 		Batteria fresh = new Batteria();
 		fresh.setID( nuova.getID() );
@@ -155,7 +155,14 @@ public class GestoreStazione {
 		UltimaSostituzione update = new UltimaSostituzione();
 		
 		update.setBattery(fresh);
-		update.setDateHour( Calendar.getInstance() );
+		Calendar momentoSostituzione = Calendar.getInstance();
+		momentoSostituzione.clear();
+		momentoSostituzione.set(Calendar.getInstance().get(Calendar.YEAR),
+				Calendar.getInstance().get(Calendar.MONTH), 
+				Calendar.getInstance().get(Calendar.DAY_OF_MONTH),
+				Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+				Calendar.getInstance().get(Calendar.MINUTE) );
+		update.setDateHour( momentoSostituzione );
 		update.setSubstitutionStation(locale);
 		car.setLastSubstitution(update);
 		
