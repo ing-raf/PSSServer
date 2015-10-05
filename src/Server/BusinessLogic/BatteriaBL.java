@@ -60,5 +60,16 @@ public class BatteriaBL {
 	public void setBrand(String fornitore){
 		this.fornitore = fornitore;
 	}
+	
+	public boolean equals (Object obj) {
+		BatteriaBL b = (BatteriaBL)obj;
+		if (this.ID == b.getID()
+				&& Float.compare(this.costoSostituzione, b.getCostSubstitution()) == 0
+				&& this.cicliRicaricaRimanenti == b.getCyclesRecharge()
+				&& this.modello.equals(b.getModel())
+				&& this.fornitore.equals( b.getBrand() ))
+			return true;
+		else return false;
+	}
 
 }

@@ -64,7 +64,13 @@ public class GestoreStazione {
 	public boolean discardBattery(BatteriaBL esausta) {
 		
 		Batteria exhausted = new Batteria();
-		exhausted.setID( esausta.getID() );		
+		exhausted.setID( esausta.getID() );
+		exhausted.setCostSubstitution( esausta.getCostSubstitution() );
+		exhausted.setCyclesRecharge( esausta.getCyclesRecharge() );
+			ModelloAutovettura model = new ModelloAutovettura();
+			model.setModel( esausta.getModel() );
+			model.setBrand( esausta.getBrand() );
+		exhausted.setModel(model);
 		return exhausted.delete();
 		
 	}
@@ -75,7 +81,7 @@ public class GestoreStazione {
 		
 		ModelloAutovettura model = new ModelloAutovettura();
 		model.setModel( modello.getModel() );
-		model.setBrand( model.getBrand() );
+		model.setBrand( modello.getBrand() );
 		
 		ArrayList<BatteriaBL> elencoBatterie = new ArrayList<BatteriaBL>();
 		

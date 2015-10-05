@@ -64,7 +64,7 @@ public class PopulateTestDatabase {
 		
 		for (ModelloAutovetturaDAO m : ma) m.save();
 		
-		BatteriaDAO[] batt = new BatteriaDAO[15];
+		BatteriaDAO[] batt = new BatteriaDAO[16];
 		
 		batt[0] = new BatteriaDAO();
 		batt[0].setID(1);
@@ -155,6 +155,12 @@ public class PopulateTestDatabase {
 		batt[14].setCostSubstitution(25.30f);
 		batt[14].setCyclesRecharge(20);
 		batt[14].setModel(ma[4]);
+		
+		batt[15] = new BatteriaDAO();
+		batt[15].setID(44);
+		batt[15].setCostSubstitution(725.30f);
+		batt[15].setCyclesRecharge(1);
+		batt[15].setModel(ma[1]);
 		
 		for (BatteriaDAO b : batt) b.save();
 		

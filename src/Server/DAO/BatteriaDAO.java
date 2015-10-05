@@ -121,6 +121,8 @@ public class BatteriaDAO {
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
 		
+		session.beginTransaction();
+		
 		try {
 			session.delete(this);
 			session.getTransaction().commit();	
