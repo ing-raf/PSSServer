@@ -1,5 +1,7 @@
 package Server.BusinessLogic;
 
+import Server.Entity.Stazione;
+
 public class StazioneBL {
 	
 	private int ID;
@@ -38,5 +40,17 @@ public class StazioneBL {
 
 	public void setAddress(String indirizzo) {
 		this.indirizzo = indirizzo;
+	}
+	
+	public boolean equals (Object obj){
+		StazioneBL s = (StazioneBL) obj;  
+			
+		if ((s.getID() == this.ID) &&
+				(s.getAddress().equals(this.indirizzo)) && 
+				(s.getName().equals(this.nome)))			
+			return true;
+		else
+			return false;
+		
 	}
 }

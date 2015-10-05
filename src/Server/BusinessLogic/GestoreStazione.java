@@ -100,7 +100,7 @@ public class GestoreStazione {
 		
 		ModelloAutovettura model = new ModelloAutovettura();
 		model.setModel( modello.getModel() );
-		model.setBrand( model.getBrand() );
+		model.setBrand( modello.getBrand() );
 		
 		Societa laSocieta = Societa.getSociety();
 		
