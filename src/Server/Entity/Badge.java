@@ -16,11 +16,11 @@ public class Badge {
 
 	}
 	
-	public Badge(){
+	Badge(){
 		
 	}
 	
-	 Badge (BadgeDAO dao) {
+	Badge (BadgeDAO dao) {
 		this.codice = dao.getCode();
 		this.creditoResiduo = dao.getCredit();
 		this.possessore = new Cliente (dao.getClient());

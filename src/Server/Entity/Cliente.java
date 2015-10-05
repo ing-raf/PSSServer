@@ -15,14 +15,14 @@ public class Cliente {
 	private Calendar dataNascita;
 	private ArrayList<AutovetturaCompatibile> autovetturePossedute;
 	
-	static Cliente getClient (String n, String s, Calendar d){
+	public static Cliente getClient (String n, String s, Calendar d){
 		
 		ClienteDAO dao = ClienteDAO.findClient(n, s, d);
 		
 		return new Cliente (dao);
 	}
 	
-	Cliente (ClienteDAO dao){
+	public Cliente (ClienteDAO dao){
 		this.nome = dao.getName();
 		this.cognome = dao.getSurname();
 		this.dataNascita = dao.getBirthDate();

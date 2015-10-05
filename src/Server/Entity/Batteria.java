@@ -14,7 +14,7 @@ public class Batteria {
 		
 	}
 	
-	Batteria(BatteriaDAO dao){
+	public Batteria(BatteriaDAO dao){
 		this.ID = dao.getID();
 		this.cicliRicaricaRimanenti = dao.getCyclesRecharge();
 		this.costoSostituzione = dao.getCostSubstitution();
@@ -49,7 +49,7 @@ public class Batteria {
 		return this.ID;
 	}
 	
-	static Batteria getBattery(int id){
+	public static Batteria getBattery(int id){
 		BatteriaDAO dao = BatteriaDAO.findBattery(id);
 		return new Batteria(dao);
 	}

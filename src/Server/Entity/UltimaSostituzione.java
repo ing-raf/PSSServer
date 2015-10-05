@@ -15,13 +15,13 @@ public class UltimaSostituzione {
 		
 	}
 	
-	static UltimaSostituzione getLastSubstitution (String targa) {
+	public static UltimaSostituzione getLastSubstitution (String targa) {
 
 		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
 		return new UltimaSostituzione(dao);
 	}
 	
-	UltimaSostituzione(UltimaSostituzioneDAO dao) {
+	public UltimaSostituzione(UltimaSostituzioneDAO dao) {
 		this.dataOra = dao.getDateHour();
 		this.staz_sostituz = new Stazione ( dao.getStation() );
 		this.batteria = new Batteria ( dao.getBattery() ); 
