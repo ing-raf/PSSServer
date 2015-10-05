@@ -36,7 +36,10 @@ public class Stazione {
 	static Stazione getStation(int cod){
 		
 		StazioneDAO dao = StazioneDAO.findStation(cod);
-		return  new Stazione(dao);
+		if (dao != null)
+			return  new Stazione(dao);
+		else
+			return null;
 	}
 	
 

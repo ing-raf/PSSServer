@@ -12,7 +12,10 @@ public class Badge {
 	static Badge getBadge(int cod){
 		
 		BadgeDAO dao = BadgeDAO.findBadge(cod);
-		return new Badge (dao);
+		if (dao != null)
+			return new Badge (dao);
+		else
+			return null;
 
 	}
 	

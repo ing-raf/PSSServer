@@ -11,6 +11,7 @@ import org.junit.Test;
 import Server.DAO.PopulateTestDatabase;
 import Server.DAO.UltimaSostituzioneDAO;
 import Server.Entity.Batteria;
+import Server.Entity.Societa;
 import Server.Entity.Stazione;
 import Server.Entity.UltimaSostituzione;
 
@@ -19,11 +20,13 @@ public class UltimaSostituzioneTest {
 	private static final String targa = "EA 210 BB";
 	private static UltimaSostituzione oracle = null;
 	private UltimaSostituzione test = null;
+	private static Societa s_test = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		PopulateTestDatabase.populate();
 		oracle = UltimaSostituzione.getLastSubstitution(targa);
+		s_test = Societa.getSociety();
 	}
 
 	@Before
@@ -72,7 +75,9 @@ public class UltimaSostituzioneTest {
 	public void testGetSubstitutionStation() {
 		final String idTest = "Test di getSubstitutionStation";
 		
-		Stazione s = Stazione.getStation(3);		
+		Stazione s = null;
+		if (Societa.findStation(3))
+			s = s_test.getStation(3);		
 		assertEquals(idTest + "riuscito", s, test.getSubstitutionStation());
 	}
 
@@ -80,7 +85,9 @@ public class UltimaSostituzioneTest {
 	public void testSetSubstitutionStation() {
 		final String idTest = "Test di setSubstitutionStation";
 		
-		Stazione s = Stazione.getStation(1);
+		Stazione s = null;
+		if (Societa.findStation(1))
+			s = s_test.getStation(1);
 		test.setSubstitutionStation(s);
 		assertEquals(idTest + "riuscito", s, test.getSubstitutionStation());
 	}
@@ -119,8 +126,10 @@ public class UltimaSostituzioneTest {
 		data.clear();
 		data.set(2015, 10, 2, 12, 27);		
 		test.setDateHour(data);
-		
-		test.setSubstitutionStation(Stazione.getStation(2));
+		Stazione s = null;
+		if (Societa.findStation(2))
+			s = s_test.getStation(2);
+		test.setSubstitutionStation(s);
 		test.setBattery(Batteria.getBattery(9));
 		
 		test.update(targa);
@@ -128,7 +137,7 @@ public class UltimaSostituzioneTest {
 		last.getBattery().getID();
 		
 		assertEquals(idTest + "riuscito", Batteria.getBattery(9), last.getBattery());
-		assertEquals(idTest + "riuscito", Stazione.getStation(2), last.getSubstitutionStation());
+		assertEquals(idTest + "riuscito", s, last.getSubstitutionStation());
 		assertEquals(idTest + "riuscito", data, last.getDateHour());
 	}
 

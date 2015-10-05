@@ -2,17 +2,15 @@ package Test.Entity;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.AfterClass;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Server.DAO.ModelloAutovetturaDAO;
 import Server.DAO.PopulateTestDatabase;
-import Server.DAO.StazioneDAO;
 import Server.Entity.ModelloAutovettura;
-import Server.Entity.Stazione;
+
 
 public class ModelloAutovetturaTest {
 
@@ -30,15 +28,6 @@ public class ModelloAutovetturaTest {
 		test.setModel("207");		
 	}
 
-	@Test
-	public void testModelloAutovetturaDAO() {
-		final String idTest = "Test del costruttore dal DAO";
-		
-		ModelloAutovetturaDAO dao = ModelloAutovetturaDAO.findModelloAuto("207", "Peugeot");
-		ModelloAutovettura nuova = new ModelloAutovettura(dao);
-		
-		assertEquals(idTest + " riuscito", test, nuova);
-	}
 
 	@Test
 	public void testGetBrand() {

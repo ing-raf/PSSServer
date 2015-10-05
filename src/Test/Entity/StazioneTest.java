@@ -10,22 +10,27 @@ import org.junit.Test;
 import Server.DAO.PopulateTestDatabase;
 import Server.DAO.StazioneDAO;
 import Server.Entity.Batteria;
+import Server.Entity.Societa;
 import Server.Entity.Stazione;
 
 public class StazioneTest {
 	
 	private static Stazione oracle = null;
 	private Stazione test = null;
+	private static Societa s_test = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		PopulateTestDatabase.populate();
-		oracle = Stazione.getStation(1);
+		s_test = Societa.getSociety();
+		if (Societa.findStation(1))
+			oracle = s_test.getStation(1);
 	}
 	
 	@Before
 	public void setUp() throws Exception {
-		test = Stazione.getStation(1);
+		if (Societa.findStation(1))
+			test = s_test.getStation(1);
 	}
 
 	@After
@@ -33,15 +38,7 @@ public class StazioneTest {
 		oracle.update();
 	}
 
-	@Test
-	public void testStazioneDAO() {
-		final String idTest = "Test del costruttore dal DAO";
-		
-		StazioneDAO dao = StazioneDAO.findStation(1);
-		Stazione nuova = new Stazione(dao);
-		
-		assertEquals(idTest + " riuscito", oracle, nuova);
-	}
+	
 
 	@Test
 	public void testGetID() {
@@ -134,8 +131,10 @@ public class StazioneTest {
 		test.removeBattery(b);
 		
 		test.update();
+		Stazione s = null;
+		if (Societa.findStation(2))
+			s = s_test.getStation(2);
 		
-		Stazione s =Stazione.getStation(2);
 		
 		assertFalse(idTest + "riuscito", s.getAvailableBatteries().contains(b));
 	}

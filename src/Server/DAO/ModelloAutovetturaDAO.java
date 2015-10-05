@@ -2,6 +2,7 @@ package Server.DAO;
 
 import java.util.ArrayList;
 
+
 import javax.persistence.*;
 
 import org.hibernate.Query;
@@ -145,6 +146,23 @@ public class ModelloAutovetturaDAO {
 			return true;
 		else
 			return false;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<ModelloAutovetturaDAO> retriveModelList (){
+		ArrayList<ModelloAutovetturaDAO> trovate;
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+				
+		Query query = session.createQuery("from ModelloAutovetturaDAO");
+		
+		trovate = (ArrayList<ModelloAutovetturaDAO>)query.list();
+				
+		session.getTransaction().commit();		
+		session.close();
+		
+		return trovate;
 	}
 	
 	

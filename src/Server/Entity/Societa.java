@@ -2,14 +2,10 @@ package Server.Entity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
-import Server.DAO.HibernateUtil;
+
 import Server.DAO.ModelloAutovetturaDAO;
 import Server.DAO.StazioneDAO;
 
@@ -17,14 +13,20 @@ public class Societa{
 	
 	private Map<Integer, Badge> badgeList;
 	private Map<Integer, Stazione> stationList;
+	private ArrayList<ModelloAutovettura> modelList;
 	private static Societa theSociety;
 	
 	private Societa() {
-		theSociety.badgeList = new HashMap<Integer, Badge>();
+		
 	}
 	
 	public static Societa getSociety() {
-		if (theSociety == null) theSociety = new Societa();
+		if (theSociety == null) {
+			theSociety = new Societa();
+			theSociety.badgeList = new HashMap<Integer, Badge>();
+			theSociety.stationList = new HashMap<Integer, Stazione>();
+			theSociety.modelList = new ArrayList<ModelloAutovettura> ();
+		}
 		
 		return theSociety;
 	}
@@ -43,25 +45,15 @@ public class Societa{
 		return theSociety.stationList.get(ID);
 	}
 
-	@SuppressWarnings("unchecked")
-	public static ArrayList<ModelloAutovettura> getModelList() {
-		List<ModelloAutovetturaDAO> trovate;
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-		session.beginTransaction();
-				
-		Query query = session.createQuery("from ModelloAutovetturaDAO");
+	
+	public  ArrayList<ModelloAutovettura> getModelList() {
+		if (theSociety.modelList.isEmpty()){
+			ArrayList<ModelloAutovetturaDAO> trovate = ModelloAutovetturaDAO.retriveModelList();
+			for (ModelloAutovetturaDAO m : trovate) 
+				theSociety.modelList.add(new ModelloAutovettura (m));
+		}
 		
-		trovate = (List<ModelloAutovetturaDAO>)query.list();
-				
-		session.getTransaction().commit();		
-		session.close();
-		
-		ArrayList<ModelloAutovettura> ritorno = new ArrayList<ModelloAutovettura>( trovate.size() );
-		
-		for (ModelloAutovetturaDAO m : trovate) ritorno.add(new ModelloAutovettura(m));
-		
-		return ritorno;
+		return theSociety.modelList;
 	}
 
 	public static boolean findBadge(int codice) {
@@ -84,26 +76,15 @@ public class Societa{
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public static ArrayList<Stazione> getStationList() {
-		List<StazioneDAO> trovate;
-		SessionFactory sf = HibernateUtil.getSessionFactory();
-		Session session = sf.openSession();
-		session.beginTransaction();
-				
-		Query query = session.createQuery("from StazioneDAO");
-		
-		trovate = (List<StazioneDAO>)query.list();
-				
-		session.getTransaction().commit();		
-		session.close();
-
-
-		ArrayList<Stazione> ritorno = new ArrayList<Stazione>( trovate.size() );
-		
-		for (StazioneDAO m : trovate) ritorno.add(new Stazione(m));
-		
-		return ritorno;
+	
+	public ArrayList<Stazione> getStationList() {
+		if (theSociety.stationList.isEmpty()){
+			ArrayList<StazioneDAO> trovate = StazioneDAO.retriveStationList();
+			for (StazioneDAO m : trovate) 
+				theSociety.stationList.put(m.getID(), new Stazione(m));
+		}
+		ArrayList<Stazione> result = new ArrayList<Stazione> (theSociety.stationList.values());
+		return result;
 	}
 
 }

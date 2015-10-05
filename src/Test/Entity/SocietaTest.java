@@ -13,10 +13,13 @@ import Server.Entity.Societa;
 import Server.Entity.Stazione;
 
 public class SocietaTest {
+	static Societa s_test = null ;
+	
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		PopulateTestDatabase.populate();
+		s_test = Societa.getSociety();
 	}
 
 	@Test
@@ -47,7 +50,7 @@ public class SocietaTest {
 		oracle[6].setBrand("Fiat");
 		oracle[6].setModel("Panda");
 		
-		ArrayList<ModelloAutovettura> listaModelli = Societa.getModelList();
+		ArrayList<ModelloAutovettura> listaModelli = s_test.getModelList();
 		
 		assertEquals(idTest + " riuscito", 7, listaModelli.size() );
 		
@@ -68,17 +71,19 @@ public class SocietaTest {
 	public void testGetStationList() {
 		final String idTest = "Test di getStationList";
 		
-		Stazione[] oracle = new Stazione[] { 
-				Stazione.getStation(1),
-				Stazione.getStation(2),
-				Stazione.getStation(3)};
+		Stazione[] oracle = new Stazione[3] ;
 		
-		ArrayList<Stazione> listaStazioni = Societa.getStationList();
+		if (Societa.findStation(1) && Societa.findStation(2) && Societa.findStation(3)){
+			oracle [0] = s_test.getStation(1);
+			oracle [1] = s_test.getStation(2);
+			oracle [2] = s_test.getStation(3);
+			ArrayList<Stazione> listaStazioni = s_test.getStationList();
 		
-		assertEquals(idTest + " riuscito", 3, listaStazioni.size() );
+			assertEquals(idTest + " riuscito", 3, listaStazioni.size() );
 		
-		for (Stazione s : oracle) 
-			assertTrue(idTest + " riuscito", listaStazioni.contains(s));
+			for (Stazione s : oracle) 
+				assertTrue(idTest + " riuscito", listaStazioni.contains(s));
+		}
 	}
 
 	@Test

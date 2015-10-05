@@ -4,18 +4,17 @@ import static org.junit.Assert.*;
 
 import java.util.Calendar;
 
-import org.junit.After;
-import org.junit.AfterClass;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Server.DAO.AutovetturaCompatibileDAO;
 import Server.DAO.PopulateTestDatabase;
-import Server.DAO.StazioneDAO;
 import Server.Entity.AutovetturaCompatibile;
 import Server.Entity.Batteria;
 import Server.Entity.ModelloAutovettura;
+import Server.Entity.Societa;
 import Server.Entity.Stazione;
 import Server.Entity.UltimaSostituzione;
 
@@ -23,11 +22,13 @@ public class AutovetturaCompatibileTest {
 	
 	private static AutovetturaCompatibile oracle = null;
 	private AutovetturaCompatibile test = null;
+	private static Societa s_test = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		PopulateTestDatabase.populate();
 		oracle = AutovetturaCompatibile.getCar("EA 210 BB");
+		s_test = Societa.getSociety();
 	}
 
 	@Before
@@ -97,7 +98,9 @@ public class AutovetturaCompatibileTest {
 	public void testSetLastSubstitution() {
 		final String idTest = "Test di setLastSubstitution";
 		Batteria b = Batteria.getBattery(21);
-		Stazione s = Stazione.getStation(2);
+		Stazione s = null;
+		if (Societa.findStation(2))
+			s = s_test.getStation(2);
 		Calendar d = Calendar.getInstance();
 		d.clear();
 		d.set(2015, 10, 02, 12, 8);
@@ -132,7 +135,7 @@ public class AutovetturaCompatibileTest {
 		data.set(2015, 10, 2, 12, 27);		
 		last.setDateHour(data);
 		
-		last.setSubstitutionStation(Stazione.getStation(2));
+		last.setSubstitutionStation(s_test.getStation(2));
 		last.setBattery(Batteria.getBattery(9));
 		
 		test.setLastSubstitution(last);

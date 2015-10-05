@@ -5,33 +5,35 @@ import static org.junit.Assert.*;
 import java.util.Calendar;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Server.DAO.BadgeDAO;
 import Server.DAO.PopulateTestDatabase;
-import Server.DAO.StazioneDAO;
 import Server.Entity.Badge;
-import Server.Entity.Batteria;
 import Server.Entity.Cliente;
-import Server.Entity.Stazione;
+import Server.Entity.Societa;
+
 
 public class BadgeTest {
 	
 	private static Badge oracle = null;
 	private Badge test = null;
+	private static Societa s_test = null;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		PopulateTestDatabase.populate();
-		oracle = Badge.getBadge(0);
+		s_test = Societa.getSociety();
+		if (Societa.findBadge(0))
+			oracle = s_test.getBadge(0);
 	}
 
 	@Before
 	public void setUp() throws Exception {
-		test = Badge.getBadge(0);
+		if (Societa.findBadge(0))
+			test = s_test.getBadge(0);
 	}
 
 	@After
@@ -45,7 +47,9 @@ public class BadgeTest {
 	@Test
 	public void testPrepareDAO() {
 		final String idTest = "Test di prepareDAO";
-		Badge p = Badge.getBadge(1);
+		Badge p = null;
+		if (Societa.findBadge(1))
+			 p = s_test.getBadge(1);
 		BadgeDAO dao = p.prepareDAO();
 		
 		assertEquals(idTest + "riuscito", BadgeDAO.findBadge(1), dao);

@@ -4,17 +4,15 @@ package Test.Entity;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import Server.DAO.BatteriaDAO;
 import Server.DAO.PopulateTestDatabase;
-import Server.DAO.StazioneDAO;
 import Server.Entity.Batteria;
 import Server.Entity.ModelloAutovettura;
-import Server.Entity.Stazione;
+
 
 public class BatteriaTest {
 	

@@ -6,6 +6,10 @@ import java.util.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Query;
+
+
+
 
 
 
@@ -154,6 +158,23 @@ public class StazioneDAO {
 			return false;
 	
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<StazioneDAO> retriveStationList() {
+		ArrayList<StazioneDAO> trovate;
+		SessionFactory sf = HibernateUtil.getSessionFactory();
+		Session session = sf.openSession();
+		session.beginTransaction();
+				
+		Query query = session.createQuery("from StazioneDAO");
+		
+		trovate = (ArrayList<StazioneDAO>)query.list();
+				
+		session.getTransaction().commit();		
+		session.close();
+		
+		return trovate ;
+		}
 	
 	
 /*	private int findIndex (BatteriaDAO vecchia){

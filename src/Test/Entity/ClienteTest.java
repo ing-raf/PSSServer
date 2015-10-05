@@ -6,17 +6,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import Server.DAO.AutovetturaCompatibileDAO;
-import Server.DAO.BatteriaDAO;
+
 import Server.DAO.ClienteDAO;
 import Server.DAO.PopulateTestDatabase;
 import Server.Entity.AutovetturaCompatibile;
-import Server.Entity.Batteria;
 import Server.Entity.Cliente;
 
 public class ClienteTest {
@@ -93,6 +90,7 @@ public class ClienteTest {
 	@Test
 	public void testGetOwnedCars() {
 		final String idTest = "Test di GetOwnedCars()";
+		@SuppressWarnings("unused")
 		AutovetturaCompatibile [] ac = new AutovetturaCompatibile[]{
 				AutovetturaCompatibile.getCar("DZ 120 FP"),
 				AutovetturaCompatibile.getCar("EA 210 BB"),
