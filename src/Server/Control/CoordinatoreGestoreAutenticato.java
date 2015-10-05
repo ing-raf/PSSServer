@@ -2,125 +2,136 @@ package Server.Control;
 
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.Calendar;
 
-import Server.BusinessLogic.GestoreAutovetture;
-import Server.BusinessLogic.GestoreBatterie;
-import Server.BusinessLogic.GestoreDisponibilita;
-import Server.BusinessLogic.GestoreSostituzioni;
-import Server.BusinessLogic.ValidazioneBadge;
+import Server.BusinessLogic.AutovetturaBL;
+import Server.BusinessLogic.AutovetturaClienteBL;
+import Server.BusinessLogic.BatteriaBL;
+import Server.BusinessLogic.GestoreBadge;
+import Server.BusinessLogic.GestoreSocieta;
+import Server.BusinessLogic.GestoreStazione;
+import Server.BusinessLogic.StazioneBL;
+import Server.BusinessLogic.UltimaSostituzioneBL;
 import Server.RMIInterface.*;
 
 public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implements ServiziGestore, ServiziGestoreAndroid {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -51837280579457780L;
+	private static final int soglia = 5;
 	private int IDStazione;
-	private ArrayList<? extends Server.BusinessLogic.Autovettura> lastElenco;
+	private ArrayList<? extends AutovetturaBL> elencoModelli;
+	private int codiceBadge;
 	
 	public CoordinatoreGestoreAutenticato (int IDStazione) throws Exception {
 		super();
 		this.IDStazione = IDStazione;
 	}
 
-	public ArrayList<? extends Autovettura> retrieveListaModelli() throws Exception {
-		this.lastElenco = GestoreAutovetture.retrieveListaModelli();		
+	@Override
+	public ArrayList<? extends Autovettura> retrieveModelList() throws Exception {
+		GestoreSocieta gs = new GestoreSocieta();
 		
-		ArrayList<Autovettura> elencoAutovetture = new ArrayList<Autovettura>( this.lastElenco.size() );
+		this.elencoModelli = gs.retrieveModelList();		
 		
-		for (Server.BusinessLogic.Autovettura autovettura: this.lastElenco) {
-			Autovettura nuova = new Autovettura();
-			nuova.setModelloAutovettura(autovettura);
-			elencoAutovetture.add(nuova);
+		ArrayList<Autovettura> elencoAutovetture = new ArrayList<Autovettura>( this.elencoModelli.size() );
+		
+		for (AutovetturaBL autovettura: this.elencoModelli) {
+			elencoAutovetture.add( new AutovetturaC(autovettura.getModel(), autovettura.getBrand()) );
 		}
 				
 		return elencoAutovetture;
 	}
 
-	/**
-	 * 
-	 * @param IDbatteria
-	 * @param costosostituzione
-	 * @param maxciclidiricarica
-	 * @param modelloautovettura
-	 */
-	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) throws Exception {
-		return GestoreDisponibilita.addBatteria(this.IDStazione, IDbatteria, costosostituzione, maxcicliricarica, this.lastElenco.get(modelloautovettura) );
+	@Override
+	public boolean addBattery(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) throws Exception {
+		@SuppressWarnings("static-access")
+		GestoreStazione gs = new GestoreStazione (this.IDStazione, this.soglia);
+		return gs.addBattery( new BatteriaBL(IDbatteria, costosostituzione, maxcicliricarica, 
+				this.elencoModelli.get(modelloautovettura).getModel(), this.elencoModelli.get(modelloautovettura).getBrand()) );
 
 	}
 
-	/**
-	 * 
-	 * @param IDstazione
-	 */
-	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws Exception {
-			ArrayList<Server.BusinessLogic.Batteria> listaBatterie = GestoreBatterie.retrieveBatterieQuasiEsauste(IDstazione);
-			ArrayList<Batteria> elencoBatterie = new ArrayList<Server.Control.Batteria>( listaBatterie.size() );
+	@Override
+	public ArrayList<? extends Batteria> retrieveNearlyExhaustedBatteries() throws Exception {
+		@SuppressWarnings("static-access")
+		GestoreStazione gs = new GestoreStazione (this.IDStazione, this.soglia);
+			ArrayList<Batteria> elencoBatterie = new ArrayList<Batteria>();
 			
-			for (Server.BusinessLogic.Batteria batteria: listaBatterie) {
-				Batteria nuova = new Batteria();
-				nuova.setBatteria(batteria);
-				elencoBatterie.add(nuova);
+			for (BatteriaBL batteria: gs.retrieveNearlyExhaustedBatteries() ) {
+				elencoBatterie.add( new BatteriaC (batteria.getID(), batteria.getCostSubstitution() ) );
 			}
 			
 			return elencoBatterie;
 
 	}
 
-	/**
-	 * 
-	 * @param codicebadge
-	 */
-	public ArrayList<? extends AutovetturaCliente> retrieveAutovettureCliente(int codicebadge) throws Exception {
+	@Override
+	public ArrayList<? extends AutovetturaCliente> retrieveCompatibleCars(int codicebadge) throws Exception {
 		
-		ValidazioneBadge badge = new ValidazioneBadge();
+		GestoreBadge gb = null;
 		
-		if ( badge.findCodiceBadge(codicebadge) == false ) {
+		try {
+			
+			gb = new GestoreBadge(codicebadge);
+			
+			this.codiceBadge = codicebadge;
+			
+		} catch (NullPointerException npe) {
 			return null;
 		}
-		else {
-			
-			this.lastElenco = GestoreAutovetture.retrieveListaAutovetture(badge);
+	
+		this.elencoModelli = gb.retrieveCarList();
 		
-			ArrayList<AutovetturaCliente> elencoAutovetture = new ArrayList<AutovetturaCliente>( this.lastElenco.size() );			
+		ArrayList<AutovetturaCliente> elencoAutovetture = new ArrayList<AutovetturaCliente>( this.elencoModelli.size() );			
 			
-			for (Server.BusinessLogic.Autovettura autovettura: this.lastElenco) {
-				AutovetturaCliente nuova = new AutovetturaCliente();
-				nuova.setAutovetturaCliente( (Server.BusinessLogic.AutovetturaCliente) autovettura);
-				elencoAutovetture.add(nuova);
-			}
-					
-			return elencoAutovetture;
+		for (AutovetturaBL autovettura: this.elencoModelli) {
+			AutovetturaClienteBL ac = (AutovetturaClienteBL) autovettura;
+			elencoAutovetture.add( new AutovetturaClienteC(ac.getBrand(), ac.getModel(), ac.getNumberPlate() ) );
 		}
+					
+		return elencoAutovetture;
 		
 	}
 
-	/**
-	 * 
-	 * @param modello
-	 */
-	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception {
-		ArrayList<Server.BusinessLogic.Stazione> listaStazioni = GestoreDisponibilita.remoteRetrieveBatterieCompatibili( this.lastElenco.get(modello),  this.IDStazione);
+	@Override
+	public ArrayList<? extends Stazione> remoteRetrieveCompatibleBatteries(int modello) throws Exception {
 		
-		ArrayList<Stazione> elencoStazioni = new ArrayList<Stazione> (listaStazioni.size() );
+		@SuppressWarnings("static-access")
+		GestoreStazione gs = new GestoreStazione (this.IDStazione, this.soglia);
+				
+		ArrayList<Stazione> elencoStazioni = new ArrayList<Stazione> ();
 		
-		for (Server.BusinessLogic.Stazione stazione : listaStazioni) {
-			Stazione nuova = new Stazione();
-			nuova.setStazione(stazione);
-			elencoStazioni.add(nuova);
+		for (StazioneBL stazione : gs.remoteRetrieveCompatibleBatteries( this.elencoModelli.get(modello) )) {
+			elencoStazioni.add( new StazioneC(stazione.getName(), stazione.getAddress()) );
 		}
 		
 		return elencoStazioni;
 	}
 
-
-	public UltimaSostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {	
-		Server.BusinessLogic.UltimaSostituzione sostituzione = GestoreSostituzioni.findLastSostituzione( (Server.BusinessLogic.AutovetturaCliente)this.lastElenco.get(autovettura) );
-		UltimaSostituzione ultima = new UltimaSostituzione();
-		ultima.setSostituzione(sostituzione);
+	@Override
+	public UltimaSostituzione retrieveLastSubstitution(int autovettura) throws Exception {	
 		
-		return ultima;
+		GestoreBadge gb = null;
+		
+		try {
+			
+			gb = new GestoreBadge(this.codiceBadge);
+			
+		} catch (NullPointerException npe) {
+			return null;
+		}
+		
+		UltimaSostituzioneBL sostituzione = gb.findLastSubstitution( ( (AutovetturaClienteBL)this.elencoModelli.get(autovettura) ).getNumberPlate() );
+
+		return new UltimaSostituzioneC(
+				sostituzione.getDateHour().get(Calendar.DAY_OF_MONTH),
+				sostituzione.getDateHour().get(Calendar.MONTH),
+				sostituzione.getDateHour().get(Calendar.YEAR),
+				sostituzione.getDateHour().get(Calendar.HOUR),
+				sostituzione.getDateHour().get(Calendar.MINUTE),
+				sostituzione.getStationName(),
+				sostituzione.getStationAddress(),
+				sostituzione.getBatteryID());
 	}
 
 }
