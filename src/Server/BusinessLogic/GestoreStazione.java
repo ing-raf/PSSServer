@@ -36,7 +36,6 @@ public class GestoreStazione {
 		
 	}
 	
-	@SuppressWarnings("unused")
 	public boolean insertBattery(BatteriaBL nuova) {
 		Societa laSocieta = Societa.getSociety();
 		Stazione locale = laSocieta.getStation(this.ID);
