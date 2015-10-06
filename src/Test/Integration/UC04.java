@@ -150,7 +150,7 @@ public class UC04 {
 	public void TC04() {
 		
 		final String idTest = "TC04";
-		final int idStazione = 1;
+		final int idStazione = -1;
 		
 		InterfacciaGestoreAutenticato client = null;
 		
