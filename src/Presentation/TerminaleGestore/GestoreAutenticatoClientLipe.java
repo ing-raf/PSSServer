@@ -27,9 +27,10 @@ public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutentica
 		this.IDstazione = IDstazione;
 		this.serverHostname = serverHostname;
 		this.client = new Client(this.serverHostname, PORT_OFFSET + 2 * this.IDstazione + 1, callHandler);
-		this.stub = (ServiziGestoreAndroid) client.getGlobal (ServiziGestoreAndroid.class);
 		
-		if (this.stub == null) throw new NullPointerException();
+		if (IDstazione < 0) throw new NullPointerException();
+		
+		this.stub = (ServiziGestoreAndroid) client.getGlobal (ServiziGestoreAndroid.class);
 	}
 
 	@Override
