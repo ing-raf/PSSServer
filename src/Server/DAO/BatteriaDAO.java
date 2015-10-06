@@ -93,7 +93,6 @@ public class BatteriaDAO {
 			session.save(this);
 			session.getTransaction().commit();
 		}catch(HibernateException he){
-			System.err.println("eccezzione lanciata");
 			session.getTransaction().rollback();
 			return false;
 		}finally{

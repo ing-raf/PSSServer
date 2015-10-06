@@ -49,9 +49,9 @@ public class UC03 {
 			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertFalse(idTest + " riuscito", modelli.isEmpty() );
-			System.err.println("Eccezione 1");
+		
 			assertTrue(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
-			System.err.println("Eccezione");
+			
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -218,11 +218,11 @@ public class UC03 {
 			fail(idTest + " riuscito");
 		}
 		
-		System.err.println("prima del testStazione");
+		;
 		
 		inserita = PopulateTestDatabase.testStazione(idStazione, idBatteria, cicli, costo, idModello);
 		
-		System.err.println("dopo il testStazione");
+		
 		
 		assertEquals (idTest + " riuscito", null, inserita);
 			
@@ -250,7 +250,7 @@ public class UC03 {
 		try {
 			
 			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
-			System.err.println("Num modelli " + modelli.size());
+			
 			assertFalse(idTest + " riuscito", modelli.isEmpty() );
 			
 			assertFalse(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) ); 

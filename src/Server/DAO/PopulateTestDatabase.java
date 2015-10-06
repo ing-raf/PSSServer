@@ -358,7 +358,7 @@ public class PopulateTestDatabase {
 	public static BatteriaDAO testStazione (int idStazione, int idBatteria, int cicliRicarica, float costo, int idModello) {
 		
 		StazioneDAO s = StazioneDAO.findStation(idStazione);
-		System.err.println(s);
+		
 		List<BatteriaDAO> list = s.getAvailableBatteries();
 		int k = 0;
 		while (k < list.size() ){
