@@ -53,8 +53,6 @@ public class UltimaSostituzione {
 	
 	public UltimaSostituzioneDAO prepareDAO(String targa) {
 		UltimaSostituzioneDAO dao = UltimaSostituzioneDAO.findSubstitution(targa);
-		System.err.println(this.getClass() + " pripeirDAO " + dao.ID);
-//		UltimaSostituzioneDAO dao = new UltimaSostituzioneDAO();
 		dao.setDateHour(this.dataOra);
 		dao.setBattery( this.batteria.prepareDAO() );
 		dao.setStation( this.staz_sostituz.prepareDAO() );

@@ -55,14 +55,8 @@ public class Autenticato extends Stato {
 	@Override
 	public ArrayList<?> retrieveCompatibleBatteries(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {		
 		GestoreStazione gs = new GestoreStazione(coordinatore.getStationID());
-		
-		System.err.println("Ingresso nella funzione incriminata");
-		
+				
 		this.batterieDisponibili = gs.retrieveCompatibleBatteries( new AutovetturaBL(this.elencoAutovetture.get(indiceAutovettura).getModel(), this.elencoAutovetture.get(indiceAutovettura).getBrand()) );
-		
-		System.err.println("Batterie trovate nella stazione " + coordinatore.getStationID() 
-			+ " per il modello " + this.elencoAutovetture.get(indiceAutovettura).getModel() + " " + this.elencoAutovetture.get(indiceAutovettura).getBrand() 
-			+ ":\t" + this.batterieDisponibili.size() );
 		
 		if ( this.batterieDisponibili.isEmpty() ) {
 			
@@ -72,9 +66,6 @@ public class Autenticato extends Stato {
 				elencoStazioni.add( new StazioneC(stazione.getName(), stazione.getAddress()) );
 			
 			coordinatore.setState( new NonAutenticato() );
-
-			System.err.println("La funzione incriminata sta ritornando " 
-					+ elencoStazioni.size() + " stazioni");
 			
 			return elencoStazioni;
 			
@@ -84,9 +75,6 @@ public class Autenticato extends Stato {
 			
 			for (BatteriaBL batteria: this.batterieDisponibili) 
 				elencoBatterie.add( new BatteriaC(batteria.getID(), batteria.getCostSubstitution()) );
-			
-			System.err.println("La funzione incriminata sta ritornando " 
-					+ elencoBatterie.size() + " batterie");
 			
 			return elencoBatterie;	
 		}

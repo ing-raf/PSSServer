@@ -29,11 +29,12 @@ public class CoordinatoreRecupero implements Runnable {
 		
 		try {
 
-			if ( gs.verifyRecharge(batteria) ) {
-				
+			if ( gs.verifyRecharge(this.batteria) ) {
+					
 				if (this.stub.rechargeBatteria( this.batteria.getID() ) == false )
 					throw new ConnectIOException("Riscontrato un problema durante la ricarica della batteria");
 				
+				this.batteria.setCyclesRecharge( this.batteria.getCyclesRecharge() - 1);
 				gs.addBattery(this.batteria);
 					
 			} else {

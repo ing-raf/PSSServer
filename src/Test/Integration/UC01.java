@@ -90,20 +90,20 @@ public class UC01 {
 		
 		assertEquals (idTest + " riuscito", 1, PopulateTestDatabase.testSostituzione(targa).getID() );
 
-		BatteriaDAO vecchia = new BatteriaDAO();
-		
 		Thread.sleep(5*1000);
 		
+		BatteriaDAO vecchia = BatteriaDAO.findBattery(33); 
+				
 		assertEquals (idTest + " riuscito", 77, vecchia.getCyclesRecharge() );
 		
-		BadgeDAO b = new BadgeDAO();
+		BadgeDAO b = BadgeDAO.findBadge(codiceBadge);
 		
 		assertEquals (idTest + " riuscito", 389.79 , b.getCredit(), 0.001f );
 		
 	}
 
 	
-//	@Test
+	@Test
 	public void TC02() {
 		
 		final String idTest = "TC02";
@@ -178,7 +178,7 @@ public class UC01 {
 		
 	}
 	
-//	@Test
+	@Test
 	public void TC03() {
 		
 		final String idTest = "TC03";
@@ -226,7 +226,7 @@ public class UC01 {
 		
 	}
 	
-//	@Test
+	@Test
 	public void TC04() {
 		
 		final String idTest = "TC04";
@@ -295,7 +295,7 @@ public class UC01 {
 		
 	}
 
-//		@Test
+		@Test
 		public void TC05() {
 			
 			final String idTest = "TC05";
@@ -356,7 +356,7 @@ public class UC01 {
 		
 	}
 		
-//		@Test
+		@Test
 		public void TC06() {
 			
 			final String idTest = "TC06";

@@ -10,7 +10,7 @@ public class AutovetturaClienteC extends AutovetturaC implements Server.RMIInter
 	}
 	
 	public AutovetturaClienteC(String fornitore, String modello, String numeroTarga) {
-		super(fornitore, modello);
+		super(modello, fornitore);
 		this.setNumberPlate(numeroTarga);
 	}
 	

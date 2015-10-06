@@ -11,7 +11,7 @@ public class AutovetturaClienteBL extends AutovetturaBL {
 	}
 	
 	public AutovetturaClienteBL(String fornitore, String modello, String numeroTarga) {
-		super(fornitore, modello);
+		super(modello, fornitore);
 		this.setNumberPlate(numeroTarga);
 	}
 	
