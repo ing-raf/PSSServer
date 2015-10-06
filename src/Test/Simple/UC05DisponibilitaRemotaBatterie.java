@@ -14,6 +14,7 @@ public class UC05DisponibilitaRemotaBatterie {
 
 	private static final int IDSTAZIONE = 1;
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		
 		InterfacciaGestoreAutenticato client = null;
@@ -48,7 +49,7 @@ public class UC05DisponibilitaRemotaBatterie {
 		System.out.println("---\t----\t\t----");
 			
 		for (int i = 0; i < modelli.size(); i++) {
-			System.out.println(i+"\t"+modelli.get(i).getFornitore() + "\t" + modelli.get(i).getModello());
+			System.out.println(i+"\t"+modelli.get(i).getBrand() + "\t" + modelli.get(i).getModel());
 		}
 		
 		System.out.println("Specificare il numero:");
@@ -73,8 +74,8 @@ public class UC05DisponibilitaRemotaBatterie {
 		
 		if ( stazioni.isEmpty() ) {
 			System.out.println("Nessuna stazione ha batterie compatibili");
-			System.out.println("con il modello " + modelli.get(indice).getFornitore() 
-					+ " " + modelli.get(indice).getModello());
+			System.out.println("con il modello " + modelli.get(indice).getBrand() 
+					+ " " + modelli.get(indice).getModel());
 			System.exit(0);
 		}
 		
@@ -82,7 +83,7 @@ public class UC05DisponibilitaRemotaBatterie {
 		System.out.println("----\t\t----");
 		
 		for (int i = 0; i < stazioni.size(); i++)
-			System.out.println(stazioni.get(i).getNome() + "\t" + stazioni.get(i).getIndirizzo());
+			System.out.println(stazioni.get(i).getName() + "\t" + stazioni.get(i).getAddress());
 		
 		System.out.println ("BANANAAAAAAAAAAAA");
 	}

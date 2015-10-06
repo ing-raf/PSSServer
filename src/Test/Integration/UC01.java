@@ -103,7 +103,7 @@ public class UC01 {
 	}
 
 	
-	@Test
+//	@Test
 	public void TC02() {
 		
 		final String idTest = "TC02";
@@ -178,7 +178,7 @@ public class UC01 {
 		
 	}
 	
-	@Test
+//	@Test
 	public void TC03() {
 		
 		final String idTest = "TC03";
@@ -226,7 +226,7 @@ public class UC01 {
 		
 	}
 	
-	@Test
+//	@Test
 	public void TC04() {
 		
 		final String idTest = "TC04";
@@ -295,7 +295,7 @@ public class UC01 {
 		
 	}
 
-		@Test
+//		@Test
 		public void TC05() {
 			
 			final String idTest = "TC05";
@@ -356,7 +356,7 @@ public class UC01 {
 		
 	}
 		
-		@Test
+//		@Test
 		public void TC06() {
 			
 			final String idTest = "TC06";

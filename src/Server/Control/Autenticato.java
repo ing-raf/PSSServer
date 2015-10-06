@@ -27,8 +27,6 @@ public class Autenticato extends Stato {
 
 	public Autenticato(int codiceBadge) {
 		
-		new GestoreBadge(codiceBadge);
-		
 		this.codiceBadge = codiceBadge;
 		this.sistemaSostituzione = null;
 		
@@ -58,8 +56,14 @@ public class Autenticato extends Stato {
 	public ArrayList<?> retrieveCompatibleBatteries(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {		
 		GestoreStazione gs = new GestoreStazione(coordinatore.getStationID());
 		
+		System.err.println("Ingresso nella funzione incriminata");
+		
 		this.batterieDisponibili = gs.retrieveCompatibleBatteries( new AutovetturaBL(this.elencoAutovetture.get(indiceAutovettura).getModel(), this.elencoAutovetture.get(indiceAutovettura).getBrand()) );
-				
+		
+		System.err.println("Batterie trovate nella stazione " + coordinatore.getStationID() 
+			+ " per il modello " + this.elencoAutovetture.get(indiceAutovettura).getModel() + " " + this.elencoAutovetture.get(indiceAutovettura).getBrand() 
+			+ ":\t" + this.batterieDisponibili.size() );
+		
 		if ( this.batterieDisponibili.isEmpty() ) {
 			
 			ArrayList<StazioneC> elencoStazioni = new ArrayList<StazioneC>();
@@ -69,6 +73,9 @@ public class Autenticato extends Stato {
 			
 			coordinatore.setState( new NonAutenticato() );
 
+			System.err.println("La funzione incriminata sta ritornando " 
+					+ elencoStazioni.size() + " stazioni");
+			
 			return elencoStazioni;
 			
 		} else {
@@ -77,6 +84,9 @@ public class Autenticato extends Stato {
 			
 			for (BatteriaBL batteria: this.batterieDisponibili) 
 				elencoBatterie.add( new BatteriaC(batteria.getID(), batteria.getCostSubstitution()) );
+			
+			System.err.println("La funzione incriminata sta ritornando " 
+					+ elencoBatterie.size() + " batterie");
 			
 			return elencoBatterie;	
 		}

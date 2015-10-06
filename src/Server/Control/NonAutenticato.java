@@ -6,9 +6,11 @@ import Server.RMIInterface.Install_Outcome;
 
 public class NonAutenticato extends Stato {
 
+	@Override
 	public boolean verifyValidationOutcome() {
 		return false;
 	}
+	
 	@Override
 	public void startValidation(CoordinatoreClienteRegistrato coordinatore, int codice) {
 		

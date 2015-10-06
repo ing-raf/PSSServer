@@ -74,7 +74,7 @@ public class UC01SostituzioneBatteria {
 		System.out.println("---\t----\t\t----\t\t----");
 			
 		for (int i = 0; i < autovetture.size(); i++) {
-			System.out.println(i+"\t"+autovetture.get(i).getFornitore() + "\t" + autovetture.get(i).getModello() + "\t" + autovetture.get(i).getNumeroTarga());
+			System.out.println(i+"\t"+autovetture.get(i).getBrand() + "\t" + autovetture.get(i).getModel() + "\t" + autovetture.get(i).getNumberPlate());
 		}
 		
 		System.out.println("Specificare il numero:");
@@ -112,7 +112,7 @@ public class UC01SostituzioneBatteria {
 				
 				for (int i = 0; i < output.size(); i++) {
 					Batteria b = (Batteria) output.get(i);
-					System.out.println(i+"\t"+ b.getID() + "\t" + b.getCosto() );
+					System.out.println(i+"\t"+ b.getID() + "\t" + b.getCostSubstitution() );
 				}
 				
 				System.out.println("Specificare il numero:");
@@ -143,7 +143,7 @@ public class UC01SostituzioneBatteria {
 				
 				for (Object o : output) {
 					Stazione s = (Stazione) o;
-					System.out.println( s.getNome() + "\t" + s.getIndirizzo() );
+					System.out.println( s.getName() + "\t" + s.getAddress() );
 				}
 							
 			} else {

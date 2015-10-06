@@ -46,7 +46,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 	public boolean addBattery(int IDbatteria, float costosostituzione, int maxcicliricarica, int modelloautovettura) throws Exception {
 		@SuppressWarnings("static-access")
 		GestoreStazione gs = new GestoreStazione (this.IDStazione, this.soglia);
-		return gs.addBattery( new BatteriaBL(IDbatteria, costosostituzione, maxcicliricarica, 
+		return gs.insertBattery( new BatteriaBL(IDbatteria, costosostituzione, maxcicliricarica, 
 				this.elencoModelli.get(modelloautovettura).getModel(), this.elencoModelli.get(modelloautovettura).getBrand()) );
 
 	}
