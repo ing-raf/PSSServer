@@ -7,17 +7,11 @@ import Server.RMIInterface.Install_Outcome;
 
 public abstract class Stato {
 
-	public ArrayList<? extends AutovetturaCliente> retrieveAutovetture(CoordinatoreClienteRegistrato coordinatore) {
+	public ArrayList<AutovetturaClienteC> retrieveCompatibleCars(CoordinatoreClienteRegistrato coordinatore) {
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * 
-	 * @param indiceAutovettura
-	 * @param elencoBatterie
-	 * @param elencoStazioni
-	 */
-	public ArrayList<?> retrieveBatterieCompatibili(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
+	public ArrayList<?> retrieveCompatibleBatteries(CoordinatoreClienteRegistrato coordinatore, int indiceAutovettura) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -27,11 +21,11 @@ public abstract class Stato {
 	 * @param indiceBatteria
 	 * @throws RemoteException 
 	 */
-	public Install_Outcome startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
+	public Install_Outcome startInstallation(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) throws RemoteException {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean verificaEsitoValidazione() {
+	public boolean verifyValidationOutcome() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -39,7 +33,7 @@ public abstract class Stato {
 	 * 
 	 * @param codice
 	 */
-	public void startValidazione(CoordinatoreClienteRegistrato coordinatore, int codice) {		
+	public void startValidation(CoordinatoreClienteRegistrato coordinatore, int codice) {		
 		throw new UnsupportedOperationException();
 	}
 	

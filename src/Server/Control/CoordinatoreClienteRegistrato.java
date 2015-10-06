@@ -25,47 +25,36 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 			this.substitutionDevicePort = 1099;
 	}
 	
-	public CoordinatoreClienteRegistrato(int IDstazione, String hostname) throws RemoteException {
+	public CoordinatoreClienteRegistrato(int IDstazione, String substitutionDeviceHostname) throws RemoteException {
 		super();
 		this.stato = new NonAutenticato();
 		this.IDstazione = IDstazione;
-		this.substitutionDeviceHostname = hostname;
+		this.substitutionDeviceHostname = substitutionDeviceHostname;
 		this.substitutionDevicePort = 1099;
 }
 
-	public ArrayList<? extends AutovetturaCliente> retrieveAutovetture() {
-		return this.stato.retrieveAutovetture(this);
+	@Override
+	public ArrayList<? extends AutovetturaCliente> retrieveCompatibleCars() {
+		return this.stato.retrieveCompatibleCars(this);
 	}
 
-	/**
-	 * 
-	 * @param indiceAutovettura
-	 * @param elencoBatterie
-	 * @param elencoStazioni
-	 */
-	public ArrayList<?> retrieveBatterieCompatibili(int indiceAutovettura) {
-		return this.stato.retrieveBatterieCompatibili(this, indiceAutovettura);
+	@Override
+	public ArrayList<?> retrieveCompatibleBatteries(int indiceAutovettura) {
+		return this.stato.retrieveCompatibleBatteries(this, indiceAutovettura);
 	}
 
-	/**
-	 * 
-	 * @param indiceBatteria
-	 * @throws RemoteException 
-	 */
-	public Install_Outcome startInstallazione(int indiceBatteria) throws RemoteException {
-		return this.stato.startInstallazione(this, indiceBatteria);
+	@Override
+	public Install_Outcome startInstallation(int indiceBatteria) throws RemoteException {
+		return this.stato.startInstallation(this, indiceBatteria);
 	}
 
-	public boolean verificaEsitoValidazione() {
-		return this.stato.verificaEsitoValidazione();
+	public boolean verifyValidationOutcome() {
+		return this.stato.verifyValidationOutcome();
 	}
 
-	/**
-	 * 
-	 * @param codice
-	 */
-	public void startValidazione(int codice) {
-		this.stato.startValidazione(this, codice);
+	@Override
+	public void startValidation(int codice) {
+		this.stato.startValidation(this, codice);
 	}
 	
 	@Override
@@ -73,7 +62,7 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 		this.stato.logOut(this);
 	}
 
-	int getIDStazione() {
+	int getStationID() {
 		return this.IDstazione;
 	}
 	
@@ -85,7 +74,7 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 		return this.substitutionDevicePort;
 	}
 	
-	void setStato (Stato stato) {
+	void setState (Stato stato) {
 		this.stato = stato;
 	}
 

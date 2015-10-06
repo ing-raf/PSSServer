@@ -1,27 +1,31 @@
 package Server.Control;
 
-import Server.BusinessLogic.ValidazioneBadge;
+
+import Server.BusinessLogic.GestoreBadge;
 import Server.RMIInterface.Install_Outcome;
 
 public class NonAutenticato extends Stato {
 
-	public boolean verificaEsitoValidazione() {
+	public boolean verifyValidationOutcome() {
 		return false;
 	}
 
-	/**
-	 * 
-	 * @param codice
-	 */
 	public void startValidazione(CoordinatoreClienteRegistrato coordinatore, int codice) {
-		ValidazioneBadge cercaBadge = new ValidazioneBadge();
 		
-		if ( cercaBadge.findCodiceBadge(codice) == true)
-			coordinatore.setStato( new Autenticato (cercaBadge) );
+		try {
+			
+			@SuppressWarnings("unused")
+			GestoreBadge cercaBadge = new GestoreBadge(codice);
+			
+			coordinatore.setState( new Autenticato (codice) );
+		} catch (NullPointerException e) {
+			System.err.println("Inserimento di un badge non valido");
+		}
 			
 	}
 	
-	public Install_Outcome startInstallazione(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) {
+	@Override
+	public Install_Outcome startInstallation(CoordinatoreClienteRegistrato coordinatore, int indiceBatteria) {
 		return Install_Outcome.NO_VALIDATE;
 	}
 	

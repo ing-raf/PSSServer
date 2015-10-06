@@ -1,6 +1,5 @@
 package Server.BusinessLogic;
 
-import Server.Entity.AutovetturaCompatibile;
 import Server.Entity.ModelloAutovettura;
 
 public class AutovetturaBL {

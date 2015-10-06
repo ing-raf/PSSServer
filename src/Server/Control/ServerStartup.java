@@ -8,13 +8,13 @@ import lipermi.handler.CallHandler;
 import lipermi.net.Server;
 
 import Server.RMIInterface.ServiziGestoreAndroid;
-import Server.BusinessLogic.GestoreStazioni;
+import Server.BusinessLogic.GestoreSocieta;
+import Server.BusinessLogic.StazioneBL;
 import Server.DAO.PopulateTestDatabase;
 
-public class ServerMain {
+public class ServerStartup {
 	
 	private static int PORT_OFFSET = 3307;
-	private static int NUM_STAZIONI = 3;
 	private static String middleware = "LipeRMI";
 
 	public static void main(String[] args) {
@@ -27,14 +27,14 @@ public class ServerMain {
 			System.exit(0);
 		}
 		
-		ArrayList<Integer> elencoIDstazioni = GestoreStazioni.retriveListaId();
+		GestoreSocieta gs = new GestoreSocieta();
 		
-		if ( elencoIDstazioni.size() != NUM_STAZIONI ) {
-			System.err.println("Farsi dare il progetto da Imma e Paolo");
-			System.exit(0);
-		}
+		ArrayList<Integer> elencoIDstazioni = new ArrayList<Integer>();
 		
-		for (int i = 0; i < NUM_STAZIONI; i++) {
+		for (StazioneBL stazione : gs.retrieveStationList())
+			elencoIDstazioni.add(stazione.getID());
+		
+		for (int i = 0; i < elencoIDstazioni.size(); i++) {
 			
 			try {
 				Registry registry = LocateRegistry.createRegistry(PORT_OFFSET + 2*elencoIDstazioni.get(i));

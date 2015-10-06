@@ -2,8 +2,6 @@ package Server.BusinessLogic;
 
 import java.util.Calendar;
 
-import Server.Entity.UltimaSostituzione;
-
 public class UltimaSostituzioneBL {
 	
 	private Calendar dataOra;

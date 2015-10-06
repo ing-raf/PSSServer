@@ -2,14 +2,14 @@ package Server.Control;
 
 import java.rmi.ConnectIOException;
 
-import Server.BusinessLogic.GestoreBatterie;
-import Server.BusinessLogic.GestoreDisponibilita;
+import Server.BusinessLogic.BatteriaBL;
+import Server.BusinessLogic.GestoreStazione;
 import SistemaSostituzione.RMIDeviceInterface.ServizidiSostituzione;
 
 public class CoordinatoreRecupero implements Runnable {
 	
 	private final int idStazione;
-	private final Server.BusinessLogic.Batteria batteria;
+	private final BatteriaBL batteria;
 	private final ServizidiSostituzione stub;
 
 	/**
@@ -17,7 +17,7 @@ public class CoordinatoreRecupero implements Runnable {
 	 * @param batteria
 	 * @param idStazione
 	 */
-	public CoordinatoreRecupero(Server.BusinessLogic.Batteria batteria, int idStazione, ServizidiSostituzione stub) {
+	public CoordinatoreRecupero(BatteriaBL batteria, int idStazione, ServizidiSostituzione stub) {
 		this.idStazione = idStazione;
 		this.batteria = batteria;
 		this.stub = stub;
@@ -25,18 +25,21 @@ public class CoordinatoreRecupero implements Runnable {
 
 	public void run() {
 		
+		GestoreStazione gs = new GestoreStazione(this.idStazione);
+		
 		try {
 
-			if ( GestoreBatterie.verifyRicarica(batteria) ) {
+			if ( gs.verifyRecharge(batteria) ) {
 				
 				if (this.stub.rechargeBatteria( this.batteria.getID() ) == false )
 					throw new ConnectIOException("Riscontrato un problema durante la ricarica della batteria");
 				
-				GestoreDisponibilita.addBatteriaDisponibili(this.batteria, this.idStazione);
+				gs.addBattery(this.batteria);
 					
 			} else {
 				
-				GestoreDisponibilita.removeBatteria(this.batteria, this.idStazione);
+				gs.discardBattery(this.batteria);
+				
 				if (this.stub.discardBatteria( this.batteria.getID() ) == false)
 					throw new ConnectIOException("Riscontrato un problema durante lo scarto della batteria");
 				

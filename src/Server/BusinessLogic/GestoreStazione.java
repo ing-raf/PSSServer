@@ -12,8 +12,19 @@ import Server.Entity.UltimaSostituzione;
 
 public class GestoreStazione {
 	
+	private final static int DEFAULT_TRESHOLD = 5;
 	private int ID;
 	private int soglia;
+	
+	public GestoreStazione(int ID) {
+		
+		Societa laSocieta = Societa.getSociety();
+		if ( !laSocieta.findStation(ID) )
+			throw new NullPointerException("Stazione non presente");
+		this.ID = ID;
+		this.soglia = DEFAULT_TRESHOLD;
+		
+	}
 	
 	public GestoreStazione(int ID, int soglia) {
 		
