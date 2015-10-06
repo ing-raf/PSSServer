@@ -10,7 +10,6 @@ import org.junit.Test;
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;
 import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
 import Server.DAO.PopulateTestDatabase;
-import Server.DAO.StazioneDAO;
 import Server.RMIInterface.Autovettura;
 
 public class UC03 {
@@ -22,9 +21,7 @@ public class UC03 {
 	public void tearDown() throws Exception {
 		
 		if (inserita != null) {
-			StazioneDAO s = new StazioneDAO();
-			s = s.getStazione(this.idStazione);
-			s.deleteBatteria(this.inserita);
+			this.inserita.delete();
 		}
 			
 	}
@@ -49,11 +46,11 @@ public class UC03 {
 		
 		try {
 			
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertFalse(idTest + " riuscito", modelli.isEmpty() );
 			
-			assertTrue(idTest + " riuscito", client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) );
+			assertTrue(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
 			
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
@@ -85,12 +82,12 @@ public class UC03 {
 		
 		try {
 			
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
 			
-			assertEquals(idTest + " riuscito", true, client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) );
+			assertEquals(idTest + " riuscito", true, client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -121,12 +118,12 @@ public class UC03 {
 		
 		try {
 			
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
 			
-			assertEquals(idTest + " riuscito", true, client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) );
+			assertEquals(idTest + " riuscito", true, client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -157,12 +154,12 @@ public class UC03 {
 		
 		try {
 			
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
 			
-			assertEquals(idTest + " riuscito", true, client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) );
+			assertEquals(idTest + " riuscito", true, client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -212,11 +209,11 @@ public class UC03 {
 		
 		try {
 			
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
-			assertNotEquals(idTest + " riuscito", true,  client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) );
+			assertNotEquals(idTest + " riuscito", true,  client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
 
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
@@ -252,11 +249,11 @@ public class UC03 {
 		
 		try {
 			
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
-			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
+			assertTrue(idTest + " riuscito", modelli.isEmpty() );
 			
-			assertNotEquals(idTest + " riuscito", true, client.addBatteria(idBatteria, costo, cicli, indiceAutovettura) ); 
+			assertFalse(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) ); 
 
 		} catch (Exception e) {
 			fail(idTest + " riuscito");

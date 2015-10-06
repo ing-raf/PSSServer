@@ -31,7 +31,7 @@ public class UC05DisponibilitaRemotaBatterie {
 		ArrayList<? extends Autovettura> modelli = new ArrayList<Autovettura>();
 		
 		try {
-			modelli = client.retrieveListaModelli();
+			modelli = client.retrieveModelList();
 		} catch (Exception e) {
 			System.err.println("Eccezione durante l'esecuzione del messaggio V.1.2");
 			e.printStackTrace();
@@ -64,7 +64,7 @@ public class UC05DisponibilitaRemotaBatterie {
 		ArrayList<Stazione> stazioni = new ArrayList<Stazione>();
 		
 		try {
-			stazioni = (ArrayList<Stazione>) client.remoteRetrieveBatterieCompatibili(indice);
+			stazioni = (ArrayList<Stazione>) client.remoteRetrieveCompatibleBatteries(indice);
 		} catch (Exception e) {
 			System.err.println("Eccezione durante l'esecuzione del messaggio V.2.2");
 			e.printStackTrace();

@@ -27,8 +27,6 @@ public class UC01 {
 		final int indiceAutovettura = 0;
 		final int indiceBatteria = 0;
 		final String targa = "DZ 120 FP";
-		final int codiceBatteria = 33;
-		
 		BadgeClientRMI clientBadge = null;
 		ClienteRegistratoClientRMI client = null;
 		
@@ -96,11 +94,11 @@ public class UC01 {
 		
 		Thread.sleep(5*1000);
 		
-		assertEquals (idTest + " riuscito", 77, vecchia.getBatteria(codiceBatteria).getCicliRicarica() );
+		assertEquals (idTest + " riuscito", 77, vecchia.getCyclesRecharge() );
 		
 		BadgeDAO b = new BadgeDAO();
 		
-		assertEquals (idTest + " riuscito", 389.79 , b.getBadge(codiceBadge).getCredito(), 0.001f );
+		assertEquals (idTest + " riuscito", 389.79 , b.getCredit(), 0.001f );
 		
 	}
 
@@ -287,9 +285,9 @@ public class UC01 {
 			
 			assertEquals(idTest + " riuscito", 1, output.size() );
 			
-			assertEquals(idTest + " riuscito", "Stazione Centrale", ( (Stazione) output.get(0) ).getNome() );
+			assertEquals(idTest + " riuscito", "Stazione Centrale", ( (Stazione) output.get(0) ).getName() );
 			
-			assertEquals(idTest + " riuscito", "Piazzale Tecchio", ( (Stazione) output.get(0) ).getIndirizzo() );
+			assertEquals(idTest + " riuscito", "Piazzale Tecchio", ( (Stazione) output.get(0) ).getAddress() );
 			
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");

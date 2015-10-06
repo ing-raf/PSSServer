@@ -38,7 +38,7 @@ public class UC04VisualizzazioneUltimoRicambio {
 		
 		try {
 			
-			autovetture = client.retrieveAutovettureCliente(badge);
+			autovetture = client.retrieveCompatibleCars(badge);
 			
 			if ( autovetture == null ) {
 				System.out.println("Questo codice non corrisponde ad alcun badge");				System.exit(0);
@@ -75,7 +75,7 @@ public class UC04VisualizzazioneUltimoRicambio {
 		UltimaSostituzione ultima = null;
 		
 		try {
-			ultima = client.retrieveUltimaSostituzione(indice);
+			ultima = client.retrieveLastSubstitution(indice);
 		} catch (Exception e) {
 			System.err.println("Eccezione durante l'esecuzione del messaggio IV.3.2");
 			e.printStackTrace();

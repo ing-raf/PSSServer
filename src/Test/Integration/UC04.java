@@ -30,7 +30,7 @@ public class UC04 {
 		}
 			
 		try {
-			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveAutovettureCliente(codiceBadge);
+			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveCompatibleCars(codiceBadge);
 			
 			assertEquals(idTest + " riuscito", true, autovetture.isEmpty());
 		} catch (Exception e) {
@@ -64,7 +64,7 @@ public class UC04 {
 		}
 			
 		try {
-			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveAutovettureCliente(codiceBadge);
+			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveCompatibleCars(codiceBadge);
 		
 			assertNotEquals(idTest + " riuscito", true, autovetture.isEmpty());
 
@@ -75,21 +75,21 @@ public class UC04 {
 		UltimaSostituzione ultima = null;
 		
 		try {
-			ultima = client.retrieveUltimaSostituzione(indiceAutovettura);
+			ultima = client.retrieveLastSubstitution(indiceAutovettura);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
 
 		assertNotEquals(idTest + " riuscito", null, ultima);
 		
-		assertEquals(idTest + " riuscito", giorno, ultima.getGiorno() );
-		assertEquals(idTest + " riuscito", mese, ultima.getMese() );
-		assertEquals(idTest + " riuscito", anno, ultima.getAnno() );
-		assertEquals(idTest + " riuscito", ora, ultima.getOra() );
-		assertEquals(idTest + " riuscito", minuti, ultima.getMinuti() );
-		assertEquals(idTest + " riuscito", idBatteria, ultima.getIDBatteria() );
-		assertEquals(idTest + " riuscito", nomeStazione, ultima.getNomeStazione() );
-		assertEquals(idTest + " riuscito", indirizzoStazione, ultima.getIndirizzoStazione() );
+		assertEquals(idTest + " riuscito", giorno, ultima.getDay() );
+		assertEquals(idTest + " riuscito", mese, ultima.getMonth() );
+		assertEquals(idTest + " riuscito", anno, ultima.getYear() );
+		assertEquals(idTest + " riuscito", ora, ultima.getHour() );
+		assertEquals(idTest + " riuscito", minuti, ultima.getMinutes() );
+		assertEquals(idTest + " riuscito", idBatteria, ultima.getBatteryID() );
+		assertEquals(idTest + " riuscito", nomeStazione, ultima.getStationName() );
+		assertEquals(idTest + " riuscito", indirizzoStazione, ultima.getStationAddress() );
 	}
 	
 	@Test
@@ -117,7 +117,7 @@ public class UC04 {
 		}
 			
 		try {
-			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveAutovettureCliente(codiceBadge);
+			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveCompatibleCars(codiceBadge);
 			
 			assertNotEquals(idTest + " riuscito", true, autovetture.isEmpty());
 		} catch (Exception e) {
@@ -128,21 +128,21 @@ public class UC04 {
 		UltimaSostituzione ultima = null;
 		
 		try {
-			ultima = client.retrieveUltimaSostituzione(indiceAutovettura);
+			ultima = client.retrieveLastSubstitution(indiceAutovettura);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
 
 		assertNotEquals(idTest + " riuscito", null, ultima);
 		
-		assertEquals(idTest + " riuscito", giorno, ultima.getGiorno() );
-		assertEquals(idTest + " riuscito", mese, ultima.getMese() );
-		assertEquals(idTest + " riuscito", anno, ultima.getAnno() );
-		assertEquals(idTest + " riuscito", ora, ultima.getOra() );
-		assertEquals(idTest + " riuscito", minuti, ultima.getMinuti() );
-		assertEquals(idTest + " riuscito", idBatteria, ultima.getIDBatteria() );
-		assertEquals(idTest + " riuscito", nomeStazione, ultima.getNomeStazione() );
-		assertEquals(idTest + " riuscito", indirizzoStazione, ultima.getIndirizzoStazione() );
+		assertEquals(idTest + " riuscito", giorno, ultima.getDay() );
+		assertEquals(idTest + " riuscito", mese, ultima.getMonth() );
+		assertEquals(idTest + " riuscito", anno, ultima.getYear() );
+		assertEquals(idTest + " riuscito", ora, ultima.getHour() );
+		assertEquals(idTest + " riuscito", minuti, ultima.getMinutes() );
+		assertEquals(idTest + " riuscito", idBatteria, ultima.getBatteryID() );
+		assertEquals(idTest + " riuscito", nomeStazione, ultima.getStationName() );
+		assertEquals(idTest + " riuscito", indirizzoStazione, ultima.getStationAddress() );
 	}
 	
 	@SuppressWarnings("unused")
@@ -183,7 +183,7 @@ public class UC04 {
 		ArrayList<? extends AutovetturaCliente> autovetture = new ArrayList<AutovetturaCliente>();
 			
 		try {
-			autovetture = client.retrieveAutovettureCliente(codiceBadge);
+			autovetture = client.retrieveCompatibleCars(codiceBadge);
 			
 			assertEquals(idTest + " riuscito", null, autovetture);
 		} catch (Exception e) {

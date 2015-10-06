@@ -34,19 +34,19 @@ public class UC05 {
 		ArrayList<Stazione> stazioni = new ArrayList<Stazione>();
 		
 		try {
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
-			stazioni = (ArrayList<Stazione>) client.remoteRetrieveBatterieCompatibili(indiceModello);
+			stazioni = (ArrayList<Stazione>) client.remoteRetrieveCompatibleBatteries(indiceModello);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
 
 		assertNotEquals(idTest + " riuscito", true, stazioni.isEmpty() );
 		
-		assertEquals(idTest + " riuscito", nomeStazione[0], stazioni.get(0).getNome() );
-		assertEquals(idTest + " riuscito", indirizzoStazione[0], stazioni.get(0).getIndirizzo() );
+		assertEquals(idTest + " riuscito", nomeStazione[0], stazioni.get(0).getName() );
+		assertEquals(idTest + " riuscito", indirizzoStazione[0], stazioni.get(0).getAddress() );
 	}
 	
 	@SuppressWarnings({ "unchecked" })
@@ -68,11 +68,11 @@ public class UC05 {
 		ArrayList<Stazione> stazioni = new ArrayList<Stazione>();
 		
 		try {
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
-			stazioni = (ArrayList<Stazione>) client.remoteRetrieveBatterieCompatibili(indiceModello);
+			stazioni = (ArrayList<Stazione>) client.remoteRetrieveCompatibleBatteries(indiceModello);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -102,19 +102,19 @@ public class UC05 {
 		ArrayList<Stazione> stazioni = new ArrayList<Stazione>();
 		
 		try {
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
-			stazioni = (ArrayList<Stazione>) client.remoteRetrieveBatterieCompatibili(indiceModello);
+			stazioni = (ArrayList<Stazione>) client.remoteRetrieveCompatibleBatteries(indiceModello);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
 		
 		assertNotEquals(idTest + " riuscito", true, stazioni.isEmpty() );
 		
-		assertEquals(idTest + " riuscito", nomeStazione[0], stazioni.get(0).getNome() );
-		assertEquals(idTest + " riuscito", indirizzoStazione[0], stazioni.get(0).getIndirizzo() );
+		assertEquals(idTest + " riuscito", nomeStazione[0], stazioni.get(0).getName() );
+		assertEquals(idTest + " riuscito", indirizzoStazione[0], stazioni.get(0).getAddress() );
 	}
 	
 	@SuppressWarnings({ "unchecked" })
@@ -136,11 +136,11 @@ public class UC05 {
 		ArrayList<Stazione> stazioni = new ArrayList<Stazione>();
 		
 		try {
-			ArrayList<? extends Autovettura> modelli = client.retrieveListaModelli();
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
 			
-			stazioni = (ArrayList<Stazione>) client.remoteRetrieveBatterieCompatibili(indiceModello);
+			stazioni = (ArrayList<Stazione>) client.remoteRetrieveCompatibleBatteries(indiceModello);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}

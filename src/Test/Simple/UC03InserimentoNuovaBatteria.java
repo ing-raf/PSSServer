@@ -30,7 +30,7 @@ public class UC03InserimentoNuovaBatteria {
 		ArrayList<? extends Autovettura> modelli = new ArrayList<Autovettura>();
 		
 		try {
-			modelli = client.retrieveListaModelli();
+			modelli = client.retrieveModelList();
 		} catch (Exception e) {
 			System.err.println("Eccezione durante l'esecuzione del messaggio III.1.2");
 			e.printStackTrace();
@@ -75,7 +75,7 @@ public class UC03InserimentoNuovaBatteria {
 		int cicli = Integer.parseInt( in.readLine() );
 		
 		try {
-			client.addBatteria(ID, costo, cicli, indice);
+			client.addBattery(ID, costo, cicli, indice);
 		} catch (Exception e) {
 			System.err.println("Eccezione durante l'esecuzione del messaggio III.3.2");
 			e.printStackTrace();

@@ -31,14 +31,14 @@ public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutentica
 	}
 
 	@Override
-	public ArrayList<? extends Autovettura> retrieveListaModelli() throws Exception {
-		return this.stub.retrieveListaModelli();
+	public ArrayList<? extends Autovettura> retrieveModelList() throws Exception {
+		return this.stub.retrieveModelList();
 	}
 
 	@Override
-	public boolean addBatteria(int IDbatteria, float costosostituzione, int maxciclidiricarica, int modelloautovettura)
+	public boolean addBattery(int IDbatteria, float costosostituzione, int maxciclidiricarica, int modelloautovettura)
 			throws Exception {
-		return this.stub.addBatteria(IDbatteria, costosostituzione, maxciclidiricarica, modelloautovettura);
+		return this.stub.addBattery(IDbatteria, costosostituzione, maxciclidiricarica, modelloautovettura);
 	}
 
 	@Override
@@ -47,19 +47,19 @@ public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutentica
 	}
 
 	@Override
-	public ArrayList<? extends AutovetturaCliente> retrieveAutovettureCliente(int codicebadge)
+	public ArrayList<? extends AutovetturaCliente> retrieveCompatibleCars(int codicebadge)
 			throws Exception {
-		return this.stub.retrieveAutovettureCliente(codicebadge);
+		return this.stub.retrieveCompatibleCars(codicebadge);
 	}
 
 	@Override
-	public ArrayList<? extends Stazione> remoteRetrieveBatterieCompatibili(int modello) throws Exception {
-		return this.stub.remoteRetrieveBatterieCompatibili(modello);
+	public ArrayList<? extends Stazione> remoteRetrieveCompatibleBatteries(int modello) throws Exception {
+		return this.stub.remoteRetrieveCompatibleBatteries(modello);
 	}
 
 	@Override
-	public UltimaSostituzione retrieveUltimaSostituzione(int autovettura) throws Exception {
-		return this.stub.retrieveUltimaSostituzione(autovettura);
+	public UltimaSostituzione retrieveLastSubstitution(int autovettura) throws Exception {
+		return this.stub.retrieveLastSubstitution(autovettura);
 	}
 
 }

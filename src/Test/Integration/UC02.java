@@ -32,7 +32,7 @@ public class UC02 {
 		ArrayList<? extends Batteria> esauste = new ArrayList<Batteria>();
 		
 		try {
-			esauste = client.retrieveBatterieQuasiEsauste(idStazione);
+			esauste = client.retrieveNearlyExhaustedBatteries();
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -42,7 +42,7 @@ public class UC02 {
 		
 		for (int i = 0; i < size; i++) {
 			assertEquals(idTest + " riuscito", idBatteria[i], esauste.get(i).getID() );		
-			assertEquals(idTest + " riuscito", costo[i], esauste.get(i).getCosto(), 0.001f );
+			assertEquals(idTest + " riuscito", costo[i], esauste.get(i).getCostSubstitution(), 0.001f );
 		}
 
 	}
@@ -64,7 +64,7 @@ public class UC02 {
 		ArrayList<? extends Batteria> esauste = new ArrayList<Batteria>();
 		
 		try {
-			esauste = client.retrieveBatterieQuasiEsauste(idStazione);
+			esauste = client.retrieveNearlyExhaustedBatteries();
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
