@@ -99,25 +99,17 @@ public class GestoreStazione {
 		ModelloAutovettura model = new ModelloAutovettura();
 		model.setModel( modello.getModel() );
 		model.setBrand( modello.getBrand() );
-		
-		System.err.println("Modello sotto esame: "  + model.getBrand() + " " + model.getModel());
-		
+			
 		ArrayList<BatteriaBL> elencoBatterie = new ArrayList<BatteriaBL>();
 		
-		System.err.println("Batterie trovate dal Pentity: "
-				+ locale.getAvailableBatteries().size());
 		
 		for (Batteria b : locale.getAvailableBatteries()) {
 			if ( b.getModel().equals(model) ) {
-				System.err.println("Trovata una corrispondenza");
 				elencoBatterie.add( new BatteriaBL(b.getID(), b.getCostSubstitution(), b.getCyclesRecharge(),
 						b.getModel().getModel(), b.getModel().getBrand() ) );
 			}
 			
 		}
-		
-		System.err.println("Numero di batterie trovate dalla Business Logic: "
-				+ elencoBatterie.size() );
 		
 		return elencoBatterie;
 		

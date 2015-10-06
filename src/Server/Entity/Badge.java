@@ -64,8 +64,10 @@ public class Badge {
 	public boolean update(){
 		
 		BadgeDAO dao = new BadgeDAO();
+
 		dao.setCode(this.getCode());
 		dao.setClient(this.getClient().prepareDAO());
+		System.err.println("Aggiorno il badge del signor " + dao.getClient().getSurname());
 		dao.setCredit(this.getCredit());
 		
 		return dao.update();

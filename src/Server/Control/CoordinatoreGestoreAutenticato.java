@@ -127,7 +127,7 @@ public class CoordinatoreGestoreAutenticato extends UnicastRemoteObject implemen
 				sostituzione.getDateHour().get(Calendar.DAY_OF_MONTH),
 				sostituzione.getDateHour().get(Calendar.MONTH),
 				sostituzione.getDateHour().get(Calendar.YEAR),
-				sostituzione.getDateHour().get(Calendar.HOUR),
+				sostituzione.getDateHour().get(Calendar.HOUR_OF_DAY),
 				sostituzione.getDateHour().get(Calendar.MINUTE),
 				sostituzione.getStationName(),
 				sostituzione.getStationAddress(),
