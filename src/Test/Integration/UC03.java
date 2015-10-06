@@ -49,20 +49,19 @@ public class UC03 {
 			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertFalse(idTest + " riuscito", modelli.isEmpty() );
-			System.err.println(modelli.size());
+			System.err.println("Eccezione 1");
 			assertTrue(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
-			
+			System.err.println("Eccezione");
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
-		
 		inserita = PopulateTestDatabase.testStazione(idStazione, idBatteria, cicli, costo, idModello);
 		
 		assertNotEquals (idTest + " riuscito", null, inserita);
 			
 	}
 	
-	//@Test
+	@Test
 	public void TC02() {
 		final String idTest = "TC02";
 		this.idStazione = 2;
@@ -98,7 +97,7 @@ public class UC03 {
 			
 	}
 	
-	//@Test
+	@Test
 	public void TC03() {
 		final String idTest = "TC03";
 		this.idStazione = 2;
@@ -134,7 +133,7 @@ public class UC03 {
 			
 	}
 	
-//	@Test
+	@Test
 	public void TC04() {
 		final String idTest = "TC04";
 		this.idStazione = 2;
@@ -172,7 +171,7 @@ public class UC03 {
 
 	
 	@SuppressWarnings("unused")
-//	@Test
+@Test
 	public void TC05() {
 		final String idTest = "TC05";
 		final int idStazione = 9;
@@ -189,7 +188,7 @@ public class UC03 {
 		
 	}
 	
-	//@Test
+@Test
 	public void TC09() {
 		final String idTest = "TC09";
 		this.idStazione = 2;
@@ -229,7 +228,7 @@ public class UC03 {
 			
 	}
 	
-//	@Test
+@Test
 	public void TC10() {
 		final String idTest = "TC10";
 		this.idStazione = 2;

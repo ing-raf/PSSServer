@@ -48,7 +48,7 @@ public class GestoreStazione {
 		try {
 		b = new Batteria( nuova.getID(), nuova.getCostSubstitution(),
 				nuova.getCyclesRecharge(), modello);
-		
+			locale.setAvailableBatteries(b);
 			return locale.update();
 			}catch (NullPointerException ex) {
 				return false;
