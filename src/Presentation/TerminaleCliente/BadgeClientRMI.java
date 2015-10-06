@@ -8,7 +8,7 @@ import Server.RMIInterface.ServiziCliente;
 
 public class BadgeClientRMI {
 	
-	private static int PORT_OFFSET = 3307;
+	private static int PORT_OFFSET = 1024;
 	private Registry registry;
 	private ServiziCliente stub;
 	

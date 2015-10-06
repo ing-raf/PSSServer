@@ -14,7 +14,7 @@ import Server.DAO.PopulateTestDatabase;
 
 public class ServerStartup {
 	
-	private static int PORT_OFFSET = 3307;
+	private static int PORT_OFFSET = 1024;
 	private static String middleware = "LipeRMI";
 
 	public static void main(String[] args) {

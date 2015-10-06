@@ -15,7 +15,7 @@ import lipermi.net.Client;
 
 public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutenticato {
 	
-	private static int PORT_OFFSET = 3307;
+	private static int PORT_OFFSET = 1024;
 	private final String serverHostname;
 	private final int IDstazione;
 	private Client client;
