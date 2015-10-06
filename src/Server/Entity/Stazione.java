@@ -100,6 +100,7 @@ public class Stazione {
 	}
 	
 	public boolean update(){	
+		System.err.println(this.getID());
 		StazioneDAO dao = this.prepareDAO();		
 		return dao.update();		
 	}

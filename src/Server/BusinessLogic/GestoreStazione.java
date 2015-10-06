@@ -46,10 +46,10 @@ public class GestoreStazione {
 		modello.setBrand( nuova.getBrand() );
 		modello.setModel( nuova.getModel() );
 		try {
-		b = new Batteria( nuova.getID(), nuova.getCostSubstitution(),
+			b = new Batteria( nuova.getID(), nuova.getCostSubstitution(),
 				nuova.getCyclesRecharge(), modello);
-		
-			return locale.update();
+				locale.setAvailableBatteries(b);
+				return locale.update();
 			}catch (NullPointerException ex) {
 				return false;
 			}
