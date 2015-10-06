@@ -9,8 +9,8 @@ public class NonAutenticato extends Stato {
 	public boolean verifyValidationOutcome() {
 		return false;
 	}
-
-	public void startValidazione(CoordinatoreClienteRegistrato coordinatore, int codice) {
+	@Override
+	public void startValidation(CoordinatoreClienteRegistrato coordinatore, int codice) {
 		
 		try {
 			
