@@ -29,8 +29,8 @@ public class InterfacciaClienteRegistrato {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InterfacciaClienteRegistrato window = new InterfacciaClienteRegistrato();
-					InterfacciaClienteRegistrato.setHost(host);
+					InterfacciaClienteRegistrato window = new InterfacciaClienteRegistrato(host);
+					
 					window.frmMenuCliente.setLocationRelativeTo(null);
 					window.frmMenuCliente.setVisible(true);
 				} catch (Exception e) {
@@ -43,7 +43,8 @@ public class InterfacciaClienteRegistrato {
 	/**
 	 * Create the application.
 	 */
-	public InterfacciaClienteRegistrato() {
+	public InterfacciaClienteRegistrato(String host) {
+		InterfacciaClienteRegistrato.setHost(host);
 		initialize();
 	}
 

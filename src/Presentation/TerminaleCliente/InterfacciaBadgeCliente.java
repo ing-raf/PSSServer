@@ -34,8 +34,7 @@ public class InterfacciaBadgeCliente {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InterfacciaBadgeCliente window = new InterfacciaBadgeCliente();
-					InterfacciaBadgeCliente.setHost(host);
+					InterfacciaBadgeCliente window = new InterfacciaBadgeCliente(host);
 					window.frmStazioneRicambioBatterie.setLocationRelativeTo(null);
 					window.frmStazioneRicambioBatterie.setVisible(true);
 				} catch (Exception e) {
@@ -49,7 +48,8 @@ public class InterfacciaBadgeCliente {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public InterfacciaBadgeCliente() throws Exception {
+	public InterfacciaBadgeCliente(String host) throws Exception {
+		InterfacciaBadgeCliente.setHost(host);
 		initialize();
 	}
 
@@ -95,7 +95,7 @@ public class InterfacciaBadgeCliente {
 					
 					e.printStackTrace();
 				}
-				InterfacciaClienteRegistrato cr = new InterfacciaClienteRegistrato();
+				InterfacciaClienteRegistrato cr = new InterfacciaClienteRegistrato(InterfacciaBadgeCliente.getHost());
 				try {
 					cr.notifyValidazione(InterfacciaBadgeCliente.getHost());
 				} catch (Exception e) {
