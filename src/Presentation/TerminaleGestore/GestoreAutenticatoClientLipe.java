@@ -42,8 +42,8 @@ public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutentica
 	}
 
 	@Override
-	public ArrayList<? extends Batteria> retrieveBatterieQuasiEsauste(int IDstazione) throws Exception {
-		return this.stub.retrieveBatterieQuasiEsauste(IDstazione);
+	public ArrayList<? extends Batteria> retrieveNearlyExhaustedBatteries() throws Exception {
+		return this.stub.retrieveNearlyExhaustedBatteries();
 	}
 
 	@Override
