@@ -14,7 +14,6 @@ import javax.swing.JButton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.rmi.RemoteException;
 
 import javax.swing.ImageIcon;
 
@@ -152,7 +151,7 @@ public class InterfacciaClienteRegistrato {
 	
 	public void notifyValidazione(String host) throws Exception {
 		ClienteRegistratoClientRMI cr = new ClienteRegistratoClientRMI(1,host);
-		if(cr.verificaEsitoValidazione() == true){
+		if(cr.verifyValidationOutcome() == true){
 			InterfacciaClienteRegistrato.clientScreen(host);
 		}
 		else{

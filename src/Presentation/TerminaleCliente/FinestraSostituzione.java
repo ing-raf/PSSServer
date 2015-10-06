@@ -13,7 +13,6 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.SwingConstants;
@@ -28,8 +27,6 @@ import Server.RMIInterface.Batteria;
 import Server.RMIInterface.Install_Outcome;
 import Server.RMIInterface.Stazione;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -38,12 +35,9 @@ import java.rmi.RemoteException;
 public class FinestraSostituzione {
 
 	private static String Host;
-	//private static JFrame frmMenuDiSostituzione;
 	private DefaultListModel<String> listaD;
 	private DefaultListModel<String> listaD1;
 	private DefaultListModel<String> listaD2;
-	private JProgressBar pbar;
-	private JFrame progress;
 
 
 	
@@ -170,7 +164,7 @@ public class FinestraSostituzione {
 		ArrayList<? extends AutovetturaCliente> autovetture = null;
 		
 		try{
-		autovetture = cr.retrieveAutovetture();
+		autovetture = cr.retrieveCompatibleCars();
 		}catch(RemoteException e){
 			e.printStackTrace();
 		}
@@ -191,7 +185,7 @@ public class FinestraSostituzione {
 		} else{
 			frmMenuDiSostituzione.setVisible(true);
 			for(int i=0; i<autovetture.size(); i++){
-				listaD.addElement(autovetture.get(i).getFornitore()+", "+autovetture.get(i).getModello()+", "+autovetture.get(i).getNumeroTarga());
+				listaD.addElement(autovetture.get(i).getBrand()+", "+autovetture.get(i).getModel()+", "+autovetture.get(i).getNumberPlate());
 			}
 		}
 		//Recupero Batterie o Stazioni
@@ -207,7 +201,7 @@ public class FinestraSostituzione {
         listaD2.removeAllElements();
         
         JPanel pannello = new JPanel();
-        JLabel staz = new JLabel("Stazioni con disponibilitï¿½:");
+        JLabel staz = new JLabel("Stazioni con disponibilità:");
         JScrollPane scroll = new JScrollPane(lista);
         JViewport jv1 = new JViewport();
         jv1.setView(staz);
@@ -227,7 +221,7 @@ public class FinestraSostituzione {
 				
 				ArrayList<?> output = null;
 				try {
-					output = cr.retrieveBatterieCompatibili(list.getSelectedIndex());
+					output = cr.retrieveCompatibleBatteries(list.getSelectedIndex());
 				} catch (RemoteException e1) {
 					e1.printStackTrace();
 				}
@@ -251,7 +245,7 @@ public class FinestraSostituzione {
 					
 						if ( (output.get(0) instanceof Batteria) && (ok == false)) {
 								for(int i=0; i<output.size(); i++){
-									listaD1.addElement(((Batteria) output.get(i)).getID()+", "+((Batteria) output.get(i)).getCosto());
+									listaD1.addElement(((Batteria) output.get(i)).getID()+", "+((Batteria) output.get(i)).getCostSubstitution());
 								}
 								ok  = true;
 
@@ -262,7 +256,8 @@ public class FinestraSostituzione {
 									public void mouseClicked(MouseEvent e1) {
 
 										try {
-											Install_Outcome outcome = cr.startInstallazione(list_1.getSelectedIndex());
+											Install_Outcome outcome = cr.startInstallation(list_1.getSelectedIndex());
+											
 											if(outcome == Install_Outcome.OK){
 												JOptionPane.showMessageDialog(null,"Installazione completata!","Sostituzione Batteria", JOptionPane.INFORMATION_MESSAGE);
 												frmMenuDiSostituzione.setVisible(false);
@@ -305,7 +300,7 @@ public class FinestraSostituzione {
 								});
 						} else if ( output.get(0) instanceof Stazione) {
 							for(int i=0; i<output.size(); i++){
-								listaD2.addElement(((Stazione) output.get(i)).getNome()+", "+((Stazione) output.get(i)).getIndirizzo());
+								listaD2.addElement(((Stazione) output.get(i)).getName()+", "+((Stazione) output.get(i)).getAddress());
 							}
 							JOptionPane.showMessageDialog(null,scroll,"Batterie terminate!", JOptionPane.INFORMATION_MESSAGE);
 							frmMenuDiSostituzione.setVisible(false);
@@ -336,7 +331,7 @@ public class FinestraSostituzione {
 
 	}
 	
-	public static void setHost(String ip){
+	public void setHost(String ip){
 		Host = ip;
 	}
 	

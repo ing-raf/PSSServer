@@ -43,14 +43,14 @@ public class UC01 {
 		}
 		
 		try {
-			clientBadge.startValidazione(codiceBadge);
+			clientBadge.startValidation(codiceBadge);
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
 		}
 		
 		try {
 			
-			assertTrue(idTest + " riuscito", client.verificaEsitoValidazione() );
+			assertTrue(idTest + " riuscito", client.verifyValidationOutcome() );
 			
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
@@ -58,7 +58,7 @@ public class UC01 {
 		
 		try {
 			
-			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveAutovetture();
+			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveCompatibleCars();
 			
 			assertFalse(idTest + " riuscito", autovetture.isEmpty() );
 			
@@ -70,7 +70,7 @@ public class UC01 {
 		
 		try {
 			
-			output = client.retrieveBatterieCompatibili(indiceAutovettura);
+			output = client.retrieveCompatibleBatteries(indiceAutovettura);
 			
 			assertFalse(idTest + " riuscito", output.isEmpty() );
 			
@@ -82,7 +82,7 @@ public class UC01 {
 		
 		try {
 			
-			assertEquals (idTest + " riuscito", Install_Outcome.OK, client.startInstallazione(indiceBatteria) );
+			assertEquals (idTest + " riuscito", Install_Outcome.OK, client.startInstallation(indiceBatteria) );
 			
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
@@ -129,14 +129,14 @@ public class UC01 {
 		}
 		
 		try {
-			clientBadge.startValidazione(codiceBadge);
+			clientBadge.startValidation(codiceBadge);
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
 		}
 		
 		try {
 			
-			assertTrue(idTest + " riuscito", client.verificaEsitoValidazione() );
+			assertTrue(idTest + " riuscito", client.verifyValidationOutcome() );
 			
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
@@ -144,7 +144,7 @@ public class UC01 {
 		
 		try {
 			
-			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveAutovetture();
+			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveCompatibleCars();
 			
 			assertFalse(idTest + " riuscito", autovetture.isEmpty() );
 			
@@ -156,7 +156,7 @@ public class UC01 {
 		
 		try {
 			
-			output = client.retrieveBatterieCompatibili(indiceAutovettura);
+			output = client.retrieveCompatibleBatteries(indiceAutovettura);
 			
 			assertFalse(idTest + " riuscito", output.isEmpty() );
 			
@@ -168,7 +168,7 @@ public class UC01 {
 		
 		try {
 			
-			assertEquals (idTest + " riuscito", Install_Outcome.NO_MONEY, client.startInstallazione(indiceBatteria) );
+			assertEquals (idTest + " riuscito", Install_Outcome.NO_MONEY, client.startInstallation(indiceBatteria) );
 			
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
@@ -201,14 +201,14 @@ public class UC01 {
 		}
 		
 		try {
-			clientBadge.startValidazione(codiceBadge);
+			clientBadge.startValidation(codiceBadge);
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
 		}
 		
 		try {
 			
-			assertTrue(idTest + " riuscito", client.verificaEsitoValidazione() );
+			assertTrue(idTest + " riuscito", client.verifyValidationOutcome() );
 			
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
@@ -216,7 +216,7 @@ public class UC01 {
 		
 		try {
 			
-			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveAutovetture();
+			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveCompatibleCars();
 			
 			assertTrue(idTest + " riuscito", autovetture.isEmpty() );
 			
@@ -250,14 +250,14 @@ public class UC01 {
 		}
 		
 		try {
-			clientBadge.startValidazione(codiceBadge);
+			clientBadge.startValidation(codiceBadge);
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
 		}
 		
 		try {
 			
-			assertTrue(idTest + " riuscito", client.verificaEsitoValidazione() );
+			assertTrue(idTest + " riuscito", client.verifyValidationOutcome() );
 			
 		} catch (RemoteException e) {
 			fail(idTest + " riuscito");
@@ -265,7 +265,7 @@ public class UC01 {
 		
 		try {
 			
-			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveAutovetture();
+			ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveCompatibleCars();
 			
 			assertFalse(idTest + " riuscito", autovetture.isEmpty() );
 			
@@ -277,7 +277,7 @@ public class UC01 {
 		
 		try {
 			
-			output = client.retrieveBatterieCompatibili(indiceAutovettura);
+			output = client.retrieveCompatibleBatteries(indiceAutovettura);
 			
 			assertFalse(idTest + " riuscito", output.isEmpty() );
 			
@@ -319,14 +319,14 @@ public class UC01 {
 			}
 			
 			try {
-				clientBadge.startValidazione(codiceBadge);
+				clientBadge.startValidation(codiceBadge);
 			} catch (RemoteException e) {
 				fail(idTest + " riuscito");
 			}
 			
 			try {
 				
-				assertTrue(idTest + " riuscito", client.verificaEsitoValidazione() );
+				assertTrue(idTest + " riuscito", client.verifyValidationOutcome() );
 				
 			} catch (RemoteException e) {
 				fail(idTest + " riuscito");
@@ -334,7 +334,7 @@ public class UC01 {
 			
 			try {
 				
-				ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveAutovetture();
+				ArrayList<? extends AutovetturaCliente> autovetture = client.retrieveCompatibleCars();
 				
 				assertFalse(idTest + " riuscito", autovetture.isEmpty() );
 				
@@ -346,7 +346,7 @@ public class UC01 {
 			
 			try {
 				
-				output = client.retrieveBatterieCompatibili(indiceAutovettura);
+				output = client.retrieveCompatibleBatteries(indiceAutovettura);
 				
 				assertTrue(idTest + " riuscito", output.isEmpty() );
 				
@@ -379,14 +379,14 @@ public class UC01 {
 			}
 			
 			try {
-				clientBadge.startValidazione(codiceBadge);
+				clientBadge.startValidation(codiceBadge);
 			} catch (RemoteException e) {
 				fail(idTest + " riuscito");
 			}
 			
 			try {
 				
-				assertFalse(idTest + " riuscito", client.verificaEsitoValidazione() );
+				assertFalse(idTest + " riuscito", client.verifyValidationOutcome() );
 				
 			} catch (RemoteException e) {
 				fail(idTest + " riuscito");

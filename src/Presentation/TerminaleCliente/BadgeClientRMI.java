@@ -17,8 +17,8 @@ public class BadgeClientRMI {
 		this.stub = (ServiziCliente)registry.lookup("ServiziCliente");
 	}
 	
-	public void startValidazione(int codiceBadge) throws RemoteException {
-		this.stub.startValidazione(codiceBadge);
+	public void startValidation(int codiceBadge) throws RemoteException {
+		this.stub.startValidation(codiceBadge);
 	};
 	
 }

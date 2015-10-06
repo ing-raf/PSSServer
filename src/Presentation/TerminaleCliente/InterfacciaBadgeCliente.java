@@ -89,7 +89,7 @@ public class InterfacciaBadgeCliente {
 			public void mouseClicked(MouseEvent arg0) {
 				
 				try {
-					badge.startValidazione(Integer.parseInt(codice_badge.getText()));
+					badge.startValidation(Integer.parseInt(codice_badge.getText()));
 				} catch (NumberFormatException | RemoteException e) {
 					
 					e.printStackTrace();

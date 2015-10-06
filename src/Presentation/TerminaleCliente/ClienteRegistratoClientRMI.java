@@ -11,7 +11,7 @@ import Server.RMIInterface.ServiziCliente;
 
 public class ClienteRegistratoClientRMI {
 	
-	private static int PORT_OFFSET = 1024;
+	private static int PORT_OFFSET = 3307;
 	private Registry registry;
 	private ServiziCliente stub;
 	
@@ -20,22 +20,22 @@ public class ClienteRegistratoClientRMI {
 		this.stub = (ServiziCliente)registry.lookup("ServiziCliente");
 	}
 	
-	public ArrayList<?> retrieveBatterieCompatibili(int indiceAutovettura) throws RemoteException{
-		return this.stub.retrieveBatterieCompatibili(indiceAutovettura);
+	public ArrayList<?> retrieveCompatibleBatteries(int indiceAutovettura) throws RemoteException{
+		return this.stub.retrieveCompatibleBatteries(indiceAutovettura);
 	}
 	
-	public ArrayList<? extends AutovetturaCliente> retrieveAutovetture() throws RemoteException {
-		return this.stub.retrieveAutovetture();
+	public ArrayList<? extends AutovetturaCliente> retrieveCompatibleCars() throws RemoteException {
+		return this.stub.retrieveCompatibleCars();
 	}
 
-	public Install_Outcome startInstallazione(int indicebatteria) throws RemoteException {
-		Install_Outcome outcome = this.stub.startInstallazione(indicebatteria);
+	public Install_Outcome startInstallation(int indicebatteria) throws RemoteException {
+		Install_Outcome outcome = this.stub.startInstallation(indicebatteria);
 		return outcome;
 		
 	}
 
-	public boolean verificaEsitoValidazione() throws RemoteException {
-		return this.stub.verificaEsitoValidazione();
+	public boolean verifyValidationOutcome() throws RemoteException {
+		return this.stub.verifyValidationOutcome();
 	}
 	
 	public void logOut() throws RemoteException {

@@ -34,7 +34,7 @@ public class UC01SostituzioneBatteria {
 		System.out.println("Client tutt appost tutt appost");
 		
 		try {
-			clientBadge.startValidazione(CODICEBADGE);
+			clientBadge.startValidation(CODICEBADGE);
 		} catch (RemoteException e) {
 			System.err.println("Eccezione durante l'esecuzione del messaggio VII.1.2");
 			e.printStackTrace();
@@ -43,7 +43,7 @@ public class UC01SostituzioneBatteria {
 		
 		try {
 			
-			if (client.verificaEsitoValidazione() == false) {
+			if (client.verifyValidationOutcome() == false) {
 				System.out.println("Questo codice non corrisponde ad alcun badge");	
 				System.exit(0);
 			}
@@ -57,7 +57,7 @@ public class UC01SostituzioneBatteria {
 		ArrayList<? extends AutovetturaCliente> autovetture = null;
 		
 		try {
-			autovetture = client.retrieveAutovetture();
+			autovetture = client.retrieveCompatibleCars();
 		} catch (RemoteException e) {
 			System.err.println("Eccezione durante l'esecuzione del messaggio I.2.2");
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class UC01SostituzioneBatteria {
 		ArrayList<?> output = null;
 		
 		try {
-			output = client.retrieveBatterieCompatibili(indice);
+			output = client.retrieveCompatibleBatteries(indice);
 		} catch (RemoteException e) {
 			System.err.println("Eccezione durante l'esecuzione del messaggio I.3.2");
 			e.printStackTrace();
@@ -125,7 +125,7 @@ public class UC01SostituzioneBatteria {
 				}
 			
 				try {
-					if (client.startInstallazione(indiceBatteria) != Install_Outcome.OK)
+					if (client.startInstallation(indiceBatteria) != Install_Outcome.OK)
 						throw new RemoteException("Installazione non avvenuta");
 				} catch (RemoteException e) {
 					System.err.println("Eccezione durante l'esecuzione del messaggio I.4.2");
