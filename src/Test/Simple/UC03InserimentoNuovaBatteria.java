@@ -47,7 +47,7 @@ public class UC03InserimentoNuovaBatteria {
 		System.out.println("---\t----\t\t----");
 			
 		for (int i = 0; i < modelli.size(); i++) {
-			System.out.println(i+"\t"+modelli.get(i).getFornitore() + "\t" + modelli.get(i).getModello());
+			System.out.println(i+"\t"+modelli.get(i).getBrand() + "\t" + modelli.get(i).getModel());
 		}
 		
 		System.out.println("Specificare il numero:");
@@ -61,7 +61,7 @@ public class UC03InserimentoNuovaBatteria {
 		}
 		
 		System.out.println("Inserire i dati della batteria compatibile");
-		System.out.println("con il modello " + modelli.get(indice).getFornitore() + " " + modelli.get(indice).getModello());
+		System.out.println("con il modello " + modelli.get(indice).getBrand() + " " + modelli.get(indice).getModel());
 		System.out.println("ID:");
 		
 		int ID = Integer.parseInt( in.readLine() );

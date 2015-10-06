@@ -27,7 +27,7 @@ public class UC02VisualizzazioneBatterieQuasiEsauste {
 		ArrayList<? extends Batteria> esauste = new ArrayList<Batteria>();
 		
 		try {
-			esauste = client.retrieveBatterieQuasiEsauste(IDSTAZIONE);
+			esauste = client.retrieveNearlyExhaustedBatteries();
 		} catch (Exception e) {
 			System.err.println("Eccezione durante l'esecuzione del messaggio II.1.2");
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class UC02VisualizzazioneBatterieQuasiEsauste {
 			System.out.println("----\t----");
 			
 			for (int i = 0; i < esauste.size(); i++) {
-				System.out.println(esauste.get(i).getID() + "\t" + esauste.get(i).getCosto());
+				System.out.println(esauste.get(i).getID() + "\t" + esauste.get(i).getCostSubstitution());
 			}
 		}
 		

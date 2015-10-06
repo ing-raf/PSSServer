@@ -60,7 +60,7 @@ public class UC04VisualizzazioneUltimoRicambio {
 		System.out.println("---\t----\t\t----\t\t----");
 			
 		for (int i = 0; i < autovetture.size(); i++) {
-			System.out.println(i+"\t"+autovetture.get(i).getFornitore() + "\t" + autovetture.get(i).getModello() + "\t" + autovetture.get(i).getNumeroTarga());
+			System.out.println(i+"\t"+autovetture.get(i).getBrand() + "\t" + autovetture.get(i).getModel() + "\t" + autovetture.get(i).getNumberPlate());
 		}
 		
 		System.out.println("Specificare il numero:");
@@ -89,9 +89,9 @@ public class UC04VisualizzazioneUltimoRicambio {
 		
 		System.out.println("Data\t\tOra\tIDBatteria\tStazione\tIndirizzo");
 		System.out.println("----\t\t----\t----\t\t----\t\t----");
-		System.out.println(ultima.getGiorno() + "/" + ultima.getMese() + "/" + ultima.getAnno() +
-				"\t" + ultima.getOra() + ":" + ultima.getMinuti() + "\t" + ultima.getIDBatteria() +
-				"\t\t" + ultima.getNomeStazione() + "\t" + ultima.getIndirizzoStazione());
+		System.out.println(ultima.getDay() + "/" + ultima.getMonth() + "/" + ultima.getYear() +
+				"\t" + ultima.getHour() + ":" + ultima.getMinutes() + "\t" + ultima.getBatteryID() +
+				"\t\t" + ultima.getStationName() + "\t" + ultima.getStationAddress());
 		
 		System.out.println ("BANANAAAAAAAAAAAA");
 	}
