@@ -31,6 +31,7 @@ public class InterfacciaClienteRegistrato {
 				try {
 					InterfacciaClienteRegistrato window = new InterfacciaClienteRegistrato();
 					InterfacciaClienteRegistrato.setHost(host);
+					window.frmMenuCliente.setLocationRelativeTo(null);
 					window.frmMenuCliente.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

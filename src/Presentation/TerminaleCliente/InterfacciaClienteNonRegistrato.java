@@ -30,6 +30,7 @@ public class InterfacciaClienteNonRegistrato {
 			public void run() {
 				try {
 					InterfacciaClienteNonRegistrato window = new InterfacciaClienteNonRegistrato();
+					window.frmStazioneDiSostituzione.setLocationRelativeTo(null);
 					window.frmStazioneDiSostituzione.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -36,6 +36,7 @@ public class InterfacciaBadgeCliente {
 				try {
 					InterfacciaBadgeCliente window = new InterfacciaBadgeCliente();
 					InterfacciaBadgeCliente.setHost(host);
+					window.frmStazioneRicambioBatterie.setLocationRelativeTo(null);
 					window.frmStazioneRicambioBatterie.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
