@@ -34,6 +34,7 @@ import java.rmi.RemoteException;
 
 public class FinestraSostituzione {
 
+	private JFrame frmMenuDiSostituzione;
 	private static String Host;
 	private DefaultListModel<String> listaD;
 	private DefaultListModel<String> listaD1;
@@ -52,6 +53,8 @@ public class FinestraSostituzione {
 			public void run() {
 				try {
 					FinestraSostituzione window = new FinestraSostituzione();
+					window.frmMenuDiSostituzione.setLocationRelativeTo(null);
+					
 					window.setHost(host);
 					
 				} catch (Exception e) {
@@ -74,7 +77,7 @@ public class FinestraSostituzione {
 	 * @throws Exception 
 	 */
 	private void initialize() throws Exception {
-		JFrame frmMenuDiSostituzione = new JFrame();
+		frmMenuDiSostituzione = new JFrame();
 		
 		frmMenuDiSostituzione.setIconImage(Toolkit.getDefaultToolkit().getImage(FinestraSostituzione.class.getResource("/Presentation/TerminaleCliente/icon/ic_launcher.png")));
 		frmMenuDiSostituzione.setTitle("Menu di sostituzione");
