@@ -35,6 +35,7 @@ public class Cliente {
 	
 	public ClienteDAO prepareDAO (){
 		ClienteDAO dao = new ClienteDAO ();
+		dao.setID( ClienteDAO.findClient(this.nome, this.cognome, this.dataNascita).getID() );
 		dao.setName(this.nome);
 		dao.setSurname(this.cognome);
 		dao.setDate(this.dataNascita);
