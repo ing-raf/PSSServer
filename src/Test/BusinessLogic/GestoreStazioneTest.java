@@ -131,6 +131,11 @@ public class GestoreStazioneTest {
 		trovate = gs.retrieveCompatibleBatteries( new AutovetturaBL("SLK", "Mercedes"));
 		
 		assertTrue(idTest + " riuscito", trovate.isEmpty());
+		
+		ArrayList<BatteriaBL> trovate1 = gs.retrieveCompatibleBatteries( new AutovetturaBL("Panda", "Fiat"));
+		
+		
+		assertTrue(idTest + " riuscito", trovate1.isEmpty());
 	}
 
 	@Test

@@ -28,7 +28,9 @@ public class Batteria {
 		this.modello = modello;
 		
 		BatteriaDAO dao = this.prepareDAO();
-		dao.save();
+		if (!dao.save())
+			throw new NullPointerException(); 
+			
 	/*	
 		BatteriaDAO batteria = new BatteriaDAO();
 		batteria.setID(id);

@@ -36,18 +36,24 @@ public class GestoreStazione {
 		
 	}
 	
+	@SuppressWarnings("unused")
 	public boolean insertBattery(BatteriaBL nuova) {
 		Societa laSocieta = Societa.getSociety();
 		Stazione locale = laSocieta.getStation(this.ID);
+		Batteria b = null;
 		
 		ModelloAutovettura modello = new ModelloAutovettura();
 		modello.setBrand( nuova.getBrand() );
 		modello.setModel( nuova.getModel() );
-		Batteria b = new Batteria( nuova.getID(), nuova.getCostSubstitution(),
+		try {
+		b = new Batteria( nuova.getID(), nuova.getCostSubstitution(),
 				nuova.getCyclesRecharge(), modello);
 		
-		locale.setAvailableBatteries(b);
-		return locale.update();
+			return locale.update();
+			}catch (NullPointerException ex) {
+				return false;
+			}
+		
 	}
 	
 	public boolean addBattery(BatteriaBL nuova) {
