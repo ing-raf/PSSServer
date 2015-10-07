@@ -13,6 +13,8 @@ import Server.RMIInterface.Stazione;
 
 public class UC05 {
 
+	private String host = "localhost";
+	
 	@SuppressWarnings({ "unchecked" })
 	@Test
 	public void TC01() {
@@ -26,7 +28,7 @@ public class UC05 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -60,7 +62,7 @@ public class UC05 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -94,7 +96,7 @@ public class UC05 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -128,7 +130,7 @@ public class UC05 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -159,7 +161,7 @@ public class UC05 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 			
 			fail(idTest + " riuscito");
 		} catch (Exception e) {

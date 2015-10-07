@@ -11,6 +11,8 @@ import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
 import Server.RMIInterface.Batteria;
 
 public class UC02 {
+	
+	private String host = "localhost";
 
 	@Test
 	public void TC01() {
@@ -24,7 +26,7 @@ public class UC02 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -56,7 +58,7 @@ public class UC02 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -83,7 +85,7 @@ public class UC02 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 			
 			fail(idTest + " riuscito");
 		} catch (Exception e) {

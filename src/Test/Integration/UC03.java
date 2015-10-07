@@ -13,7 +13,8 @@ import Server.DAO.PopulateTestDatabase;
 import Server.RMIInterface.Autovettura;
 
 public class UC03 {
-	
+
+	private String host = "localhost";
 	private Server.DAO.BatteriaDAO inserita;
 	private int idStazione;
 	
@@ -39,7 +40,7 @@ public class UC03 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -74,7 +75,7 @@ public class UC03 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -110,7 +111,7 @@ public class UC03 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -146,7 +147,7 @@ public class UC03 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -179,7 +180,7 @@ public class UC03 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 	
 			fail(idTest + " riuscito");
 		} catch (Exception e) {
@@ -201,7 +202,7 @@ public class UC03 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -242,7 +243,7 @@ public class UC03 {
 		
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}

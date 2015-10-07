@@ -13,6 +13,8 @@ import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.UltimaSostituzione;
 
 public class UC04 {
+	
+	private String host = "localhost";
 
 	@Test
 	public void TC01() {
@@ -24,7 +26,7 @@ public class UC04 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -58,7 +60,7 @@ public class UC04 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -111,7 +113,7 @@ public class UC04 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
@@ -155,7 +157,7 @@ public class UC04 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 			
 			fail(idTest + " riuscito");
 			
@@ -175,7 +177,7 @@ public class UC04 {
 		InterfacciaGestoreAutenticato client = null;
 		
 		try {
-			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, "localhost");
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
 		}
