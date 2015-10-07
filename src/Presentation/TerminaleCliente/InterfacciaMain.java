@@ -2,6 +2,7 @@ package Presentation.TerminaleCliente;
 
 import java.awt.EventQueue;
 
+
 public class InterfacciaMain {
 
 	public static void main(String[] args){

@@ -16,12 +16,11 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+
 public class InterfacciaClienteNonRegistrato {
 
 	private JFrame frmStazioneDiSostituzione;
 	private static String Host = "localhost";
-	
-
 	/**
 	 * Launch the application.
 	 */
@@ -58,6 +57,14 @@ public class InterfacciaClienteNonRegistrato {
 		SpringLayout springLayout = new SpringLayout();
 		frmStazioneDiSostituzione.getContentPane().setLayout(springLayout);
 		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Host = JOptionPane.showInputDialog(null,"Inserire l'indirizzo IP del server:", "Impostazioni", JOptionPane.QUESTION_MESSAGE);
+			}
+		});
+		
 		JLabel lblBenvenutoInStazione = new JLabel("Benvenuto in stazione!");
 		springLayout.putConstraint(SpringLayout.NORTH, lblBenvenutoInStazione, 48, SpringLayout.NORTH, frmStazioneDiSostituzione.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, lblBenvenutoInStazione, 97, SpringLayout.WEST, frmStazioneDiSostituzione.getContentPane());
@@ -78,7 +85,7 @@ public class InterfacciaClienteNonRegistrato {
 		btnAvanti.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				InterfacciaBadgeCliente.badgeScreen(InterfacciaClienteNonRegistrato.getHost());
+				InterfacciaBadgeCliente.badgeScreen(Host);
 				frmStazioneDiSostituzione.setVisible(false);
 			
 			}
@@ -87,13 +94,7 @@ public class InterfacciaClienteNonRegistrato {
 		springLayout.putConstraint(SpringLayout.EAST, btnAvanti, -181, SpringLayout.EAST, frmStazioneDiSostituzione.getContentPane());
 		frmStazioneDiSostituzione.getContentPane().add(btnAvanti);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				InterfacciaClienteNonRegistrato.setHost(JOptionPane.showInputDialog(null,"Inserire l'indirizzo IP del server:", "Impostazioni", JOptionPane.QUESTION_MESSAGE));
-			}
-		});
+		
 		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton, 10, SpringLayout.NORTH, frmStazioneDiSostituzione.getContentPane());
 		springLayout.putConstraint(SpringLayout.WEST, btnNewButton, 10, SpringLayout.WEST, frmStazioneDiSostituzione.getContentPane());
 		springLayout.putConstraint(SpringLayout.SOUTH, btnNewButton, 58, SpringLayout.NORTH, frmStazioneDiSostituzione.getContentPane());
@@ -101,12 +102,14 @@ public class InterfacciaClienteNonRegistrato {
 		btnNewButton.setIcon(new ImageIcon(InterfacciaClienteNonRegistrato.class.getResource("/Presentation/TerminaleCliente/icon/ic_settings.png")));
 		frmStazioneDiSostituzione.getContentPane().add(btnNewButton);
 	}
-	
-	public static void setHost(String ip){
-		Host = ip;
-	}
-	
-	public static String getHost(){
+
+	public static String getHost() {
 		return Host;
 	}
+
+	public static void setHost(String host) {
+		Host = host;
+	}
+	
+
 }

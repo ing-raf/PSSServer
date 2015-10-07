@@ -52,10 +52,10 @@ public class FinestraSostituzione {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FinestraSostituzione window = new FinestraSostituzione();
+					FinestraSostituzione window = new FinestraSostituzione(host);
 					window.frmMenuDiSostituzione.setLocationRelativeTo(null);
 					
-					window.setHost(host);
+					
 					
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +68,8 @@ public class FinestraSostituzione {
 	 * Create the application.
 	 * @throws Exception 
 	 */
-	public FinestraSostituzione() throws Exception {
+	public FinestraSostituzione(String host) throws Exception {
+		FinestraSostituzione.setHost(host);
 		initialize();
 	}
 
@@ -334,7 +335,7 @@ public class FinestraSostituzione {
 
 	}
 	
-	public void setHost(String ip){
+	public static void setHost(String ip){
 		Host = ip;
 	}
 	

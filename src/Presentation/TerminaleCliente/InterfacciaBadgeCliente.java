@@ -49,7 +49,7 @@ public class InterfacciaBadgeCliente {
 	 * @throws Exception 
 	 */
 	public InterfacciaBadgeCliente(String host) throws Exception {
-		InterfacciaBadgeCliente.setHost(host);
+		Host = host;
 		initialize();
 	}
 
@@ -82,7 +82,7 @@ public class InterfacciaBadgeCliente {
 		codice_badge.setHorizontalAlignment(SwingConstants.CENTER);
 		codice_badge.setColumns(10);
 		
-		BadgeClientRMI badge = new BadgeClientRMI(1,InterfacciaBadgeCliente.getHost());
+		BadgeClientRMI badge = new BadgeClientRMI(1, Host);
 		
 		JButton btnOk = new JButton("OK");
 		btnOk.addMouseListener(new MouseAdapter() {
@@ -95,7 +95,8 @@ public class InterfacciaBadgeCliente {
 					
 					e.printStackTrace();
 				}
-				InterfacciaClienteRegistrato cr = new InterfacciaClienteRegistrato(InterfacciaBadgeCliente.getHost());
+				InterfacciaClienteRegistrato cr = new InterfacciaClienteRegistrato();
+				InterfacciaClienteRegistrato.setHost(InterfacciaBadgeCliente.getHost());
 				try {
 					cr.notifyValidazione(InterfacciaBadgeCliente.getHost());
 				} catch (Exception e) {
