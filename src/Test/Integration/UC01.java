@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import Presentation.TerminaleCliente.BadgeClientRMI;
 import Presentation.TerminaleCliente.ClienteRegistratoClientRMI;
+import Server.DAO.BadgeDAO;
+import Server.DAO.BatteriaDAO;
 import Server.DAO.PopulateTestDatabase;
 import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Install_Outcome;
@@ -26,7 +28,6 @@ public class UC01 {
 		final int codiceBadge = 5;
 		final int indiceAutovettura = 0;
 		final int indiceBatteria = 0;
-		@SuppressWarnings("unused")
 		final String targa = "DZ 120 FP";
 		BadgeClientRMI clientBadge = null;
 		ClienteRegistratoClientRMI client = null;
