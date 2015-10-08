@@ -11,20 +11,20 @@ public interface ServizidiSostituzione extends Remote {
 	 * @param id
 	 * @throws RemoteException 
 	 */
-	boolean installBatteria(int id) throws Exception;
+	boolean installBatteria(int idBatteria) throws Exception;
 
 	/**
 	 * 
 	 * @param id
 	 * @throws Exception 
 	 */
-	boolean rechargeBatteria(int id) throws Exception;
+	boolean rechargeBatteria(int idBatteria) throws Exception;
 
 	/**
 	 * 
 	 * @param id
 	 * @throws Exception 
 	 */
-	boolean discardBatteria(int id) throws Exception;
+	boolean discardBatteria(int idBatteria) throws Exception;
 
 }
