@@ -57,23 +57,23 @@ public class Societa{
 	}
 
 	public boolean findBadge(int codice) {
-		Badge temp = Badge.getBadge(codice);
-		if (temp == null)
-			return false;
-		else{
+		if ( !theSociety.badgeList.containsKey(codice) ) {
+			Badge temp = Badge.getBadge(codice);
 			theSociety.badgeList.put(codice, temp);
-			return true;
 		}
+		
+		if (theSociety.badgeList.get(codice) == null ) return false;
+		else return true;
 	}
 
 	public boolean findStation(int ID) {
-		Stazione temp = Stazione.getStation(ID);
-		if (temp == null)
-			return false;
-		else{
+		if ( !theSociety.stationList.containsKey(ID) ) {
+			Stazione temp = Stazione.getStation(ID);
 			theSociety.stationList.put(ID, temp);
-			return true;
 		}
+		
+		if (theSociety.stationList.get (ID) == null) return false;
+		else return true;
 	}
 	
 	

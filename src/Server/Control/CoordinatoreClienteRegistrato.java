@@ -47,7 +47,9 @@ public class CoordinatoreClienteRegistrato extends UnicastRemoteObject implement
 	public Install_Outcome startInstallation(int indiceBatteria) throws RemoteException {
 		return this.stato.startInstallation(this, indiceBatteria);
 	}
-
+	
+	
+	@Override
 	public boolean verifyValidationOutcome() {
 		return this.stato.verifyValidationOutcome();
 	}
