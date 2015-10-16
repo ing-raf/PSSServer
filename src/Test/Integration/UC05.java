@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import Presentation.TerminaleCliente.BadgeClientRMI;
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;
 import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
 import Server.RMIInterface.Autovettura;
@@ -20,7 +21,7 @@ public class UC05 {
 	public void TC01() {
 		
 		final String idTest = "TC01";
-		final int idStazione = 3;
+		final int idStazione = 0;
 		final int indiceModello = 0;
 		final String[] nomeStazione = {"Stazione Centrale"};
 		final String[] indirizzoStazione = {"Piazzale Tecchio"};
@@ -42,6 +43,7 @@ public class UC05 {
 			
 			stazioni = (ArrayList<Stazione>) client.remoteRetrieveCompatibleBatteries(indiceModello);
 		} catch (Exception e) {
+			e.printStackTrace ();
 			fail(idTest + " riuscito");
 		}
 
@@ -168,6 +170,53 @@ public class UC05 {
 			assertTrue(true);
 		}
 	
+	}
+	
+	public void TC06() {
+		final String idTest = "TC06";
+		final int idStazione = -1;
+		final int idStazione1 = -5;
+		final int idStazione2 = 0;
+		
+		boolean ris = false;
+		
+		@SuppressWarnings("unused")
+		BadgeClientRMI clientBadge = null;
+		
+		try {
+			 clientBadge = new BadgeClientRMI(idStazione, this.host);
+			 ris=true;
+			 fail(idTest + " riuscito");
+		} catch (Exception e) {
+			assertFalse(idTest + " riuscito", ris );
+			
+		}
+		
+		 clientBadge = null;
+		
+		try {
+			 clientBadge = new BadgeClientRMI(idStazione1, this.host);
+			 ris=true;
+			 fail(idTest + " riuscito");
+		} catch (Exception e) {
+			assertFalse(idTest + " riuscito", ris );
+			
+		}
+		
+clientBadge = null;
+		
+		try {
+			 clientBadge = new BadgeClientRMI(idStazione2, this.host);
+			 ris=true;
+			 
+		} catch (Exception e) {
+			fail(idTest + " riuscito");	
+		}
+		assertTrue(idTest + " riuscito", ris );
+		
+		
+		
+		
 	}
 
 }

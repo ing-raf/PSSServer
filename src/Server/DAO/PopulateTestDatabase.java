@@ -6,7 +6,7 @@ import java.util.List;
 public class PopulateTestDatabase {
 	
 	public static void populate() throws Exception {		
-		StazioneDAO[] st = new StazioneDAO[3];
+		StazioneDAO[] st = new StazioneDAO[4];
 		
 		st[0] = new StazioneDAO();
 		st[0].setID(1);
@@ -22,6 +22,11 @@ public class PopulateTestDatabase {
 		st[2].setID(3);
 		st[2].setName("Stazione Stadio");
 		st[2].setAddress("Via Claudio");
+		
+		st[3] = new StazioneDAO();
+		st[3].setID(0);
+		st[3].setName("Stazione Sorrento ");
+		st[3].setAddress("Corso Italia");
 		
 		for (StazioneDAO s : st) s.save();
 		
@@ -64,7 +69,7 @@ public class PopulateTestDatabase {
 		
 		for (ModelloAutovetturaDAO m : ma) m.save();
 		
-		BatteriaDAO[] batt = new BatteriaDAO[16];
+		BatteriaDAO[] batt = new BatteriaDAO[17];
 		
 		batt[0] = new BatteriaDAO();
 		batt[0].setID(1);
@@ -162,6 +167,12 @@ public class PopulateTestDatabase {
 		batt[15].setCyclesRecharge(1);
 		batt[15].setModel(ma[1]);
 		
+		batt[16] = new BatteriaDAO();
+		batt[16].setID(46);
+		batt[16].setCostSubstitution(525.30f);
+		batt[16].setCyclesRecharge(56);
+		batt[16].setModel(ma[2]);
+		
 		for (BatteriaDAO b : batt) b.save();
 		
 		st[2].setAvailableBatteries(batt[0]);
@@ -172,6 +183,9 @@ public class PopulateTestDatabase {
 		st[2].setAvailableBatteries(batt[5]);
 		st[1].setAvailableBatteries(batt[6]);
 		st[0].setAvailableBatteries(batt[7]);
+		st[3].setAvailableBatteries(batt[16]);
+		
+	//	for (StazioneDAO s : st) s.update();
 		
 		ClienteDAO[] cl = new ClienteDAO[4];
 		Calendar[] cal = new Calendar[4];
@@ -228,7 +242,7 @@ public class PopulateTestDatabase {
 		
 		bg[2] = new BadgeDAO();
 		bg[2].setCode(1);
-		bg[2].setCredit(10.00f);
+		bg[2].setCredit(00.00f);
 		bg[2].setClient(cl[1]);
 		
 		bg[3] = new BadgeDAO();

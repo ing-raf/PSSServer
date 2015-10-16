@@ -16,12 +16,12 @@ public class UC04 {
 	
 	private String host = "localhost";
 
-	@Test
+	//@Test
 	public void TC01() {
 		
 		final String idTest = "TC01";
-		final int idStazione = 1;
-		final int codiceBadge = -3;
+		final int idStazione = 0;
+		final int codiceBadge = 10;
 		
 		InterfacciaGestoreAutenticato client = null;
 		
@@ -62,6 +62,7 @@ public class UC04 {
 		try {
 			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail(idTest + " riuscito");
 		}
 			
@@ -71,6 +72,7 @@ public class UC04 {
 			assertNotEquals(idTest + " riuscito", true, autovetture.isEmpty());
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			fail(idTest + " riuscito");
 		}
 					

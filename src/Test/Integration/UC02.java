@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import Presentation.TerminaleCliente.BadgeClientRMI;
 import Presentation.TerminaleGestore.GestoreAutenticatoClientLipe;
 import Presentation.TerminaleGestore.InterfacciaGestoreAutenticato;
 import Server.RMIInterface.Batteria;
@@ -91,6 +92,40 @@ public class UC02 {
 		} catch (Exception e) {
 			assertTrue(true);
 		}
+		
+	}
+	
+	@Test
+	public void TC04() {
+		final String idTest = "TC04";
+		final int idStazione = -1;
+		final int idStazione1 = -5;
+		
+		boolean ris = false;
+		
+		@SuppressWarnings("unused")
+		BadgeClientRMI clientBadge = null;
+		
+		try {
+			 clientBadge = new BadgeClientRMI(idStazione, this.host);
+			 ris=true;
+			 fail(idTest + " riuscito");
+		} catch (Exception e) {
+			assertFalse(idTest + " riuscito", ris );
+			
+		}
+		
+		 clientBadge = null;
+		
+		try {
+			 clientBadge = new BadgeClientRMI(idStazione1, this.host);
+			 ris=true;
+			 fail(idTest + " riuscito");
+		} catch (Exception e) {
+			assertFalse(idTest + " riuscito", ris );
+			
+		}
+		
 		
 	}
 

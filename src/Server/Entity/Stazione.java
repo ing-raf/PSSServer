@@ -108,8 +108,46 @@ public class Stazione {
 		StazioneDAO dao = this.prepareDAO();
 		return dao.delete();
 	}
+
+
 	
-	public boolean equals (Object obj){
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Stazione other = (Stazione) obj;
+		if (ID != other.ID)
+			return false;
+		if (disponibili == null) {
+			if (other.disponibili != null)
+				return false;
+		} else if (!disponibili.equals(other.disponibili))
+			return false;
+		if (indirizzo == null) {
+			if (other.indirizzo != null)
+				return false;
+		} else if (!indirizzo.equals(other.indirizzo))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+
+
+	
+
+
+	
+	/*public boolean equals (Object obj){
 		Stazione s = (Stazione) obj;  
 		
 		for (int i = 0; i < this.disponibili.size(); i++){
@@ -127,6 +165,6 @@ public class Stazione {
 		else
 			return false;
 	
-	}
+	}*/
 	
 }
