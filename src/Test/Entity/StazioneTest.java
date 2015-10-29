@@ -65,17 +65,9 @@ public class StazioneTest {
 	public void testGetAvailableBatteries() {
 		final String idTest = "Test di getAvailableBatteries";
 		
-		assertEquals(idTest + " riuscito", Batteria.getBattery(2), test.getAvailableBatteries().get(0) );
-		assertEquals(idTest + " riuscito", Batteria.getBattery(3), test.getAvailableBatteries().get(1) );
-		assertEquals(idTest + " riuscito", Batteria.getBattery(22), test.getAvailableBatteries().get(2) );
-	}
-
-	@Test
-	public void testSetID() {
-		final String idTest = "Test di setID";
-		
-		test.setID(2);
-		assertEquals(idTest +  "riuscito", 2, test.getID());
+		assertTrue(idTest + " riuscito", test.getAvailableBatteries().contains(Batteria.getBattery(2)) );
+		assertTrue(idTest + " riuscito", test.getAvailableBatteries().contains(Batteria.getBattery(3)) );
+		assertTrue(idTest + " riuscito", test.getAvailableBatteries().contains(Batteria.getBattery(22)) );
 	}
 
 	@Test
@@ -84,6 +76,7 @@ public class StazioneTest {
 		
 		test.setName("pippo");
 		assertEquals(idTest + "riuscito", "pippo", test.getName());
+		test.setName(oracle.getName());
 		
 	}
 
@@ -93,6 +86,7 @@ public class StazioneTest {
 		
 		test.setAddress("via Libertà");
 		assertEquals(idTest + "riuscito", "via Libertà", test.getAddress());
+		test.setAddress(oracle.getAddress());
 	}
 
 	@Test
@@ -102,6 +96,8 @@ public class StazioneTest {
 		Batteria b = Batteria.getBattery(1);
 		test.setAvailableBatteries(b);
 		assertTrue(idTest + "riuscito", test.getAvailableBatteries().contains(b));
+		test.removeBattery(b);
+		
 	}
 
 	@Test
@@ -121,6 +117,7 @@ public class StazioneTest {
 		test.removeBattery(b);
 		
 		assertFalse(idTest + "riuscito", test.getAvailableBatteries().contains(b));
+		test.setAvailableBatteries(b);;
 	}
 
 	@Test

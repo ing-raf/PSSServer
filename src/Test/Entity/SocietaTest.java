@@ -80,7 +80,7 @@ public class SocietaTest {
 			
 			ArrayList<Stazione> listaStazioni = s_test.getStationList();
 		
-			assertEquals(idTest + " riuscito", 3, listaStazioni.size() );
+			assertEquals(idTest + " riuscito", 4, listaStazioni.size() );
 		
 			for (Stazione s : oracle) 
 				assertTrue(idTest + " riuscito", listaStazioni.contains(s));
@@ -92,7 +92,7 @@ public class SocietaTest {
 		final String idTest = "Test di findStation";
 		
 		assertTrue (idTest + " riuscito", s_test.findStation(1));
-		assertFalse (idTest + " riuscito", s_test.findStation(0));
+		assertFalse (idTest + " riuscito", s_test.findStation(10));
 		
 	}
 

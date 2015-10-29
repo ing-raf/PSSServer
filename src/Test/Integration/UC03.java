@@ -50,6 +50,7 @@ public class UC03 {
 			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
 			assertFalse(idTest + " riuscito", modelli.isEmpty() );
+			System.err.println(modelli.get(indiceAutovettura).getModel());
 		
 			assertTrue(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
 			
@@ -57,12 +58,11 @@ public class UC03 {
 			fail(idTest + " riuscito");
 		}
 		inserita = PopulateTestDatabase.testStazione(idStazione, idBatteria, cicli, costo, idModello);
-		
 		assertNotEquals (idTest + " riuscito", null, inserita);
 			
 	}
 	
-	@Test
+//	@Test
 	public void TC02() {
 		final String idTest = "TC02";
 		this.idStazione = 2;
@@ -104,7 +104,7 @@ public class UC03 {
 		this.idStazione = 2;
 		final int idBatteria = 4;
 		final float costo = 6.50f;
-		final int cicli = 2;
+		final int cicli = 3;
 		final int indiceAutovettura = 6;
 		final int idModello = 43;
 		
@@ -172,7 +172,7 @@ public class UC03 {
 
 	
 	@SuppressWarnings("unused")
-@Test
+	@Test
 	public void TC05() {
 		final String idTest = "TC05";
 		final int idStazione = 9;
@@ -189,7 +189,7 @@ public class UC03 {
 		
 	}
 	
-@Test
+	@Test
 	public void TC09() {
 		final String idTest = "TC09";
 		this.idStazione = 2;
@@ -211,9 +211,9 @@ public class UC03 {
 			
 			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
 			
-			assertNotEquals(idTest + " riuscito", true, modelli.isEmpty() );
+			assertFalse(idTest + " riuscito", modelli.isEmpty() );
 			
-			assertNotEquals(idTest + " riuscito", true,  client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
+			assertFalse(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
 
 		} catch (Exception e) {
 			fail(idTest + " riuscito");
@@ -229,7 +229,7 @@ public class UC03 {
 			
 	}
 	
-@Test
+	@Test
 	public void TC10() {
 		final String idTest = "TC10";
 		this.idStazione = 2;
@@ -264,6 +264,178 @@ public class UC03 {
 		
 		assertEquals (idTest + " riuscito", null, inserita);
 			
+	}
+	
+@Test
+public void TC12() {
+	final String idTest = "TC14";
+	this.idStazione = 2;
+	final int idBatteria = 60;
+	final float costo = 9.3456f;
+	final int cicli = 35;
+	final int indiceAutovettura = 6;
+	final int idModello = 43;
+	
+	InterfacciaGestoreAutenticato client = null;
+	
+	try {
+		client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
+	} catch (Exception e) {
+		fail(idTest + " riuscito");
+	}
+	
+	try {
+		
+		ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
+		
+		assertFalse(idTest + " riuscito", modelli.isEmpty() );
+	
+		assertFalse(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
+		
+	} catch (Exception e) {
+		fail(idTest + " riuscito");
+	}
+	inserita = PopulateTestDatabase.testStazione(idStazione, idBatteria, cicli, costo, idModello);
+	
+	assertEquals (idTest + " riuscito", null, inserita);
+	}
+	@Test
+	public void TC13() {
+		final String idTest = "TC13";
+		this.idStazione = 2;
+		final int idBatteria = 60;
+		final float costo = 0.00f;
+		final int cicli = 35;
+		final int indiceAutovettura = 6;
+		final int idModello = 43;
+		
+		InterfacciaGestoreAutenticato client = null;
+		
+		try {
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
+			
+			assertFalse(idTest + " riuscito", modelli.isEmpty() );
+		
+			assertFalse(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
+			
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		inserita = PopulateTestDatabase.testStazione(idStazione, idBatteria, cicli, costo, idModello);
+		
+		assertEquals (idTest + " riuscito", null, inserita);
+	}
+	
+	@Test
+	public void TC14() {
+		final String idTest = "TC14";
+		this.idStazione = 2;
+		final int idBatteria = 60;
+		final float costo = -5.65f;
+		final int cicli = 35;
+		final int indiceAutovettura = 6;
+		final int idModello = 43;
+		
+		InterfacciaGestoreAutenticato client = null;
+		
+		try {
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
+			
+			assertFalse(idTest + " riuscito", modelli.isEmpty() );
+		
+			assertFalse(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
+			
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		inserita = PopulateTestDatabase.testStazione(idStazione, idBatteria, cicli, costo, idModello);
+		
+		assertEquals (idTest + " riuscito", null, inserita);
+		
+	}
+	
+	@Test
+	public void TC16() {
+		final String idTest = "TC16";
+		this.idStazione = 2;
+		final int idBatteria = 60;
+		final float costo = 0.01f;
+		final int cicli = 0;
+		final int indiceAutovettura = 6;
+		final int idModello = 43;
+		
+		InterfacciaGestoreAutenticato client = null;
+		
+		try {
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
+			
+			assertFalse(idTest + " riuscito", modelli.isEmpty() );
+		
+			assertFalse(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
+			
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		inserita = PopulateTestDatabase.testStazione(idStazione, idBatteria, cicli, costo, idModello);
+		
+		assertEquals (idTest + " riuscito", null, inserita);
+		
+	}
+	
+	@Test
+	public void TC17() {
+		final String idTest = "TC17";
+		this.idStazione = 2;
+		final int idBatteria = 60;
+		final float costo = 10.11f;
+		final int cicli = -3;
+		final int indiceAutovettura = 6;
+		final int idModello = 43;
+		
+		InterfacciaGestoreAutenticato client = null;
+		
+		try {
+			client = (InterfacciaGestoreAutenticato) new GestoreAutenticatoClientLipe(idStazione, this.host);
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			
+			ArrayList<? extends Autovettura> modelli = client.retrieveModelList();
+			
+			assertFalse(idTest + " riuscito", modelli.isEmpty() );
+		
+			assertFalse(idTest + " riuscito", client.addBattery(idBatteria, costo, cicli, indiceAutovettura) );
+			
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		inserita = PopulateTestDatabase.testStazione(idStazione, idBatteria, cicli, costo, idModello);
+		
+		assertEquals (idTest + " riuscito", null, inserita);
+		
 	}
 
 }

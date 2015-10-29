@@ -19,7 +19,8 @@ public class Badge {
 
 	}
 	
-	Badge(){
+	@SuppressWarnings("unused")
+	private Badge(){
 		
 	}
 	
@@ -74,6 +75,14 @@ public class Badge {
 	}
 	
 	public boolean equals (Object obj){
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
 		Badge b = (Badge) obj;  
 		if ((b.getCode() == this.codice) &&
 				(Float.compare(b.getCredit(), this.creditoResiduo) == 0) && 

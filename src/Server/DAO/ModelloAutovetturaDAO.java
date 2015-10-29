@@ -149,7 +149,7 @@ public class ModelloAutovetturaDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static ArrayList<ModelloAutovetturaDAO> retriveModelList (){
+	public static ArrayList<ModelloAutovetturaDAO> retrieveModelList (){
 		ArrayList<ModelloAutovetturaDAO> trovate;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();

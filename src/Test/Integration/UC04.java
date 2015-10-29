@@ -16,12 +16,12 @@ public class UC04 {
 	
 	private String host = "localhost";
 
-	//@Test
+	@Test
 	public void TC01() {
 		
 		final String idTest = "TC01";
-		final int idStazione = 0;
-		final int codiceBadge = 10;
+		final int idStazione = 1;
+		final int codiceBadge = -3;
 		
 		InterfacciaGestoreAutenticato client = null;
 		
@@ -45,7 +45,7 @@ public class UC04 {
 	public void TC02() {
 		
 		final String idTest = "TC02";
-		final int idStazione = 1;
+		final int idStazione = 0;
 		final int codiceBadge = 0;
 		final int indiceAutovettura = 0;
 		final int giorno = 20;
@@ -54,8 +54,8 @@ public class UC04 {
 		final int ora = 21;
 		final int minuti = 12;
 		final int idBatteria = 32;
-		final String nomeStazione = "Stazione Centrale";
-		final String indirizzoStazione = "Piazzale Tecchio";
+		final String nomeStazione = "Stazione Sorrento";
+		final String indirizzoStazione = "Corso Italia";
 		
 		InterfacciaGestoreAutenticato client = null;
 		

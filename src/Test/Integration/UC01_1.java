@@ -109,7 +109,7 @@ public class UC01_1 {
 	public void TC02() {
 		
 		final String idTest = "TC02";
-		final int idStazione = 3;
+		final int idStazione = 0;
 		final int codiceBadge = 0;
 		final int indiceAutovettura = 0;
 		final int indiceBatteria = 0;
@@ -265,7 +265,7 @@ public class UC01_1 {
 	
 }
 	
-	 @Test
+	@Test
 	public void TC05() {
 		final String idTest = "TC05";
 		final int idStazione = -1;

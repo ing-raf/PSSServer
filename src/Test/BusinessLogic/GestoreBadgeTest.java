@@ -92,7 +92,7 @@ public class GestoreBadgeTest {
 		data.clear();
 		data.set(2015, Calendar.JULY, 20,21,12);
 		
-		UltimaSostituzioneBL oracolo = new UltimaSostituzioneBL (data,"Stazione Centrale","Piazzale Tecchio", 32);
+		UltimaSostituzioneBL oracolo = new UltimaSostituzioneBL (data,"Stazione Sorrento","Corso Italia", 32);
 		assertEquals(idTest + " riuscito", oracolo,usbl);
 		
 		

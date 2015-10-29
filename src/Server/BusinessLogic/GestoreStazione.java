@@ -1,5 +1,6 @@
 package Server.BusinessLogic;
 
+
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -40,7 +41,8 @@ public class GestoreStazione {
 		Societa laSocieta = Societa.getSociety();
 		Stazione locale = laSocieta.getStation(this.ID);
 		Batteria b = null;
-		
+		if (verifyInput(nuova.getCostSubstitution(),nuova.getCyclesRecharge())==false)
+			return false;
 		ModelloAutovettura modello = new ModelloAutovettura();
 		modello.setBrand( nuova.getBrand() );
 		modello.setModel( nuova.getModel() );
@@ -52,6 +54,7 @@ public class GestoreStazione {
 			}catch (NullPointerException ex) {
 				return false;
 			}
+		
 		
 	}
 	
@@ -124,9 +127,8 @@ public class GestoreStazione {
 		
 		ArrayList<StazioneBL> elencoStazioni = new ArrayList<StazioneBL>(); 
 		
-		for (Stazione s : laSocieta.getStationList() ) 
+		for (Stazione s : laSocieta.getStationList() )
 			if (!s.equals(laSocieta.getStation(this.ID))) {
-				
 				ArrayList<Batteria> listaBatterie = s.getAvailableBatteries();
 				
 				boolean hit = false;
@@ -143,7 +145,7 @@ public class GestoreStazione {
 				}
 				
 			}
-		
+
 		return elencoStazioni;
 	}
 	
@@ -204,6 +206,14 @@ public class GestoreStazione {
 		
 		return elencoBatterie;
 		
+	}
+	
+	private boolean verifyInput(float costo, int cicli) {
+		float cost = costo*100;
+		
+		if ((costo <= 0)  || (cicli <=0 ) || !Float.toString(cost).contains(".0") )
+			return false;
+		return true;
 	}
 
 }

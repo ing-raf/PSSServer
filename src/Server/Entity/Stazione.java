@@ -16,7 +16,8 @@ public class Stazione {
 	
 	
 	
-	public Stazione() {
+	@SuppressWarnings("unused")
+	private Stazione() {
 		this.disponibili = new ArrayList <Batteria> ();
 	}
 
@@ -113,7 +114,7 @@ public class Stazione {
 	
 
 
-	@Override
+	/*@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -140,18 +141,26 @@ public class Stazione {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-	}
+	}*/
 
 
 	
 
 
 	
-	/*public boolean equals (Object obj){
+	public boolean equals (Object obj){
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
 		Stazione s = (Stazione) obj;  
 		
 		for (int i = 0; i < this.disponibili.size(); i++){
-			if (!(s.getAvailableBatteries().get(i).equals(this.disponibili.get(i))))
+			if (!(s.getAvailableBatteries().contains(this.disponibili.get(i))))
 				return false;	
 		}
 	
@@ -165,6 +174,6 @@ public class Stazione {
 		else
 			return false;
 	
-	}*/
+	}
 	
 }

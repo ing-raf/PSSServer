@@ -79,6 +79,14 @@ public class Cliente {
 	}
 	
 	public boolean equals (Object obj){
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
 		Cliente c = (Cliente) obj;  
 		
 		for (int i = 0; i < this.autovetturePossedute.size(); i++){

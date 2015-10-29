@@ -159,7 +159,7 @@ public class StazioneDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static ArrayList<StazioneDAO> retriveStationList() {
+	public static ArrayList<StazioneDAO> retrieveStationList() {
 		ArrayList<StazioneDAO> trovate;
 		SessionFactory sf = HibernateUtil.getSessionFactory();
 		Session session = sf.openSession();
@@ -173,22 +173,6 @@ public class StazioneDAO {
 		session.close();
 		
 		return trovate ;
-		}
-	
-	
-/*	private int findIndex (BatteriaDAO vecchia){
-		int index=0,k=0;
-		boolean hit = false;
-		while (k<this.disponibili.size() || hit != true){
-			if (this.disponibili.get(k).getID() == vecchia.getID()){
-				index = k;
-				hit = true;
-				}
-			k++;
-			
-		}
-		return index;
-	}
-*/	
+		}	
 	
 }

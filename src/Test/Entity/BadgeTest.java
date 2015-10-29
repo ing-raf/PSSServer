@@ -66,7 +66,7 @@ public class BadgeTest {
 	public void testGetCredit() {
 		final String idTest = "Test di getCredit";
 		
-		assertEquals(idTest + " riuscito", 18.21, test.getCredit(),0.001);
+		assertEquals(idTest + " riuscito", 0.00, test.getCredit(),0.001);
 	}
 
 	@Test
@@ -94,9 +94,10 @@ public class BadgeTest {
 		
 		test.setCredit(249.5f);
 		assertEquals(idTest +  "riuscito", 249.5, test.getCredit(),0.001);
+		test.setCredit(0.0f);
 	}
 
-	@Test
+	//@Test
 	public void testSetClient() {
 		final String idTest = "Test di setClient";
 		Calendar d = Calendar.getInstance();
@@ -107,6 +108,7 @@ public class BadgeTest {
 		test.setClient(c);
 		
 		assertEquals(idTest + " riuscito", true, c.equals(test.getClient()));
+		test.setClient(oracle.getClient());
 	}
 
 	@Test

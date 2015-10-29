@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import java.util.Calendar;
 
-
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,7 +36,7 @@ public class AutovetturaCompatibileTest {
 	}
 
 	@Test
-	public void testAutovetturaCompatibileAutovetturaCompatibileDAO() {
+	public void testAutovetturaCompatibileDAO() {
 		final String idTest = "Test del costruttore dal DAO";
 		
 		AutovetturaCompatibileDAO dao = AutovetturaCompatibileDAO.findCar("EA 210 BB");

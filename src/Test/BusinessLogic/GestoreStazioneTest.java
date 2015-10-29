@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -34,6 +33,7 @@ public class GestoreStazioneTest {
 
 //	@Before
 	public void setUp() throws Exception {
+		PopulateTestDatabase.populate();
 	}
 
 //	@After
@@ -87,11 +87,11 @@ public class GestoreStazioneTest {
 		
 		GestoreStazione gs = new GestoreStazione(2, 5);
 		
-		assertTrue(idTest + " riuscito", gs.insertBattery( new BatteriaBL(31, 40.55f, 6, "Giulietta", "Alfa Romeo") ));
+		assertTrue(idTest + " riuscito", gs.insertBattery( new BatteriaBL(80, 40.55f, 6, "Giulietta", "Alfa Romeo") ));
 		
 		StazioneDAO dao = StazioneDAO.findStation(2);
 		
-		assertTrue(idTest + " riuscito", dao.getAvailableBatteries().contains( BatteriaDAO.findBattery(31) ) );
+		assertTrue(idTest + " riuscito", dao.getAvailableBatteries().contains( BatteriaDAO.findBattery(80) ) );
 	}
 
 	@Test
@@ -142,9 +142,9 @@ public class GestoreStazioneTest {
 	public void testRemoteRetrieveCompatibleBatteries() {
 		final String idTest = "Test di RemoteRetrieveCompatibleBatteries";
 		
-		GestoreStazione gs = new GestoreStazione(3, 5);
+		GestoreStazione gs = new GestoreStazione(1, 5);
 		
-		ArrayList<StazioneBL> trovate = gs.remoteRetrieveCompatibleBatteries( new AutovetturaBL("207", "Peugeot"));
+		ArrayList<StazioneBL> trovate = gs.remoteRetrieveCompatibleBatteries( new AutovetturaBL("Panda", "Fiat"));
 		
 		assertEquals(idTest + " riuscito", 1, trovate.size());
 		

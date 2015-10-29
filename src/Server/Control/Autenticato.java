@@ -41,7 +41,7 @@ public class Autenticato extends Stato {
 		ArrayList<AutovetturaClienteC> elencoAutovetture = new ArrayList<AutovetturaClienteC>( this.elencoAutovetture.size() );			
 		
 		if ( this.elencoAutovetture.isEmpty() ) {
-			coordinatore.setState( new NonAutenticato() );
+			logOut(coordinatore);
 		} else {
 			
 			for (AutovetturaClienteBL autovettura: this.elencoAutovetture)
@@ -123,13 +123,11 @@ public class Autenticato extends Stato {
 			outcome = Install_Outcome.NO_MONEY;
 		}
 		
-		coordinatore.setState( new NonAutenticato() );
+		
+		logOut(coordinatore);
 		
 		return outcome;
 		
-			
-	
-
 	}
 
 	@Override
@@ -154,7 +152,7 @@ public class Autenticato extends Stato {
 	
 	private boolean removeBattery() {
 		try {
-			return this.sistemaSostituzione.removeBatteria();
+			return this.sistemaSostituzione.removeBattery();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -163,7 +161,7 @@ public class Autenticato extends Stato {
 	
 	private boolean installBattery(int IDbatteria) {
 		try {
-			return this.sistemaSostituzione.installBatteria(IDbatteria);
+			return this.sistemaSostituzione.installBattery(IDbatteria);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;

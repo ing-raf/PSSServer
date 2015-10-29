@@ -13,7 +13,7 @@ import Server.RMIInterface.Stazione;
 
 public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticato {
 	
-	private static int PORT_OFFSET = 3307;
+	private static int PORT_OFFSET = 1024;
 	private final String serverHostname;
 	private final int IDstazione;
 	private Registry registry;
@@ -21,6 +21,9 @@ public class GestoreAutenticatoClientRMI implements InterfacciaGestoreAutenticat
 	
 	
 	public GestoreAutenticatoClientRMI (int IDstazione, String serverHostname) throws Exception {
+		
+		if (IDstazione < 0) throw new NullPointerException();
+		
 		this.IDstazione = IDstazione;
 		this.serverHostname = serverHostname;
 		this.registry = LocateRegistry.getRegistry(this.serverHostname, PORT_OFFSET + 2 * this.IDstazione + 1);

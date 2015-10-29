@@ -66,7 +66,7 @@ public class GestoreSocietaTest {
 		
 		
 		for (int i=0; i<3; i++){
-			assertEquals(idTest + " riuscito", oracolo.get(i),list.get(i));
+			assertTrue(idTest + " riuscito",list.contains(oracolo.get(i)));
 		}
 	}
 

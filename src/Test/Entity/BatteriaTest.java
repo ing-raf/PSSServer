@@ -58,7 +58,7 @@ public class BatteriaTest {
 		
 		assertEquals(idTest + " riuscito", Batteria.getBattery(50),b );
 		
-		Batteria b1 = new Batteria (22, 600.00f, 23, mod);
+		Batteria b1 = new Batteria (70, 600.00f, 23, mod);
 		assertFalse(idTest + " riuscito", Batteria.getBattery(22).equals(b1));
 	}
 

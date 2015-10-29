@@ -25,7 +25,7 @@ public class PopulateTestDatabase {
 		
 		st[3] = new StazioneDAO();
 		st[3].setID(0);
-		st[3].setName("Stazione Sorrento ");
+		st[3].setName("Stazione Sorrento");
 		st[3].setAddress("Corso Italia");
 		
 		for (StazioneDAO s : st) s.save();
@@ -171,7 +171,7 @@ public class PopulateTestDatabase {
 		batt[16].setID(46);
 		batt[16].setCostSubstitution(525.30f);
 		batt[16].setCyclesRecharge(56);
-		batt[16].setModel(ma[2]);
+		batt[16].setModel(ma[5]);
 		
 		for (BatteriaDAO b : batt) b.save();
 		
@@ -185,7 +185,7 @@ public class PopulateTestDatabase {
 		st[0].setAvailableBatteries(batt[7]);
 		st[3].setAvailableBatteries(batt[16]);
 		
-	//	for (StazioneDAO s : st) s.update();
+		for (StazioneDAO s : st) s.update();
 		
 		ClienteDAO[] cl = new ClienteDAO[4];
 		Calendar[] cal = new Calendar[4];
@@ -237,12 +237,12 @@ public class PopulateTestDatabase {
 		
 		bg[1] = new BadgeDAO();	
 		bg[1].setCode(0);
-		bg[1].setCredit(18.21f);
+		bg[1].setCredit(00.00f);
 		bg[1].setClient(cl[3]);
 		
 		bg[2] = new BadgeDAO();
 		bg[2].setCode(1);
-		bg[2].setCredit(00.00f);
+		bg[2].setCredit(10.00f);
 		bg[2].setClient(cl[1]);
 		
 		bg[3] = new BadgeDAO();
@@ -271,7 +271,7 @@ public class PopulateTestDatabase {
 		scal[1].set(2015, Calendar.JULY, 20, 21, 12);
 		sost[1].setDateHour(scal[1]);
 		sost[1].setBattery(batt[9]);
-		sost[1].setStation(st[0]);
+		sost[1].setStation(st[3]);
 		
 		sost[2] = new UltimaSostituzioneDAO();
 		sost[2].setID(5);

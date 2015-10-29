@@ -58,7 +58,7 @@ public class UC05 {
 	public void TC02() {
 		
 		final String idTest = "TC02";
-		final int idStazione = 3;
+		final int idStazione = 0;
 		final int indiceModello = 4;
 		
 		InterfacciaGestoreAutenticato client = null;
@@ -92,8 +92,8 @@ public class UC05 {
 		final String idTest = "TC03";
 		final int idStazione = 3;
 		final int indiceModello = 5;
-		final String[] nomeStazione = {"Stazione Agnoli"};
-		final String[] indirizzoStazione = {"Via Nuova Agnano"};
+		final String[] nomeStazione = {"Stazione Sorrento" , "Stazione Agnoli"};
+		final String[] indirizzoStazione = {"Corso Italia","Via Nuova Agnano"};
 		
 		InterfacciaGestoreAutenticato client = null;
 		
@@ -116,9 +116,10 @@ public class UC05 {
 		}
 		
 		assertNotEquals(idTest + " riuscito", true, stazioni.isEmpty() );
-		
 		assertEquals(idTest + " riuscito", nomeStazione[0], stazioni.get(0).getName() );
 		assertEquals(idTest + " riuscito", indirizzoStazione[0], stazioni.get(0).getAddress() );
+		assertEquals(idTest + " riuscito", nomeStazione[1], stazioni.get(1).getName() );
+		assertEquals(idTest + " riuscito", indirizzoStazione[1], stazioni.get(1).getAddress() );
 	}
 	
 	@SuppressWarnings({ "unchecked" })
@@ -176,7 +177,7 @@ public class UC05 {
 		final String idTest = "TC06";
 		final int idStazione = -1;
 		final int idStazione1 = -5;
-		final int idStazione2 = 0;
+		
 		
 		boolean ris = false;
 		
@@ -202,21 +203,7 @@ public class UC05 {
 			assertFalse(idTest + " riuscito", ris );
 			
 		}
-		
-clientBadge = null;
-		
-		try {
-			 clientBadge = new BadgeClientRMI(idStazione2, this.host);
-			 ris=true;
-			 
-		} catch (Exception e) {
-			fail(idTest + " riuscito");	
-		}
-		assertTrue(idTest + " riuscito", ris );
-		
-		
-		
-		
+			
 	}
 
 }

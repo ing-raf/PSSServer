@@ -23,13 +23,14 @@ public class GestoreAutenticatoClientLipe implements InterfacciaGestoreAutentica
 	
 	
 	public GestoreAutenticatoClientLipe (int IDstazione, String serverHostname) throws Exception {
+		
+		if (IDstazione < 0) throw new NullPointerException();
+		
 		CallHandler callHandler = new CallHandler();
 		this.IDstazione = IDstazione;
 		this.serverHostname = serverHostname;
 		this.client = new Client(this.serverHostname, PORT_OFFSET + 2 * this.IDstazione + 1, callHandler);
-		
-		if (IDstazione < 0) throw new NullPointerException();
-		
+				
 		this.stub = (ServiziGestoreAndroid) client.getGlobal (ServiziGestoreAndroid.class);
 	}
 

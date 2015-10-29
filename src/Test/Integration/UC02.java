@@ -54,7 +54,7 @@ public class UC02 {
 	public void TC02() {
 		
 		final String idTest = "TC02";
-		final int idStazione = 3;
+		final int idStazione = 0;
 		
 		InterfacciaGestoreAutenticato client = null;
 		

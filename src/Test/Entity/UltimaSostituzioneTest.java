@@ -34,11 +34,6 @@ public class UltimaSostituzioneTest {
 		test = UltimaSostituzione.getLastSubstitution(targa);
 	}
 
-//	@After
-	public void tearDown() throws Exception {
-	//	oracle.update();
-	}
-
 	@Test
 	public void testUltimaSostituzioneDAO() {
 		final String idTest = "Test del costruttore dal DAO";

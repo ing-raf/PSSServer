@@ -30,21 +30,6 @@ public class Batteria {
 		BatteriaDAO dao = this.prepareDAO();
 		if (!dao.save())
 			throw new NullPointerException(); 
-			
-	/*	
-		BatteriaDAO batteria = new BatteriaDAO();
-		batteria.setID(id);
-		batteria.setCostSubstitution(costo);
-		batteria.setCyclesRecharge(cicli);
-		
-		ModelloAutovetturaDAO modelloDAO = new ModelloAutovetturaDAO();
-		modelloDAO.setModel(modello.getModel());
-		modelloDAO.setBrand(modello.getBrand());
-		modelloDAO.setID();
-		batteria.setModel(modelloDAO);
-		
-		if(!batteria.save())
-			throw new Exception(); */
 	}
 	
 	public int getID(){
@@ -106,10 +91,19 @@ public class Batteria {
 	}
 	
 	public boolean equals (Object obj){
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		
 		Batteria b = (Batteria) obj;  
 		if ((b.getID() == this.getID()) &&
 				(Float.compare(b.getCostSubstitution(), this.getCostSubstitution()) == 0) && 
-				(b.getCyclesRecharge() == this.getCyclesRecharge())) 
+				(b.getCyclesRecharge() == this.getCyclesRecharge()) &&
+				b.getModel().equals(this.modello)) 
 			return true;
 		else
 			return false;

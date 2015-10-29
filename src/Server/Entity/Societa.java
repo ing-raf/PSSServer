@@ -48,7 +48,7 @@ public class Societa{
 	
 	public  ArrayList<ModelloAutovettura> getModelList() {
 		if (theSociety.modelList.isEmpty()){
-			ArrayList<ModelloAutovetturaDAO> trovate = ModelloAutovetturaDAO.retriveModelList();
+			ArrayList<ModelloAutovetturaDAO> trovate = ModelloAutovetturaDAO.retrieveModelList();
 			for (ModelloAutovetturaDAO m : trovate) 
 				theSociety.modelList.add(new ModelloAutovettura (m));
 		}
@@ -78,12 +78,15 @@ public class Societa{
 	
 	
 	public ArrayList<Stazione> getStationList() {
-		if (theSociety.stationList.isEmpty()){
-			ArrayList<StazioneDAO> trovate = StazioneDAO.retriveStationList();
+		if (theSociety.stationList.isEmpty()) {
+			ArrayList<StazioneDAO> trovate = StazioneDAO.retrieveStationList();
 			for (StazioneDAO m : trovate) 
 				theSociety.stationList.put(m.getID(), new Stazione(m));
 		}
 		ArrayList<Stazione> result = new ArrayList<Stazione> (theSociety.stationList.values());
+		
+		while ( result.remove(null) );
+		
 		return result;
 	}
 

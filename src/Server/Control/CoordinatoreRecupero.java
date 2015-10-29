@@ -31,7 +31,7 @@ public class CoordinatoreRecupero implements Runnable {
 
 			if ( gs.verifyRecharge(this.batteria) ) {
 					
-				if (this.stub.rechargeBatteria( this.batteria.getID() ) == false )
+				if (this.stub.rechargeBattery( this.batteria.getID() ) == false )
 					throw new ConnectIOException("Riscontrato un problema durante la ricarica della batteria");
 				
 				this.batteria.setCyclesRecharge( this.batteria.getCyclesRecharge() - 1);
@@ -41,7 +41,7 @@ public class CoordinatoreRecupero implements Runnable {
 				
 				gs.discardBattery(this.batteria);
 				
-				if (this.stub.discardBatteria( this.batteria.getID() ) == false)
+				if (this.stub.discardBattery( this.batteria.getID() ) == false)
 					throw new ConnectIOException("Riscontrato un problema durante lo scarto della batteria");
 				
 			}

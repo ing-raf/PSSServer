@@ -22,7 +22,7 @@ public class InterfacciaSistemadiSostituzione extends UnicastRemoteObject implem
 	private static final int TIME_TO_WAIT = 1;
 	
 
-	public boolean removeBatteria() throws Exception {
+	public boolean removeBattery() throws Exception {
 		System.out.println("Inizio la rimozione della batteria");
 		Thread.sleep(TIME_TO_WAIT*SECONDS);
 		System.out.println("Terminata la rimozione della batteria");
@@ -34,7 +34,7 @@ public class InterfacciaSistemadiSostituzione extends UnicastRemoteObject implem
 	 * @param id
 	 * @throws Exception 
 	 */
-	public boolean installBatteria(int id) throws Exception {
+	public boolean installBattery(int id) throws Exception {
 		System.out.println("Inizio l'installazione della batteria nº " + id);
 		Thread.sleep(TIME_TO_WAIT*SECONDS);
 		System.out.println("Terminata l'installazione della batteria nº " + id);
@@ -46,7 +46,7 @@ public class InterfacciaSistemadiSostituzione extends UnicastRemoteObject implem
 	 * @param idBatteria
 	 * @throws Exception 
 	 */
-	public boolean rechargeBatteria(int idBatteria) throws Exception {
+	public boolean rechargeBattery(int idBatteria) throws Exception {
 		System.out.println("Inizio la ricarica della batteria nº " + idBatteria);
 		Thread.sleep(TIME_TO_WAIT*SECONDS);
 		System.out.println("Terminata la ricarica della batteria nº " + idBatteria);
@@ -58,7 +58,7 @@ public class InterfacciaSistemadiSostituzione extends UnicastRemoteObject implem
 	 * @param idBatteria
 	 * @throws Exception 
 	 */
-	public boolean discardBatteria(int idBatteria) throws Exception {
+	public boolean discardBattery(int idBatteria) throws Exception {
 		System.out.println("Inizio lo scarto della batteria nº " + idBatteria);
 		Thread.sleep(TIME_TO_WAIT*SECONDS);
 		System.out.println("Terminato lo scarto della batteria nº " + idBatteria);
