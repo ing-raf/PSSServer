@@ -16,7 +16,7 @@ import Server.RMIInterface.AutovetturaCliente;
 import Server.RMIInterface.Install_Outcome;
 import Server.RMIInterface.Stazione;
 
-public class UC01 {
+public class UC01_1 {
 	
 	private String host = "localhost";
 
@@ -109,7 +109,7 @@ public class UC01 {
 	public void TC02() {
 		
 		final String idTest = "TC02";
-		final int idStazione = 3;
+		final int idStazione = 0;
 		final int codiceBadge = 0;
 		final int indiceAutovettura = 0;
 		final int indiceBatteria = 0;
@@ -227,11 +227,82 @@ public class UC01 {
 		}
 		
 	}
-	
 	@Test
 	public void TC04() {
 		
 		final String idTest = "TC04";
+		final int idStazione = 3;
+		final int codiceBadge = 8;
+		
+		BadgeClientRMI clientBadge = null;
+		ClienteRegistratoClientRMI client = null;
+		
+		try {
+			 clientBadge = new BadgeClientRMI(idStazione, this.host);
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+			 
+		try {
+			 client = new ClienteRegistratoClientRMI(idStazione, this.host);
+		} catch (Exception e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			clientBadge.startValidation(codiceBadge);
+		} catch (RemoteException e) {
+			fail(idTest + " riuscito");
+		}
+		
+		try {
+			
+			assertFalse(idTest + " riuscito", client.verifyValidationOutcome() );
+			
+		} catch (RemoteException e) {
+			fail(idTest + " riuscito");
+		}
+	
+}
+	
+	@Test
+	public void TC05() {
+		final String idTest = "TC05";
+		final int idStazione = -1;
+		final int idStazione1 = -5;
+		
+		boolean ris = false;
+		
+		@SuppressWarnings("unused")
+		BadgeClientRMI clientBadge = null;
+		
+		try {
+			 clientBadge = new BadgeClientRMI(idStazione, this.host);
+			 ris=true;
+			 fail(idTest + " riuscito");
+		} catch (Exception e) {
+			assertFalse(idTest + " riuscito", ris );
+			
+		}
+		
+		 clientBadge = null;
+		
+		try {
+			 clientBadge = new BadgeClientRMI(idStazione1, this.host);
+			 ris=true;
+			 fail(idTest + " riuscito");
+		} catch (Exception e) {
+			assertFalse(idTest + " riuscito", ris );
+			
+		}
+		
+		
+	}
+	
+	@Test
+	public void TC06() {
+		
+		final String idTest = "TC06";
 		final int idStazione = 3;
 		final int codiceBadge = 5;
 		final int indiceAutovettura = 3;
@@ -296,11 +367,39 @@ public class UC01 {
 		}
 		
 	}
+	
+		//@Test
+		public void TC07(){
+			
+		}
+		
+		@Test
+		public void TC08(){
+			
+				final String idTest = "TC08";
+				final int idStazione = 40;
+				
+				
+				boolean ris = false;
+				
+				@SuppressWarnings("unused")
+				BadgeClientRMI clientBadge = null;
+				
+				try {
+					 clientBadge = new BadgeClientRMI(idStazione, this.host);
+					 ris=true;
+					 fail(idTest + " riuscito");
+				} catch (Exception e) {
+					assertFalse(idTest + " riuscito", ris );
+					
+			
+				}
+		}
 
 		@Test
-		public void TC05() {
+		public void TC09() {
 			
-			final String idTest = "TC05";
+			final String idTest = "TC09";
 			final int idStazione = 3;
 			final int codiceBadge = 1;
 			final int indiceAutovettura = 0;
@@ -358,42 +457,6 @@ public class UC01 {
 		
 	}
 		
-		@Test
-		public void TC06() {
-			
-			final String idTest = "TC06";
-			final int idStazione = 3;
-			final int codiceBadge = 8;
-			
-			BadgeClientRMI clientBadge = null;
-			ClienteRegistratoClientRMI client = null;
-			
-			try {
-				 clientBadge = new BadgeClientRMI(idStazione, this.host);
-			} catch (Exception e) {
-				fail(idTest + " riuscito");
-			}
-				 
-			try {
-				 client = new ClienteRegistratoClientRMI(idStazione, this.host);
-			} catch (Exception e) {
-				fail(idTest + " riuscito");
-			}
-			
-			try {
-				clientBadge.startValidation(codiceBadge);
-			} catch (RemoteException e) {
-				fail(idTest + " riuscito");
-			}
-			
-			try {
-				
-				assertFalse(idTest + " riuscito", client.verifyValidationOutcome() );
-				
-			} catch (RemoteException e) {
-				fail(idTest + " riuscito");
-			}
 		
-	}
 		
 }
